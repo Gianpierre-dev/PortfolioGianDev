@@ -10,7 +10,10 @@ import {
   Wrench, 
   Monitor, 
   Server, 
-  Layers
+  Layers,
+  TrendingUp,
+  Award,
+  Target
 } from 'lucide-react';
 
 import { 
@@ -53,11 +56,11 @@ const categoryIcons = {
 };
 
 const categoryColors = {
-  frontend: 'from-blue-500 to-purple-500',
-  backend: 'from-green-500 to-teal-500',
-  database: 'from-orange-500 to-red-500',
-  tools: 'from-yellow-500 to-orange-500',
-  other: 'from-purple-500 to-pink-500',
+  frontend: { bg: 'bg-blue-50 dark:bg-blue-900/20', text: 'text-blue-700 dark:text-blue-300', border: 'border-blue-200 dark:border-blue-800' },
+  backend: { bg: 'bg-green-50 dark:bg-green-900/20', text: 'text-green-700 dark:text-green-300', border: 'border-green-200 dark:border-green-800' },
+  database: { bg: 'bg-orange-50 dark:bg-orange-900/20', text: 'text-orange-700 dark:text-orange-300', border: 'border-orange-200 dark:border-orange-800' },
+  tools: { bg: 'bg-purple-50 dark:bg-purple-900/20', text: 'text-purple-700 dark:text-purple-300', border: 'border-purple-200 dark:border-purple-800' },
+  other: { bg: 'bg-gray-50 dark:bg-gray-900/20', text: 'text-gray-700 dark:text-gray-300', border: 'border-gray-200 dark:border-gray-800' },
 };
 
 const skillIcons = {
@@ -87,10 +90,9 @@ const skillIcons = {
   'ruby': SiRuby,
   'cplusplus': SiCplusplus,
   'c++': SiCplusplus,
-  'vscode': Code2, // Fallback icon for VS Code
+  'vscode': Code2,
 };
 
-// Colores específicos para cada tecnología
 const skillColors = {
   'html5': 'text-orange-500',
   'css3': 'text-blue-500',
@@ -124,6 +126,7 @@ const skillColors = {
 export default function Skills() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [filteredSkills, setFilteredSkills] = useState<Skill[]>(skills);
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
   useEffect(() => {
     if (selectedCategory === 'all') {
@@ -141,135 +144,121 @@ export default function Skills() {
     { id: 'tools', name: 'Herramientas', icon: Wrench },
   ];
 
-  const SkillCard = ({ skill, index }: { skill: Skill; index: number }) => {
-    const SkillIcon = skillIcons[skill.icon as keyof typeof skillIcons] || Code2;
-    const iconColor = skillColors[skill.icon as keyof typeof skillColors] || 'text-gray-500';
-    
-    return (
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-lg bg-gray-50 dark:bg-gray-700 flex items-center justify-center">
-              <SkillIcon className={`w-8 h-8 ${iconColor}`} />
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              {skill.name}
-            </h3>
-          </div>
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            {skill.level}%
-          </span>
-        </div>
-        
-        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mb-4">
-          <motion.div
-            className={`h-2 rounded-full bg-gradient-to-r ${categoryColors[skill.category]}`}
-            initial={{ width: 0 }}
-            animate={{ width: `${skill.level}%` }}
-            transition={{ duration: 1.5, delay: index * 0.1 }}
-          />
-        </div>
-        
-        <div className="flex items-center gap-2">
-          {(() => {
-            const CategoryIcon = categoryIcons[skill.category];
-            return <CategoryIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />;
-          })()}
-          <span className="text-sm text-gray-500 dark:text-gray-400 capitalize">
-            {skill.category}
-          </span>
-        </div>
-      </div>
-    );
-  };
-
   const getSkillsByCategory = (category: string) => {
     return skills.filter(skill => skill.category === category);
   };
 
+  const getSkillLevel = (level: number) => {
+    if (level >= 90) return { label: 'Experto', color: 'text-emerald-600 dark:text-emerald-400' };
+    if (level >= 75) return { label: 'Avanzado', color: 'text-blue-600 dark:text-blue-400' };
+    if (level >= 60) return { label: 'Intermedio', color: 'text-yellow-600 dark:text-yellow-400' };
+    return { label: 'Básico', color: 'text-gray-600 dark:text-gray-400' };
+  };
+
+  const SkillChip = ({ skill, index }: { skill: Skill; index: number }) => {
+    const SkillIcon = skillIcons[skill.icon as keyof typeof skillIcons] || Code2;
+    const iconColor = skillColors[skill.icon as keyof typeof skillColors] || 'text-gray-500';
+    const categoryTheme = categoryColors[skill.category];
+    const skillLevel = getSkillLevel(skill.level);
+    
+    return (
+      <div
+        onMouseEnter={() => setHoveredSkill(skill.name)}
+        onMouseLeave={() => setHoveredSkill(null)}
+        className={`relative`}
+      >
+        <div className={`flex items-center gap-2 px-3 py-2 rounded-lg border ${categoryTheme.bg} ${categoryTheme.border}`}>
+          <SkillIcon className={`w-4 h-4 ${iconColor}`} />
+          <span className="text-sm font-medium text-gray-900 dark:text-white">
+            {skill.name}
+          </span>
+          <span className={`text-xs font-semibold ${skillLevel.color}`}>
+            {skill.level}%
+          </span>
+        </div>
+        
+        {/* Tooltip */}
+        {hoveredSkill === skill.name && (
+          <div className="absolute z-10 -top-12 left-1/2 transform -translate-x-1/2 bg-gray-900 dark:bg-gray-800 text-white text-xs px-2 py-1 rounded shadow-lg whitespace-nowrap">
+            {skillLevel.label} • {skill.category}
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-t-2 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
-    <section id="skills" className="py-20 bg-white dark:bg-gray-900">
+    <section id="skills" className="py-16 bg-gray-50/50 dark:bg-gray-900/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4"
-          >
-            Habilidades Técnicas
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
-          >
-            Mis competencias tecnológicas y nivel de experiencia en diferentes áreas
-          </motion.p>
-        </div>
+                 <div className="text-center mb-12">
+           <motion.div
+             initial={{ opacity: 0, y: 10 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             transition={{ duration: 1.0, ease: "easeOut" }}
+             className="flex items-center justify-center gap-2 mb-3"
+           >
+             <Target className="w-5 h-5 text-blue-600" />
+             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+               Skills & Expertise
+             </h2>
+           </motion.div>
+           <motion.p 
+             initial={{ opacity: 0, y: 10 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             transition={{ duration: 1.0, delay: 0.3, ease: "easeOut" }}
+             className="text-gray-600 dark:text-gray-400 text-sm"
+           >
+             Tecnologías y herramientas que domino profesionalmente
+           </motion.p>
+         </div>
 
-        {/* Skills Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {categories.slice(1).map((category) => {
-            const categorySkills = getSkillsByCategory(category.id);
-            const averageLevel = categorySkills.length > 0 
-              ? Math.round(categorySkills.reduce((sum, skill) => sum + skill.level, 0) / categorySkills.length)
-              : 0;
-            
-            return (
-              <div
-                key={category.id}
-                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg border border-gray-200 dark:border-gray-700 text-center hover:shadow-xl transition-shadow"
-              >
-                <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${categoryColors[category.id as keyof typeof categoryColors]} flex items-center justify-center`}>
-                  <category.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  {category.name}
-                </h3>
-                <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-                  {categorySkills.length}
-                </div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
-                  Tecnologías
-                </div>
-                <div className="mt-3">
-                  <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Promedio: {averageLevel}%
-                  </div>
-                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2">
-                    <motion.div
-                      className={`h-2 rounded-full bg-gradient-to-r ${categoryColors[category.id as keyof typeof categoryColors]}`}
-                      initial={{ width: 0 }}
-                      animate={{ width: `${averageLevel}%` }}
-                      transition={{ duration: 1.5, delay: 0.5 }}
-                    />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+        {/* Quick Metrics */}
+        <div className="grid grid-cols-3 gap-4 mb-8">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-center gap-2 mb-1">
+              <Award className="w-4 h-4 text-blue-600" />
+              <span className="text-lg font-bold text-gray-900 dark:text-white">{skills.length}</span>
+            </div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">Tecnologías</div>
+          </div>
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-center gap-2 mb-1">
+              <TrendingUp className="w-4 h-4 text-green-600" />
+              <span className="text-lg font-bold text-gray-900 dark:text-white">
+                {Math.round(skills.reduce((sum, skill) => sum + skill.level, 0) / skills.length)}%
+              </span>
+            </div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">Nivel Promedio</div>
+          </div>
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-center gap-2 mb-1">
+              <Code2 className="w-4 h-4 text-purple-600" />
+              <span className="text-lg font-bold text-gray-900 dark:text-white">3+</span>
+            </div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">Años Exp.</div>
+          </div>
         </div>
 
         {/* Category Filters */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
           {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-2 ${
-                selectedCategory === category.id
-                  ? 'bg-blue-600 text-white shadow-lg'
-                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700'
-              }`}
-            >
+                         <button
+               key={category.id}
+               onClick={() => setSelectedCategory(category.id)}
+               className={`px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 ${
+                 selectedCategory === category.id
+                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
+                   : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700'
+               }`}
+             >
               <category.icon className="w-4 h-4" />
               {category.name}
               {category.id !== 'all' && (
-                <span className="ml-1 text-xs bg-gray-200 dark:bg-gray-600 px-2 py-0.5 rounded-full">
+                <span className="bg-gray-200 dark:bg-gray-600 px-2 py-0.5 rounded-full text-xs">
                   {getSkillsByCategory(category.id).length}
                 </span>
               )}
@@ -277,31 +266,51 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredSkills.map((skill, index) => (
-            <SkillCard key={skill.name} skill={skill} index={index} />
-          ))}
+        {/* Skills Matrix */}
+        <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+          <div className="flex flex-wrap gap-3 justify-center">
+            {filteredSkills.map((skill, index) => (
+              <SkillChip key={`${selectedCategory}-${skill.name}`} skill={skill} index={index} />
+            ))}
+          </div>
         </div>
 
-        {/* Stats */}
-        <div className="mt-16 text-center">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg p-6 text-white">
-              <div className="text-3xl font-bold mb-2">{skills.length}</div>
-              <div className="text-blue-100">Tecnologías Dominadas</div>
-            </div>
-            <div className="bg-gradient-to-r from-green-500 to-teal-500 rounded-lg p-6 text-white">
-              <div className="text-3xl font-bold mb-2">
-                {Math.round(skills.reduce((sum, skill) => sum + skill.level, 0) / skills.length)}%
-              </div>
-              <div className="text-green-100">Nivel Promedio</div>
-            </div>
-            <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-lg p-6 text-white">
-              <div className="text-3xl font-bold mb-2">3+</div>
-              <div className="text-orange-100">Años de Experiencia</div>
-            </div>
-          </div>
+                {/* Category Insights */}
+        <div className="mt-12 flex flex-wrap justify-center gap-6">
+          {categories.slice(1).map((category) => {
+            const categorySkills = getSkillsByCategory(category.id);
+            const averageLevel = categorySkills.length > 0 
+              ? Math.round(categorySkills.reduce((sum, skill) => sum + skill.level, 0) / categorySkills.length)
+              : 0;
+            
+            return (
+              <motion.div
+                key={category.id}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.0, delay: 0.3, ease: "easeOut" }}
+                className="text-center group"
+              >
+                <div className="relative mb-3">
+                  <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center shadow-sm">
+                    <category.icon className="w-7 h-7 text-gray-600 dark:text-gray-400" />
+                  </div>
+                  <div className="absolute -top-1 -right-1 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">{categorySkills.length}</span>
+                  </div>
+                </div>
+                <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
+                  {category.name}
+                </h3>
+                <div className="flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                  <span>{averageLevel}%</span>
+                  <span>•</span>
+                  <span>promedio</span>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
