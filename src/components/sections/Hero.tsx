@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
+import RippleButton from '@/components/ui/RippleButton';
+import { H1, Subtitle } from '@/components/ui/Typography';
 import { personalInfo, socialLinks } from '@/data/personal';
 import { scrollToSection } from '@/lib/utils';
 import { ChevronDown, Download, Github, Linkedin, Mail } from 'lucide-react';
@@ -140,22 +142,24 @@ export default function Hero() {
           {/* Call to Action Buttons */}
           <motion.div variants={itemVariants} className="mb-12">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
+              <RippleButton
+                variant="primary"
                 size="lg"
                 onClick={() => scrollToSection('projects')}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                className="min-w-[200px]"
               >
-                Ver Proyectos
-              </Button>
-              <Button
+                <span>Ver Proyectos</span>
+                <ChevronDown className="w-5 h-5 ml-2" />
+              </RippleButton>
+              <RippleButton
                 variant="outline"
                 size="lg"
                 onClick={() => scrollToSection('contact')}
-                className="border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900"
+                className="min-w-[200px]"
               >
                 <Mail className="w-5 h-5 mr-2" />
-                Contactar
-              </Button>
+                <span>Contactar</span>
+              </RippleButton>
             </div>
           </motion.div>
 

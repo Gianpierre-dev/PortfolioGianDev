@@ -26,11 +26,17 @@ export default function Projects() {
   const fetchProjects = async () => {
     try {
       const repos = await getGitHubRepos();
-      setProjects(repos);
+      console.log('Proyectos cargados:', repos.length); // Debug
       
-      // Extraer lenguajes únicos
+      // Mostrar TODOS los repositorios
+      setProjects(repos);
+      console.log('Todos los proyectos:', repos.map(repo => `${repo.name} (${repo.language || 'Sin lenguaje'}) - ${repo.description || 'Sin descripción'}`)); // Debug
+      console.log('Total de repositorios cargados:', repos.length);
+      
+      // Extraer lenguajes únicos (incluyendo null/undefined)
       const uniqueLanguages = [...new Set(repos.map(repo => repo.language).filter(Boolean))];
       setLanguages(uniqueLanguages);
+      console.log('Lenguajes encontrados:', uniqueLanguages); // Debug
     } catch (error) {
       console.error('Error fetching projects:', error);
     } finally {
@@ -39,11 +45,23 @@ export default function Projects() {
   };
 
   const filterProjects = () => {
+    console.log('Ejecutando filterProjects...'); // Debug
+    console.log('Filtro seleccionado:', selectedFilter); // Debug
+    console.log('Proyectos disponibles:', projects.length); // Debug
+    
+    let filtered;
     if (selectedFilter === 'all') {
-      setFilteredProjects(projects);
+      filtered = projects;
+    } else if (selectedFilter === 'sin-lenguaje') {
+      filtered = projects.filter(project => !project.language);
     } else {
-      setFilteredProjects(projects.filter(project => project.language === selectedFilter));
+      filtered = projects.filter(project => project.language === selectedFilter);
     }
+    
+    console.log('Proyectos después del filtro:', filtered.length); // Debug
+    console.log('Proyectos filtrados:', filtered.map(p => p.name)); // Debug
+    
+    setFilteredProjects(filtered);
   };
 
   const containerVariants = {
@@ -169,21 +187,31 @@ export default function Projects() {
   );
 
   return (
-    <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800">
+    <section id="projects" className="py-16 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Mis Proyectos
+            Todos mis Repositorios
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Explora mis repositorios de GitHub y descubre las tecnologías que uso
+            Explora todos mis repositorios de GitHub: proyectos completos, documentación, configuraciones y más
           </p>
+          {/* Stats info */}
+          <div className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+            {!loading && (
+              <>
+                Total de proyectos: {projects.length} | 
+                Filtrados: {filteredProjects.length} | 
+                Filtro activo: {selectedFilter}
+              </>
+            )}
+          </div>
         </motion.div>
 
         {/* Filters */}
@@ -191,7 +219,7 @@ export default function Projects() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-2 mb-12"
+          className="flex flex-wrap justify-center gap-2 mb-8"
         >
           <button
             onClick={() => setSelectedFilter('all')}
@@ -221,11 +249,26 @@ export default function Projects() {
               {language}
             </button>
           ))}
+          
+          {/* Filtro para repositorios sin lenguaje */}
+          {projects.some(project => !project.language) && (
+            <button
+              onClick={() => setSelectedFilter('sin-lenguaje')}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                selectedFilter === 'sin-lenguaje'
+                  ? 'bg-gray-600 text-white'
+                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
+              }`}
+            >
+              <div className="w-3 h-3 rounded-full mr-2 inline-block bg-gray-400" />
+              Sin lenguaje ({projects.filter(p => !p.language).length})
+            </button>
+          )}
         </motion.div>
 
         {/* Projects Grid */}
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {[...Array(6)].map((_, index) => (
               <div
                 key={index}
@@ -246,42 +289,104 @@ export default function Projects() {
             ))}
           </div>
         ) : (
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {filteredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </motion.div>
+          <>
+            <div className="text-center mb-4 p-4 bg-blue-100 dark:bg-blue-900 rounded-lg">
+              <p className="text-blue-800 dark:text-blue-200">
+                🚀 Mostrando {filteredProjects.length} repositorios públicos de GitHub
+              </p>
+              <p className="text-blue-700 dark:text-blue-300 text-sm mt-1">
+                Incluye repositorios con y sin descripción
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mb-8 auto-rows-fr">
+              {filteredProjects.map((project, index) => {
+                console.log('Renderizando proyecto:', project.name); // Debug
+                return (
+                  <div key={project.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-6">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                      {project.name}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 min-h-[3rem]">
+                      {project.description || 'Repositorio sin descripción'}
+                    </p>
+                    
+                    {/* Stats */}
+                    <div className="flex items-center gap-4 mb-4 text-sm text-gray-600 dark:text-gray-400">
+                      <div className="flex items-center gap-1">
+                        <div
+                          className="w-3 h-3 rounded-full"
+                          style={{ backgroundColor: getLanguageColor(project.language || 'Unknown') }}
+                        />
+                        <span className="text-xs font-medium px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full">
+                          {project.language || 'Sin lenguaje'}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Star className="w-4 h-4" />
+                        <span>{project.stargazers_count || 0}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <GitFork className="w-4 h-4" />
+                        <span>{project.forks_count || 0}</span>
+                      </div>
+                    </div>
+                    
+                    {/* Links */}
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-1"
+                        onClick={() => window.open(project.html_url, '_blank')}
+                      >
+                        <Github className="w-4 h-4 mr-2" />
+                        Código
+                      </Button>
+                      {project.homepage && (
+                        <Button
+                          variant="primary"
+                          size="sm"
+                          className="flex-1"
+                          onClick={() => window.open(project.homepage, '_blank')}
+                        >
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          Demo
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            
+            {filteredProjects.length === 0 && (
+              <div className="text-center py-8 mb-8">
+                <div className="text-6xl mb-4">🔍</div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                  No se encontraron repositorios
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {selectedFilter === 'all' ? 
+                    'No hay repositorios disponibles en este momento' : 
+                    `No hay repositorios en ${selectedFilter}. Intenta con otro filtro.`
+                  }
+                </p>
+              </div>
+            )}
+          </>
         )}
 
-        {/* Empty State */}
-        {!loading && filteredProjects.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-12"
-          >
-            <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-              No se encontraron proyectos
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300">
-              Intenta con otro filtro o revisa más tarde
-            </p>
-          </motion.div>
-        )}
+
+
+
 
         {/* GitHub Link */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mt-12"
+          className="text-center mt-8"
         >
           <Button
             variant="outline"
@@ -290,7 +395,7 @@ export default function Projects() {
             className="border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900"
           >
             <Github className="w-5 h-5 mr-2" />
-            Ver todos mis repositorios
+            Ver más en GitHub
           </Button>
         </motion.div>
       </div>

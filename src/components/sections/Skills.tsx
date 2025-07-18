@@ -33,7 +33,15 @@ import {
   SiExpress, 
   SiSharp, 
   SiMysql, 
-  SiMongodb 
+  SiMongodb,
+  SiAstro,
+  SiGo,
+  SiRust,
+  SiKotlin,
+  SiSwift,
+  SiDart,
+  SiRuby,
+  SiCplusplus
 } from 'react-icons/si';
 
 const categoryIcons = {
@@ -70,6 +78,15 @@ const skillIcons = {
   'mongodb': SiMongodb,
   'git': FaGitAlt,
   'github': FaGithub,
+  'astro': SiAstro,
+  'go': SiGo,
+  'rust': SiRust,
+  'kotlin': SiKotlin,
+  'swift': SiSwift,
+  'dart': SiDart,
+  'ruby': SiRuby,
+  'cplusplus': SiCplusplus,
+  'c++': SiCplusplus,
   'vscode': Code2, // Fallback icon for VS Code
 };
 
@@ -92,6 +109,15 @@ const skillColors = {
   'mongodb': 'text-green-600',
   'git': 'text-orange-500',
   'github': 'text-gray-800 dark:text-gray-200',
+  'astro': 'text-orange-500',
+  'go': 'text-cyan-400',
+  'rust': 'text-orange-600',
+  'kotlin': 'text-purple-400',
+  'swift': 'text-orange-400',
+  'dart': 'text-cyan-600',
+  'ruby': 'text-red-600',
+  'cplusplus': 'text-pink-500',
+  'c++': 'text-pink-500',
   'vscode': 'text-blue-500',
 };
 

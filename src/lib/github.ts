@@ -38,9 +38,9 @@ export async function getGitHubRepos(): Promise<Project[]> {
 
     const repos = await response.json();
     
-    // Filtrar repositorios públicos y con descripción
+    // Filtrar repositorios públicos (con o sin descripción)
     return repos
-      .filter((repo: any) => !repo.private && repo.description && !repo.fork)
+      .filter((repo: any) => !repo.private && !repo.fork)
       .map((repo: any) => ({
         id: repo.id,
         name: repo.name,
@@ -55,7 +55,7 @@ export async function getGitHubRepos(): Promise<Project[]> {
         updated_at: repo.updated_at,
         private: repo.private,
       }))
-      .slice(0, 6); // Mostrar solo los 6 más recientes
+      .slice(0, 50); // Mostrar hasta 50 repositorios
   } catch (error) {
     console.error('Error fetching GitHub repositories:', error);
     return [];

@@ -57,22 +57,50 @@ export function truncateText(text: string, maxLength: number): string {
 // Función para obtener el color de un lenguaje de programación
 export function getLanguageColor(language: string): string {
   const colors: Record<string, string> = {
+    // Lenguajes principales
     JavaScript: '#f1e05a',
     TypeScript: '#2b7489',
     Python: '#3572A5',
     Java: '#b07219',
     'C#': '#239120',
     PHP: '#4F5D95',
+    
+    // Frameworks y tecnologías web
     HTML: '#e34c26',
     CSS: '#1572B6',
     React: '#61dafb',
     'Vue.js': '#4FC08D',
     Angular: '#dd1b16',
+    Astro: '#FF5D01',
+    
+    // Backend y bases de datos
     Node: '#68a063',
     Express: '#000000',
     MongoDB: '#47A248',
     MySQL: '#00618a',
     PostgreSQL: '#336791',
+    
+    // Otros lenguajes
+    Go: '#00ADD8',
+    Rust: '#dea584',
+    Kotlin: '#A97BFF',
+    Swift: '#ffac45',
+    Dart: '#00B4AB',
+    Ruby: '#CC342D',
+    
+    // Casos especiales y variaciones
+    'C++': '#f34b7d',
+    C: '#A8B9CC',
+    'Objective-C': '#438eff',
+    Shell: '#89e051',
+    PowerShell: '#012456',
+    Dockerfile: '#384d54',
+    YAML: '#cb171e',
+    JSON: '#292929',
+    
+    // Casos especiales para repositorios sin lenguaje
+    Unknown: '#6b7280',
+    'Sin lenguaje': '#6b7280',
   };
   
   return colors[language] || '#6b7280';
