@@ -10,21 +10,31 @@ import {
   Wrench, 
   Monitor, 
   Server, 
-  Layers,
-  Code,
-  Palette,
-  FileType,
-  Wind,
-  Layout,
-  Zap,
-  Coffee,
-  Hash,
-  Leaf,
-  GitBranch,
-  Github,
-  Globe,
-  Atom
+  Layers
 } from 'lucide-react';
+
+import { 
+  FaHtml5, 
+  FaCss3Alt, 
+  FaJs, 
+  FaReact, 
+  FaBootstrap, 
+  FaNodeJs, 
+  FaPhp, 
+  FaPython, 
+  FaJava, 
+  FaGitAlt, 
+  FaGithub 
+} from 'react-icons/fa';
+
+import { 
+  SiTypescript, 
+  SiTailwindcss, 
+  SiExpress, 
+  SiSharp, 
+  SiMysql, 
+  SiMongodb 
+} from 'react-icons/si';
 
 const categoryIcons = {
   frontend: Monitor,
@@ -43,22 +53,46 @@ const categoryColors = {
 };
 
 const skillIcons = {
-  'code': Code,
-  'palette': Palette,
-  'code2': Code2,
-  'file-type': FileType,
-  'wind': Wind,
-  'layout': Layout,
-  'server': Server,
-  'zap': Zap,
-  'coffee': Coffee,
-  'hash': Hash,
-  'database': Database,
-  'leaf': Leaf,
-  'git-branch': GitBranch,
-  'github': Github,
-  'globe': Globe,
-  'atom': Atom,
+  'html5': FaHtml5,
+  'css3': FaCss3Alt,
+  'javascript': FaJs,
+  'react': FaReact,
+  'typescript': SiTypescript,
+  'tailwind': SiTailwindcss,
+  'bootstrap': FaBootstrap,
+  'nodejs': FaNodeJs,
+  'express': SiExpress,
+  'php': FaPhp,
+  'python': FaPython,
+  'java': FaJava,
+  'csharp': SiSharp,
+  'mysql': SiMysql,
+  'mongodb': SiMongodb,
+  'git': FaGitAlt,
+  'github': FaGithub,
+  'vscode': Code2, // Fallback icon for VS Code
+};
+
+// Colores específicos para cada tecnología
+const skillColors = {
+  'html5': 'text-orange-500',
+  'css3': 'text-blue-500',
+  'javascript': 'text-yellow-500',
+  'react': 'text-cyan-400',
+  'typescript': 'text-blue-600',
+  'tailwind': 'text-cyan-500',
+  'bootstrap': 'text-purple-600',
+  'nodejs': 'text-green-500',
+  'express': 'text-gray-600 dark:text-gray-400',
+  'php': 'text-indigo-500',
+  'python': 'text-blue-500',
+  'java': 'text-red-500',
+  'csharp': 'text-purple-500',
+  'mysql': 'text-blue-600',
+  'mongodb': 'text-green-600',
+  'git': 'text-orange-500',
+  'github': 'text-gray-800 dark:text-gray-200',
+  'vscode': 'text-blue-500',
 };
 
 export default function Skills() {
@@ -82,14 +116,15 @@ export default function Skills() {
   ];
 
   const SkillCard = ({ skill, index }: { skill: Skill; index: number }) => {
-    const SkillIcon = skillIcons[skill.icon as keyof typeof skillIcons] || Code;
+    const SkillIcon = skillIcons[skill.icon as keyof typeof skillIcons] || Code2;
+    const iconColor = skillColors[skill.icon as keyof typeof skillColors] || 'text-gray-500';
     
     return (
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className={`w-10 h-10 rounded-full bg-gradient-to-r ${categoryColors[skill.category]} flex items-center justify-center`}>
-              <SkillIcon className="w-5 h-5 text-white" />
+            <div className="w-12 h-12 rounded-lg bg-gray-50 dark:bg-gray-700 flex items-center justify-center">
+              <SkillIcon className={`w-8 h-8 ${iconColor}`} />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               {skill.name}

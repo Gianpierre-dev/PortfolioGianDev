@@ -33,30 +33,30 @@ export const socialLinks: SocialLink[] = [
 
 export const skills: Skill[] = [
   // Frontend
-  { name: "HTML5", level: 90, category: "frontend", icon: "globe" },
-  { name: "CSS3", level: 85, category: "frontend", icon: "palette" },
-  { name: "JavaScript", level: 88, category: "frontend", icon: "code2" },
-  { name: "React", level: 85, category: "frontend", icon: "atom" },
-  { name: "TypeScript", level: 80, category: "frontend", icon: "file-type" },
-  { name: "Tailwind CSS", level: 85, category: "frontend", icon: "wind" },
-  { name: "Bootstrap", level: 80, category: "frontend", icon: "layout" },
+  { name: "HTML5", level: 90, category: "frontend", icon: "html5" },
+  { name: "CSS3", level: 85, category: "frontend", icon: "css3" },
+  { name: "JavaScript", level: 88, category: "frontend", icon: "javascript" },
+  { name: "React", level: 85, category: "frontend", icon: "react" },
+  { name: "TypeScript", level: 80, category: "frontend", icon: "typescript" },
+  { name: "Tailwind CSS", level: 85, category: "frontend", icon: "tailwind" },
+  { name: "Bootstrap", level: 80, category: "frontend", icon: "bootstrap" },
   
   // Backend
-  { name: "Node.js", level: 82, category: "backend", icon: "server" },
-  { name: "Express.js", level: 80, category: "backend", icon: "zap" },
-  { name: "PHP", level: 85, category: "backend", icon: "code" },
-  { name: "Python", level: 83, category: "backend", icon: "code2" },
-  { name: "Java", level: 75, category: "backend", icon: "coffee" },
-  { name: "C#", level: 70, category: "backend", icon: "hash" },
+  { name: "Node.js", level: 82, category: "backend", icon: "nodejs" },
+  { name: "Express.js", level: 80, category: "backend", icon: "express" },
+  { name: "PHP", level: 85, category: "backend", icon: "php" },
+  { name: "Python", level: 83, category: "backend", icon: "python" },
+  { name: "Java", level: 75, category: "backend", icon: "java" },
+  { name: "C#", level: 70, category: "backend", icon: "csharp" },
   
   // Database
-  { name: "MySQL", level: 85, category: "database", icon: "database" },
-  { name: "MongoDB", level: 78, category: "database", icon: "leaf" },
+  { name: "MySQL", level: 85, category: "database", icon: "mysql" },
+  { name: "MongoDB", level: 78, category: "database", icon: "mongodb" },
   
   // Tools
-  { name: "Git", level: 88, category: "tools", icon: "git-branch" },
+  { name: "Git", level: 88, category: "tools", icon: "git" },
   { name: "GitHub", level: 85, category: "tools", icon: "github" },
-  { name: "VS Code", level: 90, category: "tools", icon: "code" },
+  { name: "VS Code", level: 90, category: "tools", icon: "vscode" },
 ];
 
 export const experiences: Experience[] = [
