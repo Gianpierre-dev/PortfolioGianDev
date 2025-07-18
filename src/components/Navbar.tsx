@@ -29,6 +29,12 @@ export default function Navbar() {
     setIsOpen(false);
   };
 
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    console.log('Theme changed to:', newTheme); // Debug
+  };
+
   if (!mounted) return null;
 
   return (
@@ -70,8 +76,9 @@ export default function Navbar() {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              onClick={toggleTheme}
               className="p-2"
+              title={`Cambiar a modo ${theme === 'dark' ? 'claro' : 'oscuro'}`}
             >
               {theme === 'dark' ? (
                 <Sun className="h-5 w-5" />
