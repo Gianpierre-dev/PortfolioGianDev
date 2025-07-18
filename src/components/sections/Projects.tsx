@@ -63,7 +63,7 @@ export default function Projects() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: 'easeOut',
+        ease: "easeOut" as const,
       },
     },
   };
@@ -71,8 +71,16 @@ export default function Projects() {
   const ProjectCard = ({ project }: { project: Project }) => (
     <motion.div
       variants={itemVariants}
-      whileHover={{ y: -5 }}
-      className="bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden group hover:shadow-xl transition-all duration-300"
+      whileHover={{ 
+        y: -5,
+        scale: 1.02
+      }}
+      transition={{ 
+        type: "spring", 
+        stiffness: 400, 
+        damping: 25 
+      }}
+      className="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden group transition-all duration-300"
     >
       <div className="p-6">
         {/* Header */}

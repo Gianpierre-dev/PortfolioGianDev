@@ -131,12 +131,23 @@ export default function Skills() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4"
+          >
             Habilidades Técnicas
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
+          >
             Mis competencias tecnológicas y nivel de experiencia en diferentes áreas
-          </p>
+          </motion.p>
         </div>
 
         {/* Skills Overview */}
@@ -150,7 +161,7 @@ export default function Skills() {
             return (
               <div
                 key={category.id}
-                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg border border-gray-200 dark:border-gray-700 text-center"
+                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg border border-gray-200 dark:border-gray-700 text-center hover:shadow-xl transition-shadow"
               >
                 <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${categoryColors[category.id as keyof typeof categoryColors]} flex items-center justify-center`}>
                   <category.icon className="w-8 h-8 text-white" />
