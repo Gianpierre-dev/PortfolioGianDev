@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { skills } from '@/data/personal';
 import { Skill } from '@/types';
 import { 
@@ -162,13 +162,16 @@ export default function Skills() {
     const skillLevel = getSkillLevel(skill.level);
     
     return (
-      <div
-        onMouseEnter={() => setHoveredSkill(skill.name)}
-        onMouseLeave={() => setHoveredSkill(null)}
-        className={`relative`}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: index * 0.03, ease: "easeOut" }}
+        onHoverStart={() => setHoveredSkill(skill.name)}
+        onHoverEnd={() => setHoveredSkill(null)}
+        className={`relative group`}
       >
-        <div className={`flex items-center gap-2 px-3 py-2 rounded-lg border ${categoryTheme.bg} ${categoryTheme.border}`}>
-          <SkillIcon className={`w-4 h-4 ${iconColor}`} />
+        <div className={`flex items-center gap-2 px-3 py-2 rounded-lg border transition-all duration-1000 ease-out ${categoryTheme.bg} ${categoryTheme.border} group-hover:scale-[1.008] group-hover:shadow-sm`}>
+          <SkillIcon className={`w-4 h-4 ${iconColor} transition-transform duration-1000 ease-out group-hover:scale-[1.05]`} />
           <span className="text-sm font-medium text-gray-900 dark:text-white">
             {skill.name}
           </span>
@@ -184,7 +187,7 @@ export default function Skills() {
             <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-t-2 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
           </div>
         )}
-      </div>
+      </motion.div>
     );
   };
 
@@ -218,28 +221,28 @@ export default function Skills() {
 
         {/* Quick Metrics */}
         <div className="grid grid-cols-3 gap-4 mb-8">
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700">
+          <div className="bg-gradient-to-br from-blue-50 via-indigo-25 to-blue-100 dark:from-blue-900/20 dark:via-indigo-800/10 dark:to-blue-900/30 rounded-xl p-4 text-center border border-blue-200/50 dark:border-blue-800/30 shadow-lg shadow-blue-100/50 dark:shadow-blue-900/20 transition-all duration-700 ease-out hover:scale-[1.01] hover:shadow-xl">
             <div className="flex items-center justify-center gap-2 mb-1">
-              <Award className="w-4 h-4 text-blue-600" />
-              <span className="text-lg font-bold text-gray-900 dark:text-white">{skills.length}</span>
+              <Award className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <span className="text-lg font-bold text-blue-900 dark:text-blue-100">{skills.length}</span>
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">Tecnologías</div>
+            <div className="text-xs text-blue-600/70 dark:text-blue-400/70">Tecnologías</div>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700">
+          <div className="bg-gradient-to-br from-emerald-50 via-green-25 to-emerald-100 dark:from-emerald-900/20 dark:via-green-800/10 dark:to-emerald-900/30 rounded-xl p-4 text-center border border-emerald-200/50 dark:border-emerald-800/30 shadow-lg shadow-emerald-100/50 dark:shadow-emerald-900/20 transition-all duration-700 ease-out hover:scale-[1.01] hover:shadow-xl">
             <div className="flex items-center justify-center gap-2 mb-1">
-              <TrendingUp className="w-4 h-4 text-green-600" />
-              <span className="text-lg font-bold text-gray-900 dark:text-white">
+              <TrendingUp className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              <span className="text-lg font-bold text-emerald-900 dark:text-emerald-100">
                 {Math.round(skills.reduce((sum, skill) => sum + skill.level, 0) / skills.length)}%
               </span>
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">Nivel Promedio</div>
+            <div className="text-xs text-emerald-600/70 dark:text-emerald-400/70">Nivel Promedio</div>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700">
+          <div className="bg-gradient-to-br from-purple-50 via-violet-25 to-purple-100 dark:from-purple-900/20 dark:via-violet-800/10 dark:to-purple-900/30 rounded-xl p-4 text-center border border-purple-200/50 dark:border-purple-800/30 shadow-lg shadow-purple-100/50 dark:shadow-purple-900/20 transition-all duration-700 ease-out hover:scale-[1.01] hover:shadow-xl">
             <div className="flex items-center justify-center gap-2 mb-1">
-              <Code2 className="w-4 h-4 text-purple-600" />
-              <span className="text-lg font-bold text-gray-900 dark:text-white">3+</span>
+              <Code2 className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+              <span className="text-lg font-bold text-purple-900 dark:text-purple-100">3+</span>
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">Años Exp.</div>
+            <div className="text-xs text-purple-600/70 dark:text-purple-400/70">Años Exp.</div>
           </div>
         </div>
 
@@ -249,10 +252,10 @@ export default function Skills() {
                          <button
                key={category.id}
                onClick={() => setSelectedCategory(category.id)}
-               className={`px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 ${
+               className={`px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 transition-all duration-700 ease-out hover:scale-[1.02] ${
                  selectedCategory === category.id
                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
-                   : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700'
+                   : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:shadow-sm'
                }`}
              >
               <category.icon className="w-4 h-4" />
@@ -269,19 +272,50 @@ export default function Skills() {
         {/* Skills Matrix */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
           <div className="flex flex-wrap gap-3 justify-center">
-            {filteredSkills.map((skill, index) => (
-              <SkillChip key={`${selectedCategory}-${skill.name}`} skill={skill} index={index} />
-            ))}
+            <AnimatePresence mode="wait">
+              {filteredSkills.map((skill, index) => (
+                <SkillChip key={`${selectedCategory}-${skill.name}`} skill={skill} index={index} />
+              ))}
+            </AnimatePresence>
           </div>
         </div>
 
                 {/* Category Insights */}
         <div className="mt-12 flex flex-wrap justify-center gap-6">
-          {categories.slice(1).map((category) => {
+          {categories.slice(1).map((category, index) => {
             const categorySkills = getSkillsByCategory(category.id);
             const averageLevel = categorySkills.length > 0 
               ? Math.round(categorySkills.reduce((sum, skill) => sum + skill.level, 0) / categorySkills.length)
               : 0;
+            
+            const categoryStyles = {
+              frontend: { 
+                bg: 'bg-gradient-to-br from-blue-100 via-blue-50 to-indigo-100 dark:from-blue-900/30 dark:via-blue-800/20 dark:to-indigo-900/30', 
+                icon: 'text-blue-600 dark:text-blue-400',
+                badge: 'bg-gradient-to-r from-blue-500 to-indigo-500',
+                shadow: 'shadow-blue-200/50 dark:shadow-blue-900/30'
+              },
+              backend: { 
+                bg: 'bg-gradient-to-br from-green-100 via-emerald-50 to-teal-100 dark:from-green-900/30 dark:via-emerald-800/20 dark:to-teal-900/30', 
+                icon: 'text-green-600 dark:text-green-400',
+                badge: 'bg-gradient-to-r from-green-500 to-emerald-500',
+                shadow: 'shadow-green-200/50 dark:shadow-green-900/30'
+              },
+                              database: { 
+                 bg: 'bg-gradient-to-br from-orange-100 via-amber-50 to-red-100 dark:from-orange-900/30 dark:via-amber-800/20 dark:to-red-900/30', 
+                 icon: 'text-orange-600 dark:text-orange-400',
+                 badge: 'bg-gradient-to-r from-orange-500 to-red-500',
+                 shadow: 'shadow-orange-200/50 dark:shadow-orange-900/30'
+               },
+              tools: { 
+                bg: 'bg-gradient-to-br from-purple-100 via-violet-50 to-pink-100 dark:from-purple-900/30 dark:via-violet-800/20 dark:to-pink-900/30', 
+                icon: 'text-purple-600 dark:text-purple-400',
+                badge: 'bg-gradient-to-r from-purple-500 to-pink-500',
+                shadow: 'shadow-purple-200/50 dark:shadow-purple-900/30'
+              }
+            };
+            
+            const style = categoryStyles[category.id as keyof typeof categoryStyles];
             
             return (
               <motion.div
@@ -289,22 +323,22 @@ export default function Skills() {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 1.0, delay: 0.3, ease: "easeOut" }}
+                transition={{ duration: 1.0, delay: 0.3 + (index * 0.1), ease: "easeOut" }}
                 className="text-center group"
               >
-                <div className="relative mb-3">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center shadow-sm">
-                    <category.icon className="w-7 h-7 text-gray-600 dark:text-gray-400" />
+                <div className="relative mb-3 group">
+                                     <div className={`w-16 h-16 mx-auto rounded-full ${style.bg} flex items-center justify-center ${style.shadow} shadow-lg border border-white/50 dark:border-gray-800/50 transition-all duration-700 ease-out group-hover:scale-[1.05] group-hover:shadow-xl`}>
+                    <category.icon className={`w-7 h-7 ${style.icon} transition-transform duration-700 ease-out group-hover:scale-110`} />
                   </div>
-                  <div className="absolute -top-1 -right-1 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                  <div className={`absolute -top-1 -right-1 w-6 h-6 ${style.badge} rounded-full flex items-center justify-center shadow-md transition-all duration-700 ease-out group-hover:scale-105`}>
                     <span className="text-white text-xs font-bold">{categorySkills.length}</span>
                   </div>
                 </div>
                 <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
                   {category.name}
                 </h3>
-                <div className="flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                  <span>{averageLevel}%</span>
+                <div className={`flex items-center justify-center gap-2 text-xs ${style.icon} opacity-80`}>
+                  <span className="font-semibold">{averageLevel}%</span>
                   <span>•</span>
                   <span>promedio</span>
                 </div>

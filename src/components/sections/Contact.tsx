@@ -115,20 +115,20 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Contacto
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            ¿Tienes un proyecto en mente? ¡Conversemos! Estoy disponible para nuevas oportunidades
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            ¿Tienes un proyecto en mente? Me encantaría escuchar sobre él.
           </p>
         </motion.div>
 
@@ -141,34 +141,32 @@ export default function Contact() {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <motion.div variants={itemVariants}>
+            <motion.div variants={itemVariants} className="mb-8">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
                 Información de Contacto
               </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-8">
-                Siempre estoy interesado en nuevos proyectos y oportunidades. 
-                Ya sea que quieras colaborar o simplemente saludar, ¡no dudes en contactarme!
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Siempre estoy interesado en nuevos proyectos. No dudes en contactarme.
               </p>
             </motion.div>
 
             {/* Contact Methods */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               {contactInfo.map((item, index) => (
                 <motion.div
                   key={item.label}
                   variants={itemVariants}
-                  whileHover={{ scale: 1.02 }}
-                  className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700"
+                  className="bg-white dark:bg-gray-800 rounded-lg p-5 border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow duration-200"
                 >
                   <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                      <item.icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                    <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+                      <item.icon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div className="flex-1">
                       <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
                         {item.label}
                       </h4>
-                      <p className="text-gray-600 dark:text-gray-300 font-medium">
+                      <p className="text-gray-700 dark:text-gray-300 font-medium">
                         {item.value}
                       </p>
                       <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -181,7 +179,7 @@ export default function Contact() {
             </div>
 
             {/* Social Links */}
-            <motion.div variants={itemVariants} className="pt-8">
+            <motion.div variants={itemVariants} className="pt-6">
               <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                 Sígueme en mis redes
               </h4>
@@ -196,7 +194,7 @@ export default function Contact() {
                       rel={social.name !== 'Email' ? 'noopener noreferrer' : undefined}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300"
+                      className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200"
                     >
                       <Icon className="w-5 h-5" />
                     </motion.a>
@@ -212,7 +210,7 @@ export default function Contact() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="bg-gray-50 dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700"
+            className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700 shadow-lg"
           >
             <motion.div variants={itemVariants}>
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
@@ -234,11 +232,11 @@ export default function Contact() {
                     required: 'El nombre es requerido',
                     minLength: { value: 2, message: 'El nombre debe tener al menos 2 caracteres' }
                   })}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                   placeholder="Tu nombre completo"
                 />
                 {errors.name && (
-                  <p className="mt-1 text-sm text-red-600 dark:text-red-400 flex items-center">
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center">
                     <AlertCircle className="w-4 h-4 mr-1" />
                     {errors.name.message}
                   </p>
@@ -258,11 +256,11 @@ export default function Contact() {
                     required: 'El email es requerido',
                     validate: (value) => isValidEmail(value) || 'Email inválido'
                   })}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                   placeholder="tu@email.com"
                 />
                 {errors.email && (
-                  <p className="mt-1 text-sm text-red-600 dark:text-red-400 flex items-center">
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center">
                     <AlertCircle className="w-4 h-4 mr-1" />
                     {errors.email.message}
                   </p>
@@ -282,11 +280,11 @@ export default function Contact() {
                     required: 'El asunto es requerido',
                     minLength: { value: 5, message: 'El asunto debe tener al menos 5 caracteres' }
                   })}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                   placeholder="Proyecto web / Colaboración / Consulta"
                 />
                 {errors.subject && (
-                  <p className="mt-1 text-sm text-red-600 dark:text-red-400 flex items-center">
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center">
                     <AlertCircle className="w-4 h-4 mr-1" />
                     {errors.subject.message}
                   </p>
@@ -306,11 +304,11 @@ export default function Contact() {
                     required: 'El mensaje es requerido',
                     minLength: { value: 10, message: 'El mensaje debe tener al menos 10 caracteres' }
                   })}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 resize-none transition-colors"
                   placeholder="Cuéntame sobre tu proyecto o consulta..."
                 />
                 {errors.message && (
-                  <p className="mt-1 text-sm text-red-600 dark:text-red-400 flex items-center">
+                  <p className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center">
                     <AlertCircle className="w-4 h-4 mr-1" />
                     {errors.message.message}
                   </p>

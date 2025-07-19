@@ -8,7 +8,12 @@ import { scrollToSection } from '@/lib/utils';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 
-const navigation = [
+interface NavigationItem {
+  name: string;
+  href: string;
+}
+
+const navigation: NavigationItem[] = [
   { name: 'Inicio', href: 'hero' },
   { name: 'Sobre mí', href: 'about' },
   { name: 'Proyectos', href: 'projects' },
@@ -16,10 +21,10 @@ const navigation = [
   { name: 'Contacto', href: 'contact' },
 ];
 
-export default function Navbar() {
-  const [mounted, setMounted] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+export default function Navbar(): JSX.Element {
+  const [mounted, setMounted] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);
   const { theme, setTheme } = useTheme();
   const { progress, activeSection } = useScrollProgress();
 
@@ -28,7 +33,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = (): void => {
       setScrolled(window.scrollY > 50);
     };
 
@@ -36,17 +41,21 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (href: string): void => {
     scrollToSection(href);
     setIsOpen(false);
   };
 
-  const toggleTheme = () => {
+  const toggleTheme = (): void => {
+    if (!setTheme) return;
+    
     const newTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
   };
 
-  if (!mounted) return null;
+  const isDark = theme === 'dark';
+
+  if (!mounted) return <div className="h-16" />; // Placeholder para evitar hydration mismatch
 
   return (
     <>
@@ -121,31 +130,43 @@ export default function Navbar() {
                 onClick={toggleTheme}
                 whileHover={{ scale: 1.05, rotate: 12 }}
                 whileTap={{ scale: 0.95 }}
-                className="p-2.5 rounded-xl bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 text-gray-700 dark:text-gray-300 hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 transition-all duration-200 shadow-sm hover:shadow-md"
+                className={`relative p-2.5 rounded-xl ${
+                  isDark 
+                    ? 'bg-gradient-to-r from-blue-900 to-purple-900 text-yellow-400 shadow-lg' 
+                    : 'bg-gradient-to-r from-yellow-100 to-orange-100 text-gray-800 shadow-lg'
+                } hover:shadow-xl transition-all duration-300`}
+                title={`Cambiar a tema ${isDark ? 'claro' : 'oscuro'}`}
               >
                 <AnimatePresence mode="wait">
-                  {theme === 'dark' ? (
+                  {isDark ? (
                     <motion.div
                       key="sun"
-                      initial={{ rotate: -180, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 180, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                      initial={{ rotate: -180, opacity: 0, scale: 0 }}
+                      animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                      exit={{ rotate: 180, opacity: 0, scale: 0 }}
+                      transition={{ duration: 0.3, type: "spring" }}
+                      className="flex items-center"
                     >
                       <Sun className="w-5 h-5" />
                     </motion.div>
                   ) : (
                     <motion.div
                       key="moon"
-                      initial={{ rotate: 180, opacity: 0 }}
-                      animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -180, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                      initial={{ rotate: 180, opacity: 0, scale: 0 }}
+                      animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                      exit={{ rotate: -180, opacity: 0, scale: 0 }}
+                      transition={{ duration: 0.3, type: "spring" }}
+                      className="flex items-center"
                     >
                       <Moon className="w-5 h-5" />
                     </motion.div>
                   )}
                 </AnimatePresence>
+                
+                {/* Pequeño indicador del tema activo */}
+                <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full ${
+                  isDark ? 'bg-blue-400' : 'bg-orange-400'
+                } shadow-sm`}></div>
               </motion.button>
 
               {/* Mobile menu button */}

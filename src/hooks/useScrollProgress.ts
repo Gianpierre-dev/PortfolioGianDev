@@ -2,54 +2,49 @@
 
 import { useState, useEffect } from 'react';
 
-interface ScrollProgress {
+interface ScrollProgressReturn {
   progress: number;
   activeSection: string;
 }
 
-export function useScrollProgress(): ScrollProgress {
-  const [progress, setProgress] = useState(0);
-  const [activeSection, setActiveSection] = useState('hero');
+export function useScrollProgress(): ScrollProgressReturn {
+  const [progress, setProgress] = useState<number>(0);
+  const [activeSection, setActiveSection] = useState<string>('hero');
 
   useEffect(() => {
-    const calculateProgress = () => {
+    const updateProgress = (): void => {
       const scrollTop = window.pageYOffset;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollProgress = (scrollTop / docHeight) * 100;
-      setProgress(scrollProgress);
-    };
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      setProgress(Math.min(scrollPercent, 100));
 
-    const findActiveSection = () => {
+      // Determinar la sección activa
       const sections = ['hero', 'about', 'projects', 'skills', 'contact'];
       let currentSection = 'hero';
 
-      for (const section of sections) {
+      sections.forEach((section) => {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          const sectionTop = rect.top;
-          const sectionHeight = rect.height;
-          
-          // Consider section active if it's in the viewport
-          if (sectionTop <= window.innerHeight * 0.5 && sectionTop + sectionHeight >= window.innerHeight * 0.5) {
+          if (rect.top <= 100 && rect.bottom >= 100) {
             currentSection = section;
-            break;
           }
         }
-      }
+      });
 
       setActiveSection(currentSection);
     };
 
-    const handleScroll = () => {
-      calculateProgress();
-      findActiveSection();
+    const handleScroll = (): void => {
+      requestAnimationFrame(updateProgress);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial call
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    updateProgress(); // Llamada inicial
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return { progress, activeSection };
