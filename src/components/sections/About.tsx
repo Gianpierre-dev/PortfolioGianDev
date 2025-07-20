@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { personalInfo, experiences } from '@/data/personal';
-import { Calendar, MapPin, Building, Code, Coffee } from 'lucide-react';
+import { downloadCV } from '@/lib/utils';
+import { Calendar, MapPin, Building, Code, Coffee, Download } from 'lucide-react';
 
 export default function About() {
   const containerVariants = {
@@ -109,6 +110,23 @@ export default function About() {
                 </motion.div>
               ))}
             </div>
+            
+            {/* CV Download Button */}
+            <motion.div
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="text-center mt-8"
+            >
+              <button
+                onClick={() => downloadCV()}
+                className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg"
+              >
+                <Download className="w-5 h-5" />
+                Descargar mi CV
+              </button>
+            </motion.div>
           </motion.div>
 
           {/* Timeline */}

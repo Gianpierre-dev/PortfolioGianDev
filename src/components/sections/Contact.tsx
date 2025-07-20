@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/Button';
 import { personalInfo, socialLinks } from '@/data/personal';
 import { isValidEmail } from '@/lib/utils';
+import { sendContactMessage } from '@/lib/email';
 import { ContactForm } from '@/types';
 import { 
   Mail, 
@@ -44,18 +45,22 @@ export default function Contact() {
     setSubmitStatus('idle');
 
     try {
-      // Simulación de envío de email (reemplazar con EmailJS real)
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Enviar mensaje por email (EmailJS) y WhatsApp
+      const result = await sendContactMessage(data);
       
-      // Aquí iría la integración real con EmailJS
-      // const result = await sendEmail(data);
+      if (result.success) {
+        setSubmitStatus('success');
+        setSubmitMessage('¡Mensaje enviado por email y WhatsApp! 📧📱 Te responderé pronto.');
+      } else {
+        // Si falla el email, pero WhatsApp se abrió
+        setSubmitStatus('success');
+        setSubmitMessage('Mensaje enviado por WhatsApp 📱 (Email en configuración). ¡Te responderé pronto!');
+      }
       
-      setSubmitStatus('success');
-      setSubmitMessage('¡Mensaje enviado exitosamente! Te responderé pronto.');
       reset();
     } catch (error) {
       setSubmitStatus('error');
-      setSubmitMessage('Hubo un error al enviar el mensaje. Por favor, intenta nuevamente.');
+      setSubmitMessage('Error al enviar. Pero se abrió WhatsApp 📱 - También puedes contactarme por email directamente.');
     } finally {
       setIsSubmitting(false);
     }

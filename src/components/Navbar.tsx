@@ -1,12 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useTheme } from 'next-themes';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { scrollToSection } from '@/lib/utils';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
-import { Moon, Sun, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 interface NavigationItem {
   name: string;
@@ -25,7 +24,6 @@ export default function Navbar(): JSX.Element {
   const [mounted, setMounted] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
-  const { theme, setTheme } = useTheme();
   const { progress, activeSection } = useScrollProgress();
 
   useEffect(() => {
@@ -46,22 +44,13 @@ export default function Navbar(): JSX.Element {
     setIsOpen(false);
   };
 
-  const toggleTheme = (): void => {
-    if (!setTheme) return;
-    
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-  };
-
-  const isDark = theme === 'dark';
-
-  if (!mounted) return <div className="h-16" />; // Placeholder para evitar hydration mismatch
+  if (!mounted) return <div className="h-16" />;
 
   return (
     <>
       {/* Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 z-50 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 origin-left"
+        className="fixed top-0 left-0 right-0 z-50 h-1 bg-gradient-to-r from-theme-accent via-primary to-theme-accent-soft origin-left"
         style={{ scaleX: progress / 100 }}
         initial={{ scaleX: 0 }}
         animate={{ scaleX: progress / 100 }}
@@ -72,9 +61,9 @@ export default function Navbar(): JSX.Element {
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           scrolled
-            ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-lg shadow-gray-200/20 dark:shadow-gray-900/20'
-            : 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md'
-        } border-b border-gray-200/50 dark:border-gray-700/50`}
+            ? 'bg-background-solid/90 backdrop-blur-xl shadow-lg shadow-theme-bg-muted/20'
+            : 'bg-background-solid/80 backdrop-blur-md'
+        } border-b border-theme-border/50`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 400, damping: 40 }}
@@ -106,15 +95,15 @@ export default function Navbar(): JSX.Element {
                   whileTap={{ scale: 0.95 }}
                   className={`relative px-4 py-2 rounded-lg transition-all duration-200 ${
                     activeSection === item.href
-                      ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800/50'
+                      ? 'text-theme-accent bg-theme-accent-soft/20'
+                      : 'text-theme-text-primary hover:text-theme-accent hover:bg-theme-bg-subtle/50'
                   }`}
                 >
                   {item.name}
                   {activeSection === item.href && (
                     <motion.div
                       layoutId="activeSection"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-theme-accent to-primary rounded-full"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
@@ -124,51 +113,8 @@ export default function Navbar(): JSX.Element {
               ))}
             </div>
 
-            {/* Theme Toggle & Mobile Menu */}
-            <div className="flex items-center space-x-2">
-              <motion.button
-                onClick={toggleTheme}
-                whileHover={{ scale: 1.05, rotate: 12 }}
-                whileTap={{ scale: 0.95 }}
-                className={`relative p-2.5 rounded-xl ${
-                  isDark 
-                    ? 'bg-gradient-to-r from-blue-900 to-purple-900 text-yellow-400 shadow-lg' 
-                    : 'bg-gradient-to-r from-yellow-100 to-orange-100 text-gray-800 shadow-lg'
-                } hover:shadow-xl transition-all duration-300`}
-                title={`Cambiar a tema ${isDark ? 'claro' : 'oscuro'}`}
-              >
-                <AnimatePresence mode="wait">
-                  {isDark ? (
-                    <motion.div
-                      key="sun"
-                      initial={{ rotate: -180, opacity: 0, scale: 0 }}
-                      animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                      exit={{ rotate: 180, opacity: 0, scale: 0 }}
-                      transition={{ duration: 0.3, type: "spring" }}
-                      className="flex items-center"
-                    >
-                      <Sun className="w-5 h-5" />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="moon"
-                      initial={{ rotate: 180, opacity: 0, scale: 0 }}
-                      animate={{ rotate: 0, opacity: 1, scale: 1 }}
-                      exit={{ rotate: -180, opacity: 0, scale: 0 }}
-                      transition={{ duration: 0.3, type: "spring" }}
-                      className="flex items-center"
-                    >
-                      <Moon className="w-5 h-5" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-                
-                {/* Pequeño indicador del tema activo */}
-                <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full ${
-                  isDark ? 'bg-blue-400' : 'bg-orange-400'
-                } shadow-sm`}></div>
-              </motion.button>
-
+            {/* Mobile Menu */}
+            <div className="flex items-center">
               {/* Mobile menu button */}
               <motion.button
                 onClick={() => setIsOpen(!isOpen)}
@@ -180,9 +126,9 @@ export default function Navbar(): JSX.Element {
                   {isOpen ? (
                     <motion.div
                       key="close"
-                      initial={{ rotate: 90, opacity: 0 }}
+                      initial={{ rotate: 180, opacity: 0 }}
                       animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: -90, opacity: 0 }}
+                      exit={{ rotate: -180, opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
                       <X className="w-5 h-5" />
@@ -190,9 +136,9 @@ export default function Navbar(): JSX.Element {
                   ) : (
                     <motion.div
                       key="menu"
-                      initial={{ rotate: -90, opacity: 0 }}
+                      initial={{ rotate: -180, opacity: 0 }}
                       animate={{ rotate: 0, opacity: 1 }}
-                      exit={{ rotate: 90, opacity: 0 }}
+                      exit={{ rotate: 180, opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
                       <Menu className="w-5 h-5" />

@@ -1,11 +1,11 @@
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 import type { ScrollToSectionFunction, EmailValidationFunction } from '@/types';
 
 /**
  * Combina clases CSS usando clsx y tailwind-merge para resolver conflictos
  */
-export function cn(...inputs: ClassValue[]): string {
+export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
@@ -23,15 +23,45 @@ export const isValidEmail: EmailValidationFunction = (email: string): boolean =>
 export const scrollToSection: ScrollToSectionFunction = (sectionId: string): void => {
   const element = document.getElementById(sectionId);
   if (element) {
-    const navbarHeight = 80; // Altura aproximada del navbar
-    const elementPosition = element.offsetTop - navbarHeight;
-    
-    window.scrollTo({
-      top: elementPosition,
-      behavior: 'smooth'
-    });
+    element.scrollIntoView({ behavior: 'smooth' });
   }
 };
+
+// Nueva función para descargar archivos
+export function downloadFile(fileUrl: string, fileName?: string) {
+  try {
+    const link = document.createElement('a');
+    link.href = fileUrl;
+    link.download = fileName || fileUrl.split('/').pop() || 'download';
+    link.target = '_blank';
+    
+    // Agregar al DOM temporalmente
+    document.body.appendChild(link);
+    link.click();
+    
+    // Remover del DOM
+    document.body.removeChild(link);
+    
+    // Log para debugging
+    console.log(`✅ Descargando archivo: ${fileName || fileUrl}`);
+    
+    return true;
+  } catch (error) {
+    console.error('❌ Error descargando archivo:', error);
+    
+    // Fallback: abrir en nueva pestaña
+    window.open(fileUrl, '_blank');
+    return false;
+  }
+}
+
+// Función específica para descargar CV
+export function downloadCV() {
+  return downloadFile(
+    '/documents/CV_Anthony_Gianpierre_Terrazas_Tello.pdf',
+    'CV_Gianpierre_Terrazas_Dev.pdf'
+  );
+}
 
 /**
  * Formatea una fecha a texto legible en español
