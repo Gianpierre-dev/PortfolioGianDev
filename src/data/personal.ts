@@ -3,8 +3,8 @@ import { Skill, Experience, SocialLink } from '@/types';
 export const personalInfo = {
   name: "Gianpierre Terrazas Tello",
   title: "Desarrollador Full Stack",
-  subtitle: "Autodidacta apasionado | Freelancer profesional | Code Architect",
-  bio: "Desarrollador Full Stack autodidacta con carrera terminada. Convertí mi curiosidad en expertise, mi laptop en herramienta de trabajo, y mi pasión en profesión. Freelancer especializado en crear soluciones digitales que realmente funcionen.",
+  subtitle: "Desarrollador web especializado en soluciones modernas y funcionales",
+  bio: "Desarrollador Full Stack con formación universitaria y experiencia autodidacta. Especializado en crear aplicaciones web funcionales utilizando tecnologías modernas como JavaScript, Python, React y Node.js.",
   location: "Perú",
   email: "pier_terrazas@hotmail.com",
   phone: "+51 961 170 946",
@@ -61,24 +61,24 @@ export const skills: Skill[] = [
 
 export const experiences: Experience[] = [
   {
-    company: "Freelancer Full Stack",
-    position: "Desarrollador Independiente",
+    company: "Freelance",
+    position: "Desarrollador Full Stack",
     period: "2023 - Presente",
-    description: "Desarrollo completo de aplicaciones web para clientes diversos. Desde la conceptualización hasta el deploy, manejo proyectos end-to-end con metodologías ágiles y tecnologías modernas.",
+    description: "Desarrollo de aplicaciones web para diversos clientes. Manejo proyectos completos desde la planificación hasta la implementación, utilizando metodologías ágiles y tecnologías modernas.",
     technologies: ["React", "Next.js", "Node.js", "Python", "PHP", "MongoDB", "MySQL", "Tailwind CSS"]
   },
   {
     company: "Ingecem Perú",
     position: "Desarrollador Web",
     period: "2023",
-    description: "Desarrollo y optimización del sitio web corporativo. Implementación de SEO, formularios de contacto y diseño responsive. Colaboración en la transformación digital de la empresa.",
+    description: "Desarrollo y mantenimiento del sitio web corporativo. Implementación de funcionalidades como formularios de contacto, optimización SEO y diseño responsive.",
     technologies: ["HTML5", "CSS3", "JavaScript", "PHP", "Bootstrap", "MySQL"]
   },
   {
-    company: "Proyectos Autodidactas",
-    position: "Estudiante & Developer",
+    company: "Formación Autodidacta",
+    position: "Estudiante de Desarrollo Web",
     period: "2022 - 2023",
-    description: "Journey intensivo de aprendizaje autodidacta. Desarrollo de más de 15 proyectos personales para dominar diferentes tecnologías y frameworks. Transición exitosa de estudiante a desarrollador profesional.",
+    description: "Período de aprendizaje intensivo en desarrollo web. Realización de múltiples proyectos personales para dominar diferentes tecnologías y frameworks del ecosistema web moderno.",
     technologies: ["JavaScript", "React", "Python", "Java", "Git", "GitHub", "Node.js"]
   }
 ]; 

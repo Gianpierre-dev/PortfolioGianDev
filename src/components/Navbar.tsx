@@ -50,7 +50,7 @@ export default function Navbar(): JSX.Element {
     <>
       {/* Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 z-50 h-1 bg-gradient-to-r from-theme-accent via-primary to-theme-accent-soft origin-left"
+        className="fixed top-0 left-0 right-0 z-50 h-1 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 origin-left"
         style={{ scaleX: progress / 100 }}
         initial={{ scaleX: 0 }}
         animate={{ scaleX: progress / 100 }}
@@ -61,9 +61,9 @@ export default function Navbar(): JSX.Element {
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           scrolled
-            ? 'bg-background-solid/90 backdrop-blur-xl shadow-lg shadow-theme-bg-muted/20'
-            : 'bg-background-solid/80 backdrop-blur-md'
-        } border-b border-theme-border/50`}
+            ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-lg'
+            : 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md'
+        } border-b border-gray-200/50 dark:border-gray-700/50`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ type: "spring", stiffness: 400, damping: 40 }}
@@ -95,15 +95,15 @@ export default function Navbar(): JSX.Element {
                   whileTap={{ scale: 0.95 }}
                   className={`relative px-4 py-2 rounded-lg transition-all duration-200 ${
                     activeSection === item.href
-                      ? 'text-theme-accent bg-theme-accent-soft/20'
-                      : 'text-theme-text-primary hover:text-theme-accent hover:bg-theme-bg-subtle/50'
+                      ? 'text-blue-600 dark:text-blue-400 bg-blue-50/80 dark:bg-blue-900/20'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50/80 dark:hover:bg-gray-800/50'
                   }`}
                 >
                   {item.name}
                   {activeSection === item.href && (
                     <motion.div
                       layoutId="activeSection"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-theme-accent to-primary rounded-full"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
