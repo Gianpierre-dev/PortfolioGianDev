@@ -70,15 +70,8 @@ export const experiences: Experience[] = [
   {
     company: "Ingecem Perú",
     position: "Desarrollador Web",
-    period: "2023",
+    period: "2023 - 2025",
     description: "Desarrollo y mantenimiento del sitio web corporativo. Implementación de funcionalidades como formularios de contacto, optimización SEO y diseño responsive.",
     technologies: ["HTML5", "CSS3", "JavaScript", "PHP", "Bootstrap", "MySQL"]
-  },
-  {
-    company: "Formación Autodidacta",
-    position: "Estudiante de Desarrollo Web",
-    period: "2022 - 2023",
-    description: "Período de aprendizaje intensivo en desarrollo web. Realización de múltiples proyectos personales para dominar diferentes tecnologías y frameworks del ecosistema web moderno.",
-    technologies: ["JavaScript", "React", "Python", "Java", "Git", "GitHub", "Node.js"]
   }
 ]; 

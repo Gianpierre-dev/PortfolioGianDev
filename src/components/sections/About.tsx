@@ -74,27 +74,20 @@ export default function About() {
               </h3>
               
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Soy desarrollador Full Stack con formación universitaria completada y experiencia 
-                en desarrollo web autodidacta. Durante mis estudios, descubrí mi interés por la 
-                programación y decidí profundizar mis conocimientos de forma independiente.
+                Desarrollador Full Stack con experiencia en tecnologías modernas como JavaScript, 
+                Python, React y Node.js. Mi enfoque está en crear soluciones web funcionales 
+                y escalables.
               </p>
               
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Me especializo en tecnologías como JavaScript, Python, React y Node.js. 
-                He desarrollado diversos proyectos web, desde sitios corporativos hasta 
-                aplicaciones más complejas, siempre enfocándome en código limpio y soluciones 
-                efectivas.
-              </p>
-              
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Actualmente trabajo como freelancer, lo que me permite colaborar con diferentes 
-                clientes en proyectos variados. Disfruto aprender nuevas tecnologías y mantenerme 
-                actualizado con las tendencias del desarrollo web.
+                Actualmente trabajo como freelancer, colaborando con diferentes clientes en 
+                proyectos web variados. Me mantengo constantemente actualizado con las nuevas 
+                tecnologías y mejores prácticas del desarrollo.
               </p>
 
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Mi objetivo es ayudar a empresas y emprendedores a desarrollar soluciones web 
-                funcionales y de calidad, adaptándome a las necesidades específicas de cada proyecto.
+                Mi objetivo es desarrollar aplicaciones que realmente aporten valor, 
+                con código limpio y una buena experiencia de usuario.
               </p>
             </div>
 
