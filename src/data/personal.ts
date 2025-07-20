@@ -3,8 +3,8 @@ import { Skill, Experience, SocialLink } from '@/types';
 export const personalInfo = {
   name: "Gianpierre Terrazas Tello",
   title: "Desarrollador Full Stack",
-  subtitle: "Programador apasionado por la eficiencia, el diseño limpio y la escalabilidad",
-  bio: "Soy Gianpierre, programador Full Stack. Desarrollo soluciones en Python, PHP, JS y Java, fusiono software, y diseño gráfico.",
+  subtitle: "Autodidacta apasionado | Freelancer profesional | Code Architect",
+  bio: "Desarrollador Full Stack autodidacta con carrera terminada. Convertí mi curiosidad en expertise, mi laptop en herramienta de trabajo, y mi pasión en profesión. Freelancer especializado en crear soluciones digitales que realmente funcionen.",
   location: "Perú",
   email: "pier_terrazas@hotmail.com",
   phone: "+51 961 170 946",
@@ -61,18 +61,24 @@ export const skills: Skill[] = [
 
 export const experiences: Experience[] = [
   {
-    company: "Ingecem Perú",
-    position: "Desarrollador Full Stack",
+    company: "Freelancer Full Stack",
+    position: "Desarrollador Independiente",
     period: "2023 - Presente",
-    description: "Desarrollo de aplicaciones web completas utilizando tecnologías modernas. Implementación de soluciones escalables y optimización de rendimiento.",
-    technologies: ["JavaScript", "PHP", "Python", "MySQL", "HTML5", "CSS3"]
+    description: "Desarrollo completo de aplicaciones web para clientes diversos. Desde la conceptualización hasta el deploy, manejo proyectos end-to-end con metodologías ágiles y tecnologías modernas.",
+    technologies: ["React", "Next.js", "Node.js", "Python", "PHP", "MongoDB", "MySQL", "Tailwind CSS"]
   },
   {
-    company: "Freelance",
+    company: "Ingecem Perú",
     position: "Desarrollador Web",
+    period: "2023",
+    description: "Desarrollo y optimización del sitio web corporativo. Implementación de SEO, formularios de contacto y diseño responsive. Colaboración en la transformación digital de la empresa.",
+    technologies: ["HTML5", "CSS3", "JavaScript", "PHP", "Bootstrap", "MySQL"]
+  },
+  {
+    company: "Proyectos Autodidactas",
+    position: "Estudiante & Developer",
     period: "2022 - 2023",
-    description: "Desarrollo de sitios web responsivos y aplicaciones web para diversos clientes. Enfoque en UX/UI y rendimiento.",
-    technologies: ["React", "Node.js", "MongoDB", "Tailwind CSS", "Git"]
+    description: "Journey intensivo de aprendizaje autodidacta. Desarrollo de más de 15 proyectos personales para dominar diferentes tecnologías y frameworks. Transición exitosa de estudiante a desarrollador profesional.",
+    technologies: ["JavaScript", "React", "Python", "Java", "Git", "GitHub", "Node.js"]
   }
-  // Agrega más experiencias según sea necesario
 ]; 

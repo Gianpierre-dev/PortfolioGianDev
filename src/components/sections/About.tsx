@@ -29,10 +29,10 @@ export default function About() {
   };
 
   const stats = [
-    { label: 'Años de Experiencia', value: '3+', icon: Calendar },
-    { label: 'Proyectos Completados', value: '25+', icon: Code },
-    { label: 'Tecnologías Dominadas', value: '10+', icon: Coffee },
-    { label: 'Ubicación', value: 'Perú', icon: MapPin },
+    { label: 'Journey Autodidacta', value: '3+', icon: Calendar },
+    { label: 'Proyectos Reales', value: '25+', icon: Code },
+    { label: 'Stack Tecnológico', value: '10+', icon: Coffee },
+    { label: 'Freelancer desde', value: 'Perú', icon: MapPin },
   ];
 
   return (
@@ -69,22 +69,34 @@ export default function About() {
             className="space-y-6"
           >
             <div className="prose prose-lg dark:prose-invert">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                🚀 Mi Journey: De Estudiante a Dev Freelancer
+              </h3>
+              
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Soy un desarrollador Full Stack apasionado por crear soluciones tecnológicas 
-                innovadoras. Con más de 3 años de experiencia, he trabajado con diversas 
-                tecnologías y frameworks, siempre enfocado en escribir código limpio y 
-                escalable.
+                Mi historia comenzó como muchas otras: **una curiosidad infinita y una laptop**. 
+                Mientras completaba mi carrera universitaria, descubrí que las aulas no eran suficientes 
+                para saciar mi sed de conocimiento tecnológico. <strong>Así nació mi journey autodidacta.</strong>
               </p>
               
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Mi experiencia abarca desde el desarrollo frontend con React y Vue.js, 
-                hasta backends robustos con Node.js, Python y PHP. Me especializo en 
-                crear experiencias de usuario intuitivas y sistemas eficientes.
+                **Noches de código**, documentación infinita, Stack Overflow como mejor amigo, y 
+                proyectos personales que se convertían en obsesiones. Desde mi primer "Hello World" 
+                hasta deployar aplicaciones reales, cada línea de código fue una **lección autodidacta** 
+                que me acercaba más a mi objetivo.
               </p>
               
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Actualmente trabajo en <strong>Ingecem Perú</strong>, donde lidero proyectos 
-                de desarrollo web y contribuyo a la transformación digital de la empresa.
+                Hoy, con **carrera terminada** y experiencia forjada en las trincheras del desarrollo, 
+                me dedico completamente al **freelancing**. He transformado esa curiosidad inicial en 
+                **más de 25 proyectos reales**, dominando tecnologías desde **Python y JavaScript** 
+                hasta **React y Node.js**.
+              </p>
+
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                **Mi misión:** Ayudar a empresas y emprendedores a materializar sus ideas digitales 
+                con código limpio, escalable y que realmente funcione. Porque cada proyecto es una 
+                nueva aventura, y **yo soy tu compañero de viaje en el mundo del desarrollo.**
               </p>
             </div>
 
@@ -127,6 +139,40 @@ export default function About() {
                 Descargar mi CV
               </button>
             </motion.div>
+
+            {/* Personal Philosophy */}
+            <motion.div
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-6 rounded-lg border border-blue-200 dark:border-blue-700/30 mt-8"
+            >
+              <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+                🔥 Mi ADN de Desarrollador
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                <div className="flex items-center text-gray-700 dark:text-gray-300">
+                  <span className="text-blue-600 font-bold mr-2">→</span>
+                  **Autodidacta por naturaleza**
+                </div>
+                <div className="flex items-center text-gray-700 dark:text-gray-300">
+                  <span className="text-purple-600 font-bold mr-2">→</span>
+                  **Código limpio y escalable**
+                </div>
+                <div className="flex items-center text-gray-700 dark:text-gray-300">
+                  <span className="text-green-600 font-bold mr-2">→</span>
+                  **Freelancer full-time**
+                </div>
+                <div className="flex items-center text-gray-700 dark:text-gray-300">
+                  <span className="text-red-600 font-bold mr-2">→</span>
+                  **Aprendizaje constante**
+                </div>
+              </div>
+              <p className="mt-4 text-gray-600 dark:text-gray-400 italic">
+                "Cada bug es una lección, cada proyecto es una evolución."
+              </p>
+            </motion.div>
           </motion.div>
 
           {/* Timeline */}
@@ -137,8 +183,8 @@ export default function About() {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-              Experiencia Profesional
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+              ⚡ Mi Journey Profesional
             </h3>
             
             <div className="relative">

@@ -19,7 +19,8 @@ import {
   Linkedin,
   Clock,
   User,
-  MessageSquare
+  MessageSquare,
+  Copy
 } from 'lucide-react';
 
 const iconMap = {
@@ -32,6 +33,7 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [submitMessage, setSubmitMessage] = useState('');
+  const [copyNotification, setCopyNotification] = useState('');
 
   const {
     register,
@@ -39,6 +41,35 @@ export default function Contact() {
     formState: { errors },
     reset,
   } = useForm<ContactForm>();
+
+  // Función para copiar email al portapapeles
+  const handleEmailClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      await navigator.clipboard.writeText(personalInfo.email);
+      setCopyNotification('¡Email copiado al portapapeles! 📋');
+      setTimeout(() => setCopyNotification(''), 3000);
+    } catch (error) {
+      // Fallback: intentar abrir cliente de correo
+      window.location.href = `mailto:${personalInfo.email}`;
+    }
+  };
+
+  // Función para manejar clic en teléfono
+  const handlePhoneClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Intentar abrir WhatsApp primero, luego marcador
+    const whatsappUrl = `https://wa.me/51961170946`;
+    const phoneUrl = `tel:${personalInfo.phone}`;
+    
+    // Abrir WhatsApp en nueva pestaña
+    window.open(whatsappUrl, '_blank');
+    
+    // También intentar marcador como fallback
+    setTimeout(() => {
+      window.location.href = phoneUrl;
+    }, 500);
+  };
 
   const onSubmit = async (data: ContactForm) => {
     setIsSubmitting(true);
@@ -94,14 +125,16 @@ export default function Contact() {
       label: 'Email',
       value: personalInfo.email,
       href: `mailto:${personalInfo.email}`,
-      description: 'Envíame un email directo'
+      description: 'Clic para copiar email',
+      onClick: handleEmailClick
     },
     {
       icon: Phone,
       label: 'Teléfono',
       value: personalInfo.phone,
       href: `tel:${personalInfo.phone}`,
-      description: 'Llámame o envía WhatsApp'
+      description: 'Clic para WhatsApp/Llamar',
+      onClick: handlePhoneClick
     },
     {
       icon: MapPin,
@@ -161,15 +194,37 @@ export default function Contact() {
                 <motion.div
                   key={item.label}
                   variants={itemVariants}
-                  className="bg-white dark:bg-gray-800 rounded-lg p-5 border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow duration-200"
+                  className={`
+                    bg-white dark:bg-gray-800 rounded-lg p-5 border border-gray-200 dark:border-gray-700 
+                    transition-all duration-200
+                    ${item.href !== '#' 
+                      ? 'hover:shadow-lg hover:border-blue-300 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 cursor-pointer transform hover:scale-[1.02]' 
+                      : 'hover:shadow-md'
+                    }
+                  `}
+                  whileHover={item.href !== '#' ? { scale: 1.02, y: -2 } : {}}
+                  whileTap={item.href !== '#' ? { scale: 0.98 } : {}}
+                  onClick={item.onClick}
                 >
                   <div className="flex items-center space-x-4">
-                    <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
-                      <item.icon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    <div className={`
+                      w-10 h-10 rounded-lg flex items-center justify-center
+                      ${item.href !== '#' 
+                        ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' 
+                        : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
+                      }
+                    `}>
+                      <item.icon className="w-5 h-5" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center">
                         {item.label}
+                        {item.href !== '#' && (
+                          <span className="ml-2 text-xs bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 px-2 py-1 rounded-full flex items-center">
+                            {item.label === 'Email' ? <Copy className="w-3 h-3 mr-1" /> : <Phone className="w-3 h-3 mr-1" />}
+                            {item.label === 'Email' ? 'Copiar' : 'WhatsApp'}
+                          </span>
+                        )}
                       </h4>
                       <p className="text-gray-700 dark:text-gray-300 font-medium">
                         {item.value}
@@ -182,6 +237,19 @@ export default function Contact() {
                 </motion.div>
               ))}
             </div>
+
+            {/* Copy Notification */}
+            {copyNotification && (
+              <motion.div
+                initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -20, scale: 0.9 }}
+                className="bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 p-4 rounded-lg flex items-center shadow-lg border border-green-200 dark:border-green-700"
+              >
+                <CheckCircle className="w-5 h-5 mr-2" />
+                {copyNotification}
+              </motion.div>
+            )}
 
             {/* Social Links */}
             <motion.div variants={itemVariants} className="pt-6">
