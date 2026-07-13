@@ -8,7 +8,7 @@ export const personalInfo = {
   location: "Perú",
   email: "pier_terrazas@hotmail.com",
   phone: "+51 961 170 946",
-  avatarUrl: "/images/profile.png",
+  avatarUrl: "/images/profile.webp",
   githubUsername: "Gianpierre-dev",
   resumeUrl: "/documents/CV_Anthony_Gianpierre_Terrazas_Tello.pdf",
 };

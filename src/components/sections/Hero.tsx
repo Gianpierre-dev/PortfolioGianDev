@@ -24,8 +24,8 @@ export default function Hero() {
   const roles = [
     'Desarrollador Full Stack',
     'Especialista en TypeScript',
-    'Sistemas de gestión empresarial',
-    'Automatización de procesos'
+    'Tech Lead',
+    'Desarrollador de sistemas de gestión'
   ];
 
   useEffect(() => {
@@ -104,7 +104,7 @@ export default function Hero() {
               <div className="w-full h-full rounded-full ring-2 ring-blue-500/40 p-1.5 shadow-xl">
                 <div className="w-full h-full rounded-full overflow-hidden bg-white dark:bg-gray-800 flex items-center justify-center transition-all duration-500">
                   <img 
-                    src="/images/profile/camisa%20negra2.png" 
+                    src="/images/profile.webp"
                     alt={`Foto profesional de ${personalInfo.name}`}
                     className="w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-105"
                     onError={(e) => {
