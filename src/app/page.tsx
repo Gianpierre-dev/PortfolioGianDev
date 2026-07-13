@@ -16,12 +16,12 @@ export default function HomePage() {
       <Contact />
       
       {/* Footer */}
-      <footer className="bg-gradient-to-b from-gray-800 to-gray-900 dark:from-gray-900 dark:to-black text-white">
+      <footer className="bg-gray-900 dark:bg-gray-950 text-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             {/* Profile Section */}
             <div className="md:col-span-1">
-              <h3 className="text-xl font-bold mb-3 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              <h3 className="text-xl font-bold mb-3 text-white">
                 Gianpierre Terrazas
               </h3>
               <p className="text-gray-300 text-sm leading-relaxed mb-4">
@@ -51,7 +51,7 @@ export default function HomePage() {
                 </a>
                 <a 
                   href="mailto:pier_terrazas@hotmail.com"
-                  className="w-8 h-8 bg-gray-700 hover:bg-purple-600 rounded-lg flex items-center justify-center transition-colors duration-200"
+                  className="w-8 h-8 bg-gray-700 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors duration-200"
                 >
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.910 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
@@ -88,7 +88,7 @@ export default function HomePage() {
                   pier_terrazas@hotmail.com
                 </p>
                 <p className="text-gray-300 text-sm flex items-center">
-                  <svg className="w-4 h-4 mr-2 text-purple-400" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 mr-2 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                   </svg>
                   +51 961 170 946

@@ -221,28 +221,28 @@ export default function Skills() {
 
         {/* Quick Metrics */}
         <div className="grid grid-cols-3 gap-4 mb-8">
-          <div className="bg-gradient-to-br from-blue-50 via-indigo-25 to-blue-100 dark:from-blue-900/20 dark:via-indigo-800/10 dark:to-blue-900/30 rounded-xl p-4 text-center border border-blue-200/50 dark:border-blue-800/30 shadow-lg shadow-blue-100/50 dark:shadow-blue-900/20 transition-all duration-700 ease-out hover:scale-[1.01] hover:shadow-xl">
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300 hover:shadow-md">
             <div className="flex items-center justify-center gap-2 mb-1">
               <Award className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-              <span className="text-lg font-bold text-blue-900 dark:text-blue-100">{skills.length}</span>
+              <span className="text-lg font-bold text-gray-900 dark:text-white">{skills.length}</span>
             </div>
-            <div className="text-xs text-blue-600/70 dark:text-blue-400/70">Tecnologías</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">Tecnologías</div>
           </div>
-          <div className="bg-gradient-to-br from-emerald-50 via-green-25 to-emerald-100 dark:from-emerald-900/20 dark:via-green-800/10 dark:to-emerald-900/30 rounded-xl p-4 text-center border border-emerald-200/50 dark:border-emerald-800/30 shadow-lg shadow-emerald-100/50 dark:shadow-emerald-900/20 transition-all duration-700 ease-out hover:scale-[1.01] hover:shadow-xl">
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300 hover:shadow-md">
             <div className="flex items-center justify-center gap-2 mb-1">
-              <TrendingUp className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-              <span className="text-lg font-bold text-emerald-900 dark:text-emerald-100">
+              <TrendingUp className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <span className="text-lg font-bold text-gray-900 dark:text-white">
                 {Math.round(skills.reduce((sum, skill) => sum + skill.level, 0) / skills.length)}%
               </span>
             </div>
-            <div className="text-xs text-emerald-600/70 dark:text-emerald-400/70">Nivel Promedio</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">Nivel Promedio</div>
           </div>
-          <div className="bg-gradient-to-br from-purple-50 via-violet-25 to-purple-100 dark:from-purple-900/20 dark:via-violet-800/10 dark:to-purple-900/30 rounded-xl p-4 text-center border border-purple-200/50 dark:border-purple-800/30 shadow-lg shadow-purple-100/50 dark:shadow-purple-900/20 transition-all duration-700 ease-out hover:scale-[1.01] hover:shadow-xl">
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300 hover:shadow-md">
             <div className="flex items-center justify-center gap-2 mb-1">
-              <Code2 className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-              <span className="text-lg font-bold text-purple-900 dark:text-purple-100">3+</span>
+              <Code2 className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <span className="text-lg font-bold text-gray-900 dark:text-white">3+</span>
             </div>
-            <div className="text-xs text-purple-600/70 dark:text-purple-400/70">Años Exp.</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">Años Exp.</div>
           </div>
         </div>
 
@@ -288,34 +288,12 @@ export default function Skills() {
               ? Math.round(categorySkills.reduce((sum, skill) => sum + skill.level, 0) / categorySkills.length)
               : 0;
             
-            const categoryStyles = {
-              frontend: { 
-                bg: 'bg-gradient-to-br from-blue-100 via-blue-50 to-indigo-100 dark:from-blue-900/30 dark:via-blue-800/20 dark:to-indigo-900/30', 
-                icon: 'text-blue-600 dark:text-blue-400',
-                badge: 'bg-gradient-to-r from-blue-500 to-indigo-500',
-                shadow: 'shadow-blue-200/50 dark:shadow-blue-900/30'
-              },
-              backend: { 
-                bg: 'bg-gradient-to-br from-green-100 via-emerald-50 to-teal-100 dark:from-green-900/30 dark:via-emerald-800/20 dark:to-teal-900/30', 
-                icon: 'text-green-600 dark:text-green-400',
-                badge: 'bg-gradient-to-r from-green-500 to-emerald-500',
-                shadow: 'shadow-green-200/50 dark:shadow-green-900/30'
-              },
-                              database: { 
-                 bg: 'bg-gradient-to-br from-orange-100 via-amber-50 to-red-100 dark:from-orange-900/30 dark:via-amber-800/20 dark:to-red-900/30', 
-                 icon: 'text-orange-600 dark:text-orange-400',
-                 badge: 'bg-gradient-to-r from-orange-500 to-red-500',
-                 shadow: 'shadow-orange-200/50 dark:shadow-orange-900/30'
-               },
-              tools: { 
-                bg: 'bg-gradient-to-br from-purple-100 via-violet-50 to-pink-100 dark:from-purple-900/30 dark:via-violet-800/20 dark:to-pink-900/30', 
-                icon: 'text-purple-600 dark:text-purple-400',
-                badge: 'bg-gradient-to-r from-purple-500 to-pink-500',
-                shadow: 'shadow-purple-200/50 dark:shadow-purple-900/30'
-              }
+            const style = {
+              bg: 'bg-gray-100 dark:bg-gray-800',
+              icon: 'text-blue-600 dark:text-blue-400',
+              badge: 'bg-blue-600',
+              shadow: 'shadow-sm'
             };
-            
-            const style = categoryStyles[category.id as keyof typeof categoryStyles];
             
             return (
               <motion.div
@@ -327,7 +305,7 @@ export default function Skills() {
                 className="text-center group"
               >
                 <div className="relative mb-3 group">
-                                     <div className={`w-16 h-16 mx-auto rounded-full ${style.bg} flex items-center justify-center ${style.shadow} shadow-lg border border-white/50 dark:border-gray-800/50 transition-all duration-700 ease-out group-hover:scale-[1.05] group-hover:shadow-xl`}>
+                                     <div className={`w-16 h-16 mx-auto rounded-full ${style.bg} flex items-center justify-center ${style.shadow} border border-gray-200 dark:border-gray-700 transition-all duration-300 ease-out group-hover:shadow-md`}>
                     <category.icon className={`w-7 h-7 ${style.icon} transition-transform duration-700 ease-out group-hover:scale-110`} />
                   </div>
                   <div className={`absolute -top-1 -right-1 w-6 h-6 ${style.badge} rounded-full flex items-center justify-center shadow-md transition-all duration-700 ease-out group-hover:scale-105`}>

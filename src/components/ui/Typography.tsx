@@ -12,7 +12,7 @@ interface TypographyProps {
 
 export function H1({ children, className = '', gradient = false, animated = false }: TypographyProps) {
   const baseClasses = `text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight`;
-  const gradientClasses = gradient ? 'bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent' : 'text-gray-900 dark:text-white';
+  const gradientClasses = gradient ? 'text-blue-600 dark:text-blue-400' : 'text-gray-900 dark:text-white';
   
   if (animated) {
     return (
@@ -36,7 +36,7 @@ export function H1({ children, className = '', gradient = false, animated = fals
 
 export function H2({ children, className = '', gradient = false, animated = false }: TypographyProps) {
   const baseClasses = `text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight`;
-  const gradientClasses = gradient ? 'bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent' : 'text-gray-900 dark:text-white';
+  const gradientClasses = gradient ? 'text-blue-600 dark:text-blue-400' : 'text-gray-900 dark:text-white';
   
   if (animated) {
     return (
@@ -61,7 +61,7 @@ export function H2({ children, className = '', gradient = false, animated = fals
 
 export function H3({ children, className = '', gradient = false, animated = false }: TypographyProps) {
   const baseClasses = `text-2xl sm:text-3xl font-semibold leading-tight tracking-tight`;
-  const gradientClasses = gradient ? 'bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent' : 'text-gray-900 dark:text-white';
+  const gradientClasses = gradient ? 'text-blue-600 dark:text-blue-400' : 'text-gray-900 dark:text-white';
   
   if (animated) {
     return (

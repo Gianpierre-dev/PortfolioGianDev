@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import RippleButton from '@/components/ui/RippleButton';
-import { H1, Subtitle } from '@/components/ui/Typography';
+
 import { personalInfo, socialLinks } from '@/data/personal';
 import { scrollToSection, downloadCV } from '@/lib/utils';
 import { ChevronDown, Download, Github, Linkedin, Mail } from 'lucide-react';
@@ -72,72 +72,15 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 dark:from-gray-900 dark:to-black overflow-hidden">
-      {/* Animated Background Elements */}
+    <section id="hero" className="relative min-h-screen flex items-center justify-center bg-gray-950 overflow-hidden">
+      {/* Subtle Grid Pattern */}
       <div className="absolute inset-0">
-        {/* Floating Shapes */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-blue-500/20 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl animate-bounce"></div>
-        <div className="absolute bottom-40 left-20 w-24 h-24 bg-cyan-500/20 rounded-full blur-xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-20 right-10 w-16 h-16 bg-indigo-500/20 rounded-full blur-lg animate-bounce delay-500"></div>
-        
-        {/* Floating Particles */}
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className={`absolute w-2 h-2 bg-white/30 rounded-full`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -20, 0],
-              x: [0, Math.random() * 20 - 10, 0],
-              opacity: [0.3, 1, 0.3],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-        
-        {/* Floating Code Elements */}
-        {['<>', '{;}', 'fn()', '()=>', 'class', 'const'].map((code, i) => (
-          <motion.div
-            key={code}
-            className="absolute text-blue-300/20 font-mono text-sm font-bold select-none pointer-events-none"
-            style={{
-              left: `${20 + Math.random() * 60}%`,
-              top: `${20 + Math.random() * 60}%`,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              x: [0, Math.random() * 30 - 15, 0],
-              opacity: [0.1, 0.3, 0.1],
-              rotate: [0, Math.random() * 10 - 5, 0],
-            }}
-            transition={{
-              duration: 4 + Math.random() * 3,
-              repeat: Infinity,
-              delay: Math.random() * 3,
-              ease: "easeInOut",
-            }}
-          >
-            {code}
-          </motion.div>
-        ))}
-        
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-transparent to-purple-500/5"></div>
-        <div 
-          className="absolute inset-0 opacity-30"
+        <div
+          className="absolute inset-0 opacity-20"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px)
+              linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px)
             `,
             backgroundSize: '50px 50px'
           }}
@@ -157,8 +100,8 @@ export default function Hero() {
             className="mb-8"
           >
             <div className="w-48 h-48 mx-auto mb-6 relative group">
-              <div className="w-full h-full rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 p-1.5 shadow-2xl shadow-blue-500/25">
-                <div className="w-full h-full rounded-full overflow-hidden bg-white dark:bg-gray-800 flex items-center justify-center group-hover:shadow-2xl transition-all duration-500">
+              <div className="w-full h-full rounded-full ring-2 ring-blue-500/40 p-1.5 shadow-xl">
+                <div className="w-full h-full rounded-full overflow-hidden bg-white dark:bg-gray-800 flex items-center justify-center transition-all duration-500">
                   <img 
                     src="/images/profile/camisa%20negra2.png" 
                     alt={`Foto profesional de ${personalInfo.name}`}
@@ -178,9 +121,6 @@ export default function Hero() {
                   </div>
                 </div>
               </div>
-              
-              {/* Glow effect */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 opacity-20 blur-2xl group-hover:opacity-40 transition-opacity duration-500"></div>
             </div>
           </motion.div>
 
@@ -191,7 +131,7 @@ export default function Hero() {
             </h1>
             <div className="text-xl sm:text-2xl lg:text-3xl text-gray-200 mb-6">
               <span>Soy </span>
-              <span className="text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text font-semibold">
+              <span className="text-blue-400 font-semibold">
                 {displayedText}
                 <span className="animate-pulse">|</span>
               </span>
@@ -216,8 +156,8 @@ export default function Hero() {
                     href={social.url}
                     target={social.name !== 'Email' ? '_blank' : undefined}
                     rel={social.name !== 'Email' ? 'noopener noreferrer' : undefined}
-                    className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300 hover:scale-110 hover:rotate-6"
-                    whileHover={{ scale: 1.1, rotate: 6 }}
+                    className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300"
+                    whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     <Icon className="w-5 h-5" />

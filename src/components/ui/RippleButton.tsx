@@ -37,16 +37,14 @@ export default function RippleButton({
 
   const variantClasses = {
     primary: `
-      bg-gradient-to-r from-blue-600 to-purple-600 text-white
-      hover:from-blue-700 hover:to-purple-700 
-      active:from-blue-800 active:to-purple-800
-      shadow-blue-500/25 hover:shadow-blue-500/40
+      bg-blue-600 text-white
+      hover:bg-blue-700 active:bg-blue-800
+      shadow-blue-500/20 hover:shadow-blue-500/30
     `,
     secondary: `
-      bg-gradient-to-r from-gray-600 to-gray-700 text-white
-      hover:from-gray-700 hover:to-gray-800 
-      active:from-gray-800 active:to-gray-900
-      shadow-gray-500/25 hover:shadow-gray-500/40
+      bg-gray-700 text-white
+      hover:bg-gray-800 active:bg-gray-900
+      shadow-gray-500/20 hover:shadow-gray-500/30
     `,
     outline: `
       border-2 border-blue-600 text-blue-600 bg-transparent
@@ -150,14 +148,6 @@ export default function RippleButton({
       <span className="relative z-10 flex items-center justify-center gap-2">
         {children}
       </span>
-      
-      {/* Shine Effect */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12"
-        initial={{ x: '-100%' }}
-        whileHover={{ x: '200%' }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      />
     </motion.button>
   );
 } 

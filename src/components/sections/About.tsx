@@ -137,26 +137,26 @@ export default function About() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
-              className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-6 rounded-lg border border-blue-200 dark:border-blue-700/30 mt-8"
+              className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 mt-8"
             >
               <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
                 Mi Enfoque de Trabajo
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                 <div className="flex items-center text-gray-700 dark:text-gray-300">
-                  <span className="text-blue-600 font-bold mr-2">•</span>
+                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">•</span>
                   Aprendizaje continuo
                 </div>
                 <div className="flex items-center text-gray-700 dark:text-gray-300">
-                  <span className="text-purple-600 font-bold mr-2">•</span>
+                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">•</span>
                   Código limpio y mantenible
                 </div>
                 <div className="flex items-center text-gray-700 dark:text-gray-300">
-                  <span className="text-green-600 font-bold mr-2">•</span>
+                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">•</span>
                   Colaboración efectiva
                 </div>
                 <div className="flex items-center text-gray-700 dark:text-gray-300">
-                  <span className="text-red-600 font-bold mr-2">•</span>
+                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">•</span>
                   Soluciones prácticas
                 </div>
               </div>

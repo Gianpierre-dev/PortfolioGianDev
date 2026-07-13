@@ -50,7 +50,7 @@ export default function Navbar() {
     <>
       {/* Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 z-50 h-1 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 origin-left"
+        className="fixed top-0 left-0 right-0 z-50 h-1 bg-blue-600 origin-left"
         style={{ scaleX: progress / 100 }}
         initial={{ scaleX: 0 }}
         animate={{ scaleX: progress / 100 }}
@@ -77,7 +77,7 @@ export default function Navbar() {
               className="flex items-center"
             >
               <motion.div
-                className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                className="text-2xl font-bold text-blue-600 dark:text-blue-400"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -103,7 +103,7 @@ export default function Navbar() {
                   {activeSection === item.href && (
                     <motion.div
                       layoutId="activeSection"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400 rounded-full"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
@@ -120,7 +120,7 @@ export default function Navbar() {
                 onClick={() => setIsOpen(!isOpen)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="md:hidden p-2.5 rounded-xl bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 text-gray-700 dark:text-gray-300 hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 transition-all duration-200 shadow-sm hover:shadow-md"
+                className="md:hidden p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200 shadow-sm hover:shadow-md"
               >
                 <AnimatePresence mode="wait">
                   {isOpen ? (
