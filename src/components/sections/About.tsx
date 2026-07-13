@@ -23,7 +23,7 @@ export default function About() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: 'easeOut',
+        ease: 'easeOut' as const,
       },
     },
   };
@@ -74,20 +74,20 @@ export default function About() {
               </h3>
               
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Desarrollador Full Stack con experiencia en tecnologías modernas como JavaScript, 
-                Python, React y Node.js. Mi enfoque está en crear soluciones web funcionales 
-                y escalables.
-              </p>
-              
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Actualmente trabajo como freelancer, colaborando con diferentes clientes en 
-                proyectos web variados. Me mantengo constantemente actualizado con las nuevas 
-                tecnologías y mejores prácticas del desarrollo.
+                Desarrollador Full Stack especializado en sistemas de gestión para empresas:
+                planillas, recursos humanos, inventarios y automatización de procesos
+                tributarios (SUNAT).
               </p>
 
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Mi objetivo es desarrollar aplicaciones que realmente aporten valor, 
-                con código limpio y una buena experiencia de usuario.
+                Trabajo con TypeScript en todo el stack: NestJS, Prisma y PostgreSQL en el
+                backend; Next.js y Tailwind CSS en el frontend; Astro para sitios corporativos.
+                Mis proyectos se despliegan en Railway con almacenamiento en la nube.
+              </p>
+
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                Mi objetivo es construir sistemas que aporten valor real al negocio, con
+                código probado, arquitectura limpia y una buena experiencia de usuario.
               </p>
             </div>
 
@@ -161,7 +161,7 @@ export default function About() {
                 </div>
               </div>
               <p className="mt-4 text-gray-600 dark:text-gray-400 italic">
-                "Cada proyecto es una oportunidad de crear algo útil y bien hecho."
+                &ldquo;Cada proyecto es una oportunidad de crear algo útil y bien hecho.&rdquo;
               </p>
             </motion.div>
           </motion.div>

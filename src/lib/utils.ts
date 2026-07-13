@@ -134,14 +134,14 @@ export function calculateReadingTime(text: string, wordsPerMinute: number = 200)
 /**
  * Debounce para limitar la frecuencia de ejecución de funciones
  */
-export function debounce<T extends (...args: any[]) => any>(
-  func: T, 
+export function debounce<T extends (...args: never[]) => unknown>(
+  func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
-  
+
   return (...args: Parameters<T>) => {
     clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(this, args), wait);
+    timeout = setTimeout(() => func(...args), wait);
   };
 } 

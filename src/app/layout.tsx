@@ -53,7 +53,7 @@ const themeScript = `
   } catch (_) {}
 `;
 
-export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="es" suppressHydrationWarning>
       <head>

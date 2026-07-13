@@ -22,9 +22,9 @@ export default function Hero() {
   
   const roles = [
     'Desarrollador Full Stack',
-    'Programador Python',
-    'Desarrollador Web',
-    'Diseñador UI/UX'
+    'Especialista en TypeScript',
+    'Sistemas de gestión empresarial',
+    'Automatización de procesos'
   ];
 
   useEffect(() => {
@@ -66,7 +66,7 @@ export default function Hero() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: 'easeOut',
+        ease: 'easeOut' as const,
       },
     },
   };
@@ -267,7 +267,7 @@ export default function Hero() {
           >
             <motion.div
               animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' as const }}
               className="cursor-pointer flex flex-col items-center gap-2"
               onClick={() => scrollToSection('about')}
             >

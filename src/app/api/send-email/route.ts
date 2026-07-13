@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 
 // Configuración del transporter de email
 const createTransporter = () => {
-  return nodemailer.createTransporter({
+  return nodemailer.createTransport({
     service: 'hotmail', // Para Hotmail/Outlook
     auth: {
       user: process.env.EMAIL_USER, // Tu email
@@ -86,21 +86,22 @@ ${message}
       messageId: result.messageId
     });
 
-  } catch (error: any) {
-    console.error('❌ Error enviando email:', error);
-    
+  } catch (error) {
+    console.error('Error enviando email:', error);
+
+    const err = error as { code?: string; message?: string };
     let errorMessage = 'Error interno del servidor';
-    if (error.code === 'EAUTH') {
-      errorMessage = 'Error de autenticación. Verifica credenciales.';
-    } else if (error.code === 'ECONNECTION') {
+    if (err.code === 'EAUTH') {
+      errorMessage = 'Error de autenticación. Verifica las credenciales.';
+    } else if (err.code === 'ECONNECTION') {
       errorMessage = 'Error de conexión SMTP';
     }
 
     return NextResponse.json(
-      { 
-        success: false, 
+      {
+        success: false,
         error: errorMessage,
-        details: process.env.NODE_ENV === 'development' ? error.message : undefined
+        details: process.env.NODE_ENV === 'development' ? err.message : undefined
       },
       { status: 500 }
     );

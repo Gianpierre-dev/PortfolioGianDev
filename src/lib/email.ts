@@ -4,13 +4,13 @@ import { ContactForm } from '@/types';
 export const sendWhatsApp = (formData: ContactForm) => {
   const phoneNumber = '51961170946'; // Tu número con código país (Perú +51)
   
-  const message = `🔥 *Nuevo mensaje desde el Portfolio* 🔥
+  const message = `*Nuevo mensaje desde el portfolio*
 
-👤 *Nombre:* ${formData.name}
-📧 *Email:* ${formData.email}
-📝 *Asunto:* ${formData.subject}
+*Nombre:* ${formData.name}
+*Email:* ${formData.email}
+*Asunto:* ${formData.subject}
 
-💬 *Mensaje:*
+*Mensaje:*
 ${formData.message}
 
 ---

@@ -180,7 +180,7 @@ export const AnimatedGradient = ({
         transition={{
           duration,
           repeat: Infinity,
-          ease: 'linear'
+          ease: 'linear' as const
         }}
       />
     </div>
@@ -225,7 +225,7 @@ export const FloatingParticles = ({
           transition={{
             duration: 3 + Math.random() * 4,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: 'easeInOut' as const,
             delay: Math.random() * 3,
           }}
         />

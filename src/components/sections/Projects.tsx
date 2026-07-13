@@ -9,8 +9,8 @@ import {
   Users,
   Calendar,
   Code2,
-  Smartphone,
   Monitor,
+  Lock,
   Database,
   Zap,
   Globe,
@@ -21,134 +21,150 @@ import {
   Bot
 } from 'lucide-react';
 
-// Configuración de proyectos híbrida - Manual + GitHub API
+// Proyectos curados manualmente. Los sistemas privados (para empresas) no
+// exponen repositorio ni demo: se documentan como case studies.
 const staticProjects = [
   {
     id: 1,
-    title: "Portfolio Gianpierre",
-    description: "Portfolio personal desarrollado con Next.js, TypeScript y Tailwind CSS. Diseño moderno y responsive con animaciones sutiles.",
-    longDescription: "Mi portfolio personal que muestra mis habilidades como desarrollador full-stack. Incluye secciones interactivas, tema oscuro/claro, animaciones fluidas y optimización SEO. Con sistema de proyectos dinámico que se actualiza automáticamente desde GitHub, diseño glassmorphism moderno y experiencia de usuario excepcional. Optimizado para rendimiento y accesibilidad.",
-    image: "/images/projects/portfolio.jpg",
-    category: "frontend",
+    title: "Sistema de Planillas MultiEmpresa",
+    description: "Motor de cálculo de planillas bajo legislación laboral peruana con soporte para los 6 regímenes privados del país.",
+    longDescription: "Sistema de nómina multiempresa que cubre el ciclo completo: carga de trabajadores, cálculo de planillas bajo los 6 regímenes laborales privados de Perú (General, Pequeña empresa, Microempresa, Agrario, Construcción civil, Trabajadoras del hogar) y generación de boletas de pago. Backend con arquitectura hexagonal, más de 370 tests automatizados y CI bloqueante.",
+    image: "/images/projects/planillas.svg",
+    category: "fullstack",
     featured: true,
-    status: "live",
-    tech: ["TypeScript", "Next.js", "Tailwind CSS", "Framer Motion", "GitHub API"],
-    repoName: "PortfolioGianDev",
-    links: { 
-      demo: "https://gianpierre-dev.vercel.app", 
-      code: "https://github.com/Gianpierre-dev/PortfolioGianDev" 
-    },
-    year: "2024"
+    status: "development",
+    tech: ["NestJS", "Prisma", "PostgreSQL", "Next.js", "Tailwind CSS", "Railway", "Wasabi S3"],
+    repoName: "",
+    private: true,
+    links: { demo: "", code: "" },
+    year: "2026"
   },
   {
     id: 2,
-    title: "ABBA-PADREWEB",
-    description: "E-commerce completo con catálogo de productos, carrito de compras y sistema de gestión empresarial avanzado.",
-    longDescription: "Plataforma e-commerce integral que combina tienda online moderna con sistema administrativo robusto. Incluye catálogo interactivo de productos, carrito de compras optimizado, panel de administración con métricas en tiempo real, gestión de inventario, procesamiento de pedidos y sistema de reportes detallados. Desarrollado con tecnologías web modernas para máximo rendimiento.",
-    image: "/images/projects/abba.jpg",
-    category: "fullstack", 
+    title: "SIGEMYPE",
+    description: "Sistema de gestión integral para estudio contable: cronogramas tributarios SUNAT, alertas, parte diario y consultas RUC/DNI.",
+    longDescription: "Plataforma interna para un estudio contable que administra cronogramas de obligaciones tributarias y laborales (SUNAT), alertas de vencimientos, parte diario de trabajo del equipo, planificación de tareas y consultas automatizadas de DNI, RUC y tipo de cambio. Monorepo con Turborepo, importación desde Excel, más de 120 tests, hardening de seguridad (rate limiting, revocación JWT) y métricas Prometheus.",
+    image: "/images/projects/sigemype.svg",
+    category: "fullstack",
     featured: false,
     status: "live",
-    tech: ["PHP", "JavaScript", "MySQL", "Bootstrap", "Chart.js", "PayPal API"],
-    repoName: "ABBA-PADREWEB",
-    links: { 
-      demo: "https://abba-padreweb.com", 
-      code: "https://github.com/Gianpierre-dev/ABBA-PADREWEB" 
-    },
-    year: "2024"
+    tech: ["NestJS", "Prisma", "PostgreSQL", "Next.js", "Turborepo", "Redis"],
+    repoName: "",
+    private: true,
+    links: { demo: "", code: "" },
+    year: "2026"
+  },
+  {
+    id: 3,
+    title: "Sistema de RRHH MultiEmpresa",
+    description: "Gestión de empleados, contratos y documentos con soporte multiempresa y generación de carnets en PDF.",
+    longDescription: "Sistema de Recursos Humanos en producción para gestión multiempresa: legajos de empleados, contratos, documentos y fotos, con generación automática de photochecks y carnets en PDF. Autenticación JWT, validación con Zod y despliegue en Railway.",
+    image: "/images/projects/rrhh.svg",
+    category: "fullstack",
+    featured: false,
+    status: "live",
+    tech: ["NestJS", "Prisma", "PostgreSQL", "Next.js", "Tailwind CSS", "Railway"],
+    repoName: "",
+    private: true,
+    links: { demo: "", code: "" },
+    year: "2026"
   },
   {
     id: 4,
-    title: "MrSif",
-    description: "Aplicación web moderna con funcionalidades avanzadas y diseño intuitivo para una experiencia de usuario optimizada.",
-    longDescription: "MrSif es una aplicación web desarrollada con tecnologías modernas, enfocada en proporcionar una interfaz limpia y funcional. Incluye características innovadoras y un diseño responsive que se adapta a diferentes dispositivos.",
-    image: "/images/projects/mrsif.jpg",
-    category: "frontend",
+    title: "Automatización SUNAT",
+    description: "App de escritorio que descarga y clasifica comprobantes electrónicos del portal SUNAT de forma masiva.",
+    longDescription: "Aplicación de escritorio que automatiza la descarga, organización y clasificación de comprobantes electrónicos (facturas, boletas, guías de remisión) desde el portal SUNAT, parseando XML bajo el estándar UBL 2.1. Scraping con Playwright, interfaz PySide6 y distribución como ejecutable.",
+    image: "/images/projects/automation-python.jpg",
+    category: "automation",
     featured: false,
-    status: "live", 
-    tech: ["JavaScript", "HTML5", "CSS3", "Bootstrap"],
-    repoName: "MrSif",
-    links: { 
-      demo: "https://github.com/Gianpierre-dev/MrSif", 
-      code: "https://github.com/Gianpierre-dev/MrSif" 
+    status: "development",
+    tech: ["Python", "Playwright", "PySide6", "SQLAlchemy", "SQLite"],
+    repoName: "Sistema-de-automatizaciones-Sunat-",
+    private: false,
+    links: {
+      demo: "",
+      code: "https://github.com/Gianpierre-dev/Sistema-de-automatizaciones-Sunat-"
     },
-    year: "2024"
+    year: "2026"
   },
   {
     id: 5,
-    title: "Celeste Music Web",
-    description: "Plataforma de streaming de música con reproductor personalizado y interfaz moderna.",
-    longDescription: "Web app de música con reproductor HTML5 personalizado, gestión de playlists, búsqueda de canciones y diseño responsive. Incluye efectos visuales y controles avanzados.",
-    image: "/images/projects/celestemusic.jpg",
-    category: "frontend",
+    title: "TeachGenius",
+    description: "Plataforma educativa gamificada: profesores crean sopas de letras de figuras literarias y los alumnos compiten contra el tiempo.",
+    longDescription: "Aplicación educativa gamificada donde los docentes crean actividades de pupiletras (sopas de letras) sobre figuras literarias y los alumnos las resuelven desde cualquier dispositivo con temporizador competitivo. Backend NestJS con Prisma y frontend Astro + React.",
+    image: "/images/projects/teachgenius.svg",
+    category: "fullstack",
     featured: false,
-    status: "live",
-    tech: ["HTML5", "CSS3", "JavaScript", "Web Audio API"],
-    repoName: "CelesteMusicWeb",
-    links: { 
-      demo: "https://gianpierre-dev.github.io/CelesteMusicWeb", 
-      code: "https://github.com/Gianpierre-dev/CelesteMusicWeb" 
+    status: "development",
+    tech: ["NestJS", "Prisma", "PostgreSQL", "Astro", "React", "Tailwind CSS"],
+    repoName: "TeachGenius_Frontend",
+    private: false,
+    links: {
+      demo: "",
+      code: "https://github.com/Gianpierre-dev/TeachGenius_Frontend"
     },
-    year: "2023"
+    year: "2026"
   },
   {
     id: 6,
+    title: "Tonin",
+    description: "Web app inmersiva de frases motivacionales según tu estado de ánimo, con música ambiental y experiencia swipe.",
+    longDescription: "Producto propio B2C: frases motivacionales adaptadas al estado de ánimo del usuario con experiencia de swipe, música ambiental por mood, temas dinámicos y panel de administración. Frontend React con Zustand y Framer Motion; API en Java 21 + Spring Boot con JWT y almacenamiento en Wasabi S3.",
+    image: "/images/projects/tonin.svg",
+    category: "fullstack",
+    featured: false,
+    status: "development",
+    tech: ["React", "TypeScript", "Zustand", "Spring Boot", "Wasabi S3"],
+    repoName: "Tonin-Web",
+    private: false,
+    links: {
+      demo: "",
+      code: "https://github.com/Gianpierre-dev/Tonin-Web"
+    },
+    year: "2026"
+  },
+  {
+    id: 7,
+    title: "Portfolio Gianpierre",
+    description: "Este portfolio: Next.js 15, TypeScript y Tailwind CSS, con proyectos sincronizados desde GitHub.",
+    longDescription: "Portfolio personal con tema oscuro/claro, animaciones con Framer Motion, optimización SEO y métricas de repositorios actualizadas automáticamente desde la API de GitHub.",
+    image: "/images/projects/portfolio.jpg",
+    category: "frontend",
+    featured: false,
+    status: "live",
+    tech: ["TypeScript", "Next.js", "Tailwind CSS", "Framer Motion", "GitHub API"],
+    repoName: "PortfolioGianDev",
+    private: false,
+    links: {
+      demo: "https://gianpierre-dev.vercel.app",
+      code: "https://github.com/Gianpierre-dev/PortfolioGianDev"
+    },
+    year: "2025"
+  },
+  {
+    id: 8,
     title: "Ingecem Web",
-    description: "Sitio web corporativo para empresa de ingeniería con diseño profesional y responsive.",
-    longDescription: "Landing page corporativa desarrollada para Ingecem Perú con diseño moderno, optimización SEO, formularios de contacto y secciones informativas sobre servicios de ingeniería.",
+    description: "Sitio corporativo para empresa de ingeniería con optimización SEO y formularios de contacto.",
+    longDescription: "Sitio web corporativo de Ingecem Perú con diseño responsive, optimización SEO, formularios de contacto y secciones informativas sobre servicios de ingeniería.",
     image: "/images/projects/ingecem.png",
     category: "frontend",
     featured: false,
     status: "live",
-    tech: ["HTML5", "CSS3", "JavaScript", "Bootstrap", "PHP"],
+    tech: ["TypeScript", "Vite", "Tailwind CSS"],
     repoName: "IngecemWeb",
-    links: { 
-      demo: "https://ingecemperu.com", 
-      code: "https://github.com/Gianpierre-dev/IngecemWeb" 
+    private: false,
+    links: {
+      demo: "https://ingecemperu.com",
+      code: "https://github.com/Gianpierre-dev/IngecemWeb"
     },
-    year: "2023"
-  },
-  {
-    id: 7,
-    title: "Tierra Segura",
-    description: "Plataforma web para gestión de seguridad y monitoreo con características avanzadas de protección y análisis.",
-    longDescription: "Tierra Segura es una aplicación web integral diseñada para el monitoreo y gestión de seguridad. Incluye sistemas de alerta, dashboard en tiempo real, reportes detallados y herramientas de análisis para garantizar la protección y supervisión continua.",
-    image: "/images/projects/tierrasegura.jpg",
-    category: "fullstack",
-    featured: false,
-    status: "development",
-    tech: ["JavaScript", "Node.js", "React", "MongoDB", "Express"],
-    repoName: "TierraSeguraWeb",
-    links: { 
-      demo: "https://github.com/sigemype/TierraSeguraWeb", 
-      code: "https://github.com/sigemype/TierraSeguraWeb" 
-    },
-    year: "2024"
-  },
-  {
-    id: 8,
-    title: "Zen2.0",
-    description: "Aplicación web moderna con diseño minimalista y funcionalidades avanzadas para productividad y bienestar.",
-    longDescription: "Zen2.0 es una aplicación web enfocada en productividad y mindfulness con interfaz limpia y moderna. Incluye herramientas para gestión de tareas, meditación guiada, tracking de hábitos y análisis de bienestar personal.",
-    image: "/images/projects/zen.png",
-    category: "frontend",
-    featured: false,
-    status: "live",
-    tech: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    repoName: "Zen2.0",
-    links: { 
-      demo: "https://gianpierre-dev.github.io/Zen2.0", 
-      code: "https://github.com/Gianpierre-dev/Zen2.0" 
-    },
-    year: "2024"
+    year: "2025"
   }
 ];
 
 const categories = [
   { id: 'all', name: 'Todos', icon: Code2, count: 8 },
-  { id: 'frontend', name: 'Frontend', icon: Monitor, count: 5 },
-  { id: 'fullstack', name: 'Full-Stack', icon: Database, count: 2 },
-  { id: 'mobile', name: 'Mobile', icon: Smartphone, count: 0 },
+  { id: 'fullstack', name: 'Sistemas', icon: Database, count: 5 },
+  { id: 'frontend', name: 'Frontend', icon: Monitor, count: 2 },
   { id: 'automation', name: 'Automatización', icon: Bot, count: 1 }
 ];
 
@@ -158,9 +174,25 @@ const statusConfig = {
   demo: { label: 'Demo', color: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300', icon: Eye }
 };
 
+type StaticProject = (typeof staticProjects)[number];
+
+interface GitHubRepoData {
+  id: number;
+  stars: number;
+  forks: number;
+  lastUpdate: string;
+  language: string | null;
+  size: number;
+}
+
+type ProjectWithMetrics = StaticProject & {
+  metrics: { stars: number; forks: number; language?: string | null; visits?: string };
+  lastUpdate?: string;
+};
+
 // Hook para obtener datos de GitHub automáticamente
 function useGitHubData() {
-  const [githubData, setGithubData] = useState<any>({});
+  const [githubData, setGithubData] = useState<Record<number, GitHubRepoData>>({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -190,7 +222,7 @@ function useGitHubData() {
         });
 
         const results = await Promise.all(repoPromises);
-        const dataMap = results.reduce((acc, item) => {
+        const dataMap = results.reduce<Record<number, GitHubRepoData>>((acc, item) => {
           if (item) {
             acc[item.id] = item;
           }
@@ -309,7 +341,7 @@ export default function Projects() {
             className="max-w-3xl mx-auto"
           >
             <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-2">
-              Una selección de mis mejores proyectos desarrollados con tecnologías modernas.
+              Sistemas de gestión empresarial y productos propios. Los proyectos privados se desarrollaron para empresas y no exponen código.
             </p>
             <div className="flex items-center justify-center gap-2 text-sm text-gray-500 dark:text-gray-500">
               <motion.div
@@ -317,7 +349,7 @@ export default function Projects() {
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
-              <span>Métricas actualizadas automáticamente desde GitHub</span>
+              <span>Métricas de proyectos públicos sincronizadas desde GitHub</span>
             </div>
           </motion.div>
         </div>
@@ -396,10 +428,10 @@ export default function Projects() {
                   <Star className="w-4 h-4 fill-current animate-pulse" />
                   Proyecto Destacado
                 </span>
-                {!loading && (
+                {featuredProject.private && (
                   <span className="bg-gradient-to-r from-gray-800 to-gray-900 dark:from-gray-700 dark:to-gray-800 text-white px-3 py-2 rounded-xl text-xs flex items-center gap-2 shadow-lg backdrop-blur-sm">
-                    <GitBranch className="w-3 h-3" />
-                    <span className="hidden sm:inline">GitHub Sync</span>
+                    <Lock className="w-3 h-3" />
+                    <span className="hidden sm:inline">Proyecto privado</span>
                   </span>
                 )}
               </div>
@@ -442,47 +474,41 @@ export default function Projects() {
                       </div>
                     </div>
                     
-                    {/* Metrics */}
-                    <div className="grid grid-cols-3 gap-4">
-                      <div className="text-center bg-white/50 dark:bg-gray-800/50 rounded-xl p-4 backdrop-blur-sm border border-white/20 dark:border-gray-700/20">
-                        <div className="text-2xl font-bold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent flex items-center justify-center gap-2">
-                          <Star className="w-5 h-5 text-yellow-500" />
-                          {featuredProject.metrics.stars || 0}
-                        </div>
-                        <div className="text-xs text-gray-600 dark:text-gray-400 font-medium mt-1">GitHub Stars</div>
-                      </div>
-                      <div className="text-center bg-white/50 dark:bg-gray-800/50 rounded-xl p-4 backdrop-blur-sm border border-white/20 dark:border-gray-700/20">
-                        <div className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent flex items-center justify-center gap-2">
-                          <GitBranch className="w-5 h-5 text-blue-500" />
-                          {featuredProject.metrics.forks || 0}
-                        </div>
-                        <div className="text-xs text-gray-600 dark:text-gray-400 font-medium mt-1">Forks</div>
-                      </div>
-                      <div className="text-center bg-white/50 dark:bg-gray-800/50 rounded-xl p-4 backdrop-blur-sm border border-white/20 dark:border-gray-700/20">
-                        <div className="text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
-                          {featuredProject.metrics.language || 'PHP'}
-                        </div>
-                        <div className="text-xs text-gray-600 dark:text-gray-400 font-medium mt-1">Lenguaje Principal</div>
-                      </div>
-                    </div>
                   </div>
-                  
+
                   {/* Action Buttons */}
-                  <div className="flex gap-4 pt-2">
-                    <a
-                      href={featuredProject.links.demo}
-                      className="group flex items-center gap-3 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 hover:from-blue-700 hover:via-purple-700 hover:to-blue-800 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
-                    >
-                      <ExternalLink className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                      Ver Demo Live
-                    </a>
-                    <a
-                      href={featuredProject.links.code}
-                      className="group flex items-center gap-3 bg-gradient-to-r from-gray-800 via-gray-900 to-black hover:from-gray-900 hover:via-black hover:to-gray-900 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
-                    >
-                      <Github className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                      Ver Código
-                    </a>
+                  <div className="flex flex-wrap gap-4 pt-2">
+                    {featuredProject.links.demo && (
+                      <a
+                        href={featuredProject.links.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center gap-3 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 hover:from-blue-700 hover:via-purple-700 hover:to-blue-800 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                      >
+                        <ExternalLink className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                        Ver Demo Live
+                      </a>
+                    )}
+                    {featuredProject.links.code && (
+                      <a
+                        href={featuredProject.links.code}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex items-center gap-3 bg-gradient-to-r from-gray-800 via-gray-900 to-black hover:from-gray-900 hover:via-black hover:to-gray-900 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                      >
+                        <Github className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                        Ver Código
+                      </a>
+                    )}
+                    {featuredProject.private && (
+                      <a
+                        href="#contact"
+                        className="group flex items-center gap-3 bg-gradient-to-r from-gray-800 via-gray-900 to-black hover:from-gray-900 hover:via-black hover:to-gray-900 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                      >
+                        <Lock className="w-5 h-5" />
+                        Proyecto privado — Consultar
+                      </a>
+                    )}
                   </div>
                 </div>
                 
@@ -553,8 +579,8 @@ function StatusBadge({ status }: { status: string }) {
   );
 }
 
-function ProjectCard({ project, index, isHovered, onHover, loading }: {
-  project: any;
+function ProjectCard({ project, index, onHover, loading }: {
+  project: ProjectWithMetrics;
   index: number;
   isHovered: boolean;
   onHover: (id: number | null) => void;
@@ -653,30 +679,36 @@ function ProjectCard({ project, index, isHovered, onHover, loading }: {
           </motion.div>
 
           {/* Quick Actions Overlay */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 z-30">
-            <div className="flex gap-3">
-              <motion.a
-                href={project.links.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-full p-3 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-lg border border-white/30"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <ExternalLink className="w-5 h-5" />
-              </motion.a>
-              <motion.a
-                href={project.links.code}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-full p-3 text-gray-700 dark:text-gray-300 hover:bg-gray-800 hover:text-white transition-all duration-300 shadow-lg border border-white/30"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Github className="w-5 h-5" />
-              </motion.a>
+          {(project.links.demo || project.links.code) && (
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 z-30">
+              <div className="flex gap-3">
+                {project.links.demo && (
+                  <motion.a
+                    href={project.links.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-full p-3 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-lg border border-white/30"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                  </motion.a>
+                )}
+                {project.links.code && (
+                  <motion.a
+                    href={project.links.code}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-full p-3 text-gray-700 dark:text-gray-300 hover:bg-gray-800 hover:text-white transition-all duration-300 shadow-lg border border-white/30"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Github className="w-5 h-5" />
+                  </motion.a>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
         
         {/* Content Section with Glass Effect */}
@@ -689,8 +721,13 @@ function ProjectCard({ project, index, isHovered, onHover, loading }: {
             >
               {project.title}
             </motion.h3>
-            {!loading && (
-              <motion.div 
+            {project.private ? (
+              <span className="flex items-center gap-1 text-xs font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700/50 px-2 py-1 rounded-full">
+                <Lock className="w-3 h-3" />
+                Privado
+              </span>
+            ) : (!loading && project.repoName && (
+              <motion.div
                 className="flex items-center gap-3 text-sm"
                 whileHover={{ scale: 1.05 }}
               >
@@ -703,7 +740,7 @@ function ProjectCard({ project, index, isHovered, onHover, loading }: {
                   <span className="font-semibold">{project.metrics.forks}</span>
                 </div>
               </motion.div>
-            )}
+            ))}
           </div>
           
           {/* Description with Better Typography */}
@@ -733,26 +770,40 @@ function ProjectCard({ project, index, isHovered, onHover, loading }: {
           {/* Action Buttons */}
           <div className="flex items-center justify-between pt-4 border-t border-gray-200/30 dark:border-gray-700/30">
             <div className="flex gap-4">
-              <motion.a
-                href={project.links.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold text-sm transition-colors duration-200 flex items-center gap-1"
-                whileHover={{ x: 3 }}
-              >
-                <ExternalLink className="w-4 h-4" />
-                Ver Demo
-              </motion.a>
-              <motion.a
-                href={project.links.code}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-semibold text-sm transition-colors duration-200 flex items-center gap-1"
-                whileHover={{ x: 3 }}
-              >
-                <Github className="w-4 h-4" />
-                Código
-              </motion.a>
+              {project.links.demo && (
+                <motion.a
+                  href={project.links.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-semibold text-sm transition-colors duration-200 flex items-center gap-1"
+                  whileHover={{ x: 3 }}
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  Ver Demo
+                </motion.a>
+              )}
+              {project.links.code && (
+                <motion.a
+                  href={project.links.code}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-semibold text-sm transition-colors duration-200 flex items-center gap-1"
+                  whileHover={{ x: 3 }}
+                >
+                  <Github className="w-4 h-4" />
+                  Código
+                </motion.a>
+              )}
+              {project.private && (
+                <motion.a
+                  href="#contact"
+                  className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 font-semibold text-sm transition-colors duration-200 flex items-center gap-1"
+                  whileHover={{ x: 3 }}
+                >
+                  <Lock className="w-4 h-4" />
+                  Consultar
+                </motion.a>
+              )}
             </div>
             
             {/* Status Indicator */}

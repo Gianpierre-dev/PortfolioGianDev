@@ -1,7 +1,46 @@
-import { Project, GitHubUser } from '@/types';
-
 const GITHUB_API_URL = 'https://api.github.com';
 const USERNAME = 'Gianpierre-dev';
+
+export interface GitHubUser {
+  login: string;
+  name: string | null;
+  avatar_url: string;
+  bio: string | null;
+  public_repos: number;
+  followers: number;
+  following: number;
+}
+
+interface GitHubApiRepo {
+  id: number;
+  name: string;
+  description: string | null;
+  html_url: string;
+  homepage: string | null;
+  topics?: string[];
+  language: string | null;
+  stargazers_count: number;
+  forks_count: number;
+  created_at: string;
+  updated_at: string;
+  private: boolean;
+  fork: boolean;
+}
+
+export interface GitHubRepoSummary {
+  id: number;
+  name: string;
+  description: string | null;
+  html_url: string;
+  homepage: string | null;
+  topics: string[];
+  language: string | null;
+  stargazers_count: number;
+  forks_count: number;
+  created_at: string;
+  updated_at: string;
+  private: boolean;
+}
 
 export async function getGitHubUser(): Promise<GitHubUser | null> {
   try {
@@ -23,7 +62,7 @@ export async function getGitHubUser(): Promise<GitHubUser | null> {
   }
 }
 
-export async function getGitHubRepos(): Promise<Project[]> {
+export async function getGitHubRepos(): Promise<GitHubRepoSummary[]> {
   try {
     const response = await fetch(`${GITHUB_API_URL}/users/${USERNAME}/repos?sort=updated&direction=desc&per_page=50`, {
       headers: {
@@ -36,12 +75,12 @@ export async function getGitHubRepos(): Promise<Project[]> {
       throw new Error('Failed to fetch GitHub repositories');
     }
 
-    const repos = await response.json();
-    
+    const repos: GitHubApiRepo[] = await response.json();
+
     // Filtrar repositorios públicos (con o sin descripción)
     return repos
-      .filter((repo: any) => !repo.private && !repo.fork)
-      .map((repo: any) => ({
+      .filter((repo) => !repo.private && !repo.fork)
+      .map((repo) => ({
         id: repo.id,
         name: repo.name,
         description: repo.description,
@@ -87,7 +126,7 @@ export async function getGitHubStats() {
       totalStars,
       totalForks,
       languages,
-      mostUsedLanguage: Object.keys(languages).reduce((a, b) => 
+      mostUsedLanguage: Object.keys(languages).reduce((a, b) =>
         languages[a] > languages[b] ? a : b, ''
       ),
     };
@@ -95,4 +134,4 @@ export async function getGitHubStats() {
     console.error('Error fetching GitHub stats:', error);
     return null;
   }
-} 
+}

@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, type Variants } from 'framer-motion';
 import { useRef } from 'react';
 
 interface RevealSectionProps {
@@ -53,19 +53,17 @@ export default function RevealSection({
     },
   };
 
-  const containerVariants = staggerChildren
-    ? {
-        initial: {},
-        animate: {
-          transition: {
-            staggerChildren,
-            delayChildren: delay,
-          },
-        },
-      }
-    : {};
+  const containerVariants: Variants = {
+    initial: {},
+    animate: {
+      transition: {
+        staggerChildren,
+        delayChildren: delay,
+      },
+    },
+  };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     initial: directionVariants[direction].initial,
     animate: {
       ...directionVariants[direction].animate,

@@ -20,7 +20,7 @@ const navigation: NavigationItem[] = [
   { name: 'Contacto', href: 'contact' },
 ];
 
-export default function Navbar(): JSX.Element {
+export default function Navbar() {
   const [mounted, setMounted] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
