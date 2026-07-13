@@ -76,13 +76,25 @@ export default function Navbar() {
               animate={{ opacity: 1, x: 0 }}
               className="flex items-center"
             >
-              <motion.div
-                className="text-2xl font-bold text-blue-600 dark:text-blue-400"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <motion.button
+                onClick={() => handleNavClick('hero')}
+                className="flex items-center gap-2.5"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                aria-label="Ir al inicio"
               >
-                GT
-              </motion.div>
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-900 dark:bg-gray-800 font-mono text-sm font-bold text-white">
+                  gt<span className="text-blue-500">_</span>
+                </span>
+                <span className="hidden sm:block text-left leading-tight">
+                  <span className="block text-sm font-bold text-gray-900 dark:text-white">
+                    Gianpierre Terrazas
+                  </span>
+                  <span className="block text-xs text-gray-500 dark:text-gray-400">
+                    Full Stack Developer
+                  </span>
+                </span>
+              </motion.button>
             </motion.div>
 
             {/* Desktop Navigation */}
