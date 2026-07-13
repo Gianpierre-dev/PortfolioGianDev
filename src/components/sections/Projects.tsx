@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
+import ClipReveal from '@/components/ui/ClipReveal';
+import {
   ExternalLink, 
   Github, 
   Star,
@@ -477,13 +478,13 @@ export default function Projects() {
                 {/* Project Image */}
                 <div className="relative group">
                   {/* Image Container */}
-                  <div className="aspect-[4/3] bg-gray-100 dark:bg-gray-700 rounded-2xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700 transition-all duration-500">
+                  <ClipReveal className="aspect-[4/3] bg-gray-100 dark:bg-gray-700 rounded-2xl overflow-hidden shadow-sm border border-gray-200 dark:border-gray-700 transition-all duration-500">
                     <img
                       src={featuredProject.image}
                       alt={featuredProject.title}
                       className="w-full h-full object-contain transition-transform duration-500"
                     />
-                  </div>
+                  </ClipReveal>
 
                   {/* Year Badge */}
                   <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-4 rounded-2xl shadow-md border-4 border-white dark:border-gray-800">
@@ -559,11 +560,13 @@ function ProjectCard({ project, index, onHover, loading }: {
         {/* Image Section */}
         <div className="relative aspect-[4/3] overflow-hidden">
           {/* Image */}
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-contain transition-all duration-500 ease-out"
-          />
+          <ClipReveal delay={0.1} className="h-full">
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-contain transition-all duration-500 ease-out"
+            />
+          </ClipReveal>
 
           {/* Top Badges with Glass Effect */}
           <div className="absolute top-4 left-4 flex items-center gap-2 z-30">

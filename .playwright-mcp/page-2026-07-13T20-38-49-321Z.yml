@@ -1,0 +1,551 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e5]:
+        - generic [ref=e6]: GT
+        - generic [ref=e8]:
+          - button "Inicio" [ref=e9]
+          - button "Sobre mí" [ref=e11]
+          - button "Proyectos" [ref=e12]
+          - button "Habilidades" [ref=e13]
+          - button "Contacto" [ref=e14]
+    - generic [ref=e19]:
+      - img "Foto profesional de Gianpierre Terrazas Tello" [ref=e24]
+      - generic [ref=e25]:
+        - heading "Gianpierre Terrazas Tello" [level=1] [ref=e26]
+        - generic [ref=e29]:
+          - text: Soy
+          - generic [ref=e30]: "|"
+      - paragraph [ref=e32]: "Desarrollador Full Stack especializado en sistemas de gestión para empresas: planillas, RRHH, inventarios y automatización de procesos SUNAT. Trabajo con TypeScript en todo el stack: NestJS + Prisma + PostgreSQL en backend, Next.js + Tailwind CSS en frontend y Astro para sitios corporativos. Despliegue en Railway y almacenamiento en la nube compatible con S3."
+      - generic [ref=e34]:
+        - link [ref=e35] [cursor=pointer]:
+          - /url: https://github.com/Gianpierre-dev
+        - link [ref=e39] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/gianpierre-terrazas-tello-a792282a1/
+        - link [ref=e44] [cursor=pointer]:
+          - /url: mailto:pier_terrazas@hotmail.com
+      - generic [ref=e49]:
+        - button "Ver Proyectos" [ref=e50]
+        - button "Descargar CV" [ref=e55]
+        - button "Contactar" [ref=e61]
+      - generic [ref=e67]: Scroll
+    - generic [ref=e73]:
+      - generic [ref=e74]:
+        - heading "Sobre mí" [level=2] [ref=e75]
+        - paragraph [ref=e76]: Conoce más sobre mi experiencia, habilidades y pasión por el desarrollo
+      - generic [ref=e77]:
+        - generic [ref=e78]:
+          - generic [ref=e79]:
+            - heading "Sobre mí" [level=3] [ref=e80]
+            - paragraph [ref=e81]: "Desarrollador Full Stack especializado en sistemas de gestión para empresas: planillas, recursos humanos, inventarios y automatización de procesos tributarios (SUNAT)."
+            - paragraph [ref=e82]: "Trabajo con TypeScript en todo el stack: NestJS, Prisma y PostgreSQL en el backend; Next.js y Tailwind CSS en el frontend; Astro para sitios corporativos. Mis proyectos se despliegan en Railway con almacenamiento en la nube."
+            - paragraph [ref=e83]: Mi objetivo es construir sistemas que aporten valor real al negocio, con código probado, arquitectura limpia y una buena experiencia de usuario.
+          - generic [ref=e84]:
+            - generic [ref=e85]:
+              - generic [ref=e88]: 3+
+              - generic [ref=e89]: Años de Experiencia
+            - generic [ref=e90]:
+              - generic [ref=e94]: 25+
+              - generic [ref=e95]: Proyectos Completados
+            - generic [ref=e96]:
+              - generic [ref=e99]: 10+
+              - generic [ref=e100]: Tecnologías
+            - generic [ref=e101]:
+              - generic [ref=e105]: Perú
+              - generic [ref=e106]: Ubicación
+          - button "Descargar mi CV" [ref=e108]
+          - generic [ref=e112]:
+            - heading "Mi Enfoque de Trabajo" [level=4] [ref=e113]
+            - generic [ref=e114]:
+              - generic [ref=e115]:
+                - generic [ref=e116]: •
+                - text: Aprendizaje continuo
+              - generic [ref=e117]:
+                - generic [ref=e118]: •
+                - text: Código limpio y mantenible
+              - generic [ref=e119]:
+                - generic [ref=e120]: •
+                - text: Colaboración efectiva
+              - generic [ref=e121]:
+                - generic [ref=e122]: •
+                - text: Soluciones prácticas
+            - paragraph [ref=e123]: “Cada proyecto es una oportunidad de crear algo útil y bien hecho.”
+        - generic [ref=e124]:
+          - heading "Experiencia Profesional" [level=3] [ref=e125]
+          - generic [ref=e126]:
+            - generic [ref=e130]:
+              - heading "STI GOLD" [level=4] [ref=e135]
+              - generic [ref=e136]: Tech Lead & Full Stack Developer
+              - generic [ref=e137]: Enero 2026 - Presente
+              - paragraph [ref=e138]: "Desarrollo completo de sistemas internos: arquitectura, backend, frontend y deploy. Automatización de consultas SUNAT con Playwright y APIs REST con Spring Boot y NestJS, con almacenamiento de archivos en Wasabi S3."
+              - generic [ref=e139]:
+                - generic [ref=e140]: TypeScript
+                - generic [ref=e141]: NestJS
+                - generic [ref=e142]: Java
+                - generic [ref=e143]: Spring Boot
+                - generic [ref=e144]: Python
+                - generic [ref=e145]: PostgreSQL
+                - generic [ref=e146]: Docker
+            - generic [ref=e149]:
+              - heading "JJMM" [level=4] [ref=e154]
+              - generic [ref=e155]: Programador
+              - generic [ref=e156]: Enero 2026 - Presente
+              - paragraph [ref=e157]: Desarrollo de software a medida para necesidades operativas de la empresa y automatización de procesos contables con Python.
+              - generic [ref=e158]:
+                - generic [ref=e159]: Python
+                - generic [ref=e160]: React
+                - generic [ref=e161]: TypeScript
+                - generic [ref=e162]: PostgreSQL
+                - generic [ref=e163]: Git
+            - generic [ref=e166]:
+              - heading "SipnasisCode" [level=4] [ref=e171]
+              - generic [ref=e172]: Full Stack Developer
+              - generic [ref=e173]: Julio 2025 - Diciembre 2025
+              - paragraph [ref=e174]: Desarrollo de múltiples sistemas empresariales para clientes de la agencia, participando en proyectos Full Stack bajo acuerdo de confidencialidad.
+              - generic [ref=e175]:
+                - generic [ref=e176]: TypeScript
+                - generic [ref=e177]: NestJS
+                - generic [ref=e178]: React
+                - generic [ref=e179]: Next.js
+                - generic [ref=e180]: Prisma
+                - generic [ref=e181]: PostgreSQL
+                - generic [ref=e182]: Tailwind CSS
+            - generic [ref=e185]:
+              - heading "GALDIAZ S.A.C." [level=4] [ref=e190]
+              - generic [ref=e191]: Programador Informático
+              - generic [ref=e192]: 2024 - Julio 2025
+              - paragraph [ref=e193]: Sistema de control de inventario y gestión de stock, automatización de tareas administrativas con Python y macros VBA, y optimización de base de datos SQL Server.
+              - generic [ref=e194]:
+                - generic [ref=e195]: Python
+                - generic [ref=e196]: PHP
+                - generic [ref=e197]: C#
+                - generic [ref=e198]: SQL Server
+                - generic [ref=e199]: Excel VBA
+                - generic [ref=e200]: Power BI
+            - generic [ref=e203]:
+              - heading "Mr. Sif" [level=4] [ref=e208]
+              - generic [ref=e209]: Front-End Developer & SEO
+              - generic [ref=e210]: "2024"
+              - paragraph [ref=e211]: Desarrollo de interfaces web con AlpineJS y Tailwind CSS, y gestión de posicionamiento SEO y marketing digital.
+              - generic [ref=e212]:
+                - generic [ref=e213]: AlpineJS
+                - generic [ref=e214]: Tailwind CSS
+                - generic [ref=e215]: Figma
+                - generic [ref=e216]: SEO
+            - generic [ref=e219]:
+              - heading "Ingecem Perú" [level=4] [ref=e224]
+              - generic [ref=e225]: Desarrollador Web (Prácticas Pre-Profesionales)
+              - generic [ref=e226]: 2018 - 2022
+              - paragraph [ref=e227]: Desarrollo de sistema de control de inventario en C#, diseño e implementación de interfaces de usuario y apoyo en el levantamiento de requerimientos.
+              - generic [ref=e228]:
+                - generic [ref=e229]: C#
+                - generic [ref=e230]: HTML
+                - generic [ref=e231]: CSS
+                - generic [ref=e232]: JavaScript
+    - generic [ref=e234]:
+      - generic [ref=e235]:
+        - generic [ref=e240]:
+          - heading "Mis Proyectos" [level=2] [ref=e241]
+          - generic [ref=e242]: Sincronizando con GitHub...
+        - generic [ref=e248]:
+          - paragraph [ref=e249]: Sistemas de gestión empresarial y productos propios. Los proyectos privados se desarrollaron para empresas y no exponen código.
+          - generic [ref=e250]: Métricas de proyectos públicos sincronizadas desde GitHub
+      - generic [ref=e253]:
+        - button "Todos 8" [ref=e254]:
+          - generic [ref=e260]: Todos
+          - generic [ref=e261]: "8"
+        - button "Sistemas 5" [ref=e262]:
+          - generic [ref=e268]: Sistemas
+          - generic [ref=e269]: "5"
+        - button "Frontend 2" [ref=e270]:
+          - generic [ref=e274]: Frontend
+          - generic [ref=e275]: "2"
+        - button "Automatización 1" [ref=e276]:
+          - generic [ref=e281]: Automatización
+          - generic [ref=e282]: "1"
+      - generic [ref=e284]:
+        - generic [ref=e285]:
+          - generic [ref=e286]: Proyecto Destacado
+          - generic [ref=e289]: Proyecto privado
+        - generic [ref=e294]:
+          - generic [ref=e295]:
+            - generic [ref=e296]:
+              - generic [ref=e297]: fullstack • 2026
+              - heading "Sistema de Planillas MultiEmpresa" [level=3] [ref=e300]
+              - generic [ref=e301]: En Desarrollo
+            - paragraph [ref=e306]: "Sistema de nómina multiempresa que cubre el ciclo completo: carga de trabajadores, cálculo de planillas bajo los 6 regímenes laborales privados de Perú (General, Pequeña empresa, Microempresa, Agrario, Construcción civil, Trabajadoras del hogar) y generación de boletas de pago. Backend con arquitectura hexagonal, más de 370 tests automatizados y CI bloqueante."
+            - generic [ref=e308]:
+              - heading "Stack Tecnológico" [level=4] [ref=e309]
+              - generic [ref=e310]:
+                - generic [ref=e311]: NestJS
+                - generic [ref=e312]: Prisma
+                - generic [ref=e313]: PostgreSQL
+                - generic [ref=e314]: Next.js
+                - generic [ref=e315]: Tailwind CSS
+                - generic [ref=e316]: Railway
+                - generic [ref=e317]: Wasabi S3
+            - link "Proyecto privado — Consultar" [ref=e319] [cursor=pointer]:
+              - /url: "#contact"
+          - generic [ref=e323]:
+            - img "Sistema de Planillas MultiEmpresa" [ref=e325]
+            - generic [ref=e326]: "2026"
+      - generic [ref=e330]:
+        - generic [ref=e332]:
+          - generic [ref=e333]:
+            - img "SIGEMYPE" [ref=e335]
+            - generic [ref=e336]: En Producción
+            - generic [ref=e342]: "2026"
+          - generic [ref=e344]:
+            - generic [ref=e345]:
+              - heading "SIGEMYPE" [level=3] [ref=e346]
+              - generic [ref=e347]: Privado
+            - paragraph [ref=e351]: "Sistema de gestión integral para estudio contable: cronogramas tributarios SUNAT, alertas, parte diario y consultas RUC/DNI."
+            - generic [ref=e352]:
+              - generic [ref=e353]: NestJS
+              - generic [ref=e354]: Prisma
+              - generic [ref=e355]: PostgreSQL
+              - generic [ref=e356]: Next.js
+              - generic [ref=e357]: "+2"
+            - generic [ref=e358]:
+              - link "Consultar" [ref=e360] [cursor=pointer]:
+                - /url: "#contact"
+              - generic [ref=e364]: En vivo
+        - generic [ref=e368]:
+          - generic [ref=e369]:
+            - img "Sistema de RRHH MultiEmpresa" [ref=e371]
+            - generic [ref=e372]: En Producción
+            - generic [ref=e378]: "2026"
+          - generic [ref=e380]:
+            - generic [ref=e381]:
+              - heading "Sistema de RRHH MultiEmpresa" [level=3] [ref=e382]
+              - generic [ref=e383]: Privado
+            - paragraph [ref=e387]: Gestión de empleados, contratos y documentos con soporte multiempresa y generación de carnets en PDF.
+            - generic [ref=e388]:
+              - generic [ref=e389]: NestJS
+              - generic [ref=e390]: Prisma
+              - generic [ref=e391]: PostgreSQL
+              - generic [ref=e392]: Next.js
+              - generic [ref=e393]: "+2"
+            - generic [ref=e394]:
+              - link "Consultar" [ref=e396] [cursor=pointer]:
+                - /url: "#contact"
+              - generic [ref=e400]: En vivo
+        - generic [ref=e404]:
+          - generic [ref=e405]:
+            - img "Automatización SUNAT" [ref=e407]
+            - generic [ref=e408]: En Desarrollo
+            - generic [ref=e415]: "2026"
+            - link [ref=e419] [cursor=pointer]:
+              - /url: https://github.com/Gianpierre-dev/Sistema-de-automatizaciones-Sunat-
+          - generic [ref=e423]:
+            - heading "Automatización SUNAT" [level=3] [ref=e425]
+            - paragraph [ref=e426]: App de escritorio que descarga y clasifica comprobantes electrónicos del portal SUNAT de forma masiva.
+            - generic [ref=e427]:
+              - generic [ref=e428]: Python
+              - generic [ref=e429]: Playwright
+              - generic [ref=e430]: PySide6
+              - generic [ref=e431]: SQLAlchemy
+              - generic [ref=e432]: "+1"
+            - generic [ref=e433]:
+              - link "Código" [ref=e435] [cursor=pointer]:
+                - /url: https://github.com/Gianpierre-dev/Sistema-de-automatizaciones-Sunat-
+              - generic [ref=e439]: En desarrollo
+        - generic [ref=e443]:
+          - generic [ref=e444]:
+            - img "TeachGenius" [ref=e446]
+            - generic [ref=e447]: En Desarrollo
+            - generic [ref=e454]: "2026"
+            - link [ref=e458] [cursor=pointer]:
+              - /url: https://github.com/Gianpierre-dev/TeachGenius_Frontend
+          - generic [ref=e462]:
+            - heading "TeachGenius" [level=3] [ref=e464]
+            - paragraph [ref=e465]: "Plataforma educativa gamificada: profesores crean sopas de letras de figuras literarias y los alumnos compiten contra el tiempo."
+            - generic [ref=e466]:
+              - generic [ref=e467]: NestJS
+              - generic [ref=e468]: Prisma
+              - generic [ref=e469]: PostgreSQL
+              - generic [ref=e470]: Astro
+              - generic [ref=e471]: "+2"
+            - generic [ref=e472]:
+              - link "Código" [ref=e474] [cursor=pointer]:
+                - /url: https://github.com/Gianpierre-dev/TeachGenius_Frontend
+              - generic [ref=e478]: En desarrollo
+        - generic [ref=e482]:
+          - generic [ref=e483]:
+            - img "Tonin" [ref=e485]
+            - generic [ref=e486]: En Desarrollo
+            - generic [ref=e493]: "2026"
+            - link [ref=e497] [cursor=pointer]:
+              - /url: https://github.com/Gianpierre-dev/Tonin-Web
+          - generic [ref=e501]:
+            - heading "Tonin" [level=3] [ref=e503]
+            - paragraph [ref=e504]: Web app inmersiva de frases motivacionales según tu estado de ánimo, con música ambiental y experiencia swipe.
+            - generic [ref=e505]:
+              - generic [ref=e506]: React
+              - generic [ref=e507]: TypeScript
+              - generic [ref=e508]: Zustand
+              - generic [ref=e509]: Spring Boot
+              - generic [ref=e510]: "+1"
+            - generic [ref=e511]:
+              - link "Código" [ref=e513] [cursor=pointer]:
+                - /url: https://github.com/Gianpierre-dev/Tonin-Web
+              - generic [ref=e517]: En desarrollo
+        - generic [ref=e521]:
+          - generic [ref=e522]:
+            - img "Portfolio Gianpierre" [ref=e524]
+            - generic [ref=e525]: En Producción
+            - generic [ref=e531]: "2025"
+            - generic [ref=e534]:
+              - link [ref=e535] [cursor=pointer]:
+                - /url: https://gianpierre-dev.vercel.app
+              - link [ref=e540] [cursor=pointer]:
+                - /url: https://github.com/Gianpierre-dev/PortfolioGianDev
+          - generic [ref=e544]:
+            - heading "Portfolio Gianpierre" [level=3] [ref=e546]
+            - paragraph [ref=e547]: "Este portfolio: Next.js 15, TypeScript y Tailwind CSS, con proyectos sincronizados desde GitHub."
+            - generic [ref=e548]:
+              - generic [ref=e549]: TypeScript
+              - generic [ref=e550]: Next.js
+              - generic [ref=e551]: Tailwind CSS
+              - generic [ref=e552]: Framer Motion
+              - generic [ref=e553]: "+1"
+            - generic [ref=e554]:
+              - generic [ref=e555]:
+                - link "Ver Demo" [ref=e556] [cursor=pointer]:
+                  - /url: https://gianpierre-dev.vercel.app
+                - link "Código" [ref=e561] [cursor=pointer]:
+                  - /url: https://github.com/Gianpierre-dev/PortfolioGianDev
+              - generic [ref=e565]: En vivo
+        - generic [ref=e569]:
+          - generic [ref=e570]:
+            - img "Ingecem Web" [ref=e572]
+            - generic [ref=e573]: En Producción
+            - generic [ref=e579]: "2025"
+            - generic [ref=e582]:
+              - link [ref=e583] [cursor=pointer]:
+                - /url: https://ingecemperu.com
+              - link [ref=e588] [cursor=pointer]:
+                - /url: https://github.com/Gianpierre-dev/IngecemWeb
+          - generic [ref=e592]:
+            - heading "Ingecem Web" [level=3] [ref=e594]
+            - paragraph [ref=e595]: Sitio corporativo para empresa de ingeniería con optimización SEO y formularios de contacto.
+            - generic [ref=e596]:
+              - generic [ref=e597]: TypeScript
+              - generic [ref=e598]: Vite
+              - generic [ref=e599]: Tailwind CSS
+            - generic [ref=e600]:
+              - generic [ref=e601]:
+                - link "Ver Demo" [ref=e602] [cursor=pointer]:
+                  - /url: https://ingecemperu.com
+                - link "Código" [ref=e607] [cursor=pointer]:
+                  - /url: https://github.com/Gianpierre-dev/IngecemWeb
+              - generic [ref=e611]: En vivo
+      - generic [ref=e614]: Las métricas se actualizan automáticamente desde GitHub
+    - generic [ref=e621]:
+      - generic [ref=e622]:
+        - heading "Skills & Expertise" [level=2] [ref=e628]
+        - paragraph [ref=e629]: Tecnologías y herramientas que domino profesionalmente
+      - generic [ref=e630]:
+        - generic [ref=e631]:
+          - generic [ref=e632]: "18"
+          - generic [ref=e637]: Tecnologías
+        - generic [ref=e638]:
+          - generic [ref=e639]: 85%
+          - generic [ref=e644]: Nivel Promedio
+        - generic [ref=e645]:
+          - generic [ref=e646]: 3+
+          - generic [ref=e652]: Años Exp.
+      - generic [ref=e653]:
+        - button "Todas" [ref=e654]
+        - button "Frontend 5" [ref=e659]:
+          - text: Frontend
+          - generic [ref=e662]: "5"
+        - button "Backend 6" [ref=e663]:
+          - text: Backend
+          - generic [ref=e667]: "6"
+        - button "Base de Datos 3" [ref=e668]:
+          - text: Base de Datos
+          - generic [ref=e673]: "3"
+        - button "Herramientas 4" [ref=e674]:
+          - text: Herramientas
+          - generic [ref=e677]: "4"
+      - generic [ref=e679]:
+        - generic [ref=e681]:
+          - generic [ref=e684]: TypeScript
+          - generic [ref=e685]: 92%
+        - generic [ref=e687]:
+          - generic [ref=e690]: Next.js
+          - generic [ref=e691]: 90%
+        - generic [ref=e693]:
+          - generic [ref=e696]: React
+          - generic [ref=e697]: 90%
+        - generic [ref=e699]:
+          - generic [ref=e702]: Astro
+          - generic [ref=e703]: 85%
+        - generic [ref=e705]:
+          - generic [ref=e708]: Tailwind CSS
+          - generic [ref=e709]: 92%
+        - generic [ref=e711]:
+          - generic [ref=e714]: NestJS
+          - generic [ref=e715]: 90%
+        - generic [ref=e717]:
+          - generic [ref=e720]: Node.js
+          - generic [ref=e721]: 88%
+        - generic [ref=e723]:
+          - generic [ref=e726]: Prisma ORM
+          - generic [ref=e727]: 88%
+        - generic [ref=e729]:
+          - generic [ref=e732]: Python
+          - generic [ref=e733]: 80%
+        - generic [ref=e735]:
+          - generic [ref=e738]: Java / Spring Boot
+          - generic [ref=e739]: 72%
+        - generic [ref=e741]:
+          - generic [ref=e744]: PHP
+          - generic [ref=e745]: 75%
+        - generic [ref=e747]:
+          - generic [ref=e750]: PostgreSQL
+          - generic [ref=e751]: 88%
+        - generic [ref=e753]:
+          - generic [ref=e756]: MySQL
+          - generic [ref=e757]: 85%
+        - generic [ref=e759]:
+          - generic [ref=e762]: MongoDB
+          - generic [ref=e763]: 72%
+        - generic [ref=e765]:
+          - generic [ref=e768]: Playwright
+          - generic [ref=e769]: 85%
+        - generic [ref=e771]:
+          - generic [ref=e774]: Railway
+          - generic [ref=e775]: 85%
+        - generic [ref=e777]:
+          - generic [ref=e780]: Git
+          - generic [ref=e781]: 90%
+        - generic [ref=e783]:
+          - generic [ref=e786]: AWS S3 / Wasabi
+          - generic [ref=e787]: 80%
+      - generic [ref=e788]:
+        - generic [ref=e789]:
+          - generic [ref=e790]: "5"
+          - heading "Frontend" [level=3] [ref=e796]
+          - generic [ref=e797]:
+            - generic [ref=e798]: 90%
+            - generic [ref=e799]: •
+            - generic [ref=e800]: promedio
+        - generic [ref=e801]:
+          - generic [ref=e802]: "6"
+          - heading "Backend" [level=3] [ref=e809]
+          - generic [ref=e810]:
+            - generic [ref=e811]: 82%
+            - generic [ref=e812]: •
+            - generic [ref=e813]: promedio
+        - generic [ref=e814]:
+          - generic [ref=e815]: "3"
+          - heading "Base de Datos" [level=3] [ref=e823]
+          - generic [ref=e824]:
+            - generic [ref=e825]: 82%
+            - generic [ref=e826]: •
+            - generic [ref=e827]: promedio
+        - generic [ref=e828]:
+          - generic [ref=e829]: "4"
+          - heading "Herramientas" [level=3] [ref=e835]
+          - generic [ref=e836]:
+            - generic [ref=e837]: 85%
+            - generic [ref=e838]: •
+            - generic [ref=e839]: promedio
+    - generic [ref=e841]:
+      - generic [ref=e842]:
+        - heading "Contacto" [level=2] [ref=e843]
+        - paragraph [ref=e844]: ¿Tienes un proyecto en mente? Me encantaría escuchar sobre él.
+      - generic [ref=e845]:
+        - generic [ref=e846]:
+          - generic [ref=e847]:
+            - heading "Información de Contacto" [level=3] [ref=e848]
+            - paragraph [ref=e849]: Siempre estoy interesado en nuevos proyectos. No dudes en contactarme.
+          - generic [ref=e850]:
+            - generic [ref=e857] [cursor=pointer]:
+              - heading [level=4] [ref=e858]:
+                - text: Email
+                - generic [ref=e859]: Copiar
+              - paragraph [ref=e863]: pier_terrazas@hotmail.com
+              - paragraph [ref=e864]: Clic para copiar email
+            - generic [ref=e870] [cursor=pointer]:
+              - heading [level=4] [ref=e871]:
+                - text: Teléfono
+                - generic [ref=e872]: WhatsApp
+              - paragraph [ref=e875]: +51 961 170 946
+              - paragraph [ref=e876]: Clic para WhatsApp/Llamar
+            - generic [ref=e883]:
+              - heading "Ubicación" [level=4] [ref=e884]
+              - paragraph [ref=e885]: Perú
+              - paragraph [ref=e886]: Disponible para trabajo remoto
+            - generic [ref=e893]:
+              - heading "Horario" [level=4] [ref=e894]
+              - paragraph [ref=e895]: 9:00 AM - 6:00 PM
+              - paragraph [ref=e896]: Hora de Perú (UTC-5)
+          - generic [ref=e897]:
+            - heading "Sígueme en mis redes" [level=4] [ref=e898]
+            - generic [ref=e899]:
+              - link [ref=e900] [cursor=pointer]:
+                - /url: https://github.com/Gianpierre-dev
+              - link [ref=e904] [cursor=pointer]:
+                - /url: https://www.linkedin.com/in/gianpierre-terrazas-tello-a792282a1/
+              - link [ref=e909] [cursor=pointer]:
+                - /url: mailto:pier_terrazas@hotmail.com
+        - generic [ref=e913]:
+          - heading "Envíame un Mensaje" [level=3] [ref=e915]
+          - generic [ref=e916]:
+            - generic [ref=e917]:
+              - generic [ref=e918]: Nombre *
+              - textbox "Nombre *" [ref=e922]:
+                - /placeholder: Tu nombre completo
+            - generic [ref=e923]:
+              - generic [ref=e924]: Email *
+              - textbox "Email *" [ref=e928]:
+                - /placeholder: tu@email.com
+            - generic [ref=e929]:
+              - generic [ref=e930]: Asunto *
+              - textbox "Asunto *" [ref=e933]:
+                - /placeholder: Proyecto web / Colaboración / Consulta
+            - generic [ref=e934]:
+              - generic [ref=e935]: Mensaje *
+              - textbox "Mensaje *" [ref=e938]:
+                - /placeholder: Cuéntame sobre tu proyecto o consulta...
+            - button "Enviar Mensaje" [ref=e940]
+    - generic [ref=e945]:
+      - generic [ref=e946]:
+        - generic [ref=e947]:
+          - heading "Gianpierre Terrazas" [level=3] [ref=e948]
+          - paragraph [ref=e949]: Desarrollador Full Stack especializado en crear soluciones web modernas y escalables. Siempre buscando nuevos desafíos y oportunidades de crecimiento.
+          - generic [ref=e950]:
+            - link [ref=e951] [cursor=pointer]:
+              - /url: https://github.com/Gianpierre-dev
+            - link [ref=e954] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/gianpierre-terrazas-tello-a792282a1/
+            - link [ref=e957] [cursor=pointer]:
+              - /url: mailto:pier_terrazas@hotmail.com
+        - generic [ref=e960]:
+          - heading "Navegación" [level=4] [ref=e961]
+          - list [ref=e962]:
+            - listitem [ref=e963]:
+              - link "Sobre mí" [ref=e964] [cursor=pointer]:
+                - /url: "#about"
+            - listitem [ref=e965]:
+              - link "Proyectos" [ref=e966] [cursor=pointer]:
+                - /url: "#projects"
+            - listitem [ref=e967]:
+              - link "Habilidades" [ref=e968] [cursor=pointer]:
+                - /url: "#skills"
+            - listitem [ref=e969]:
+              - link "Contacto" [ref=e970] [cursor=pointer]:
+                - /url: "#contact"
+        - generic [ref=e971]:
+          - heading "Contacto" [level=4] [ref=e972]
+          - generic [ref=e973]:
+            - paragraph [ref=e974]: Perú
+            - paragraph [ref=e977]: pier_terrazas@hotmail.com
+            - paragraph [ref=e980]: +51 961 170 946
+      - generic [ref=e983]:
+        - paragraph [ref=e984]: © 2026 Gianpierre Terrazas Tello. Todos los derechos reservados.
+        - generic [ref=e985]: Disponible para proyectos
+  - alert [ref=e988]

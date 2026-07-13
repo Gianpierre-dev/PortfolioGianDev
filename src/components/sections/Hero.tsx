@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import RippleButton from '@/components/ui/RippleButton';
+import LineReveal from '@/components/ui/LineReveal';
 
 import { personalInfo, socialLinks } from '@/data/personal';
 import { scrollToSection, downloadCV } from '@/lib/utils';
@@ -126,9 +127,12 @@ export default function Hero() {
 
           {/* Name and Title */}
           <motion.div variants={itemVariants} className="mb-8">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4">
-              {personalInfo.name}
-            </h1>
+            <LineReveal
+              as="h1"
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4"
+              lines={[personalInfo.name]}
+              delay={0.2}
+            />
             <div className="text-xl sm:text-2xl lg:text-3xl text-gray-200 mb-6">
               <span>Soy </span>
               <span className="text-blue-400 font-semibold">
