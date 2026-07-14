@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { skills } from '@/data/personal';
 import { Skill } from '@/types';
+import { useIdioma } from '@/i18n/LanguageProvider';
 import { 
   Code2, 
   Database, 
@@ -124,6 +125,7 @@ const skillColors = {
 };
 
 export default function Skills() {
+  const { t } = useIdioma();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [filteredSkills, setFilteredSkills] = useState<Skill[]>(skills);
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
@@ -137,11 +139,11 @@ export default function Skills() {
   }, [selectedCategory]);
 
   const categories = [
-    { id: 'all', name: 'Todas', icon: Code2 },
-    { id: 'frontend', name: 'Frontend', icon: Monitor },
-    { id: 'backend', name: 'Backend', icon: Server },
-    { id: 'database', name: 'Base de Datos', icon: Database },
-    { id: 'tools', name: 'Herramientas', icon: Wrench },
+    { id: 'all', name: t.skills.categorias.all, icon: Code2 },
+    { id: 'frontend', name: t.skills.categorias.frontend, icon: Monitor },
+    { id: 'backend', name: t.skills.categorias.backend, icon: Server },
+    { id: 'database', name: t.skills.categorias.database, icon: Database },
+    { id: 'tools', name: t.skills.categorias.tools, icon: Wrench },
   ];
 
   const getSkillsByCategory = (category: string) => {
@@ -149,10 +151,10 @@ export default function Skills() {
   };
 
   const getSkillLevel = (level: number) => {
-    if (level >= 90) return { label: 'Experto', color: 'text-emerald-600 dark:text-emerald-400' };
-    if (level >= 75) return { label: 'Avanzado', color: 'text-blue-600 dark:text-blue-400' };
-    if (level >= 60) return { label: 'Intermedio', color: 'text-yellow-600 dark:text-yellow-400' };
-    return { label: 'Básico', color: 'text-gray-600 dark:text-gray-400' };
+    if (level >= 90) return { label: t.skills.niveles.experto, color: 'text-emerald-600 dark:text-emerald-400' };
+    if (level >= 75) return { label: t.skills.niveles.avanzado, color: 'text-blue-600 dark:text-blue-400' };
+    if (level >= 60) return { label: t.skills.niveles.intermedio, color: 'text-yellow-600 dark:text-yellow-400' };
+    return { label: t.skills.niveles.basico, color: 'text-gray-600 dark:text-gray-400' };
   };
 
   const SkillChip = ({ skill, index }: { skill: Skill; index: number }) => {
@@ -205,7 +207,7 @@ export default function Skills() {
            >
              <Target className="w-5 h-5 text-blue-600" />
              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-               Skills & Expertise
+               {t.skills.titulo}
              </h2>
            </motion.div>
            <motion.p 
@@ -215,7 +217,7 @@ export default function Skills() {
              transition={{ duration: 1.0, delay: 0.3, ease: "easeOut" }}
              className="text-gray-600 dark:text-gray-400 text-sm"
            >
-             Tecnologías y herramientas que domino profesionalmente
+             {t.skills.subtitulo}
            </motion.p>
          </div>
 
@@ -226,7 +228,7 @@ export default function Skills() {
               <Award className="w-4 h-4 text-blue-600 dark:text-blue-400" />
               <span className="text-lg font-bold text-gray-900 dark:text-white">{skills.length}</span>
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">Tecnologías</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">{t.skills.metricas.tecnologias}</div>
           </div>
           <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300 hover:shadow-md">
             <div className="flex items-center justify-center gap-2 mb-1">
@@ -235,14 +237,14 @@ export default function Skills() {
                 {Math.round(skills.reduce((sum, skill) => sum + skill.level, 0) / skills.length)}%
               </span>
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">Nivel Promedio</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">{t.skills.metricas.nivelPromedio}</div>
           </div>
           <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700 shadow-sm transition-all duration-300 hover:shadow-md">
             <div className="flex items-center justify-center gap-2 mb-1">
               <Code2 className="w-4 h-4 text-blue-600 dark:text-blue-400" />
               <span className="text-lg font-bold text-gray-900 dark:text-white">3+</span>
             </div>
-            <div className="text-xs text-gray-500 dark:text-gray-400">Años Exp.</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">{t.skills.metricas.aniosExp}</div>
           </div>
         </div>
 
@@ -318,7 +320,7 @@ export default function Skills() {
                 <div className={`flex items-center justify-center gap-2 text-xs ${style.icon} opacity-80`}>
                   <span className="font-semibold">{averageLevel}%</span>
                   <span>•</span>
-                  <span>promedio</span>
+                  <span>{t.skills.promedio}</span>
                 </div>
               </motion.div>
             );

@@ -1,14 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/Button';
 import RippleButton from '@/components/ui/RippleButton';
 import LineReveal from '@/components/ui/LineReveal';
 
 import { personalInfo, socialLinks } from '@/data/personal';
 import { scrollToSection, downloadCV } from '@/lib/utils';
 import { ChevronDown, Download, Github, Linkedin, Mail } from 'lucide-react';
+import { useIdioma } from '@/i18n/LanguageProvider';
 
 const iconMap = {
   github: Github,
@@ -17,38 +16,7 @@ const iconMap = {
 };
 
 export default function Hero() {
-  const [displayedText, setDisplayedText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  
-  const roles = [
-    'Desarrollador Full Stack',
-    'Especialista en TypeScript',
-    'Tech Lead',
-    'Desarrollador de sistemas de gestión'
-  ];
-
-  useEffect(() => {
-    const currentRole = roles[currentIndex];
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        if (displayedText.length < currentRole.length) {
-          setDisplayedText(currentRole.slice(0, displayedText.length + 1));
-        } else {
-          setTimeout(() => setIsDeleting(true), 2000);
-        }
-      } else {
-        if (displayedText.length > 0) {
-          setDisplayedText(currentRole.slice(0, displayedText.length - 1));
-        } else {
-          setIsDeleting(false);
-          setCurrentIndex((prev) => (prev + 1) % roles.length);
-        }
-      }
-    }, isDeleting ? 50 : 100);
-
-    return () => clearTimeout(timeout);
-  }, [displayedText, currentIndex, isDeleting]);
+  const { t } = useIdioma();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -129,23 +97,27 @@ export default function Hero() {
           <motion.div variants={itemVariants} className="mb-8">
             <LineReveal
               as="h1"
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4"
+              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
               lines={[personalInfo.name]}
               delay={0.2}
             />
-            <div className="text-xl sm:text-2xl lg:text-3xl text-gray-200 mb-6">
-              <span>Soy </span>
-              <span className="text-blue-400 font-semibold">
-                {displayedText}
-                <span className="animate-pulse">|</span>
-              </span>
-            </div>
+            <LineReveal
+              as="p"
+              className="text-xl sm:text-2xl lg:text-3xl text-gray-100 max-w-3xl mx-auto font-medium leading-snug"
+              lines={[
+                t.hero.statementLinea1,
+                <span key="acento">
+                  <span className="text-blue-400">{t.hero.statementLinea2Pre}</span>{t.hero.statementLinea2Post}
+                </span>,
+              ]}
+              delay={0.5}
+            />
           </motion.div>
 
-          {/* Description */}
+          {/* Proof line */}
           <motion.div variants={itemVariants} className="mb-10">
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
-              {personalInfo.bio}
+            <p className="text-sm sm:text-base text-gray-400 tracking-wide">
+              {t.hero.prueba}
             </p>
           </motion.div>
 
@@ -180,7 +152,7 @@ export default function Hero() {
                 onClick={() => scrollToSection('projects')}
                 className="min-w-[200px]"
               >
-                <span>Ver Proyectos</span>
+                <span>{t.hero.ctaProyectos}</span>
                 <ChevronDown className="w-5 h-5 ml-2" />
               </RippleButton>
               <RippleButton
@@ -190,7 +162,7 @@ export default function Hero() {
                 className="min-w-[200px]"
               >
                 <Download className="w-5 h-5 mr-2" />
-                <span>Descargar CV</span>
+                <span>{t.hero.ctaCV}</span>
               </RippleButton>
               <RippleButton
                 variant="outline"
@@ -199,7 +171,7 @@ export default function Hero() {
                 className="min-w-[200px]"
               >
                 <Mail className="w-5 h-5 mr-2" />
-                <span>Contactar</span>
+                <span>{t.hero.ctaContacto}</span>
               </RippleButton>
             </div>
           </motion.div>
@@ -215,7 +187,7 @@ export default function Hero() {
               className="cursor-pointer flex flex-col items-center gap-2"
               onClick={() => scrollToSection('about')}
             >
-              <span className="text-gray-400 text-sm font-medium">Scroll</span>
+              <span className="text-gray-400 text-sm font-medium">{t.hero.scroll}</span>
               <ChevronDown className="w-8 h-8 text-gray-400 hover:text-white transition-colors duration-300" />
             </motion.div>
           </motion.div>

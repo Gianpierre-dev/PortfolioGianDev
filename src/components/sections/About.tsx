@@ -4,8 +4,11 @@ import { motion } from 'framer-motion';
 import { personalInfo, experiences } from '@/data/personal';
 import { downloadCV } from '@/lib/utils';
 import { Calendar, MapPin, Building, Code, Coffee, Download } from 'lucide-react';
+import { useIdioma } from '@/i18n/LanguageProvider';
 
 export default function About() {
+  const { t } = useIdioma();
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -29,10 +32,10 @@ export default function About() {
   };
 
   const stats = [
-    { label: 'Años de Experiencia', value: '3+', icon: Calendar },
-    { label: 'Proyectos Completados', value: '25+', icon: Code },
-    { label: 'Tecnologías', value: '10+', icon: Coffee },
-    { label: 'Ubicación', value: 'Perú', icon: MapPin },
+    { label: t.about.stats.experiencia, value: '3+', icon: Calendar },
+    { label: t.about.stats.proyectos, value: '25+', icon: Code },
+    { label: t.about.stats.tecnologias, value: '10+', icon: Coffee },
+    { label: t.about.stats.ubicacion, value: t.about.ubicacionValor, icon: MapPin },
   ];
 
   return (
@@ -49,13 +52,13 @@ export default function About() {
             variants={itemVariants}
             className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4"
           >
-            Sobre mí
+            {t.about.titulo}
           </motion.h2>
-          <motion.p 
+          <motion.p
             variants={itemVariants}
             className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
           >
-            Conoce más sobre mi experiencia, habilidades y pasión por el desarrollo
+            {t.about.subtitulo}
           </motion.p>
         </motion.div>
 
@@ -70,25 +73,14 @@ export default function About() {
           >
             <div className="prose prose-lg dark:prose-invert">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                Sobre mí
+                {t.about.bioTitulo}
               </h3>
-              
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Desarrollador Full Stack especializado en sistemas de gestión para empresas:
-                planillas, recursos humanos, inventarios y automatización de procesos
-                tributarios (SUNAT).
-              </p>
 
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Trabajo con TypeScript en todo el stack: NestJS, Prisma y PostgreSQL en el
-                backend; Next.js y Tailwind CSS en el frontend; Astro para sitios corporativos.
-                Mis proyectos se despliegan en Railway con almacenamiento en la nube.
-              </p>
-
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                Mi objetivo es construir sistemas que aporten valor real al negocio, con
-                código probado, arquitectura limpia y una buena experiencia de usuario.
-              </p>
+              {t.about.bioParrafos.map((parrafo, index) => (
+                <p key={index} className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {parrafo}
+                </p>
+              ))}
             </div>
 
             {/* Stats */}
@@ -127,7 +119,7 @@ export default function About() {
                 className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg"
               >
                 <Download className="w-5 h-5" />
-                Descargar mi CV
+                {t.about.cvBoton}
               </button>
             </motion.div>
 
@@ -140,28 +132,18 @@ export default function About() {
               className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700 mt-8"
             >
               <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
-                Mi Enfoque de Trabajo
+                {t.about.enfoqueTitulo}
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                <div className="flex items-center text-gray-700 dark:text-gray-300">
-                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">•</span>
-                  Aprendizaje continuo
-                </div>
-                <div className="flex items-center text-gray-700 dark:text-gray-300">
-                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">•</span>
-                  Código limpio y mantenible
-                </div>
-                <div className="flex items-center text-gray-700 dark:text-gray-300">
-                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">•</span>
-                  Colaboración efectiva
-                </div>
-                <div className="flex items-center text-gray-700 dark:text-gray-300">
-                  <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">•</span>
-                  Soluciones prácticas
-                </div>
+                {t.about.enfoqueBullets.map((bullet) => (
+                  <div key={bullet} className="flex items-center text-gray-700 dark:text-gray-300">
+                    <span className="text-blue-600 dark:text-blue-400 font-bold mr-2">•</span>
+                    {bullet}
+                  </div>
+                ))}
               </div>
               <p className="mt-4 text-gray-600 dark:text-gray-400 italic">
-                &ldquo;Cada proyecto es una oportunidad de crear algo útil y bien hecho.&rdquo;
+                {t.about.cita}
               </p>
             </motion.div>
           </motion.div>
@@ -175,14 +157,16 @@ export default function About() {
             className="space-y-8"
           >
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-              Experiencia Profesional
+              {t.about.experienciaTitulo}
             </h3>
             
             <div className="relative">
               {/* Timeline line */}
               <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-300 dark:bg-gray-600"></div>
               
-              {experiences.map((exp, index) => (
+              {experiences.map((exp, index) => {
+                const expT = t.experiencias[exp.company];
+                return (
                 <motion.div
                   key={index}
                   variants={itemVariants}
@@ -205,15 +189,15 @@ export default function About() {
                     </div>
                     
                     <div className="text-blue-600 dark:text-blue-400 font-medium mb-1">
-                      {exp.position}
+                      {expT?.position ?? exp.position}
                     </div>
-                    
+
                     <div className="text-sm text-gray-500 dark:text-gray-400 mb-3">
                       {exp.period}
                     </div>
-                    
+
                     <p className="text-gray-600 dark:text-gray-300 mb-4">
-                      {exp.description}
+                      {expT?.description ?? exp.description}
                     </p>
                     
                     <div className="flex flex-wrap gap-2">
@@ -228,7 +212,8 @@ export default function About() {
                     </div>
                   </div>
                 </motion.div>
-              ))}
+                );
+              })}
             </div>
           </motion.div>
         </div>

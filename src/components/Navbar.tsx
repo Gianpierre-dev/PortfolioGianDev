@@ -5,26 +5,30 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { scrollToSection } from '@/lib/utils';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
-import { Menu, X } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+import { useIdioma } from '@/i18n/LanguageProvider';
 
 interface NavigationItem {
   name: string;
   href: string;
 }
 
-const navigation: NavigationItem[] = [
-  { name: 'Inicio', href: 'hero' },
-  { name: 'Sobre mí', href: 'about' },
-  { name: 'Proyectos', href: 'projects' },
-  { name: 'Habilidades', href: 'skills' },
-  { name: 'Contacto', href: 'contact' },
-];
-
 export default function Navbar() {
   const [mounted, setMounted] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
   const { progress, activeSection } = useScrollProgress();
+  const { resolvedTheme, setTheme } = useTheme();
+  const { idioma, t, cambiarIdioma } = useIdioma();
+
+  const navigation: NavigationItem[] = [
+    { name: t.nav.inicio, href: 'hero' },
+    { name: t.nav.about, href: 'about' },
+    { name: t.nav.proyectos, href: 'projects' },
+    { name: t.nav.habilidades, href: 'skills' },
+    { name: t.nav.contacto, href: 'contact' },
+  ];
 
   useEffect(() => {
     setMounted(true);
@@ -81,7 +85,7 @@ export default function Navbar() {
                 className="flex items-center gap-2.5"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                aria-label="Ir al inicio"
+                aria-label={t.nav.irInicio}
               >
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-900 dark:bg-gray-800 font-mono text-sm font-bold text-white">
                   gt<span className="text-blue-500">_</span>
@@ -91,7 +95,7 @@ export default function Navbar() {
                     Gianpierre Terrazas
                   </span>
                   <span className="block text-xs text-gray-500 dark:text-gray-400">
-                    Full Stack Developer
+                    {t.nav.rolLogo}
                   </span>
                 </span>
               </motion.button>
@@ -125,8 +129,30 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Mobile Menu */}
-            <div className="flex items-center">
+            {/* Acciones: idioma + tema + menú móvil */}
+            <div className="flex items-center gap-2">
+              <motion.button
+                onClick={cambiarIdioma}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-xs font-bold text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+                aria-label={t.nav.cambiarIdioma}
+              >
+                <span className={idioma === 'es' ? 'text-blue-600 dark:text-blue-400' : 'text-gray-400 dark:text-gray-500'}>ES</span>
+                <span className="mx-1 text-gray-300 dark:text-gray-600">|</span>
+                <span className={idioma === 'en' ? 'text-blue-600 dark:text-blue-400' : 'text-gray-400 dark:text-gray-500'}>EN</span>
+              </motion.button>
+
+              <motion.button
+                onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+                aria-label={resolvedTheme === 'dark' ? t.nav.cambiarTemaClaro : t.nav.cambiarTemaOscuro}
+              >
+                {resolvedTheme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </motion.button>
+
               {/* Mobile menu button */}
               <motion.button
                 onClick={() => setIsOpen(!isOpen)}

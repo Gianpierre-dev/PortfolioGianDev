@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ClipReveal from '@/components/ui/ClipReveal';
+import { useIdioma } from '@/i18n/LanguageProvider';
+import type { Diccionario } from '@/i18n/types';
 import {
   ExternalLink, 
   Github, 
@@ -24,12 +26,12 @@ import {
 
 // Proyectos curados manualmente. Los sistemas privados (para empresas) no
 // exponen repositorio ni demo: se documentan como case studies.
+// Los textos (description/longDescription) viven en el diccionario i18n,
+// keyed por id. Aquí solo permanecen los datos técnicos no traducibles.
 const staticProjects = [
   {
     id: 1,
     title: "Sistema de Planillas MultiEmpresa",
-    description: "Motor de cálculo de planillas bajo legislación laboral peruana con soporte para los 6 regímenes privados del país.",
-    longDescription: "Sistema de nómina multiempresa que cubre el ciclo completo: carga de trabajadores, cálculo de planillas bajo los 6 regímenes laborales privados de Perú (General, Pequeña empresa, Microempresa, Agrario, Construcción civil, Trabajadoras del hogar) y generación de boletas de pago. Backend con arquitectura hexagonal, más de 370 tests automatizados y CI bloqueante.",
     image: "/images/projects/planillas.svg",
     category: "fullstack",
     featured: true,
@@ -43,8 +45,6 @@ const staticProjects = [
   {
     id: 2,
     title: "SIGEMYPE",
-    description: "Sistema de gestión integral para estudio contable: cronogramas tributarios SUNAT, alertas, parte diario y consultas RUC/DNI.",
-    longDescription: "Plataforma interna para un estudio contable que administra cronogramas de obligaciones tributarias y laborales (SUNAT), alertas de vencimientos, parte diario de trabajo del equipo, planificación de tareas y consultas automatizadas de DNI, RUC y tipo de cambio. Monorepo con Turborepo, importación desde Excel, más de 120 tests, hardening de seguridad (rate limiting, revocación JWT) y métricas Prometheus.",
     image: "/images/projects/sigemype.svg",
     category: "fullstack",
     featured: false,
@@ -58,8 +58,6 @@ const staticProjects = [
   {
     id: 3,
     title: "Sistema de RRHH MultiEmpresa",
-    description: "Gestión de empleados, contratos y documentos con soporte multiempresa y generación de carnets en PDF.",
-    longDescription: "Sistema de Recursos Humanos en producción para gestión multiempresa: legajos de empleados, contratos, documentos y fotos, con generación automática de photochecks y carnets en PDF. Autenticación JWT, validación con Zod y despliegue en Railway.",
     image: "/images/projects/rrhh.svg",
     category: "fullstack",
     featured: false,
@@ -73,8 +71,6 @@ const staticProjects = [
   {
     id: 4,
     title: "Automatización SUNAT",
-    description: "App de escritorio que descarga y clasifica comprobantes electrónicos del portal SUNAT de forma masiva.",
-    longDescription: "Aplicación de escritorio que automatiza la descarga, organización y clasificación de comprobantes electrónicos (facturas, boletas, guías de remisión) desde el portal SUNAT, parseando XML bajo el estándar UBL 2.1. Scraping con Playwright, interfaz PySide6 y distribución como ejecutable.",
     image: "/images/projects/automation-python.jpg",
     category: "automation",
     featured: false,
@@ -91,8 +87,6 @@ const staticProjects = [
   {
     id: 5,
     title: "TeachGenius",
-    description: "Plataforma educativa gamificada: profesores crean sopas de letras de figuras literarias y los alumnos compiten contra el tiempo.",
-    longDescription: "Aplicación educativa gamificada donde los docentes crean actividades de pupiletras (sopas de letras) sobre figuras literarias y los alumnos las resuelven desde cualquier dispositivo con temporizador competitivo. Backend NestJS con Prisma y frontend Astro + React.",
     image: "/images/projects/teachgenius.svg",
     category: "fullstack",
     featured: false,
@@ -109,8 +103,6 @@ const staticProjects = [
   {
     id: 6,
     title: "Tonin",
-    description: "Web app inmersiva de frases motivacionales según tu estado de ánimo, con música ambiental y experiencia swipe.",
-    longDescription: "Producto propio B2C: frases motivacionales adaptadas al estado de ánimo del usuario con experiencia de swipe, música ambiental por mood, temas dinámicos y panel de administración. Frontend React con Zustand y Framer Motion; API en Java 21 + Spring Boot con JWT y almacenamiento en Wasabi S3.",
     image: "/images/projects/tonin.svg",
     category: "fullstack",
     featured: false,
@@ -127,8 +119,6 @@ const staticProjects = [
   {
     id: 7,
     title: "Portfolio Gianpierre",
-    description: "Este portfolio: Next.js 15, TypeScript y Tailwind CSS, con proyectos sincronizados desde GitHub.",
-    longDescription: "Portfolio personal con tema oscuro/claro, animaciones con Framer Motion, optimización SEO y métricas de repositorios actualizadas automáticamente desde la API de GitHub.",
     image: "/images/projects/portfolio.jpg",
     category: "frontend",
     featured: false,
@@ -145,8 +135,6 @@ const staticProjects = [
   {
     id: 8,
     title: "Ingecem Web",
-    description: "Sitio corporativo para empresa de ingeniería con optimización SEO y formularios de contacto.",
-    longDescription: "Sitio web corporativo de Ingecem Perú con diseño responsive, optimización SEO, formularios de contacto y secciones informativas sobre servicios de ingeniería.",
     image: "/images/projects/ingecem.png",
     category: "frontend",
     featured: false,
@@ -163,16 +151,16 @@ const staticProjects = [
 ];
 
 const categories = [
-  { id: 'all', name: 'Todos', icon: Code2, count: 8 },
-  { id: 'fullstack', name: 'Sistemas', icon: Database, count: 5 },
-  { id: 'frontend', name: 'Frontend', icon: Monitor, count: 2 },
-  { id: 'automation', name: 'Automatización', icon: Bot, count: 1 }
-];
+  { id: 'all', icon: Code2, count: 8 },
+  { id: 'fullstack', icon: Database, count: 5 },
+  { id: 'frontend', icon: Monitor, count: 2 },
+  { id: 'automation', icon: Bot, count: 1 }
+] as const;
 
-const statusConfig = {
-  live: { label: 'En Producción', color: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300', icon: Globe },
-  development: { label: 'En Desarrollo', color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300', icon: Code2 },
-  demo: { label: 'Demo', color: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300', icon: Eye }
+const statusStyles = {
+  live: { color: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300', icon: Globe },
+  development: { color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300', icon: Code2 },
+  demo: { color: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300', icon: Eye }
 };
 
 type StaticProject = (typeof staticProjects)[number];
@@ -190,6 +178,8 @@ type ProjectWithMetrics = StaticProject & {
   metrics: { stars: number; forks: number; language?: string | null; visits?: string };
   lastUpdate?: string;
 };
+
+type EstadoProyecto = keyof typeof statusStyles;
 
 // Hook para obtener datos de GitHub automáticamente
 function useGitHubData() {
@@ -245,6 +235,7 @@ function useGitHubData() {
 }
 
 export default function Projects() {
+  const { t } = useIdioma();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const { githubData, loading } = useGitHubData();
@@ -295,7 +286,7 @@ export default function Projects() {
             </motion.div>
             <div>
               <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
-                Mis Proyectos
+                {t.projects.titulo}
               </h2>
               {loading && (
                 <div className="flex items-center justify-center gap-2 mt-2">
@@ -306,7 +297,7 @@ export default function Projects() {
                     <Clock className="w-4 h-4 text-blue-500" />
                   </motion.div>
                   <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
-                    Sincronizando con GitHub...
+                    {t.projects.sincronizando}
                   </span>
                 </div>
               )}
@@ -321,7 +312,7 @@ export default function Projects() {
             className="max-w-3xl mx-auto"
           >
             <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-2">
-              Sistemas de gestión empresarial y productos propios. Los proyectos privados se desarrollaron para empresas y no exponen código.
+              {t.projects.subtitulo}
             </p>
             <div className="flex items-center justify-center gap-2 text-sm text-gray-500 dark:text-gray-500">
               <motion.div
@@ -329,7 +320,7 @@ export default function Projects() {
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
-              <span>Métricas de proyectos públicos sincronizadas desde GitHub</span>
+              <span>{t.projects.metricasNota}</span>
             </div>
           </motion.div>
         </div>
@@ -362,7 +353,7 @@ export default function Projects() {
               </div>
 
               {/* Category name */}
-              <span className="relative z-10">{category.name}</span>
+              <span className="relative z-10">{t.projects.categorias[category.id]}</span>
 
               {/* Count badge */}
               <div className={`relative z-10 px-3 py-1 rounded-xl text-xs font-bold transition-all duration-300 ${
@@ -389,12 +380,12 @@ export default function Projects() {
               <div className="absolute top-6 right-6 flex items-center gap-3">
                 <span className="bg-blue-600 text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 shadow-sm">
                   <Star className="w-4 h-4 fill-current" />
-                  Proyecto Destacado
+                  {t.projects.destacado}
                 </span>
                 {featuredProject.private && (
                   <span className="bg-gray-800 dark:bg-gray-700 text-white px-3 py-2 rounded-xl text-xs flex items-center gap-2 shadow-sm">
                     <Lock className="w-3 h-3" />
-                    <span className="hidden sm:inline">Proyecto privado</span>
+                    <span className="hidden sm:inline">{t.projects.privado}</span>
                   </span>
                 )}
               </div>
@@ -411,18 +402,18 @@ export default function Projects() {
                     <h3 className="text-4xl font-bold text-gray-900 dark:text-white leading-tight">
                       {featuredProject.title}
                     </h3>
-                    <StatusBadge status={featuredProject.status} />
+                    <StatusBadge status={featuredProject.status} t={t} />
                   </div>
-                  
+
                   <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed font-medium">
-                    {featuredProject.longDescription}
+                    {t.proyectos[String(featuredProject.id)].longDescription}
                   </p>
                   
                   <div className="space-y-6">
                     {/* Tech Stack */}
                     <div>
                       <h4 className="text-sm font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide mb-3">
-                        Stack Tecnológico
+                        {t.projects.stackTecnologico}
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {featuredProject.tech.map((tech, index) => (
@@ -449,7 +440,7 @@ export default function Projects() {
                         className="group flex items-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-sm hover:shadow-md"
                       >
                         <ExternalLink className="w-5 h-5" />
-                        Ver Demo Live
+                        {t.projects.verDemoLive}
                       </a>
                     )}
                     {featuredProject.links.code && (
@@ -460,7 +451,7 @@ export default function Projects() {
                         className="group flex items-center gap-3 bg-gray-800 dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-sm hover:shadow-md"
                       >
                         <Github className="w-5 h-5" />
-                        Ver Código
+                        {t.projects.verCodigo}
                       </a>
                     )}
                     {featuredProject.private && (
@@ -469,7 +460,7 @@ export default function Projects() {
                         className="group flex items-center gap-3 bg-gray-800 dark:bg-gray-700 hover:bg-gray-900 dark:hover:bg-gray-600 text-white px-8 py-4 rounded-2xl font-semibold transition-all duration-300 shadow-sm hover:shadow-md"
                       >
                         <Lock className="w-5 h-5" />
-                        Proyecto privado — Consultar
+                        {t.projects.privadoConsultar}
                       </a>
                     )}
                   </div>
@@ -500,13 +491,14 @@ export default function Projects() {
         {/* Regular Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {regularProjects.map((project, index) => (
-            <ProjectCard 
-              key={project.id} 
-              project={project} 
+            <ProjectCard
+              key={project.id}
+              project={project}
               index={index}
               isHovered={hoveredProject === project.id}
               onHover={setHoveredProject}
               loading={loading}
+              t={t}
             />
           ))}
         </div>
@@ -515,7 +507,7 @@ export default function Projects() {
         <div className="mt-12 text-center">
           <div className="inline-flex items-center gap-2 bg-blue-50 dark:bg-blue-900/30 px-4 py-2 rounded-lg text-sm text-blue-700 dark:text-blue-300">
             <Github className="w-4 h-4" />
-            <span>Las métricas se actualizan automáticamente desde GitHub</span>
+            <span>{t.projects.githubNotice}</span>
             {!loading && <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>}
           </div>
         </div>
@@ -524,24 +516,25 @@ export default function Projects() {
   );
 }
 
-function StatusBadge({ status }: { status: string }) {
-  const config = statusConfig[status as keyof typeof statusConfig];
+function StatusBadge({ status, t }: { status: string; t: Diccionario }) {
+  const config = statusStyles[status as EstadoProyecto];
   const Icon = config.icon;
-  
+
   return (
     <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${config.color}`}>
       <Icon className="w-3 h-3" />
-      {config.label}
+      {t.projects.status[status as EstadoProyecto]}
     </span>
   );
 }
 
-function ProjectCard({ project, index, onHover, loading }: {
+function ProjectCard({ project, index, onHover, loading, t }: {
   project: ProjectWithMetrics;
   index: number;
   isHovered: boolean;
   onHover: (id: number | null) => void;
   loading: boolean;
+  t: Diccionario;
 }) {
   return (
     <motion.div
@@ -571,7 +564,7 @@ function ProjectCard({ project, index, onHover, loading }: {
           {/* Top Badges with Glass Effect */}
           <div className="absolute top-4 left-4 flex items-center gap-2 z-30">
             <div className="bg-white/20 dark:bg-gray-900/20 backdrop-blur-md rounded-lg px-3 py-1.5 border border-white/30">
-              <StatusBadge status={project.status} />
+              <StatusBadge status={project.status} t={t} />
             </div>
             {!loading && project.metrics.language && (
               <div className="bg-black/40 backdrop-blur-md text-white px-3 py-1.5 rounded-lg text-xs font-semibold border border-white/20">
@@ -633,7 +626,7 @@ function ProjectCard({ project, index, onHover, loading }: {
             {project.private ? (
               <span className="flex items-center gap-1 text-xs font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700/50 px-2 py-1 rounded-full">
                 <Lock className="w-3 h-3" />
-                Privado
+                {t.projects.privadoBadge}
               </span>
             ) : (!loading && project.repoName && (
               <motion.div
@@ -654,7 +647,7 @@ function ProjectCard({ project, index, onHover, loading }: {
           
           {/* Description with Better Typography */}
           <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed line-clamp-2">
-            {project.description}
+            {t.proyectos[String(project.id)].description}
           </p>
           
           {/* Tech Stack with Enhanced Styling */}
@@ -686,7 +679,7 @@ function ProjectCard({ project, index, onHover, loading }: {
                   whileHover={{ x: 3 }}
                 >
                   <ExternalLink className="w-4 h-4" />
-                  Ver Demo
+                  {t.projects.verDemo}
                 </motion.a>
               )}
               {project.links.code && (
@@ -698,7 +691,7 @@ function ProjectCard({ project, index, onHover, loading }: {
                   whileHover={{ x: 3 }}
                 >
                   <Github className="w-4 h-4" />
-                  Código
+                  {t.projects.codigo}
                 </motion.a>
               )}
               {project.private && (
@@ -708,7 +701,7 @@ function ProjectCard({ project, index, onHover, loading }: {
                   whileHover={{ x: 3 }}
                 >
                   <Lock className="w-4 h-4" />
-                  Consultar
+                  {t.projects.consultar}
                 </motion.a>
               )}
             </div>
@@ -721,9 +714,7 @@ function ProjectCard({ project, index, onHover, loading }: {
                 'bg-blue-500'
               }`}></div>
               <span className="text-xs text-gray-500 dark:text-gray-400 capitalize">
-                {project.status === 'live' ? 'En vivo' : 
-                 project.status === 'development' ? 'En desarrollo' : 
-                 'Demo'}
+                {t.projects.estadoCorto[project.status as EstadoProyecto]}
               </span>
             </div>
           </div>

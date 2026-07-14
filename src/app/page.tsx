@@ -1,11 +1,16 @@
+'use client';
+
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
 import Projects from '@/components/sections/Projects';
 import Skills from '@/components/sections/Skills';
 import Contact from '@/components/sections/Contact';
+import { useIdioma } from '@/i18n/LanguageProvider';
 
 export default function HomePage() {
+  const { t } = useIdioma();
+
   return (
     <main className="min-h-screen bg-white dark:bg-gray-900">
       <Navbar />
@@ -25,8 +30,7 @@ export default function HomePage() {
                 Gianpierre Terrazas
               </h3>
               <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                Desarrollador Full Stack especializado en crear soluciones web modernas y escalables. 
-                Siempre buscando nuevos desafíos y oportunidades de crecimiento.
+                {t.footer.descripcion}
               </p>
               <div className="flex space-x-3">
                 <a 
@@ -62,24 +66,24 @@ export default function HomePage() {
 
             {/* Quick Links */}
             <div className="md:col-span-1">
-              <h4 className="text-lg font-semibold mb-4 text-white">Navegación</h4>
+              <h4 className="text-lg font-semibold mb-4 text-white">{t.footer.navegacionTitulo}</h4>
               <ul className="space-y-2">
-                <li><a href="#about" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">Sobre mí</a></li>
-                <li><a href="#projects" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">Proyectos</a></li>
-                <li><a href="#skills" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">Habilidades</a></li>
-                <li><a href="#contact" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">Contacto</a></li>
+                <li><a href="#about" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">{t.footer.navegacion.about}</a></li>
+                <li><a href="#projects" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">{t.footer.navegacion.proyectos}</a></li>
+                <li><a href="#skills" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">{t.footer.navegacion.habilidades}</a></li>
+                <li><a href="#contact" className="text-gray-300 hover:text-blue-400 transition-colors text-sm">{t.footer.navegacion.contacto}</a></li>
               </ul>
             </div>
 
             {/* Contact Info */}
             <div className="md:col-span-1">
-              <h4 className="text-lg font-semibold mb-4 text-white">Contacto</h4>
+              <h4 className="text-lg font-semibold mb-4 text-white">{t.footer.contactoTitulo}</h4>
               <div className="space-y-2">
                 <p className="text-gray-300 text-sm flex items-center">
                   <svg className="w-4 h-4 mr-2 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                   </svg>
-                  Perú
+                  {t.footer.ubicacion}
                 </p>
                 <p className="text-gray-300 text-sm flex items-center">
                   <svg className="w-4 h-4 mr-2 text-green-400" fill="currentColor" viewBox="0 0 24 24">
@@ -100,10 +104,10 @@ export default function HomePage() {
           {/* Bottom Section */}
           <div className="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              © {new Date().getFullYear()} Gianpierre Terrazas Tello. Todos los derechos reservados.
+              © {new Date().getFullYear()} Gianpierre Terrazas Tello. {t.footer.copyright}
             </p>
             <div className="flex items-center space-x-4">
-              <span className="text-gray-400 text-sm">Disponible para proyectos</span>
+              <span className="text-gray-400 text-sm">{t.footer.disponible}</span>
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
             </div>
           </div>

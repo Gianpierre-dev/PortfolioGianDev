@@ -8,6 +8,7 @@ import { personalInfo, socialLinks } from '@/data/personal';
 import { isValidEmail } from '@/lib/utils';
 import { sendContactMessage } from '@/lib/email';
 import { ContactForm } from '@/types';
+import { useIdioma } from '@/i18n/LanguageProvider';
 import { 
   Mail, 
   Phone, 
@@ -30,6 +31,7 @@ const iconMap = {
 };
 
 export default function Contact() {
+  const { t } = useIdioma();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [submitMessage, setSubmitMessage] = useState('');
@@ -47,7 +49,7 @@ export default function Contact() {
     e.preventDefault();
     try {
       await navigator.clipboard.writeText(personalInfo.email);
-      setCopyNotification('¡Email copiado al portapapeles! 📋');
+      setCopyNotification(t.contact.mensajes.copiado);
       setTimeout(() => setCopyNotification(''), 3000);
     } catch (error) {
       // Fallback: intentar abrir cliente de correo
@@ -81,17 +83,17 @@ export default function Contact() {
       
       if (result.success) {
         setSubmitStatus('success');
-        setSubmitMessage('¡Mensaje enviado por email y WhatsApp! 📧📱 Te responderé pronto.');
+        setSubmitMessage(t.contact.mensajes.exito);
       } else {
         // Si falla el email, pero WhatsApp se abrió
         setSubmitStatus('success');
-        setSubmitMessage('Mensaje enviado por WhatsApp 📱 (Email en configuración). ¡Te responderé pronto!');
+        setSubmitMessage(t.contact.mensajes.exitoSoloWhatsapp);
       }
-      
+
       reset();
     } catch (error) {
       setSubmitStatus('error');
-      setSubmitMessage('Error al enviar. Pero se abrió WhatsApp 📱 - También puedes contactarme por email directamente.');
+      setSubmitMessage(t.contact.mensajes.error);
     } finally {
       setIsSubmitting(false);
     }
@@ -122,33 +124,33 @@ export default function Contact() {
   const contactInfo = [
     {
       icon: Mail,
-      label: 'Email',
+      label: t.contact.labels.email,
       value: personalInfo.email,
       href: `mailto:${personalInfo.email}`,
-      description: 'Clic para copiar email',
+      description: t.contact.descripciones.email,
       onClick: handleEmailClick
     },
     {
       icon: Phone,
-      label: 'Teléfono',
+      label: t.contact.labels.telefono,
       value: personalInfo.phone,
       href: `tel:${personalInfo.phone}`,
-      description: 'Clic para WhatsApp/Llamar',
+      description: t.contact.descripciones.telefono,
       onClick: handlePhoneClick
     },
     {
       icon: MapPin,
-      label: 'Ubicación',
-      value: personalInfo.location,
+      label: t.contact.labels.ubicacion,
+      value: t.contact.valores.ubicacion,
       href: '#',
-      description: 'Disponible para trabajo remoto'
+      description: t.contact.descripciones.ubicacion
     },
     {
       icon: Clock,
-      label: 'Horario',
-      value: '9:00 AM - 6:00 PM',
+      label: t.contact.labels.horario,
+      value: t.contact.valores.horario,
       href: '#',
-      description: 'Hora de Perú (UTC-5)'
+      description: t.contact.descripciones.horario
     }
   ];
 
@@ -163,10 +165,10 @@ export default function Contact() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Contacto
+            {t.contact.titulo}
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            ¿Tienes un proyecto en mente? Me encantaría escuchar sobre él.
+            {t.contact.subtitulo}
           </p>
         </motion.div>
 
@@ -181,10 +183,10 @@ export default function Contact() {
           >
             <motion.div variants={itemVariants} className="mb-8">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                Información de Contacto
+                {t.contact.infoTitulo}
               </h3>
               <p className="text-gray-600 dark:text-gray-300 mb-6">
-                Siempre estoy interesado en nuevos proyectos. No dudes en contactarme.
+                {t.contact.infoTexto}
               </p>
             </motion.div>
 
@@ -221,8 +223,8 @@ export default function Contact() {
                         {item.label}
                         {item.href !== '#' && (
                           <span className="ml-2 text-xs bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 px-2 py-1 rounded-full flex items-center">
-                            {item.label === 'Email' ? <Copy className="w-3 h-3 mr-1" /> : <Phone className="w-3 h-3 mr-1" />}
-                            {item.label === 'Email' ? 'Copiar' : 'WhatsApp'}
+                            {item.label === t.contact.labels.email ? <Copy className="w-3 h-3 mr-1" /> : <Phone className="w-3 h-3 mr-1" />}
+                            {item.label === t.contact.labels.email ? t.contact.badgeCopiar : t.contact.badgeWhatsapp}
                           </span>
                         )}
                       </h4>
@@ -254,7 +256,7 @@ export default function Contact() {
             {/* Social Links */}
             <motion.div variants={itemVariants} className="pt-6">
               <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Sígueme en mis redes
+                {t.contact.redesTitulo}
               </h4>
               <div className="flex space-x-4">
                 {socialLinks.map((social) => {
@@ -287,7 +289,7 @@ export default function Contact() {
           >
             <motion.div variants={itemVariants}>
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                Envíame un Mensaje
+                {t.contact.formTitulo}
               </h3>
             </motion.div>
 
@@ -296,17 +298,17 @@ export default function Contact() {
               <motion.div variants={itemVariants}>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   <User className="w-4 h-4 inline mr-2" />
-                  Nombre *
+                  {t.contact.form.nombre} *
                 </label>
                 <input
                   type="text"
                   id="name"
-                  {...register('name', { 
-                    required: 'El nombre es requerido',
-                    minLength: { value: 2, message: 'El nombre debe tener al menos 2 caracteres' }
+                  {...register('name', {
+                    required: t.contact.validaciones.nombreRequerido,
+                    minLength: { value: 2, message: t.contact.validaciones.nombreMin }
                   })}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
-                  placeholder="Tu nombre completo"
+                  placeholder={t.contact.form.nombrePlaceholder}
                 />
                 {errors.name && (
                   <p className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center">
@@ -320,17 +322,17 @@ export default function Contact() {
               <motion.div variants={itemVariants}>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   <Mail className="w-4 h-4 inline mr-2" />
-                  Email *
+                  {t.contact.form.email} *
                 </label>
                 <input
                   type="email"
                   id="email"
-                  {...register('email', { 
-                    required: 'El email es requerido',
-                    validate: (value) => isValidEmail(value) || 'Email inválido'
+                  {...register('email', {
+                    required: t.contact.validaciones.emailRequerido,
+                    validate: (value) => isValidEmail(value) || t.contact.validaciones.emailInvalido
                   })}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
-                  placeholder="tu@email.com"
+                  placeholder={t.contact.form.emailPlaceholder}
                 />
                 {errors.email && (
                   <p className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center">
@@ -344,17 +346,17 @@ export default function Contact() {
               <motion.div variants={itemVariants}>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   <MessageSquare className="w-4 h-4 inline mr-2" />
-                  Asunto *
+                  {t.contact.form.asunto} *
                 </label>
                 <input
                   type="text"
                   id="subject"
-                  {...register('subject', { 
-                    required: 'El asunto es requerido',
-                    minLength: { value: 5, message: 'El asunto debe tener al menos 5 caracteres' }
+                  {...register('subject', {
+                    required: t.contact.validaciones.asuntoRequerido,
+                    minLength: { value: 5, message: t.contact.validaciones.asuntoMin }
                   })}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
-                  placeholder="Proyecto web / Colaboración / Consulta"
+                  placeholder={t.contact.form.asuntoPlaceholder}
                 />
                 {errors.subject && (
                   <p className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center">
@@ -368,17 +370,17 @@ export default function Contact() {
               <motion.div variants={itemVariants}>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   <MessageSquare className="w-4 h-4 inline mr-2" />
-                  Mensaje *
+                  {t.contact.form.mensaje} *
                 </label>
                 <textarea
                   id="message"
                   rows={5}
-                  {...register('message', { 
-                    required: 'El mensaje es requerido',
-                    minLength: { value: 10, message: 'El mensaje debe tener al menos 10 caracteres' }
+                  {...register('message', {
+                    required: t.contact.validaciones.mensajeRequerido,
+                    minLength: { value: 10, message: t.contact.validaciones.mensajeMin }
                   })}
                   className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 resize-none transition-colors"
-                  placeholder="Cuéntame sobre tu proyecto o consulta..."
+                  placeholder={t.contact.form.mensajePlaceholder}
                 />
                 {errors.message && (
                   <p className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center">
@@ -399,12 +401,12 @@ export default function Contact() {
                   {isSubmitting ? (
                     <>
                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                      Enviando...
+                      {t.contact.form.enviando}
                     </>
                   ) : (
                     <>
                       <Send className="w-5 h-5 mr-2" />
-                      Enviar Mensaje
+                      {t.contact.form.enviar}
                     </>
                   )}
                 </Button>
