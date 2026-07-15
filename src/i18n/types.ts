@@ -179,6 +179,7 @@ export interface DiccionarioFooter {
 export interface ExperienciaTraducida {
   position: string;
   description: string;
+  period: string;
 }
 
 export interface ProyectoTraducido {

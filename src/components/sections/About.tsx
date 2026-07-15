@@ -62,20 +62,16 @@ export default function About() {
           </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Bio Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
+          {/* Bio Section (sticky en desktop) */}
           <motion.div
             variants={itemVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="space-y-6"
+            className="space-y-6 lg:col-span-2 lg:sticky lg:top-24 lg:self-start"
           >
             <div className="prose prose-lg dark:prose-invert">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                {t.about.bioTitulo}
-              </h3>
-
               {t.about.bioParrafos.map((parrafo, index) => (
                 <p key={index} className="text-gray-600 dark:text-gray-300 leading-relaxed">
                   {parrafo}
@@ -154,7 +150,7 @@ export default function About() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-8 lg:col-span-3"
           >
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
               {t.about.experienciaTitulo}
@@ -180,31 +176,32 @@ export default function About() {
                   <div className="absolute left-2 top-2 w-4 h-4 bg-blue-600 dark:bg-blue-400 rounded-full border-4 border-white dark:border-gray-900"></div>
                   
                   {/* Content */}
-                  <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Building className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                      <h4 className="text-xl font-semibold text-gray-900 dark:text-white">
-                        {exp.company}
-                      </h4>
+                  <div className="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 mb-1">
+                      <div className="flex items-center gap-2">
+                        <Building className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                          {exp.company}
+                        </h4>
+                      </div>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">
+                        {expT?.period ?? exp.period}
+                      </span>
                     </div>
-                    
-                    <div className="text-blue-600 dark:text-blue-400 font-medium mb-1">
+
+                    <div className="text-sm text-blue-600 dark:text-blue-400 font-medium mb-3">
                       {expT?.position ?? exp.position}
                     </div>
 
-                    <div className="text-sm text-gray-500 dark:text-gray-400 mb-3">
-                      {exp.period}
-                    </div>
-
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
                       {expT?.description ?? exp.description}
                     </p>
-                    
-                    <div className="flex flex-wrap gap-2">
+
+                    <div className="flex flex-wrap gap-1.5">
                       {exp.technologies.map((tech, techIndex) => (
                         <span
                           key={techIndex}
-                          className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full text-sm"
+                          className="px-2.5 py-0.5 bg-gray-100 dark:bg-gray-700/60 text-gray-700 dark:text-gray-300 rounded-full text-xs"
                         >
                           {tech}
                         </span>

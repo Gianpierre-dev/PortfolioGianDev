@@ -181,31 +181,37 @@ export const es: Diccionario = {
   },
   experiencias: {
     'STI GOLD': {
+      period: 'Enero 2026 - Presente',
       position: 'Tech Lead & Full Stack Developer',
       description:
         'Desarrollo completo de sistemas internos: arquitectura, backend, frontend y deploy. Automatización de consultas SUNAT con Playwright y APIs REST con Spring Boot y NestJS, con almacenamiento de archivos en Wasabi S3.',
     },
     JJMM: {
+      period: 'Enero 2026 - Presente',
       position: 'Programador',
       description:
         'Desarrollo de software a medida para necesidades operativas de la empresa y automatización de procesos contables con Python.',
     },
     SipnasisCode: {
+      period: 'Julio 2025 - Diciembre 2025',
       position: 'Full Stack Developer',
       description:
         'Desarrollo de múltiples sistemas empresariales para clientes de la agencia, participando en proyectos Full Stack bajo acuerdo de confidencialidad.',
     },
     'GALDIAZ S.A.C.': {
+      period: '2024 - Julio 2025',
       position: 'Programador Informático',
       description:
         'Sistema de control de inventario y gestión de stock, automatización de tareas administrativas con Python y macros VBA, y optimización de base de datos SQL Server.',
     },
     'Mr. Sif': {
+      period: '2024',
       position: 'Front-End Developer & SEO',
       description:
         'Desarrollo de interfaces web con AlpineJS y Tailwind CSS, y gestión de posicionamiento SEO y marketing digital.',
     },
     'Ingecem Perú': {
+      period: '2018 - 2022',
       position: 'Desarrollador Web (Prácticas Pre-Profesionales)',
       description:
         'Desarrollo de sistema de control de inventario en C#, diseño e implementación de interfaces de usuario y apoyo en el levantamiento de requerimientos.',
