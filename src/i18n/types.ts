@@ -52,7 +52,6 @@ export interface DiccionarioProjects {
   titulo: string;
   sincronizando: string;
   subtitulo: string;
-  metricasNota: string;
   categorias: {
     all: string;
     fullstack: string;
@@ -64,21 +63,11 @@ export interface DiccionarioProjects {
     development: string;
     demo: string;
   };
-  estadoCorto: {
-    live: string;
-    development: string;
-    demo: string;
-  };
   destacado: string;
-  privado: string;
   privadoBadge: string;
-  privadoConsultar: string;
   consultar: string;
-  verDemoLive: string;
-  verCodigo: string;
   verDemo: string;
   codigo: string;
-  stackTecnologico: string;
   githubNotice: string;
 }
 

@@ -56,7 +56,6 @@ export const es: Diccionario = {
     sincronizando: 'Sincronizando con GitHub...',
     subtitulo:
       'Sistemas de gestión empresarial y productos propios. Los proyectos privados se desarrollaron para empresas y no exponen código.',
-    metricasNota: 'Métricas de proyectos públicos sincronizadas desde GitHub',
     categorias: {
       all: 'Todos',
       fullstack: 'Sistemas',
@@ -68,21 +67,11 @@ export const es: Diccionario = {
       development: 'En Desarrollo',
       demo: 'Demo',
     },
-    estadoCorto: {
-      live: 'En vivo',
-      development: 'En desarrollo',
-      demo: 'Demo',
-    },
-    destacado: 'Proyecto Destacado',
-    privado: 'Proyecto privado',
+    destacado: 'Destacado',
     privadoBadge: 'Privado',
-    privadoConsultar: 'Proyecto privado — Consultar',
     consultar: 'Consultar',
-    verDemoLive: 'Ver Demo Live',
-    verCodigo: 'Ver Código',
     verDemo: 'Ver Demo',
     codigo: 'Código',
-    stackTecnologico: 'Stack Tecnológico',
     githubNotice: 'Las métricas se actualizan automáticamente desde GitHub',
   },
   skills: {
