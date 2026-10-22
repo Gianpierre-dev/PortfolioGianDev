@@ -4,7 +4,7 @@ import { useState, useRef, MouseEvent } from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
 
 interface RippleButtonProps extends HTMLMotionProps<'button'> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'outline' | 'outlineOnDark' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   rippleColor?: string;
   children: React.ReactNode;
@@ -54,8 +54,15 @@ export default function RippleButton({
       dark:hover:border-blue-300 dark:hover:text-blue-300
       shadow-blue-500/10 hover:shadow-blue-500/20
     `,
+    // Para fondos siempre oscuros (hero): no depende del tema activo.
+    outlineOnDark: `
+      border-2 border-blue-400 text-blue-300 bg-transparent
+      hover:bg-blue-500/10 hover:border-blue-300 hover:text-blue-200
+      active:bg-blue-500/20
+      shadow-blue-500/10 hover:shadow-blue-500/20
+    `,
     ghost: `
-      bg-transparent text-gray-700 hover:bg-gray-100 
+      bg-transparent text-gray-700 hover:bg-gray-100
       active:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800
       dark:active:bg-gray-700 shadow-none hover:shadow-lg
     `,
@@ -103,6 +110,7 @@ export default function RippleButton({
       case 'secondary':
         return 'rgba(255, 255, 255, 0.5)';
       case 'outline':
+      case 'outlineOnDark':
         return 'rgba(59, 130, 246, 0.2)';
       case 'ghost':
         return 'rgba(0, 0, 0, 0.1)';

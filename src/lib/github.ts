@@ -1,3 +1,5 @@
+import type { MetricasRepo } from '@/data/proyectos';
+
 const GITHUB_API_URL = 'https://api.github.com';
 const USERNAME = 'Gianpierre-dev';
 
@@ -99,6 +101,30 @@ export async function getGitHubRepos(): Promise<GitHubRepoSummary[]> {
     console.error('Error fetching GitHub repositories:', error);
     return [];
   }
+}
+
+// Métricas (stars, forks, último update) de los repos indicados, keyed por nombre.
+// Se ejecuta en el servidor: una sola llamada a la API (cacheada 1 h por
+// getGitHubRepos) en lugar de una llamada por repo desde cada navegador.
+export async function getRepoMetrics(repoNames: string[]): Promise<Record<string, MetricasRepo>> {
+  const buscados = new Set(repoNames.filter(Boolean));
+  if (buscados.size === 0) return {};
+
+  const repos = await getGitHubRepos();
+
+  return repos.reduce<Record<string, MetricasRepo>>(
+    (acc, repo) => {
+      if (buscados.has(repo.name)) {
+        acc[repo.name] = {
+          stars: repo.stargazers_count,
+          forks: repo.forks_count,
+          lastUpdate: repo.updated_at,
+        };
+      }
+      return acc;
+    },
+    {}
+  );
 }
 
 export async function getGitHubStats() {

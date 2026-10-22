@@ -1,13 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { personalInfo, experiences } from '@/data/personal';
+import { experiences } from '@/data/personal';
 import { downloadCV } from '@/lib/utils';
-import { Calendar, MapPin, Building, Code, Coffee, Download } from 'lucide-react';
+import { Calendar, MapPin, Building, Code, Download } from 'lucide-react';
 import { useIdioma } from '@/i18n/LanguageProvider';
 
 export default function About() {
-  const { t } = useIdioma();
+  const { t, idioma } = useIdioma();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -34,7 +34,6 @@ export default function About() {
   const stats = [
     { label: t.about.stats.experiencia, value: '3+', icon: Calendar },
     { label: t.about.stats.proyectos, value: '25+', icon: Code },
-    { label: t.about.stats.tecnologias, value: '10+', icon: Coffee },
     { label: t.about.stats.ubicacion, value: t.about.ubicacionValor, icon: MapPin },
   ];
 
@@ -80,7 +79,7 @@ export default function About() {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-2 gap-4 mt-8">
+            <div className="grid grid-cols-3 gap-3 mt-8">
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
@@ -91,7 +90,7 @@ export default function About() {
                   transition={{ delay: index * 0.1 }}
                   className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg text-center"
                 >
-                  <stat.icon className="w-8 h-8 mx-auto mb-2 text-blue-600 dark:text-blue-400" />
+                  <stat.icon className="w-8 h-8 mx-auto mb-2 text-blue-600 dark:text-blue-400" aria-hidden="true" />
                   <div className="text-2xl font-bold text-gray-900 dark:text-white">
                     {stat.value}
                   </div>
@@ -111,7 +110,7 @@ export default function About() {
               className="text-center mt-8"
             >
               <button
-                onClick={() => downloadCV()}
+                onClick={() => downloadCV(idioma)}
                 className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-lg"
               >
                 <Download className="w-5 h-5" />

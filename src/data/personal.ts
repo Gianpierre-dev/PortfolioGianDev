@@ -10,7 +10,7 @@ export const personalInfo = {
   phone: "+51 961 170 946",
   avatarUrl: "/images/profile.webp",
   githubUsername: "Gianpierre-dev",
-  resumeUrl: "/documents/CV_Anthony_Gianpierre_Terrazas_Tello.pdf",
+  resumeUrl: "/documents/CV_Gianpierre_Terrazas_ES.pdf",
 };
 
 export const socialLinks: SocialLink[] = [
@@ -33,30 +33,30 @@ export const socialLinks: SocialLink[] = [
 
 export const skills: Skill[] = [
   // Frontend
-  { name: "TypeScript", level: 92, category: "frontend", icon: "typescript" },
-  { name: "Next.js", level: 90, category: "frontend", icon: "react" },
-  { name: "React", level: 90, category: "frontend", icon: "react" },
-  { name: "Astro", level: 85, category: "frontend", icon: "astro" },
-  { name: "Tailwind CSS", level: 92, category: "frontend", icon: "tailwind" },
+  { name: "TypeScript", category: "frontend" },
+  { name: "Next.js", category: "frontend" },
+  { name: "React", category: "frontend" },
+  { name: "Astro", category: "frontend" },
+  { name: "Tailwind CSS", category: "frontend" },
 
   // Backend
-  { name: "NestJS", level: 90, category: "backend", icon: "nodejs" },
-  { name: "Node.js", level: 88, category: "backend", icon: "nodejs" },
-  { name: "Prisma ORM", level: 88, category: "backend", icon: "nodejs" },
-  { name: "Python", level: 80, category: "backend", icon: "python" },
-  { name: "Java / Spring Boot", level: 72, category: "backend", icon: "java" },
-  { name: "PHP", level: 75, category: "backend", icon: "php" },
+  { name: "NestJS", category: "backend" },
+  { name: "Node.js", category: "backend" },
+  { name: "Prisma ORM", category: "backend" },
+  { name: "Python", category: "backend" },
+  { name: "Java / Spring Boot", category: "backend" },
+  { name: "PHP", category: "backend" },
 
   // Database
-  { name: "PostgreSQL", level: 88, category: "database", icon: "mysql" },
-  { name: "MySQL", level: 85, category: "database", icon: "mysql" },
-  { name: "MongoDB", level: 72, category: "database", icon: "mongodb" },
+  { name: "PostgreSQL", category: "database" },
+  { name: "MySQL", category: "database" },
+  { name: "MongoDB", category: "database" },
 
   // Tools
-  { name: "Playwright", level: 85, category: "tools", icon: "git" },
-  { name: "Railway", level: 85, category: "tools", icon: "github" },
-  { name: "Git", level: 90, category: "tools", icon: "git" },
-  { name: "AWS S3 / Wasabi", level: 80, category: "tools", icon: "github" },
+  { name: "Playwright", category: "tools" },
+  { name: "Railway", category: "tools" },
+  { name: "Git", category: "tools" },
+  { name: "AWS S3 / Wasabi", category: "tools" },
 ];
 
 export const experiences: Experience[] = [
@@ -97,7 +97,7 @@ export const experiences: Experience[] = [
   },
   {
     company: "Ingecem Perú",
-    position: "Desarrollador Web (Prácticas Pre-Profesionales)",
+    position: "Desarrollador Web",
     period: "2018 - 2022",
     description: "Desarrollo de sistema de control de inventario en C#, diseño e implementación de interfaces de usuario y apoyo en el levantamiento de requerimientos.",
     technologies: ["C#", "HTML", "CSS", "JavaScript"]

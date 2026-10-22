@@ -1,13 +1,15 @@
 'use client';
 
+import { useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import RippleButton from '@/components/ui/RippleButton';
-import LineReveal from '@/components/ui/LineReveal';
 
 import { personalInfo, socialLinks } from '@/data/personal';
 import { scrollToSection, downloadCV } from '@/lib/utils';
 import { ChevronDown, Download, Github, Linkedin, Mail } from 'lucide-react';
 import { useIdioma } from '@/i18n/LanguageProvider';
+import { etiquetaSocial } from '@/lib/a11y';
 
 const iconMap = {
   github: Github,
@@ -16,14 +18,18 @@ const iconMap = {
 };
 
 export default function Hero() {
-  const { t } = useIdioma();
+  const { t, idioma } = useIdioma();
+  const [fotoFallida, setFotoFallida] = useState(false);
 
+  // Solo los elementos secundarios tienen entrada animada. La foto, el nombre
+  // (h1) y el statement se pintan desde el primer frame: si arrancaran en
+  // opacity 0, el LCP esperaría a que termine la animación.
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: {},
     visible: {
-      opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
       },
     },
   };
@@ -43,7 +49,7 @@ export default function Hero() {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center bg-gray-950 overflow-hidden">
       {/* Subtle Grid Pattern */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0" aria-hidden="true">
         <div
           className="absolute inset-0 opacity-20"
           style={{
@@ -63,56 +69,43 @@ export default function Hero() {
           animate="visible"
           className="text-center"
         >
-          {/* Avatar - AGRANDADA */}
-          <motion.div
-            variants={itemVariants}
-            className="mb-8"
-          >
+          {/* Avatar: única imagen con prioridad de carga en toda la página */}
+          <div className="mb-8">
             <div className="w-48 h-48 mx-auto mb-6 relative group">
               <div className="w-full h-full rounded-full ring-2 ring-blue-500/40 p-1.5 shadow-xl">
-                <div className="w-full h-full rounded-full overflow-hidden bg-white dark:bg-gray-800 flex items-center justify-center transition-all duration-500">
-                  <img 
-                    src="/images/profile.webp"
-                    alt={`Foto profesional de ${personalInfo.name}`}
-                    className="w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-105"
-                    onError={(e) => {
-                      // Fallback a iniciales si la imagen no carga
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      target.nextElementSibling?.classList.remove('hidden');
-                    }}
-                  />
-                  {/* Fallback con iniciales */}
-                  <div className="hidden w-full h-full flex items-center justify-center">
-                    <span className="text-6xl font-bold text-gray-700 dark:text-gray-300">
+                <div className="relative w-full h-full rounded-full overflow-hidden bg-gray-800 flex items-center justify-center">
+                  {fotoFallida ? (
+                    <span className="text-6xl font-bold text-gray-300" aria-hidden="true">
                       GT
                     </span>
-                  </div>
+                  ) : (
+                    <Image
+                      src={personalInfo.avatarUrl}
+                      alt={`Foto profesional de ${personalInfo.name}`}
+                      fill
+                      priority
+                      sizes="192px"
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      onError={() => setFotoFallida(true)}
+                    />
+                  )}
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Name and Title */}
-          <motion.div variants={itemVariants} className="mb-8">
-            <LineReveal
-              as="h1"
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
-              lines={[personalInfo.name]}
-              delay={0.2}
-            />
-            <LineReveal
-              as="p"
-              className="text-xl sm:text-2xl lg:text-3xl text-gray-100 max-w-3xl mx-auto font-medium leading-snug"
-              lines={[
-                t.hero.statementLinea1,
-                <span key="acento">
-                  <span className="text-blue-400">{t.hero.statementLinea2Pre}</span>{t.hero.statementLinea2Post}
-                </span>,
-              ]}
-              delay={0.5}
-            />
-          </motion.div>
+          {/* Name and Title: sin animación de entrada (elemento LCP) */}
+          <div className="mb-8">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+              {personalInfo.name}
+            </h1>
+            <p className="text-xl sm:text-2xl lg:text-3xl text-gray-100 max-w-3xl mx-auto font-medium leading-snug">
+              <span className="block">{t.hero.statementLinea1}</span>
+              <span className="block">
+                <span className="text-blue-400">{t.hero.statementLinea2Pre}</span>{t.hero.statementLinea2Post}
+              </span>
+            </p>
+          </div>
 
           {/* Proof line */}
           <motion.div variants={itemVariants} className="mb-10">
@@ -125,18 +118,20 @@ export default function Hero() {
           <motion.div variants={itemVariants} className="mb-10">
             <div className="flex justify-center space-x-6">
               {socialLinks.map((social) => {
-                const Icon = iconMap[social.icon as keyof typeof iconMap];
+                const Icon = iconMap[social.icon];
+                const esExterno = social.icon !== 'mail';
                 return (
                   <motion.a
                     key={social.name}
                     href={social.url}
-                    target={social.name !== 'Email' ? '_blank' : undefined}
-                    rel={social.name !== 'Email' ? 'noopener noreferrer' : undefined}
+                    target={esExterno ? '_blank' : undefined}
+                    rel={esExterno ? 'noopener noreferrer' : undefined}
+                    aria-label={etiquetaSocial(social, t)}
                     className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center text-gray-300 hover:text-white hover:bg-white/20 transition-all duration-300"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Icon className="w-5 h-5" />
+                    <Icon className="w-5 h-5" aria-hidden="true" />
                   </motion.a>
                 );
               })}
@@ -153,24 +148,24 @@ export default function Hero() {
                 className="min-w-[200px]"
               >
                 <span>{t.hero.ctaProyectos}</span>
-                <ChevronDown className="w-5 h-5 ml-2" />
+                <ChevronDown className="w-5 h-5 ml-2" aria-hidden="true" />
               </RippleButton>
               <RippleButton
-                variant="outline"
+                variant="outlineOnDark"
                 size="lg"
-                onClick={() => downloadCV()}
+                onClick={() => downloadCV(idioma)}
                 className="min-w-[200px]"
               >
-                <Download className="w-5 h-5 mr-2" />
+                <Download className="w-5 h-5 mr-2" aria-hidden="true" />
                 <span>{t.hero.ctaCV}</span>
               </RippleButton>
               <RippleButton
-                variant="outline"
+                variant="outlineOnDark"
                 size="lg"
                 onClick={() => scrollToSection('contact')}
                 className="min-w-[200px]"
               >
-                <Mail className="w-5 h-5 mr-2" />
+                <Mail className="w-5 h-5 mr-2" aria-hidden="true" />
                 <span>{t.hero.ctaContacto}</span>
               </RippleButton>
             </div>
@@ -181,18 +176,19 @@ export default function Hero() {
             variants={itemVariants}
             className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
           >
-            <motion.div
+            <motion.button
+              type="button"
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' as const }}
-              className="cursor-pointer flex flex-col items-center gap-2"
+              className="cursor-pointer flex flex-col items-center gap-2 text-gray-400 hover:text-white transition-colors duration-300"
               onClick={() => scrollToSection('about')}
             >
-              <span className="text-gray-400 text-sm font-medium">{t.hero.scroll}</span>
-              <ChevronDown className="w-8 h-8 text-gray-400 hover:text-white transition-colors duration-300" />
-            </motion.div>
+              <span className="text-sm font-medium">{t.hero.scroll}</span>
+              <ChevronDown className="w-8 h-8" aria-hidden="true" />
+            </motion.button>
           </motion.div>
         </motion.div>
       </div>
     </section>
   );
-} 
+}

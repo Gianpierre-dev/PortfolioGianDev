@@ -5,14 +5,27 @@ export const en: Diccionario = {
   nav: {
     inicio: 'Home',
     about: 'About',
+    servicios: 'Services',
     proyectos: 'Projects',
     habilidades: 'Skills',
     contacto: 'Contact',
     rolLogo: 'Full Stack Developer',
     irInicio: 'Go to home',
+    navegacionPrincipal: 'Main navigation',
+    cambiarTema: 'Toggle theme',
     cambiarTemaClaro: 'Switch to light mode',
     cambiarTemaOscuro: 'Switch to dark mode',
     cambiarIdioma: 'Switch language to Spanish',
+    abrirMenu: 'Open menu',
+    cerrarMenu: 'Close menu',
+  },
+  a11y: {
+    saltarContenido: 'Skip to main content',
+    github: 'GitHub profile',
+    linkedin: 'LinkedIn profile',
+    email: 'Send an email',
+    whatsapp: 'Message on WhatsApp',
+    nuevaPestana: 'opens in a new tab',
   },
   hero: {
     statementLinea1: 'I build the systems that run',
@@ -36,7 +49,6 @@ export const en: Diccionario = {
     stats: {
       experiencia: 'Years of Experience',
       proyectos: 'Completed Projects',
-      tecnologias: 'Technologies',
       ubicacion: 'Location',
     },
     ubicacionValor: 'Peru',
@@ -51,11 +63,59 @@ export const en: Diccionario = {
     cita: '“Every project is an opportunity to build something useful and well made.”',
     experienciaTitulo: 'Professional Experience',
   },
+  servicios: {
+    titulo: 'Services',
+    subtitulo: 'What I can build for your company, backed by systems already in use.',
+    items: [
+      {
+        titulo: 'Custom payroll and HR systems',
+        beneficio:
+          'Calculates payroll under each worker’s Peruvian labor regime, generates payslips and centralizes staff records, contracts and documents.',
+      },
+      {
+        titulo: 'SUNAT process automation',
+        beneficio:
+          'Bulk-downloads and classifies electronic receipts from SUNAT (Peru’s tax authority), with no hours of manual work on its portal.',
+      },
+      {
+        titulo: 'Management systems for accounting firms',
+        beneficio:
+          'Tax due-date schedules, alerts, the team’s daily work log and RUC/DNI lookups in one place.',
+      },
+      {
+        titulo: 'Corporate websites with SEO',
+        beneficio:
+          'A professional, fast, mobile-friendly website, optimized so your clients can find you on Google.',
+      },
+    ],
+    procesoTitulo: 'How I work',
+    procesoSubtitulo: 'A clear process, from the first conversation to the system in production.',
+    pasos: [
+      {
+        titulo: 'Discovery meeting',
+        descripcion: 'We talk about your current process, the problem you want to solve and your goals.',
+      },
+      {
+        titulo: 'Proposal and scope',
+        descripcion: 'You receive a proposal with the scope and delivery plan defined before work starts.',
+      },
+      {
+        titulo: 'Development with regular deliveries',
+        descripcion: 'We move forward in stages and you review the working system at every delivery, not just at the end.',
+      },
+      {
+        titulo: 'Deployment and support',
+        descripcion: 'I put the system into production and keep supporting you after delivery.',
+      },
+    ],
+    cta: 'Tell me about your project',
+  },
   projects: {
     titulo: 'My Projects',
-    sincronizando: 'Syncing with GitHub...',
     subtitulo:
       'Enterprise management systems and my own products. Private projects were built for companies and do not expose their code.',
+    notaContexto:
+      'Context: SUNAT is Peru’s tax authority, and “planilla” is payroll under Peruvian labor regimes.',
     categorias: {
       all: 'All',
       fullstack: 'Systems',
@@ -73,29 +133,18 @@ export const en: Diccionario = {
     verDemo: 'View Demo',
     codigo: 'Code',
     githubNotice: 'Metrics are updated automatically from GitHub',
+    estrellas: 'stars',
+    forks: 'forks',
   },
   skills: {
-    titulo: 'Skills & Expertise',
-    subtitulo: 'Technologies and tools I master professionally',
-    metricas: {
-      tecnologias: 'Technologies',
-      nivelPromedio: 'Average Level',
-      aniosExp: 'Years Exp.',
-    },
+    titulo: 'Tech stack',
+    subtitulo: 'Technologies I use to build and deploy systems',
     categorias: {
-      all: 'All',
       frontend: 'Frontend',
       backend: 'Backend',
-      database: 'Database',
+      database: 'Databases',
       tools: 'Tools',
     },
-    niveles: {
-      experto: 'Expert',
-      avanzado: 'Advanced',
-      intermedio: 'Intermediate',
-      basico: 'Basic',
-    },
-    promedio: 'average',
   },
   contact: {
     titulo: 'Contact',
@@ -113,8 +162,8 @@ export const en: Diccionario = {
       horario: '9:00 AM - 6:00 PM',
     },
     descripciones: {
-      email: 'Click to copy email',
-      telefono: 'Click for WhatsApp/Call',
+      email: 'Click to copy the email',
+      telefono: 'Click to message on WhatsApp',
       ubicacion: 'Available for remote work',
       horario: 'Peru time (UTC-5)',
     },
@@ -122,6 +171,7 @@ export const en: Diccionario = {
     badgeWhatsapp: 'WhatsApp',
     redesTitulo: 'Follow me on social media',
     formTitulo: 'Send me a Message',
+    formAviso: 'When you submit, WhatsApp will open with your message ready to send.',
     form: {
       nombre: 'Name',
       email: 'Email',
@@ -129,10 +179,10 @@ export const en: Diccionario = {
       mensaje: 'Message',
       nombrePlaceholder: 'Your full name',
       emailPlaceholder: 'you@email.com',
-      asuntoPlaceholder: 'Web project / Collaboration / Inquiry',
+      asuntoPlaceholder: 'Payroll system / Automation / Website',
       mensajePlaceholder: 'Tell me about your project or inquiry...',
-      enviar: 'Send Message',
-      enviando: 'Sending...',
+      enviar: 'Send via WhatsApp',
+      enviando: 'Opening WhatsApp...',
     },
     validaciones: {
       nombreRequerido: 'Name is required',
@@ -145,20 +195,18 @@ export const en: Diccionario = {
       mensajeMin: 'Message must be at least 10 characters',
     },
     mensajes: {
-      copiado: 'Email copied to clipboard! 📋',
-      exito: 'Message sent via email and WhatsApp! 📧📱 I will get back to you soon.',
-      exitoSoloWhatsapp:
-        'Message sent via WhatsApp 📱 (Email being configured). I will get back to you soon!',
-      error:
-        'Sending failed. But WhatsApp opened 📱 - You can also contact me directly by email.',
+      copiado: 'Email copied to clipboard.',
+      exito: 'WhatsApp opened with your message. Just send it from there. I will get back to you soon.',
+      error: 'WhatsApp could not be opened. You can write to me directly by email or phone.',
     },
   },
   footer: {
     descripcion:
-      'Full Stack Developer specialized in building modern, scalable web solutions. Always looking for new challenges and growth opportunities.',
+      'I build payroll, HR and SUNAT automation systems for Peruvian companies, with end-to-end TypeScript.',
     navegacionTitulo: 'Navigation',
     navegacion: {
       about: 'About',
+      servicios: 'Services',
       proyectos: 'Projects',
       habilidades: 'Skills',
       contacto: 'Contact',
@@ -201,59 +249,53 @@ export const en: Diccionario = {
     },
     'Ingecem Perú': {
       period: '2018 - 2022',
-      position: 'Web Developer (Pre-Professional Internship)',
+      position: 'Web Developer',
       description:
         'Development of an inventory control system in C#, design and implementation of user interfaces, and support in requirements gathering.',
     },
   },
   proyectos: {
     '1': {
+      title: 'Multi-Company Payroll System',
       description:
-        'Payroll calculation engine under Peruvian labor law with support for the country’s 6 private regimes.',
-      longDescription:
-        'Multi-company payroll system covering the full cycle: worker onboarding, payroll calculation under Peru’s 6 private labor regimes (General, Small business, Micro business, Agrarian, Civil construction, Domestic workers) and payslip generation. Backend with hexagonal architecture, over 370 automated tests and a blocking CI.',
+        'Calculates payroll for Peru’s 6 private-sector labor regimes and generates payslips, for several companies at once. Built for teams that manage the payroll of more than one company.',
+      technicalNote: 'Hexagonal architecture, 370+ automated tests and a blocking CI.',
     },
     '2': {
+      title: 'SIGEMYPE',
       description:
-        'Integral management system for an accounting firm: SUNAT tax schedules, alerts, daily log and RUC/DNI lookups.',
-      longDescription:
-        'Internal platform for an accounting firm that manages tax and labor obligation schedules (SUNAT), due-date alerts, the team’s daily work log, task planning and automated DNI, RUC and exchange-rate lookups. Turborepo monorepo, Excel import, over 120 tests, security hardening (rate limiting, JWT revocation) and Prometheus metrics.',
+        'Organizes an accounting firm’s work: SUNAT tax due-date schedules, alerts before every deadline, the team’s daily work log and automated RUC, DNI and exchange-rate lookups.',
+      technicalNote: 'Turborepo monorepo, Excel import, 120+ tests and security hardening.',
     },
     '3': {
+      title: 'Multi-Company HR System',
       description:
-        'Management of employees, contracts and documents with multi-company support and PDF badge generation.',
-      longDescription:
-        'HR system in production for multi-company management: employee records, contracts, documents and photos, with automatic generation of photochecks and PDF badges. JWT authentication, Zod validation and deployment on Railway.',
+        'Centralizes staff records, contracts and documents for several companies, and generates print-ready ID badges and cards as PDFs.',
+      technicalNote: 'JWT authentication, Zod validation and deployment on Railway.',
     },
     '4': {
+      title: 'SUNAT Automation',
       description:
-        'Desktop app that bulk-downloads and classifies electronic receipts from the SUNAT portal.',
-      longDescription:
-        'Desktop application that automates the download, organization and classification of electronic receipts (invoices, sales receipts, dispatch guides) from the SUNAT portal, parsing XML under the UBL 2.1 standard. Scraping with Playwright, a PySide6 interface and distribution as an executable.',
+        'Bulk-downloads electronic receipts (invoices, sales receipts and dispatch guides) from the SUNAT portal and classifies them automatically, with no manual work.',
+      technicalNote: 'Playwright scraping, UBL 2.1 XML parsing and a PySide6 desktop interface.',
     },
     '5': {
+      title: 'TeachGenius',
       description:
-        'Gamified educational platform: teachers create word searches of literary devices and students compete against the clock.',
-      longDescription:
-        'Gamified educational app where teachers create word-search activities about literary devices and students solve them from any device with a competitive timer. NestJS backend with Prisma and an Astro + React frontend.',
+        'Educational platform: teachers create word searches about literary devices and students solve them from any device, against the clock.',
+      technicalNote: 'NestJS backend with Prisma and an Astro + React frontend.',
     },
     '6': {
+      title: 'Tonin',
       description:
-        'Immersive web app of motivational quotes based on your mood, with ambient music and a swipe experience.',
-      longDescription:
-        'Own B2C product: motivational quotes tailored to the user’s mood with a swipe experience, ambient music per mood, dynamic themes and an admin panel. React frontend with Zustand and Framer Motion; API in Java 21 + Spring Boot with JWT and Wasabi S3 storage.',
-    },
-    '7': {
-      description:
-        'This portfolio: Next.js 15, TypeScript and Tailwind CSS, with projects synced from GitHub.',
-      longDescription:
-        'Personal portfolio with dark/light theme, Framer Motion animations, SEO optimization and repository metrics updated automatically from the GitHub API.',
+        'My own product: motivational quotes based on your mood, with ambient music, a swipe experience and an admin panel.',
+      technicalNote: 'React frontend with Zustand; Java 21 + Spring Boot API with JWT and Wasabi S3 storage.',
     },
     '8': {
+      title: 'Ingecem Website',
       description:
-        'Corporate site for an engineering company with SEO optimization and contact forms.',
-      longDescription:
-        'Corporate website for Ingecem Perú with responsive design, SEO optimization, contact forms and informational sections about engineering services.',
+        'Corporate website for an engineering company: presents its services, receives client inquiries and is optimized for search engines.',
+      technicalNote: 'Responsive design with TypeScript, Vite and Tailwind CSS.',
     },
   },
 };

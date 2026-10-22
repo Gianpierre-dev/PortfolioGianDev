@@ -5,6 +5,7 @@ import { motion, useInView } from 'framer-motion';
 import { useIdioma } from '@/i18n/LanguageProvider';
 import { EASE_SITE } from '@/lib/motion';
 import type { Diccionario, Idioma } from '@/i18n/types';
+import { proyectos, type EstadoProyecto, type MetricasRepo, type ProyectoBase } from '@/data/proyectos';
 import {
   ExternalLink,
   Github,
@@ -15,127 +16,8 @@ import {
   Database,
   Zap,
   GitBranch,
-  Clock,
   Bot
 } from 'lucide-react';
-
-// Proyectos curados manualmente. Los sistemas privados (para empresas) no
-// exponen repositorio ni demo: se documentan como case studies.
-// Los textos (description/longDescription) viven en el diccionario i18n,
-// keyed por id. Aquí solo permanecen los datos técnicos no traducibles.
-const staticProjects = [
-  {
-    id: 1,
-    title: "Sistema de Planillas MultiEmpresa",
-    category: "fullstack",
-    featured: true,
-    status: "development",
-    tech: ["NestJS", "Prisma", "PostgreSQL", "Next.js", "Tailwind CSS", "Railway", "Wasabi S3"],
-    repoName: "",
-    private: true,
-    links: { demo: "", code: "" },
-    year: "2026"
-  },
-  {
-    id: 2,
-    title: "SIGEMYPE",
-    category: "fullstack",
-    featured: false,
-    status: "live",
-    tech: ["NestJS", "Prisma", "PostgreSQL", "Next.js", "Turborepo", "Redis"],
-    repoName: "",
-    private: true,
-    links: { demo: "", code: "" },
-    year: "2026"
-  },
-  {
-    id: 3,
-    title: "Sistema de RRHH MultiEmpresa",
-    category: "fullstack",
-    featured: false,
-    status: "live",
-    tech: ["NestJS", "Prisma", "PostgreSQL", "Next.js", "Tailwind CSS", "Railway"],
-    repoName: "",
-    private: true,
-    links: { demo: "", code: "" },
-    year: "2026"
-  },
-  {
-    id: 4,
-    title: "Automatización SUNAT",
-    category: "automation",
-    featured: false,
-    status: "development",
-    tech: ["Python", "Playwright", "PySide6", "SQLAlchemy", "SQLite"],
-    repoName: "Sistema-de-automatizaciones-Sunat-",
-    private: false,
-    links: {
-      demo: "",
-      code: "https://github.com/Gianpierre-dev/Sistema-de-automatizaciones-Sunat-"
-    },
-    year: "2026"
-  },
-  {
-    id: 5,
-    title: "TeachGenius",
-    category: "fullstack",
-    featured: false,
-    status: "development",
-    tech: ["NestJS", "Prisma", "PostgreSQL", "Astro", "React", "Tailwind CSS"],
-    repoName: "TeachGenius_Frontend",
-    private: false,
-    links: {
-      demo: "",
-      code: "https://github.com/Gianpierre-dev/TeachGenius_Frontend"
-    },
-    year: "2026"
-  },
-  {
-    id: 6,
-    title: "Tonin",
-    category: "fullstack",
-    featured: false,
-    status: "development",
-    tech: ["React", "TypeScript", "Zustand", "Spring Boot", "Wasabi S3"],
-    repoName: "Tonin-Web",
-    private: false,
-    links: {
-      demo: "",
-      code: "https://github.com/Gianpierre-dev/Tonin-Web"
-    },
-    year: "2026"
-  },
-  {
-    id: 7,
-    title: "Portfolio Gianpierre",
-    category: "frontend",
-    featured: false,
-    status: "live",
-    tech: ["TypeScript", "Next.js", "Tailwind CSS", "Framer Motion", "GitHub API"],
-    repoName: "PortfolioGianDev",
-    private: false,
-    links: {
-      demo: "https://gianpierre-dev.vercel.app",
-      code: "https://github.com/Gianpierre-dev/PortfolioGianDev"
-    },
-    year: "2025"
-  },
-  {
-    id: 8,
-    title: "Ingecem Web",
-    category: "frontend",
-    featured: false,
-    status: "live",
-    tech: ["TypeScript", "Vite", "Tailwind CSS"],
-    repoName: "IngecemWeb",
-    private: false,
-    links: {
-      demo: "https://ingecemperu.com",
-      code: "https://github.com/Gianpierre-dev/IngecemWeb"
-    },
-    year: "2025"
-  }
-];
 
 const categories = [
   { id: 'all', icon: Code2 },
@@ -144,84 +26,29 @@ const categories = [
   { id: 'automation', icon: Bot }
 ] as const;
 
+type IdCategoria = (typeof categories)[number]['id'];
+
 // Un solo indicador de estado por fila: punto de color + etiqueta.
-const statusStyles = {
+const statusStyles: Record<EstadoProyecto, { dot: string; text: string }> = {
   live: { dot: 'bg-emerald-500', text: 'text-emerald-700 dark:text-emerald-400' },
   development: { dot: 'bg-amber-500', text: 'text-amber-700 dark:text-amber-400' },
   demo: { dot: 'bg-purple-500', text: 'text-purple-700 dark:text-purple-400' }
 };
 
-type StaticProject = (typeof staticProjects)[number];
-
-interface GitHubRepoData {
-  id: number;
-  stars: number;
-  forks: number;
-  lastUpdate: string;
-}
-
-type ProjectWithMetrics = StaticProject & {
+type ProjectWithMetrics = ProyectoBase & {
   metrics: { stars: number; forks: number };
   lastUpdate?: string;
 };
 
-type EstadoProyecto = keyof typeof statusStyles;
-
-// Hook para obtener datos de GitHub automáticamente
-function useGitHubData() {
-  const [githubData, setGithubData] = useState<Record<number, GitHubRepoData>>({});
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchGitHubData = async () => {
-      try {
-        const repoPromises = staticProjects.map(async (project) => {
-          if (project.repoName && project.links.code) {
-            // Extraer usuario y repo de la URL de GitHub
-            const match = project.links.code.match(/github\.com\/([^\/]+)\/([^\/]+)/);
-            if (match) {
-              const [, owner, repo] = match;
-              const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
-              if (response.ok) {
-                const data = await response.json();
-                return {
-                  id: project.id,
-                  stars: data.stargazers_count,
-                  forks: data.forks_count,
-                  lastUpdate: data.updated_at
-                };
-              }
-            }
-          }
-          return null;
-        });
-
-        const results = await Promise.all(repoPromises);
-        const dataMap = results.reduce<Record<number, GitHubRepoData>>((acc, item) => {
-          if (item) {
-            acc[item.id] = item;
-          }
-          return acc;
-        }, {});
-
-        setGithubData(dataMap);
-      } catch (error) {
-        console.error('Error fetching GitHub data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchGitHubData();
-  }, []);
-
-  return { githubData, loading };
+interface ProjectsProps {
+  // Métricas de GitHub keyed por repoName. Se obtienen en el servidor
+  // (page.tsx → src/lib/github.ts, cache de 1 h), nunca desde el navegador.
+  metricasGithub: Record<string, MetricasRepo>;
 }
 
 // Antigüedad del último push en lenguaje natural ("hace 3 días").
-// Se calcula en cliente tras el fetch, así que no hay riesgo de hydration mismatch.
-function formatearAntiguedad(iso: string, idioma: Idioma): string {
-  const dias = Math.round((Date.now() - new Date(iso).getTime()) / 86_400_000);
+function formatearAntiguedad(iso: string, idioma: Idioma, ahora: number): string {
+  const dias = Math.round((ahora - new Date(iso).getTime()) / 86_400_000);
   const rtf = new Intl.RelativeTimeFormat(idioma, { numeric: 'auto' });
 
   if (dias < 30) return rtf.format(-dias, 'day');
@@ -232,19 +59,31 @@ function formatearAntiguedad(iso: string, idioma: Idioma): string {
   return rtf.format(-Math.round(meses / 12), 'year');
 }
 
-export default function Projects() {
+// La hora actual se toma tras el montaje: si se calculara durante el render,
+// el HTML del servidor y el del cliente podrían diferir (hydration mismatch).
+function useAhora(): number | null {
+  const [ahora, setAhora] = useState<number | null>(null);
+
+  useEffect(() => {
+    setAhora(Date.now());
+  }, []);
+
+  return ahora;
+}
+
+export default function Projects({ metricasGithub }: ProjectsProps) {
   const { t, idioma } = useIdioma();
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedCategory, setSelectedCategory] = useState<IdCategoria>('all');
   const listaRef = useRef<HTMLUListElement>(null);
   // El reveal se controla con un flag propio, no con whileInView por fila:
   // whileInView + once:true no alcanza a las filas que se montan después
   // (al cambiar de filtro) y las dejaba en opacity 0 de forma permanente.
   const listaEnVista = useInView(listaRef, { once: true, amount: 0.05 });
-  const { githubData, loading } = useGitHubData();
+  const ahora = useAhora();
 
-  // Combinar datos estáticos con datos de GitHub
-  const projects: ProjectWithMetrics[] = staticProjects.map(project => {
-    const githubInfo = githubData[project.id];
+  // Combinar datos estáticos con las métricas de GitHub
+  const projects: ProjectWithMetrics[] = proyectos.map(project => {
+    const githubInfo = project.repoName ? metricasGithub[project.repoName] : undefined;
     return {
       ...project,
       metrics: {
@@ -259,12 +98,12 @@ export default function Projects() {
   // recordar actualizar un número a mano.
   const conteos = useMemo(
     () =>
-      staticProjects.reduce<Record<string, number>>(
+      proyectos.reduce<Record<string, number>>(
         (acc, project) => {
           acc[project.category] = (acc[project.category] ?? 0) + 1;
           return acc;
         },
-        { all: staticProjects.length }
+        { all: proyectos.length }
       ),
     []
   );
@@ -279,8 +118,10 @@ export default function Projects() {
     (a, b) => Number(b.featured) - Number(a.featured)
   );
 
+  const hayMetricas = Object.keys(metricasGithub).length > 0;
+
   return (
-    <section id="projects" className="relative py-20 bg-gray-50 dark:bg-gray-950 overflow-hidden">
+    <section id="projects" className="relative py-20 bg-white dark:bg-gray-900 overflow-hidden">
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         {/* Header */}
         <div className="text-center mb-14">
@@ -292,7 +133,7 @@ export default function Projects() {
             className="flex items-center justify-center gap-3 mb-4"
           >
             <div className="p-3 bg-blue-600 rounded-2xl shadow-sm">
-              <Zap className="w-6 h-6 text-white" />
+              <Zap className="w-6 h-6 text-white" aria-hidden="true" />
             </div>
             <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
               {t.projects.titulo}
@@ -308,6 +149,12 @@ export default function Projects() {
           >
             {t.projects.subtitulo}
           </motion.p>
+
+          {t.projects.notaContexto && (
+            <p className="max-w-2xl mx-auto mt-3 text-sm italic text-gray-500 dark:text-gray-400">
+              {t.projects.notaContexto}
+            </p>
+          )}
         </div>
 
         {/* Categories */}
@@ -315,6 +162,7 @@ export default function Projects() {
           {categories.map((category, index) => (
             <motion.button
               key={category.id}
+              type="button"
               onClick={() => setSelectedCategory(category.id)}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -327,11 +175,11 @@ export default function Projects() {
                   : 'bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 hover:text-gray-900 dark:hover:text-gray-200'
               }`}
             >
-              <category.icon className="w-4 h-4" />
+              <category.icon className="w-4 h-4" aria-hidden="true" />
               <span>{t.projects.categorias[category.id]}</span>
               <span
                 className={`text-xs font-mono tabular-nums ${
-                  selectedCategory === category.id ? 'text-white/70' : 'text-gray-400 dark:text-gray-600'
+                  selectedCategory === category.id ? 'text-white/70' : 'text-gray-400 dark:text-gray-500'
                 }`}
               >
                 {conteos[category.id] ?? 0}
@@ -353,46 +201,34 @@ export default function Projects() {
               key={project.id}
               project={project}
               idioma={idioma}
+              ahora={ahora}
               t={t}
             />
           ))}
         </motion.ul>
 
         {/* GitHub Integration Notice */}
-        <div className="mt-10 flex justify-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 px-4 py-2 text-xs text-gray-500 dark:text-gray-400">
-            {loading ? (
-              <>
-                <motion.span
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  className="inline-flex"
-                >
-                  <Clock className="w-3.5 h-3.5 text-blue-500" />
-                </motion.span>
-                <span>{t.projects.sincronizando}</span>
-              </>
-            ) : (
-              <>
-                <Github className="w-3.5 h-3.5" />
-                <span>{t.projects.githubNotice}</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              </>
-            )}
+        {hayMetricas && (
+          <div className="mt-10 flex justify-center">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 px-4 py-2 text-xs text-gray-500 dark:text-gray-400">
+              <Github className="w-3.5 h-3.5" aria-hidden="true" />
+              <span>{t.projects.githubNotice}</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );
 }
 
-function StatusBadge({ status, t }: { status: string; t: Diccionario }) {
-  const config = statusStyles[status as EstadoProyecto];
+function StatusBadge({ status, t }: { status: EstadoProyecto; t: Diccionario }) {
+  const config = statusStyles[status];
 
   return (
     <span className={`inline-flex items-center gap-2 text-xs font-semibold ${config.text}`}>
-      <span className={`w-1.5 h-1.5 rounded-full ${config.dot}`} />
-      {t.projects.status[status as EstadoProyecto]}
+      <span className={`w-1.5 h-1.5 rounded-full ${config.dot}`} aria-hidden="true" />
+      {t.projects.status[status]}
     </span>
   );
 }
@@ -402,19 +238,22 @@ const FILA_VARIANTS = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE_SITE } }
 };
 
-function ProjectRow({ project, idioma, t }: {
+function ProjectRow({ project, idioma, ahora, t }: {
   project: ProjectWithMetrics;
   idioma: Idioma;
+  ahora: number | null;
   t: Diccionario;
 }) {
   const textos = t.proyectos[String(project.id)];
+  // Un proyecto sin textos en el diccionario no se muestra, en lugar de romper la página.
+  if (!textos) return null;
   const mostrarMetricas = project.metrics.stars > 0 || project.metrics.forks > 0;
 
   return (
     <motion.li variants={FILA_VARIANTS} className="group">
-      <div className="grid grid-cols-1 gap-x-6 gap-y-4 rounded-2xl px-4 py-7 -mx-4 transition-colors duration-300 hover:bg-white dark:hover:bg-gray-900/70 md:grid-cols-[3.5rem_minmax(0,1fr)_11.5rem]">
+      <div className="grid grid-cols-1 gap-x-6 gap-y-4 rounded-2xl px-4 py-7 -mx-4 transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-gray-800/60 md:grid-cols-[3.5rem_minmax(0,1fr)_11.5rem]">
         {/* Año */}
-        <span className="font-mono text-sm tabular-nums text-gray-400 dark:text-gray-600 md:pt-1">
+        <span className="font-mono text-sm tabular-nums text-gray-400 dark:text-gray-500 md:pt-1">
           {project.year}
         </span>
 
@@ -422,24 +261,28 @@ function ProjectRow({ project, idioma, t }: {
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white transition-colors duration-300 group-hover:text-blue-600 dark:group-hover:text-blue-400">
-              {project.title}
+              {textos.title}
             </h3>
             {project.featured && (
               <span className="inline-flex items-center gap-1 rounded-full bg-blue-600/10 dark:bg-blue-500/15 px-2.5 py-1 text-xs font-semibold text-blue-700 dark:text-blue-400">
-                <Star className="w-3 h-3 fill-current" />
+                <Star className="w-3 h-3 fill-current" aria-hidden="true" />
                 {t.projects.destacado}
               </span>
             )}
             {project.private && (
               <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-1 text-xs font-semibold text-gray-500 dark:text-gray-400">
-                <Lock className="w-3 h-3" />
+                <Lock className="w-3 h-3" aria-hidden="true" />
                 {t.projects.privadoBadge}
               </span>
             )}
           </div>
 
           <p className="mt-2.5 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            {project.featured ? textos.longDescription : textos.description}
+            {textos.description}
+          </p>
+
+          <p className="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-500">
+            {textos.technicalNote}
           </p>
 
           <p className="mt-3 font-mono text-xs leading-relaxed text-gray-500 dark:text-gray-500">
@@ -451,9 +294,9 @@ function ProjectRow({ project, idioma, t }: {
         <div className="flex flex-col gap-3 md:items-end md:pt-1">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 md:justify-end">
             <StatusBadge status={project.status} t={t} />
-            {project.lastUpdate && (
-              <span className="text-xs text-gray-400 dark:text-gray-600">
-                {formatearAntiguedad(project.lastUpdate, idioma)}
+            {project.lastUpdate && ahora !== null && (
+              <span className="text-xs text-gray-400 dark:text-gray-500">
+                {formatearAntiguedad(project.lastUpdate, idioma, ahora)}
               </span>
             )}
           </div>
@@ -461,12 +304,14 @@ function ProjectRow({ project, idioma, t }: {
           {mostrarMetricas && (
             <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
               <span className="flex items-center gap-1">
-                <Star className="w-3.5 h-3.5 fill-current text-amber-500" />
+                <Star className="w-3.5 h-3.5 fill-current text-amber-500" aria-hidden="true" />
                 <span className="font-semibold tabular-nums">{project.metrics.stars}</span>
+                <span className="sr-only">{t.projects.estrellas}</span>
               </span>
               <span className="flex items-center gap-1">
-                <GitBranch className="w-3.5 h-3.5" />
+                <GitBranch className="w-3.5 h-3.5" aria-hidden="true" />
                 <span className="font-semibold tabular-nums">{project.metrics.forks}</span>
+                <span className="sr-only">{t.projects.forks}</span>
               </span>
             </div>
           )}
@@ -477,9 +322,10 @@ function ProjectRow({ project, idioma, t }: {
                 href={project.links.demo}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`${t.projects.verDemo}: ${textos.title} (${t.a11y.nuevaPestana})`}
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200"
               >
-                <ExternalLink className="w-4 h-4" />
+                <ExternalLink className="w-4 h-4" aria-hidden="true" />
                 {t.projects.verDemo}
               </a>
             )}
@@ -488,18 +334,20 @@ function ProjectRow({ project, idioma, t }: {
                 href={project.links.code}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`${t.projects.codigo}: ${textos.title} (${t.a11y.nuevaPestana})`}
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors duration-200"
               >
-                <Github className="w-4 h-4" />
+                <Github className="w-4 h-4" aria-hidden="true" />
                 {t.projects.codigo}
               </a>
             )}
             {project.private && (
               <a
                 href="#contact"
+                aria-label={`${t.projects.consultar}: ${textos.title}`}
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors duration-200"
               >
-                <Lock className="w-4 h-4" />
+                <Lock className="w-4 h-4" aria-hidden="true" />
                 {t.projects.consultar}
               </a>
             )}

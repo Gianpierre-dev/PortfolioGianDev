@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import type { ScrollToSectionFunction, EmailValidationFunction } from '@/types';
+import type { Idioma } from '@/i18n/types';
 
 /**
  * Combina clases CSS usando clsx y tailwind-merge para resolver conflictos
@@ -22,9 +23,11 @@ export const isValidEmail: EmailValidationFunction = (email: string): boolean =>
  */
 export const scrollToSection: ScrollToSectionFunction = (sectionId: string): void => {
   const element = document.getElementById(sectionId);
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
-  }
+  if (!element) return;
+
+  // Con "reducir movimiento" activo el salto es inmediato.
+  const reducirMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  element.scrollIntoView({ behavior: reducirMovimiento ? 'auto' : 'smooth' });
 };
 
 // Nueva función para descargar archivos
@@ -55,12 +58,14 @@ export function downloadFile(fileUrl: string, fileName?: string) {
   }
 }
 
-// Función específica para descargar CV
-export function downloadCV() {
-  return downloadFile(
-    '/documents/CV_Anthony_Gianpierre_Terrazas_Tello.pdf',
-    'CV_Gianpierre_Terrazas_Dev.pdf'
-  );
+const CV_POR_IDIOMA: Record<Idioma, string> = {
+  es: '/documents/CV_Gianpierre_Terrazas_ES.pdf',
+  en: '/documents/CV_Gianpierre_Terrazas_EN.pdf',
+};
+
+// Descarga el CV en el idioma activo del sitio
+export function downloadCV(idioma: Idioma) {
+  return downloadFile(CV_POR_IDIOMA[idioma]);
 }
 
 /**

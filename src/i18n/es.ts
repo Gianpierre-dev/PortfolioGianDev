@@ -5,14 +5,27 @@ export const es: Diccionario = {
   nav: {
     inicio: 'Inicio',
     about: 'Sobre mí',
+    servicios: 'Servicios',
     proyectos: 'Proyectos',
     habilidades: 'Habilidades',
     contacto: 'Contacto',
     rolLogo: 'Full Stack Developer',
     irInicio: 'Ir al inicio',
+    navegacionPrincipal: 'Navegación principal',
+    cambiarTema: 'Cambiar tema',
     cambiarTemaClaro: 'Cambiar a modo claro',
     cambiarTemaOscuro: 'Cambiar a modo oscuro',
     cambiarIdioma: 'Cambiar idioma a inglés',
+    abrirMenu: 'Abrir menú',
+    cerrarMenu: 'Cerrar menú',
+  },
+  a11y: {
+    saltarContenido: 'Saltar al contenido principal',
+    github: 'Perfil de GitHub',
+    linkedin: 'Perfil de LinkedIn',
+    email: 'Enviar un correo',
+    whatsapp: 'Escribir por WhatsApp',
+    nuevaPestana: 'se abre en una nueva pestaña',
   },
   hero: {
     statementLinea1: 'Construyo los sistemas que gestionan',
@@ -36,7 +49,6 @@ export const es: Diccionario = {
     stats: {
       experiencia: 'Años de Experiencia',
       proyectos: 'Proyectos Completados',
-      tecnologias: 'Tecnologías',
       ubicacion: 'Ubicación',
     },
     ubicacionValor: 'Perú',
@@ -51,9 +63,55 @@ export const es: Diccionario = {
     cita: '“Cada proyecto es una oportunidad de crear algo útil y bien hecho.”',
     experienciaTitulo: 'Experiencia Profesional',
   },
+  servicios: {
+    titulo: 'Servicios',
+    subtitulo: 'Lo que puedo construir para tu empresa, respaldado por sistemas que ya están en uso.',
+    items: [
+      {
+        titulo: 'Sistemas de planillas y RRHH a medida',
+        beneficio:
+          'Calcula la planilla según el régimen laboral de cada trabajador, genera boletas y centraliza legajos, contratos y documentos del personal.',
+      },
+      {
+        titulo: 'Automatización de procesos SUNAT',
+        beneficio:
+          'Descarga y clasifica comprobantes electrónicos de forma masiva, sin horas de trabajo manual en el portal SUNAT.',
+      },
+      {
+        titulo: 'Sistemas de gestión para estudios contables',
+        beneficio:
+          'Cronogramas de vencimientos, alertas, parte diario del equipo y consultas de RUC y DNI en un solo lugar.',
+      },
+      {
+        titulo: 'Sitios web corporativos con SEO',
+        beneficio:
+          'Una web profesional, rápida y adaptada a móviles, optimizada para que tus clientes te encuentren en Google.',
+      },
+    ],
+    procesoTitulo: 'Cómo trabajo',
+    procesoSubtitulo: 'Un proceso claro, desde la primera conversación hasta el sistema en producción.',
+    pasos: [
+      {
+        titulo: 'Reunión de descubrimiento',
+        descripcion: 'Conversamos sobre tu proceso actual, el problema que quieres resolver y tus objetivos.',
+      },
+      {
+        titulo: 'Propuesta y alcance',
+        descripcion: 'Recibes una propuesta con el alcance y el plan de entregas definidos antes de empezar.',
+      },
+      {
+        titulo: 'Desarrollo con entregas periódicas',
+        descripcion: 'Avanzamos por etapas y revisas el sistema funcionando en cada entrega, no solo al final.',
+      },
+      {
+        titulo: 'Despliegue y soporte',
+        descripcion: 'Publico el sistema en producción y te acompaño con soporte después de la entrega.',
+      },
+    ],
+    cta: 'Cuéntame tu proyecto',
+  },
   projects: {
     titulo: 'Mis Proyectos',
-    sincronizando: 'Sincronizando con GitHub...',
     subtitulo:
       'Sistemas de gestión empresarial y productos propios. Los proyectos privados se desarrollaron para empresas y no exponen código.',
     categorias: {
@@ -73,29 +131,18 @@ export const es: Diccionario = {
     verDemo: 'Ver Demo',
     codigo: 'Código',
     githubNotice: 'Las métricas se actualizan automáticamente desde GitHub',
+    estrellas: 'estrellas',
+    forks: 'forks',
   },
   skills: {
-    titulo: 'Skills & Expertise',
-    subtitulo: 'Tecnologías y herramientas que domino profesionalmente',
-    metricas: {
-      tecnologias: 'Tecnologías',
-      nivelPromedio: 'Nivel Promedio',
-      aniosExp: 'Años Exp.',
-    },
+    titulo: 'Stack tecnológico',
+    subtitulo: 'Tecnologías con las que construyo y despliego los sistemas',
     categorias: {
-      all: 'Todas',
       frontend: 'Frontend',
       backend: 'Backend',
-      database: 'Base de Datos',
+      database: 'Bases de datos',
       tools: 'Herramientas',
     },
-    niveles: {
-      experto: 'Experto',
-      avanzado: 'Avanzado',
-      intermedio: 'Intermedio',
-      basico: 'Básico',
-    },
-    promedio: 'promedio',
   },
   contact: {
     titulo: 'Contacto',
@@ -113,8 +160,8 @@ export const es: Diccionario = {
       horario: '9:00 AM - 6:00 PM',
     },
     descripciones: {
-      email: 'Clic para copiar email',
-      telefono: 'Clic para WhatsApp/Llamar',
+      email: 'Clic para copiar el email',
+      telefono: 'Clic para escribir por WhatsApp',
       ubicacion: 'Disponible para trabajo remoto',
       horario: 'Hora de Perú (UTC-5)',
     },
@@ -122,6 +169,7 @@ export const es: Diccionario = {
     badgeWhatsapp: 'WhatsApp',
     redesTitulo: 'Sígueme en mis redes',
     formTitulo: 'Envíame un Mensaje',
+    formAviso: 'Al enviar, se abrirá WhatsApp con tu mensaje listo para enviar.',
     form: {
       nombre: 'Nombre',
       email: 'Email',
@@ -129,10 +177,10 @@ export const es: Diccionario = {
       mensaje: 'Mensaje',
       nombrePlaceholder: 'Tu nombre completo',
       emailPlaceholder: 'tu@email.com',
-      asuntoPlaceholder: 'Proyecto web / Colaboración / Consulta',
+      asuntoPlaceholder: 'Sistema de planillas / Automatización / Sitio web',
       mensajePlaceholder: 'Cuéntame sobre tu proyecto o consulta...',
-      enviar: 'Enviar Mensaje',
-      enviando: 'Enviando...',
+      enviar: 'Enviar por WhatsApp',
+      enviando: 'Abriendo WhatsApp...',
     },
     validaciones: {
       nombreRequerido: 'El nombre es requerido',
@@ -145,20 +193,19 @@ export const es: Diccionario = {
       mensajeMin: 'El mensaje debe tener al menos 10 caracteres',
     },
     mensajes: {
-      copiado: '¡Email copiado al portapapeles! 📋',
-      exito: '¡Mensaje enviado por email y WhatsApp! 📧📱 Te responderé pronto.',
-      exitoSoloWhatsapp:
-        'Mensaje enviado por WhatsApp 📱 (Email en configuración). ¡Te responderé pronto!',
+      copiado: 'Email copiado al portapapeles.',
+      exito: 'Se abrió WhatsApp con tu mensaje. Solo falta que lo envíes desde allí. Te responderé pronto.',
       error:
-        'Error al enviar. Pero se abrió WhatsApp 📱 - También puedes contactarme por email directamente.',
+        'No se pudo abrir WhatsApp. Puedes escribirme directamente a mi email o a mi número de teléfono.',
     },
   },
   footer: {
     descripcion:
-      'Desarrollador Full Stack especializado en crear soluciones web modernas y escalables. Siempre buscando nuevos desafíos y oportunidades de crecimiento.',
+      'Desarrollo sistemas de planillas, RRHH y automatización de procesos SUNAT para empresas peruanas, con TypeScript de punta a punta.',
     navegacionTitulo: 'Navegación',
     navegacion: {
       about: 'Sobre mí',
+      servicios: 'Servicios',
       proyectos: 'Proyectos',
       habilidades: 'Habilidades',
       contacto: 'Contacto',
@@ -201,59 +248,53 @@ export const es: Diccionario = {
     },
     'Ingecem Perú': {
       period: '2018 - 2022',
-      position: 'Desarrollador Web (Prácticas Pre-Profesionales)',
+      position: 'Desarrollador Web',
       description:
         'Desarrollo de sistema de control de inventario en C#, diseño e implementación de interfaces de usuario y apoyo en el levantamiento de requerimientos.',
     },
   },
   proyectos: {
     '1': {
+      title: 'Sistema de Planillas Multiempresa',
       description:
-        'Motor de cálculo de planillas bajo legislación laboral peruana con soporte para los 6 regímenes privados del país.',
-      longDescription:
-        'Sistema de nómina multiempresa que cubre el ciclo completo: carga de trabajadores, cálculo de planillas bajo los 6 regímenes laborales privados de Perú (General, Pequeña empresa, Microempresa, Agrario, Construcción civil, Trabajadoras del hogar) y generación de boletas de pago. Backend con arquitectura hexagonal, más de 370 tests automatizados y CI bloqueante.',
+        'Calcula la planilla de los 6 regímenes laborales privados del Perú y genera las boletas de pago, para varias empresas a la vez. Pensado para quienes gestionan la planilla de más de una empresa.',
+      technicalNote: 'Arquitectura hexagonal, más de 370 tests automatizados y CI bloqueante.',
     },
     '2': {
+      title: 'SIGEMYPE',
       description:
-        'Sistema de gestión integral para estudio contable: cronogramas tributarios SUNAT, alertas, parte diario y consultas RUC/DNI.',
-      longDescription:
-        'Plataforma interna para un estudio contable que administra cronogramas de obligaciones tributarias y laborales (SUNAT), alertas de vencimientos, parte diario de trabajo del equipo, planificación de tareas y consultas automatizadas de DNI, RUC y tipo de cambio. Monorepo con Turborepo, importación desde Excel, más de 120 tests, hardening de seguridad (rate limiting, revocación JWT) y métricas Prometheus.',
+        'Organiza el trabajo de un estudio contable: cronogramas de vencimientos SUNAT, alertas antes de cada fecha límite, parte diario del equipo y consultas automáticas de RUC, DNI y tipo de cambio.',
+      technicalNote: 'Monorepo con Turborepo, importación desde Excel, más de 120 tests y hardening de seguridad.',
     },
     '3': {
+      title: 'Sistema de RRHH Multiempresa',
       description:
-        'Gestión de empleados, contratos y documentos con soporte multiempresa y generación de carnets en PDF.',
-      longDescription:
-        'Sistema de Recursos Humanos en producción para gestión multiempresa: legajos de empleados, contratos, documentos y fotos, con generación automática de photochecks y carnets en PDF. Autenticación JWT, validación con Zod y despliegue en Railway.',
+        'Centraliza los legajos, contratos y documentos del personal de varias empresas, y genera photochecks y carnets en PDF listos para imprimir.',
+      technicalNote: 'Autenticación JWT, validación con Zod y despliegue en Railway.',
     },
     '4': {
+      title: 'Automatización SUNAT',
       description:
-        'App de escritorio que descarga y clasifica comprobantes electrónicos del portal SUNAT de forma masiva.',
-      longDescription:
-        'Aplicación de escritorio que automatiza la descarga, organización y clasificación de comprobantes electrónicos (facturas, boletas, guías de remisión) desde el portal SUNAT, parseando XML bajo el estándar UBL 2.1. Scraping con Playwright, interfaz PySide6 y distribución como ejecutable.',
+        'Descarga de forma masiva los comprobantes electrónicos (facturas, boletas y guías de remisión) del portal SUNAT y los clasifica automáticamente, sin trabajo manual.',
+      technicalNote: 'Scraping con Playwright, lectura de XML UBL 2.1 e interfaz de escritorio con PySide6.',
     },
     '5': {
+      title: 'TeachGenius',
       description:
-        'Plataforma educativa gamificada: profesores crean sopas de letras de figuras literarias y los alumnos compiten contra el tiempo.',
-      longDescription:
-        'Aplicación educativa gamificada donde los docentes crean actividades de pupiletras (sopas de letras) sobre figuras literarias y los alumnos las resuelven desde cualquier dispositivo con temporizador competitivo. Backend NestJS con Prisma y frontend Astro + React.',
+        'Plataforma educativa: los docentes crean sopas de letras sobre figuras literarias y los alumnos las resuelven desde cualquier dispositivo, contra el tiempo.',
+      technicalNote: 'Backend NestJS con Prisma y frontend Astro + React.',
     },
     '6': {
+      title: 'Tonin',
       description:
-        'Web app inmersiva de frases motivacionales según tu estado de ánimo, con música ambiental y experiencia swipe.',
-      longDescription:
-        'Producto propio B2C: frases motivacionales adaptadas al estado de ánimo del usuario con experiencia de swipe, música ambiental por mood, temas dinámicos y panel de administración. Frontend React con Zustand y Framer Motion; API en Java 21 + Spring Boot con JWT y almacenamiento en Wasabi S3.',
-    },
-    '7': {
-      description:
-        'Este portfolio: Next.js 15, TypeScript y Tailwind CSS, con proyectos sincronizados desde GitHub.',
-      longDescription:
-        'Portfolio personal con tema oscuro/claro, animaciones con Framer Motion, optimización SEO y métricas de repositorios actualizadas automáticamente desde la API de GitHub.',
+        'Producto propio: frases motivacionales según tu estado de ánimo, con música ambiental, experiencia tipo swipe y panel de administración.',
+      technicalNote: 'Frontend React con Zustand; API en Java 21 + Spring Boot con JWT y almacenamiento en Wasabi S3.',
     },
     '8': {
+      title: 'Sitio web Ingecem',
       description:
-        'Sitio corporativo para empresa de ingeniería con optimización SEO y formularios de contacto.',
-      longDescription:
-        'Sitio web corporativo de Ingecem Perú con diseño responsive, optimización SEO, formularios de contacto y secciones informativas sobre servicios de ingeniería.',
+        'Sitio corporativo para una empresa de ingeniería: presenta sus servicios, recibe consultas de clientes y está optimizado para buscadores.',
+      technicalNote: 'Diseño responsive con TypeScript, Vite y Tailwind CSS.',
     },
   },
 };

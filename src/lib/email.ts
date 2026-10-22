@@ -1,9 +1,16 @@
 import { ContactForm } from '@/types';
 
-// Función para abrir WhatsApp con mensaje predefinido (MÉTODO PRINCIPAL)
-export const sendWhatsApp = (formData: ContactForm) => {
-  const phoneNumber = '51961170946'; // Tu número con código país (Perú +51)
-  
+// Número de WhatsApp con código de país (Perú +51), sin "+" ni espacios.
+const WHATSAPP_NUMERO = '51961170946';
+
+export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMERO}`;
+
+interface ResultadoEnvio {
+  success: boolean;
+}
+
+// Abre WhatsApp con el mensaje del formulario ya redactado (MÉTODO PRINCIPAL).
+export const sendWhatsApp = (formData: ContactForm): ResultadoEnvio => {
   const message = `*Nuevo mensaje desde el portfolio*
 
 *Nombre:* ${formData.name}
@@ -16,27 +23,26 @@ ${formData.message}
 ---
 _Enviado desde el formulario de contacto del portfolio_`;
 
-  const encodedMessage = encodeURIComponent(message);
-  const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-  
-  console.log('📱 Abriendo WhatsApp...');
-  // Abrir WhatsApp en nueva pestaña
-  window.open(whatsappURL, '_blank');
-  
-  return { success: true, message: 'Mensaje enviado por WhatsApp 📱' };
+  const whatsappURL = `${WHATSAPP_URL}?text=${encodeURIComponent(message)}`;
+
+  // window.open devuelve null si el navegador bloqueó la ventana emergente.
+  // No se pasa 'noopener' como feature porque con él window.open siempre devuelve
+  // null y no se podría detectar el bloqueo; se corta el opener a mano.
+  const ventana = window.open(whatsappURL, '_blank');
+  if (!ventana) {
+    // Ventana bloqueada (Safari iOS, bloqueadores): se navega en la misma pestaña
+    // para que el mensaje no se pierda.
+    window.location.href = whatsappURL;
+    return { success: true };
+  }
+
+  ventana.opener = null;
+  return { success: true };
 };
 
-// Función principal de contacto (SIMPLIFICADA)
-export const sendContactMessage = async (formData: ContactForm) => {
-  console.log('🚀 Enviando mensaje de contacto por WhatsApp...');
-  
-  // Enviar directamente por WhatsApp
-  const result = sendWhatsApp(formData);
-  
-  return {
-    success: true,
-    message: '¡Mensaje enviado por WhatsApp! 📱 Te responderé pronto.'
-  };
+// Función principal de contacto: hoy el único canal es WhatsApp.
+export const sendContactMessage = async (formData: ContactForm): Promise<ResultadoEnvio> => {
+  return sendWhatsApp(formData);
 };
 
 // ===============================
@@ -46,8 +52,6 @@ export const sendContactMessage = async (formData: ContactForm) => {
 // Función para enviar email via API route (BACKUP - para futuro)
 export const sendEmailViaAPI = async (formData: ContactForm) => {
   try {
-    console.log('📧 Enviando email via API route...');
-    
     const response = await fetch('/api/send-email', {
       method: 'POST',
       headers: {
@@ -64,40 +68,13 @@ export const sendEmailViaAPI = async (formData: ContactForm) => {
     const result = await response.json();
 
     if (response.ok && result.success) {
-      console.log('✅ Email enviado correctamente via API');
       return { success: true, message: 'Email enviado correctamente' };
-    } else {
-      console.error('❌ Error en API de email:', result.error);
-      return { success: false, message: result.error || 'Error enviando email' };
     }
+
+    console.error('Error en API de email:', result.error);
+    return { success: false, message: result.error || 'Error enviando email' };
   } catch (error) {
-    console.error('❌ Error conectando con API de email:', error);
+    console.error('Error conectando con API de email:', error);
     return { success: false, message: 'Error de conexión con el servidor' };
   }
 };
-
-// Función combinada WhatsApp + Email (para cuando configures email)
-export const sendContactMessageWithEmail = async (formData: ContactForm) => {
-  console.log('🚀 Enviando mensaje por WhatsApp + Email...');
-  
-  // 1. Intentar enviar por email
-  const emailResult = await sendEmailViaAPI(formData);
-  
-  // 2. Enviar por WhatsApp
-  setTimeout(() => {
-    sendWhatsApp(formData);
-  }, 1000);
-  
-  // 3. Resultado
-  if (emailResult.success) {
-    return { 
-      success: true, 
-      message: '¡Mensaje enviado por email y WhatsApp! 📧📱' 
-    };
-  } else {
-    return { 
-      success: true, 
-      message: 'Mensaje enviado por WhatsApp 📱 (Email en configuración)' 
-    };
-  }
-}; 

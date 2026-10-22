@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Proyecto
 
-Portfolio personal de Gianpierre Terrazas — sitio one-page construido con Next.js 15 (App Router), React 19, TypeScript y Tailwind CSS 4. Deploy en Vercel.
+Portfolio personal de Gianpierre Terrazas — sitio one-page construido con Next.js 15 (App Router), React 19, TypeScript y Tailwind CSS 4. Deploy en Railway (https://portfolio-gian-production.up.railway.app). El público objetivo son clientes potenciales (empresas peruanas, estudios contables, pymes), no reclutadores.
 
 ## Comandos
 
@@ -21,24 +21,29 @@ Nota: aunque las convenciones globales de `C:\dev\CLAUDE.md` indican pnpm, este 
 
 ## Arquitectura
 
-Es una single page: `src/app/page.tsx` compone todas las secciones en orden (Navbar → Hero → About → Projects → Skills → Contact → footer inline). No hay rutas adicionales de UI.
+Es una single page: `src/app/page.tsx` (server component) compone todas las secciones en orden (SkipLink → Navbar → Hero → About → Services → Projects → Skills → Contact → Footer). No hay rutas adicionales de UI.
 
-- `src/components/sections/` — secciones de la página (Hero, About, Projects, Skills, Contact). Son client components con animaciones de Framer Motion.
-- `src/components/ui/` — primitivas reutilizables (Button, Typography, RevealSection, ParallaxBackground, RippleButton, Grid).
-- `src/data/personal.ts` — única fuente de datos personales (nombre, título, email, username de GitHub, skills). Cambios de contenido van aquí, no en los componentes.
-- `src/lib/github.ts` — integración con la API pública de GitHub (username hardcodeado `Gianpierre-dev`). Usa `next: { revalidate: 3600 }` para cachear; la sección Projects se alimenta de aquí automáticamente.
-- `src/lib/email.ts` — el formulario de contacto envía por WhatsApp (`wa.me` con mensaje pre-armado) como método principal; existe también `src/app/api/send-email/route.ts` con nodemailer/EmailJS como alternativa.
-- `src/types/index.ts` — tipos compartidos (Project, GitHubUser, ContactForm, etc.).
-- `src/app/sitemap.ts` y `src/app/robots.ts` — SEO generado por Next.js; la URL base viene de `NEXT_PUBLIC_SITE_URL`.
+- `src/app/page.tsx` — obtiene las métricas de GitHub en el servidor y las pasa como props a Projects.
+- `src/components/sections/` — secciones de la página (Hero, About, Services, Projects, Skills, Contact). Son client components con animaciones de Framer Motion.
+- `src/components/` — Navbar, Footer, SkipLink, ThemeProvider y SmoothScroll (Lenis + `MotionConfig reducedMotion="user"`).
+- `src/components/ui/` — primitivas reutilizables (Button, RippleButton, etc.).
+- `src/i18n/` — diccionarios ES/EN (`es.ts` es la fuente de verdad del shape, `types.ts` la interfaz). Todo texto visible va aquí; el español es neutro con tuteo.
+- `src/data/personal.ts` — datos personales (nombre, título, email, skills, experiencia). Cambios de contenido van aquí, no en los componentes.
+- `src/data/proyectos.ts` — datos técnicos de los proyectos (stack, links, repo, estado). Los textos de cada proyecto viven en el diccionario i18n, keyed por id.
+- `src/lib/github.ts` — integración con la API pública de GitHub (username hardcodeado `Gianpierre-dev`). Usa `next: { revalidate: 3600 }`; solo se llama desde el servidor.
+- `src/lib/email.ts` — el formulario de contacto abre WhatsApp (`wa.me` con mensaje pre-armado) como canal principal; existe también `src/app/api/send-email/route.ts` con nodemailer/EmailJS como alternativa.
+- `src/lib/site.ts` — URL canónica (`SITE_URL`) y textos SEO. Fuente única para metadataBase, sitemap, robots y JSON-LD.
+- `src/app/opengraph-image.tsx` y `src/app/twitter-image.tsx` — imagen de previsualización generada con `next/og` (`src/lib/og-imagen.tsx`).
+- `src/types/index.ts` — tipos compartidos (Skill, ContactForm, SocialLink, etc.).
 
 ## Convenciones
 
-- Tema claro/oscuro con `next-themes` (`ThemeProvider` en `src/components/`); todo estilo nuevo debe incluir variantes `dark:`.
-- Iconos: Lucide React y react-icons.
-- Formularios con react-hook-form (ver Contact).
-- `next.config.ts` define headers de seguridad (X-Frame-Options, nosniff, Referrer-Policy) y dominios permitidos de imágenes (GitHub avatars, *.github.io, *.vercel.app) — actualizar ahí si se agregan imágenes remotas nuevas.
+- Tema claro/oscuro con `next-themes` (`ThemeProvider` en `src/components/`), variante `dark:` por clase (ver `globals.css`); todo estilo nuevo debe incluir variantes `dark:`. El hero es oscuro en ambos temas.
+- Iconos: Lucide React; los íconos decorativos llevan `aria-hidden` y los enlaces solo-ícono un `aria-label` del diccionario (`t.a11y`).
+- Formularios con react-hook-form (ver Contact), con `aria-invalid` y `aria-describedby` en los errores.
+- `next.config.ts` define headers de seguridad (X-Frame-Options, nosniff, Referrer-Policy) y dominios permitidos de imágenes — actualizar ahí si se agregan imágenes remotas nuevas.
 
 ## Variables de entorno
 
-- `NEXT_PUBLIC_SITE_URL` — URL pública del sitio (default `http://localhost:3000`).
+- `NEXT_PUBLIC_SITE_URL` — URL pública del sitio. Se inyecta en build; si falta, se usa el dominio de Railway (ver `src/lib/site.ts`). No definir defaults en `next.config.ts` (un default a localhost terminaba en og:image).
 - `EMAILJS_SERVICE_ID`, `EMAILJS_TEMPLATE_ID`, `EMAILJS_PUBLIC_KEY` — opcionales, para el envío de email alternativo.

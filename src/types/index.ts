@@ -12,12 +12,11 @@ export interface PersonalInfo {
   resumeUrl: string;
 }
 
-// Tipos para habilidades
+// Tipos para habilidades. Sin niveles ni porcentajes: el stack se muestra
+// agrupado por categoría.
 export interface Skill {
   name: string;
-  level: number;
-  category: 'frontend' | 'backend' | 'database' | 'tools';
-  icon: string;
+  category: SkillCategory;
 }
 
 // Tipos para experiencia laboral
