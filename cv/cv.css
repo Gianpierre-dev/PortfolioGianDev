@@ -1,0 +1,43 @@
+@page { size: A4; margin: 14mm 15mm; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  font-size: 9.6pt;
+  line-height: 1.38;
+  color: #1f2937;
+}
+
+a { color: #1d4ed8; text-decoration: none; }
+
+header { text-align: center; margin-bottom: 10px; }
+h1 { font-size: 19pt; letter-spacing: 0.3px; color: #111827; }
+.rol { font-size: 10.5pt; color: #1d4ed8; font-weight: 600; margin-top: 2px; }
+.contacto { font-size: 8.8pt; color: #4b5563; margin-top: 4px; }
+
+section { margin-top: 9px; }
+h2 {
+  font-size: 10pt;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #111827;
+  border-bottom: 1.2px solid #1d4ed8;
+  padding-bottom: 2px;
+  margin-bottom: 5px;
+}
+
+.item { margin-bottom: 6px; break-inside: avoid; }
+.cabecera { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+h3 { font-size: 9.9pt; color: #111827; }
+.cabecera span { font-size: 8.8pt; color: #4b5563; white-space: nowrap; }
+
+ul { margin: 2px 0 0 15px; }
+li { margin-bottom: 1px; }
+.stack { font-size: 8.6pt; color: #4b5563; margin-top: 1px; }
+
+p + p { margin-top: 2px; }
+
+.dos-columnas { display: grid; grid-template-columns: 1.6fr 1fr; gap: 18px; break-inside: avoid; }
+.dos-columnas h2 + p { margin-top: 0; }
+.dos-columnas div > h2:not(:first-child) { margin-top: 9px; }
