@@ -83,9 +83,9 @@ export const es: Diccionario = {
           'Cronogramas de vencimientos, alertas, parte diario del equipo y consultas de RUC y DNI en un solo lugar.',
       },
       {
-        titulo: 'Sitios web corporativos con SEO',
+        titulo: 'Sitios web y tiendas online',
         beneficio:
-          'Una web profesional, rápida y adaptada a móviles, optimizada para que tus clientes te encuentren en Google.',
+          'Una web o tienda online profesional, rápida y adaptada a móviles: catálogo, carrito, pagos con Yape o Plin y pedidos por WhatsApp, optimizada para que tus clientes te encuentren en Google.',
       },
     ],
     procesoTitulo: 'Cómo trabajo',
@@ -295,6 +295,24 @@ export const es: Diccionario = {
       description:
         'Sitio corporativo para una empresa de ingeniería: presenta sus servicios, recibe consultas de clientes y está optimizado para buscadores.',
       technicalNote: 'Diseño responsive con TypeScript, Vite y Tailwind CSS.',
+    },
+    '9': {
+      title: 'Valentino Benites — tienda online',
+      description:
+        'Tienda online de carteras y accesorios artesanales hechos a pedido: catálogo por categorías, carrito, pago con Yape o Plin y envíos a todo el Perú, con un panel para que la marca administre sus productos.',
+      technicalNote: 'Monorepo con frontend Next.js y API NestJS + Prisma; panel con autenticación JWT, imágenes en S3 e importación del catálogo desde Excel.',
+    },
+    '10': {
+      title: "Tlacuache's Store — catálogo outlet",
+      description:
+        'Catálogo online de un outlet de carteras y billeteras de marca: muestra precio de outlet frente al precio de tienda, novedades y categorías, y los pedidos se cierran por WhatsApp.',
+      technicalNote: 'Sitio rápido y estático con Astro y Tailwind CSS.',
+    },
+    '11': {
+      title: 'Mr. Sif — sitio comercial',
+      description:
+        'Sitio comercial de un sistema de facturación electrónica para mypes: presenta beneficios, soluciones y planes, y lleva a los visitantes a solicitar una demo.',
+      technicalNote: 'Interfaces con AlpineJS y Tailwind CSS, y posicionamiento SEO.',
     },
   },
 };

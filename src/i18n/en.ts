@@ -83,9 +83,9 @@ export const en: Diccionario = {
           'Tax due-date schedules, alerts, the team’s daily work log and RUC/DNI lookups in one place.',
       },
       {
-        titulo: 'Corporate websites with SEO',
+        titulo: 'Websites and online stores',
         beneficio:
-          'A professional, fast, mobile-friendly website, optimized so your clients can find you on Google.',
+          'A professional, fast, mobile-friendly website or online store: catalog, cart, local payment methods and WhatsApp ordering, optimized so your clients can find you on Google.',
       },
     ],
     procesoTitulo: 'How I work',
@@ -296,6 +296,24 @@ export const en: Diccionario = {
       description:
         'Corporate website for an engineering company: presents its services, receives client inquiries and is optimized for search engines.',
       technicalNote: 'Responsive design with TypeScript, Vite and Tailwind CSS.',
+    },
+    '9': {
+      title: 'Valentino Benites — online store',
+      description:
+        'Online store for made-to-order handcrafted handbags and accessories: catalog by category, cart, payment with Yape or Plin (Peruvian mobile wallets) and nationwide shipping, plus a panel where the brand manages its products.',
+      technicalNote: 'Monorepo with a Next.js frontend and a NestJS + Prisma API; JWT-protected admin panel, images on S3 and catalog import from Excel.',
+    },
+    '10': {
+      title: "Tlacuache's Store — outlet catalog",
+      description:
+        'Online catalog for a designer handbag and wallet outlet: shows outlet versus retail prices, new arrivals and categories, with orders closed via WhatsApp.',
+      technicalNote: 'Fast static site built with Astro and Tailwind CSS.',
+    },
+    '11': {
+      title: 'Mr. Sif — marketing site',
+      description:
+        'Marketing site for an electronic invoicing system aimed at small businesses: presents benefits, solutions and plans, and drives visitors to request a demo.',
+      technicalNote: 'Interfaces built with AlpineJS and Tailwind CSS, plus SEO.',
     },
   },
 };
