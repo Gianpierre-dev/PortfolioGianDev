@@ -33,36 +33,26 @@ export const es: Diccionario = {
     statementLinea2Pre: 'planillas, RRHH y procesos SUNAT',
     statementLinea2Post: ' de empresas peruanas.',
     prueba: 'Tech Lead en STI GOLD · Sistemas en producción · TypeScript de punta a punta',
-    ctaProyectos: 'Ver Proyectos',
+    ctaProyectos: 'Ver proyectos',
     ctaCV: 'Descargar CV',
     ctaContacto: 'Contactar',
     scroll: 'Scroll',
   },
   about: {
     titulo: 'Sobre mí',
-    subtitulo: 'Conoce más sobre mi experiencia, habilidades y pasión por el desarrollo',
-    bioTitulo: 'Sobre mí',
+    subtitulo: 'Quién desarrolla tu sistema y con qué experiencia.',
     bioParrafos: [
-      'Desarrollador Full Stack especializado en sistemas de gestión para empresas: planillas, recursos humanos, inventarios y automatización de procesos tributarios (SUNAT).',
-      'Trabajo con TypeScript en todo el stack: NestJS, Prisma y PostgreSQL en el backend; Next.js y Tailwind CSS en el frontend; Astro para sitios corporativos. Mis proyectos se despliegan en Railway con almacenamiento en la nube.',
-      'Mi objetivo es construir sistemas que aporten valor real al negocio, con código probado, arquitectura limpia y una buena experiencia de usuario.',
+      'Soy desarrollador full stack y trabajo con empresas peruanas que necesitan dejar atrás las hojas de cálculo y los procesos manuales: planillas, recursos humanos, inventarios y trámites con SUNAT.',
+      'Me encargo del proyecto completo: entiendo tu proceso, propongo la solución, la desarrollo y la dejo funcionando en producción. Hoy también lidero el desarrollo de sistemas internos como Tech Lead en STI GOLD.',
+      'Construyo con tecnologías actuales (TypeScript, NestJS, Next.js y PostgreSQL) y con pruebas automatizadas, para que el sistema sea confiable y fácil de mantener a medida que tu empresa crece.',
     ],
     stats: {
-      experiencia: 'Años de Experiencia',
-      proyectos: 'Proyectos Completados',
+      experiencia: 'Años de experiencia',
+      proyectos: 'Proyectos completados',
       ubicacion: 'Ubicación',
     },
     ubicacionValor: 'Perú',
-    cvBoton: 'Descargar mi CV',
-    enfoqueTitulo: 'Mi Enfoque de Trabajo',
-    enfoqueBullets: [
-      'Aprendizaje continuo',
-      'Código limpio y mantenible',
-      'Colaboración efectiva',
-      'Soluciones prácticas',
-    ],
-    cita: '“Cada proyecto es una oportunidad de crear algo útil y bien hecho.”',
-    experienciaTitulo: 'Experiencia Profesional',
+    experienciaTitulo: 'Experiencia profesional',
   },
   servicios: {
     titulo: 'Servicios',
@@ -112,9 +102,9 @@ export const es: Diccionario = {
     cta: 'Cuéntame tu proyecto',
   },
   projects: {
-    titulo: 'Mis Proyectos',
+    titulo: 'Proyectos',
     subtitulo:
-      'Sistemas de gestión empresarial y productos propios. Los proyectos privados se desarrollaron para empresas y no exponen código.',
+      'Sistemas de gestión, tiendas online y sitios web en producción. Los sistemas privados se desarrollaron para empresas y no exponen su código.',
     categorias: {
       all: 'Todos',
       fullstack: 'Sistemas',
@@ -122,16 +112,16 @@ export const es: Diccionario = {
       automation: 'Automatización',
     },
     status: {
-      live: 'En Producción',
-      development: 'En Desarrollo',
+      live: 'En producción',
+      development: 'En desarrollo',
       demo: 'Demo',
     },
     destacado: 'Destacado',
     privadoBadge: 'Privado',
     consultar: 'Consultar',
-    verDemo: 'Ver Demo',
+    verDemo: 'Ver sitio',
     codigo: 'Código',
-    githubNotice: 'Las métricas se actualizan automáticamente desde GitHub',
+    capturaAlt: 'Captura de la página principal de',
     estrellas: 'estrellas',
     forks: 'forks',
   },
@@ -148,8 +138,8 @@ export const es: Diccionario = {
   contact: {
     titulo: 'Contacto',
     subtitulo: '¿Tienes un proyecto en mente? Me encantaría escuchar sobre él.',
-    infoTitulo: 'Información de Contacto',
-    infoTexto: 'Siempre estoy interesado en nuevos proyectos. No dudes en contactarme.',
+    infoTitulo: 'Información de contacto',
+    infoTexto: 'Escríbeme por el medio que prefieras: revisamos tu caso y te propongo los siguientes pasos.',
     labels: {
       email: 'Email',
       telefono: 'Teléfono',
@@ -168,8 +158,7 @@ export const es: Diccionario = {
     },
     badgeCopiar: 'Copiar',
     badgeWhatsapp: 'WhatsApp',
-    redesTitulo: 'Sígueme en mis redes',
-    formTitulo: 'Envíame un Mensaje',
+    formTitulo: 'Envíame un mensaje',
     formAviso: 'Al enviar, se abrirá WhatsApp con tu mensaje listo para enviar.',
     form: {
       nombre: 'Nombre',
@@ -290,12 +279,6 @@ export const es: Diccionario = {
       description:
         'Producto propio: frases motivacionales según tu estado de ánimo, con música ambiental, experiencia tipo swipe y panel de administración.',
       technicalNote: 'Frontend React con Zustand; API en Java 21 + Spring Boot con JWT y almacenamiento en Wasabi S3.',
-    },
-    '8': {
-      title: 'Sitio web Ingecem',
-      description:
-        'Sitio corporativo para una empresa de ingeniería: presenta sus servicios, recibe consultas de clientes y está optimizado para buscadores.',
-      technicalNote: 'Diseño responsive con TypeScript, Vite y Tailwind CSS.',
     },
     '9': {
       title: 'Valentino Benites — tienda online',

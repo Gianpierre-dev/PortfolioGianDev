@@ -6,10 +6,9 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import type { FieldError } from 'react-hook-form';
 import { Button } from '@/components/ui/Button';
-import { personalInfo, socialLinks } from '@/data/personal';
+import { personalInfo } from '@/data/personal';
 import { isValidEmail } from '@/lib/utils';
 import { sendContactMessage, WHATSAPP_URL } from '@/lib/email';
-import { etiquetaSocial } from '@/lib/a11y';
 import { ContactForm } from '@/types';
 import { useIdioma } from '@/i18n/LanguageProvider';
 import {
@@ -19,19 +18,11 @@ import {
   Send,
   CheckCircle,
   AlertCircle,
-  Github,
-  Linkedin,
   Clock,
   User,
   MessageSquare,
   Copy
 } from 'lucide-react';
-
-const iconMap = {
-  github: Github,
-  linkedin: Linkedin,
-  mail: Mail,
-};
 
 const CLASES_INPUT =
   'w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors';
@@ -276,33 +267,6 @@ export default function Contact() {
                 </motion.div>
               )}
             </div>
-
-            {/* Social Links */}
-            <motion.div variants={itemVariants} className="pt-6">
-              <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                {t.contact.redesTitulo}
-              </h4>
-              <div className="flex space-x-4">
-                {socialLinks.map((social) => {
-                  const Icon = iconMap[social.icon];
-                  const esExterno = social.icon !== 'mail';
-                  return (
-                    <motion.a
-                      key={social.name}
-                      href={social.url}
-                      target={esExterno ? '_blank' : undefined}
-                      rel={esExterno ? 'noopener noreferrer' : undefined}
-                      aria-label={etiquetaSocial(social, t)}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-500/15 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200"
-                    >
-                      <Icon className="w-5 h-5" aria-hidden="true" />
-                    </motion.a>
-                  );
-                })}
-              </div>
-            </motion.div>
           </motion.div>
 
           {/* Contact Form */}

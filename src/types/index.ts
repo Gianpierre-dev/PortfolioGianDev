@@ -25,7 +25,6 @@ export interface Experience {
   position: string;
   period: string;
   description: string;
-  technologies: string[];
 }
 
 // Tipos para enlaces sociales

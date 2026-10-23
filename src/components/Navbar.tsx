@@ -25,9 +25,9 @@ export default function Navbar() {
 
   const navigation: NavigationItem[] = [
     { name: t.nav.inicio, href: 'hero' },
-    { name: t.nav.about, href: 'about' },
     { name: t.nav.servicios, href: 'services' },
     { name: t.nav.proyectos, href: 'projects' },
+    { name: t.nav.about, href: 'about' },
     { name: t.nav.habilidades, href: 'skills' },
     { name: t.nav.contacto, href: 'contact' },
   ];

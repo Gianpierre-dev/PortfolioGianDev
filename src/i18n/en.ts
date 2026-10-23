@@ -33,36 +33,26 @@ export const en: Diccionario = {
     statementLinea2Pre: 'payroll, HR and SUNAT processes',
     statementLinea2Post: ' for Peruvian companies.',
     prueba: 'Tech Lead at STI GOLD · Systems in production · End-to-end TypeScript',
-    ctaProyectos: 'View Projects',
+    ctaProyectos: 'View projects',
     ctaCV: 'Download CV',
-    ctaContacto: 'Get in Touch',
+    ctaContacto: 'Get in touch',
     scroll: 'Scroll',
   },
   about: {
-    titulo: 'About Me',
-    subtitulo: 'Learn more about my experience, skills and passion for development',
-    bioTitulo: 'About Me',
+    titulo: 'About me',
+    subtitulo: 'Who builds your system, and with what experience.',
     bioParrafos: [
-      'Full Stack Developer specialized in management systems for companies: payroll, human resources, inventory and automation of tax processes (SUNAT).',
-      'I work with TypeScript across the entire stack: NestJS, Prisma and PostgreSQL on the backend; Next.js and Tailwind CSS on the frontend; Astro for corporate sites. My projects are deployed on Railway with cloud storage.',
-      'My goal is to build systems that deliver real business value, with tested code, clean architecture and a great user experience.',
+      'I am a full stack developer working with Peruvian companies that need to move past spreadsheets and manual processes: payroll, human resources, inventory and SUNAT (tax authority) procedures.',
+      'I handle the whole project: I learn your process, propose the solution, build it and leave it running in production. I also lead internal systems development as Tech Lead at STI GOLD.',
+      'I build with modern technology (TypeScript, NestJS, Next.js and PostgreSQL) and automated tests, so the system stays reliable and easy to maintain as your company grows.',
     ],
     stats: {
-      experiencia: 'Years of Experience',
-      proyectos: 'Completed Projects',
+      experiencia: 'Years of experience',
+      proyectos: 'Completed projects',
       ubicacion: 'Location',
     },
     ubicacionValor: 'Peru',
-    cvBoton: 'Download my CV',
-    enfoqueTitulo: 'My Approach to Work',
-    enfoqueBullets: [
-      'Continuous learning',
-      'Clean, maintainable code',
-      'Effective collaboration',
-      'Practical solutions',
-    ],
-    cita: '“Every project is an opportunity to build something useful and well made.”',
-    experienciaTitulo: 'Professional Experience',
+    experienciaTitulo: 'Professional experience',
   },
   servicios: {
     titulo: 'Services',
@@ -112,9 +102,9 @@ export const en: Diccionario = {
     cta: 'Tell me about your project',
   },
   projects: {
-    titulo: 'My Projects',
+    titulo: 'Projects',
     subtitulo:
-      'Enterprise management systems and my own products. Private projects were built for companies and do not expose their code.',
+      'Management systems, online stores and websites in production. Private systems were built for companies and do not expose their code.',
     notaContexto:
       'Context: SUNAT is Peru’s tax authority, and “planilla” is payroll under Peruvian labor regimes.',
     categorias: {
@@ -124,16 +114,16 @@ export const en: Diccionario = {
       automation: 'Automation',
     },
     status: {
-      live: 'In Production',
-      development: 'In Development',
+      live: 'In production',
+      development: 'In development',
       demo: 'Demo',
     },
     destacado: 'Featured',
     privadoBadge: 'Private',
     consultar: 'Inquire',
-    verDemo: 'View Demo',
+    verDemo: 'Visit site',
     codigo: 'Code',
-    githubNotice: 'Metrics are updated automatically from GitHub',
+    capturaAlt: 'Screenshot of the home page of',
     estrellas: 'stars',
     forks: 'forks',
   },
@@ -150,8 +140,8 @@ export const en: Diccionario = {
   contact: {
     titulo: 'Contact',
     subtitulo: 'Have a project in mind? I would love to hear about it.',
-    infoTitulo: 'Contact Information',
-    infoTexto: "I'm always interested in new projects. Feel free to reach out.",
+    infoTitulo: 'Contact information',
+    infoTexto: 'Reach out through whichever channel you prefer: we review your case and I propose the next steps.',
     labels: {
       email: 'Email',
       telefono: 'Phone',
@@ -170,8 +160,7 @@ export const en: Diccionario = {
     },
     badgeCopiar: 'Copy',
     badgeWhatsapp: 'WhatsApp',
-    redesTitulo: 'Follow me on social media',
-    formTitulo: 'Send me a Message',
+    formTitulo: 'Send me a message',
     formAviso: 'When you submit, WhatsApp will open with your message ready to send.',
     form: {
       nombre: 'Name',
@@ -291,12 +280,6 @@ export const en: Diccionario = {
       description:
         'My own product: motivational quotes based on your mood, with ambient music, a swipe experience and an admin panel.',
       technicalNote: 'React frontend with Zustand; Java 21 + Spring Boot API with JWT and Wasabi S3 storage.',
-    },
-    '8': {
-      title: 'Ingecem Website',
-      description:
-        'Corporate website for an engineering company: presents its services, receives client inquiries and is optimized for search engines.',
-      technicalNote: 'Responsive design with TypeScript, Vite and Tailwind CSS.',
     },
     '9': {
       title: 'Valentino Benites — online store',

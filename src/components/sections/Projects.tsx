@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo, useRef } from 'react';
+import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import { useIdioma } from '@/i18n/LanguageProvider';
 import { EASE_SITE } from '@/lib/motion';
@@ -118,8 +119,6 @@ export default function Projects({ metricasGithub }: ProjectsProps) {
     (a, b) => Number(b.featured) - Number(a.featured)
   );
 
-  const hayMetricas = Object.keys(metricasGithub).length > 0;
-
   return (
     <section id="projects" className="relative py-20 bg-white dark:bg-gray-900 overflow-hidden">
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
@@ -207,16 +206,6 @@ export default function Projects({ metricasGithub }: ProjectsProps) {
           ))}
         </motion.ul>
 
-        {/* GitHub Integration Notice */}
-        {hayMetricas && (
-          <div className="mt-10 flex justify-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 px-4 py-2 text-xs text-gray-500 dark:text-gray-400">
-              <Github className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>{t.projects.githubNotice}</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" aria-hidden="true" />
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );
@@ -259,6 +248,21 @@ function ProjectRow({ project, idioma, ahora, t }: {
 
         {/* Contenido */}
         <div className="min-w-0">
+          {project.imagen && (
+            <div className="mb-5 overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
+              <Image
+                src={project.imagen}
+                alt={`${t.projects.capturaAlt} ${textos.title}`}
+                width={1280}
+                height={800}
+                // Ancho real de la columna de contenido: 672 px desde lg; entre md y lg
+                // descuenta las columnas de año y acciones (336 px).
+                sizes="(min-width: 1024px) 672px, (min-width: 768px) calc(100vw - 336px), calc(100vw - 48px)"
+                className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:transform-none motion-reduce:transition-none"
+              />
+            </div>
+          )}
+
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white transition-colors duration-300 group-hover:text-blue-600 dark:group-hover:text-blue-400">
               {textos.title}

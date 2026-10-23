@@ -22,10 +22,11 @@ export default async function HomePage() {
       <SkipLink />
       <Navbar />
       <main id={ID_CONTENIDO_PRINCIPAL} tabIndex={-1} className="min-h-screen bg-white dark:bg-gray-900 focus:outline-none">
+        {/* Orden pensado para un cliente: qué ofrezco, la prueba y después quién soy. */}
         <Hero />
-        <About />
         <Services />
         <Projects metricasGithub={metricasGithub} />
+        <About />
         <Skills />
         <Contact />
       </main>

@@ -15,9 +15,9 @@ export default function Footer() {
   const { t } = useIdioma();
 
   const enlaces = [
-    { href: '#about', texto: t.footer.navegacion.about },
     { href: '#services', texto: t.footer.navegacion.servicios },
     { href: '#projects', texto: t.footer.navegacion.proyectos },
+    { href: '#about', texto: t.footer.navegacion.about },
     { href: '#skills', texto: t.footer.navegacion.habilidades },
     { href: '#contact', texto: t.footer.navegacion.contacto },
   ];

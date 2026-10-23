@@ -19,7 +19,7 @@ export function useScrollProgress(): ScrollProgressReturn {
       setProgress(Math.min(scrollPercent, 100));
 
       // Determinar la sección activa
-      const sections = ['hero', 'about', 'services', 'projects', 'skills', 'contact'];
+      const sections = ['hero', 'services', 'projects', 'about', 'skills', 'contact'];
       let currentSection = 'hero';
 
       sections.forEach((section) => {

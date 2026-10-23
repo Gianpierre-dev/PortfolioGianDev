@@ -53,14 +53,9 @@ export interface DiccionarioAboutStats {
 export interface DiccionarioAbout {
   titulo: string;
   subtitulo: string;
-  bioTitulo: string;
   bioParrafos: string[];
   stats: DiccionarioAboutStats;
   ubicacionValor: string;
-  cvBoton: string;
-  enfoqueTitulo: string;
-  enfoqueBullets: string[];
-  cita: string;
   experienciaTitulo: string;
 }
 
@@ -107,7 +102,8 @@ export interface DiccionarioProjects {
   consultar: string;
   verDemo: string;
   codigo: string;
-  githubNotice: string;
+  // Prefijo del alt de la captura; el título del proyecto se concatena.
+  capturaAlt: string;
   estrellas: string;
   forks: string;
 }
@@ -146,7 +142,6 @@ export interface DiccionarioContact {
   };
   badgeCopiar: string;
   badgeWhatsapp: string;
-  redesTitulo: string;
   formTitulo: string;
   formAviso: string;
   form: {
@@ -218,7 +213,7 @@ export interface Diccionario {
   skills: DiccionarioSkills;
   contact: DiccionarioContact;
   footer: DiccionarioFooter;
-  // Keyed por company (personal.ts mantiene period/technologies/company).
+  // Keyed por company (personal.ts mantiene company y los textos de respaldo).
   experiencias: Record<string, ExperienciaTraducida>;
   // Keyed por id de proyecto (data/proyectos.ts mantiene tech/links/year).
   proyectos: Record<string, ProyectoTraducido>;

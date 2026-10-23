@@ -181,7 +181,7 @@ export default function Hero() {
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' as const }}
               className="cursor-pointer flex flex-col items-center gap-2 text-gray-400 hover:text-white transition-colors duration-300"
-              onClick={() => scrollToSection('about')}
+              onClick={() => scrollToSection('services')}
             >
               <span className="text-sm font-medium">{t.hero.scroll}</span>
               <ChevronDown className="w-8 h-8" aria-hidden="true" />

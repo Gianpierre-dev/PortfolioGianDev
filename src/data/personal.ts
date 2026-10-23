@@ -50,7 +50,7 @@ export const skills: Skill[] = [
   // Database
   { name: "PostgreSQL", category: "database" },
   { name: "MySQL", category: "database" },
-  { name: "MongoDB", category: "database" },
+  { name: "SQL Server", category: "database" },
 
   // Tools
   { name: "Playwright", category: "tools" },
@@ -65,41 +65,35 @@ export const experiences: Experience[] = [
     position: "Tech Lead & Full Stack Developer",
     period: "Enero 2026 - Presente",
     description: "Desarrollo completo de sistemas internos: arquitectura, backend, frontend y deploy. Automatización de consultas SUNAT con Playwright y APIs REST con Spring Boot y NestJS, con almacenamiento de archivos en Wasabi S3.",
-    technologies: ["TypeScript", "NestJS", "Java", "Spring Boot", "Python", "PostgreSQL", "Docker"]
   },
   {
     company: "JJMM",
     position: "Programador",
     period: "Enero 2026 - Presente",
     description: "Desarrollo de software a medida para necesidades operativas de la empresa y automatización de procesos contables con Python.",
-    technologies: ["Python", "React", "TypeScript", "PostgreSQL", "Git"]
   },
   {
     company: "SipnasisCode",
     position: "Full Stack Developer",
     period: "Julio 2025 - Diciembre 2025",
     description: "Desarrollo de múltiples sistemas empresariales para clientes de la agencia, participando en proyectos Full Stack bajo acuerdo de confidencialidad.",
-    technologies: ["TypeScript", "NestJS", "React", "Next.js", "Prisma", "PostgreSQL", "Tailwind CSS"]
   },
   {
     company: "GALDIAZ S.A.C.",
     position: "Programador Informático",
     period: "2024 - Julio 2025",
     description: "Sistema de control de inventario y gestión de stock, automatización de tareas administrativas con Python y macros VBA, y optimización de base de datos SQL Server.",
-    technologies: ["Python", "PHP", "C#", "SQL Server", "Excel VBA", "Power BI"]
   },
   {
     company: "Mr. Sif",
     position: "Front-End Developer & SEO",
     period: "2024",
     description: "Desarrollo de interfaces web con AlpineJS y Tailwind CSS, y gestión de posicionamiento SEO y marketing digital.",
-    technologies: ["AlpineJS", "Tailwind CSS", "Figma", "SEO"]
   },
   {
     company: "Ingecem Perú",
     position: "Desarrollador Web",
     period: "2018 - 2022",
     description: "Desarrollo de sistema de control de inventario en C#, diseño e implementación de interfaces de usuario y apoyo en el levantamiento de requerimientos.",
-    technologies: ["C#", "HTML", "CSS", "JavaScript"]
   }
 ];

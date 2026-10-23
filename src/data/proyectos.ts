@@ -16,6 +16,9 @@ export interface ProyectoBase {
   repoName: string;
   private: boolean;
   links: { demo: string; code: string };
+  // Captura del sitio en vivo (public/images/proyectos, 1280x800). Solo los
+  // proyectos con demo pública la tienen.
+  imagen?: string;
   year: string;
 }
 
@@ -72,6 +75,7 @@ export const proyectos: ProyectoBase[] = [
       demo: 'https://valentinobenites.com',
       code: 'https://github.com/Gianpierre-dev/ValentinoBenites',
     },
+    imagen: '/images/proyectos/valentino-benites.webp',
     year: '2026',
   },
   {
@@ -86,6 +90,7 @@ export const proyectos: ProyectoBase[] = [
       demo: 'https://editorialhtb.com',
       code: 'https://github.com/Gianpierre-dev/Human-Touch-Books',
     },
+    imagen: '/images/proyectos/human-touch-books.webp',
     year: '2026',
   },
   {
@@ -139,6 +144,7 @@ export const proyectos: ProyectoBase[] = [
     repoName: '',
     private: false,
     links: { demo: 'https://tienda-production-3860.up.railway.app', code: '' },
+    imagen: '/images/proyectos/tlacuache-store.webp',
     year: '2026',
   },
   {
@@ -150,20 +156,7 @@ export const proyectos: ProyectoBase[] = [
     repoName: '',
     private: false,
     links: { demo: 'https://mrsif.com.pe', code: '' },
+    imagen: '/images/proyectos/mr-sif.webp',
     year: '2024',
-  },
-  {
-    id: 8,
-    category: 'frontend',
-    featured: false,
-    status: 'live',
-    tech: ['TypeScript', 'Vite', 'Tailwind CSS'],
-    repoName: 'IngecemWeb',
-    private: false,
-    links: {
-      demo: 'https://ingecemperu.com',
-      code: 'https://github.com/Gianpierre-dev/IngecemWeb',
-    },
-    year: '2025',
   },
 ];
