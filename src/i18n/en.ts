@@ -26,6 +26,7 @@ export const en: Diccionario = {
     email: 'Send an email',
     whatsapp: 'Message on WhatsApp',
     nuevaPestana: 'opens in a new tab',
+    fotoPerfil: 'Professional photo of',
   },
   hero: {
     statementLinea1: 'I build the systems that run',

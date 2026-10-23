@@ -81,7 +81,7 @@ export default function Hero() {
                   ) : (
                     <Image
                       src={personalInfo.avatarUrl}
-                      alt={`Foto profesional de ${personalInfo.name}`}
+                      alt={`${t.a11y.fotoPerfil} ${personalInfo.name}`}
                       fill
                       priority
                       sizes="192px"

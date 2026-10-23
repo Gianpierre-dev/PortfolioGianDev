@@ -1,20 +1,12 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
   output: 'standalone',
-  images: {
-    domains: ['avatars.githubusercontent.com'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**.github.io',
-      },
-      {
-        protocol: 'https',
-        hostname: '**.vercel.app',
-      },
-    ],
+  // Las imágenes OG leen las fuentes con fs; el output standalone solo copia
+  // los archivos que detecta en imports, así que se incluyen de forma explícita.
+  outputFileTracingIncludes: {
+    '/opengraph-image': ['./src/assets/fonts/**'],
+    '/twitter-image': ['./src/assets/fonts/**'],
   },
   async headers() {
     return [

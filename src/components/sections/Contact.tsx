@@ -228,7 +228,8 @@ export default function Contact() {
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`${t.a11y.whatsapp}: ${personalInfo.phone} (${t.a11y.nuevaPestana})`}
+                  // El nombre accesible empieza por la etiqueta visible (WCAG 2.5.3).
+                  aria-label={`${t.contact.labels.telefono}: ${personalInfo.phone}. ${t.a11y.whatsapp} (${t.a11y.nuevaPestana})`}
                   className={`${CLASES_TARJETA} ${CLASES_TARJETA_INTERACTIVA}`}
                 >
                   <ContenidoTarjeta

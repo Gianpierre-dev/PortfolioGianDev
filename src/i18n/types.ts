@@ -29,6 +29,8 @@ export interface DiccionarioA11y {
   email: string;
   whatsapp: string;
   nuevaPestana: string;
+  // Prefijo del alt del avatar; el nombre se concatena en el componente.
+  fotoPerfil: string;
 }
 
 export interface DiccionarioHero {
