@@ -3,7 +3,12 @@ import { ContactForm } from '@/types';
 // Número de WhatsApp con código de país (Perú +51), sin "+" ni espacios.
 const WHATSAPP_NUMERO = '51961170946';
 
-export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMERO}`;
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMERO}`;
+
+// Enlace de WhatsApp con un primer mensaje ya escrito: el cliente solo tiene
+// que tocar "Enviar", sin pensar cómo empezar la conversación.
+export const urlWhatsapp = (mensaje: string): string =>
+  `${WHATSAPP_URL}?text=${encodeURIComponent(mensaje)}`;
 
 interface ResultadoEnvio {
   success: boolean;
@@ -23,7 +28,7 @@ ${formData.message}
 ---
 _Enviado desde el formulario de contacto del portfolio_`;
 
-  const whatsappURL = `${WHATSAPP_URL}?text=${encodeURIComponent(message)}`;
+  const whatsappURL = urlWhatsapp(message);
 
   // window.open devuelve null si el navegador bloqueó la ventana emergente.
   // No se pasa 'noopener' como feature porque con él window.open siempre devuelve

@@ -28,6 +28,12 @@ export const en: Diccionario = {
     nuevaPestana: 'opens in a new tab',
     fotoPerfil: 'Professional photo of',
   },
+  whatsapp: {
+    cta: 'Message me on WhatsApp',
+    flotante: 'Message on WhatsApp',
+    mensajeGeneral: 'Hi Gianpierre, I saw your portfolio and would like to talk about a project for my company.',
+    mensajeProyecto: 'Hi Gianpierre, I saw your portfolio and I am interested in a system like',
+  },
   hero: {
     statementLinea1: 'I build the systems that run',
     statementLinea2Pre: 'payroll, HR and SUNAT processes',
@@ -35,7 +41,6 @@ export const en: Diccionario = {
     prueba: 'Tech Lead at STI GOLD · Systems in production · End-to-end TypeScript',
     ctaProyectos: 'View projects',
     ctaCV: 'Download CV',
-    ctaContacto: 'Get in touch',
     scroll: 'Scroll',
   },
   about: {
@@ -99,7 +104,7 @@ export const en: Diccionario = {
         descripcion: 'I put the system into production and keep supporting you after delivery.',
       },
     ],
-    cta: 'Tell me about your project',
+    cta: 'Tell me about your project on WhatsApp',
   },
   projects: {
     titulo: 'Projects',

@@ -4,6 +4,8 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import { useIdioma } from '@/i18n/LanguageProvider';
+import IconoWhatsapp from '@/components/ui/IconoWhatsapp';
+import { urlWhatsapp } from '@/lib/email';
 import { EASE_SITE } from '@/lib/motion';
 import type { Diccionario, Idioma } from '@/i18n/types';
 import { proyectos, type EstadoProyecto, type MetricasRepo, type ProyectoBase } from '@/data/proyectos';
@@ -346,12 +348,15 @@ function ProjectRow({ project, idioma, ahora, t }: {
               </a>
             )}
             {project.private && (
+              // El mensaje ya nombra el sistema: Gian sabe de entrada qué le interesa al cliente.
               <a
-                href="#contact"
-                aria-label={`${t.projects.consultar}: ${textos.title}`}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors duration-200"
+                href={urlWhatsapp(`${t.whatsapp.mensajeProyecto} ${textos.title}.`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${t.projects.consultar}: ${textos.title} (${t.a11y.nuevaPestana})`}
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 transition-colors duration-200"
               >
-                <Lock className="w-4 h-4" aria-hidden="true" />
+                <IconoWhatsapp className="w-4 h-4" />
                 {t.projects.consultar}
               </a>
             )}

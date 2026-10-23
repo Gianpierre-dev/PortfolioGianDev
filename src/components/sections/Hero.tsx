@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import RippleButton from '@/components/ui/RippleButton';
+import IconoWhatsapp from '@/components/ui/IconoWhatsapp';
+import { urlWhatsapp } from '@/lib/email';
 
 import { personalInfo, socialLinks } from '@/data/personal';
 import { scrollToSection, downloadCV } from '@/lib/utils';
@@ -114,8 +116,42 @@ export default function Hero() {
             </p>
           </motion.div>
 
-          {/* Social Links */}
+          {/* Llamados a la acción: WhatsApp es el canal principal de los clientes */}
           <motion.div variants={itemVariants} className="mb-10">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href={urlWhatsapp(t.whatsapp.mensajeGeneral)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${t.whatsapp.cta} (${t.a11y.nuevaPestana})`}
+                className="inline-flex min-w-[200px] items-center justify-center gap-2 rounded-xl bg-green-700 px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-green-900/30 transition-colors duration-200 hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-950"
+              >
+                <IconoWhatsapp className="w-5 h-5" />
+                <span>{t.whatsapp.cta}</span>
+              </a>
+              <RippleButton
+                variant="outlineOnDark"
+                size="lg"
+                onClick={() => scrollToSection('projects')}
+                className="min-w-[200px]"
+              >
+                <span>{t.hero.ctaProyectos}</span>
+                <ChevronDown className="w-5 h-5" aria-hidden="true" />
+              </RippleButton>
+              <RippleButton
+                variant="outlineOnDark"
+                size="lg"
+                onClick={() => downloadCV(idioma)}
+                className="min-w-[200px]"
+              >
+                <Download className="w-5 h-5" aria-hidden="true" />
+                <span>{t.hero.ctaCV}</span>
+              </RippleButton>
+            </div>
+          </motion.div>
+
+          {/* Social Links */}
+          <motion.div variants={itemVariants} className="mb-12">
             <div className="flex justify-center space-x-6">
               {socialLinks.map((social) => {
                 const Icon = iconMap[social.icon];
@@ -135,39 +171,6 @@ export default function Hero() {
                   </motion.a>
                 );
               })}
-            </div>
-          </motion.div>
-
-          {/* Call to Action Buttons */}
-          <motion.div variants={itemVariants} className="mb-12">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <RippleButton
-                variant="primary"
-                size="lg"
-                onClick={() => scrollToSection('projects')}
-                className="min-w-[200px]"
-              >
-                <span>{t.hero.ctaProyectos}</span>
-                <ChevronDown className="w-5 h-5 ml-2" aria-hidden="true" />
-              </RippleButton>
-              <RippleButton
-                variant="outlineOnDark"
-                size="lg"
-                onClick={() => downloadCV(idioma)}
-                className="min-w-[200px]"
-              >
-                <Download className="w-5 h-5 mr-2" aria-hidden="true" />
-                <span>{t.hero.ctaCV}</span>
-              </RippleButton>
-              <RippleButton
-                variant="outlineOnDark"
-                size="lg"
-                onClick={() => scrollToSection('contact')}
-                className="min-w-[200px]"
-              >
-                <Mail className="w-5 h-5 mr-2" aria-hidden="true" />
-                <span>{t.hero.ctaContacto}</span>
-              </RippleButton>
             </div>
           </motion.div>
 

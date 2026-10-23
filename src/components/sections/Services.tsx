@@ -1,9 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Building2, FileSearch, Globe, Users } from 'lucide-react';
+import { Building2, FileSearch, Globe, Users } from 'lucide-react';
+import IconoWhatsapp from '@/components/ui/IconoWhatsapp';
 import { useIdioma } from '@/i18n/LanguageProvider';
-import { scrollToSection } from '@/lib/utils';
+import { urlWhatsapp } from '@/lib/email';
 import { EASE_SITE } from '@/lib/motion';
 
 // Íconos en el mismo orden que t.servicios.items:
@@ -107,14 +108,16 @@ export default function Services() {
           </motion.ol>
 
           <div className="mt-12 flex justify-center">
-            <button
-              type="button"
-              onClick={() => scrollToSection('contact')}
-              className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition-colors duration-200 hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950"
+            <a
+              href={urlWhatsapp(t.whatsapp.mensajeGeneral)}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${t.servicios.cta} (${t.a11y.nuevaPestana})`}
+              className="inline-flex items-center gap-2 rounded-lg bg-green-700 px-6 py-3 font-semibold text-white transition-colors duration-200 hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950"
             >
+              <IconoWhatsapp className="w-5 h-5" />
               {t.servicios.cta}
-              <ArrowRight className="w-4 h-4" aria-hidden="true" />
-            </button>
+            </a>
           </div>
         </div>
       </div>

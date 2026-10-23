@@ -33,6 +33,16 @@ export interface DiccionarioA11y {
   fotoPerfil: string;
 }
 
+// Textos de los accesos a WhatsApp (portada, botón flotante, servicios y
+// proyectos privados). Los mensajes son el primer texto que recibe Gian.
+export interface DiccionarioWhatsapp {
+  cta: string;
+  flotante: string;
+  mensajeGeneral: string;
+  // Se completa con el título del proyecto: "...un sistema como {título}."
+  mensajeProyecto: string;
+}
+
 export interface DiccionarioHero {
   statementLinea1: string;
   statementLinea2Pre: string;
@@ -40,7 +50,6 @@ export interface DiccionarioHero {
   prueba: string;
   ctaProyectos: string;
   ctaCV: string;
-  ctaContacto: string;
   scroll: string;
 }
 
@@ -206,6 +215,7 @@ export interface ProyectoTraducido {
 export interface Diccionario {
   nav: DiccionarioNav;
   a11y: DiccionarioA11y;
+  whatsapp: DiccionarioWhatsapp;
   hero: DiccionarioHero;
   about: DiccionarioAbout;
   servicios: DiccionarioServicios;

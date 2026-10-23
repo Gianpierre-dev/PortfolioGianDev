@@ -8,12 +8,12 @@ import type { FieldError } from 'react-hook-form';
 import { Button } from '@/components/ui/Button';
 import { personalInfo } from '@/data/personal';
 import { isValidEmail } from '@/lib/utils';
-import { sendContactMessage, WHATSAPP_URL } from '@/lib/email';
+import { sendContactMessage, urlWhatsapp } from '@/lib/email';
+import IconoWhatsapp from '@/components/ui/IconoWhatsapp';
 import { ContactForm } from '@/types';
 import { useIdioma } from '@/i18n/LanguageProvider';
 import {
   Mail,
-  Phone,
   MapPin,
   Send,
   CheckCircle,
@@ -199,6 +199,25 @@ export default function Contact() {
 
             {/* Contact Methods */}
             <ul className="space-y-4">
+              {/* WhatsApp primero: es el canal por el que escriben los clientes */}
+              <motion.li variants={itemVariants}>
+                <a
+                  href={urlWhatsapp(t.whatsapp.mensajeGeneral)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  // El nombre accesible empieza por la etiqueta visible (WCAG 2.5.3).
+                  aria-label={`${t.contact.labels.telefono}: ${personalInfo.phone}. ${t.a11y.whatsapp} (${t.a11y.nuevaPestana})`}
+                  className={`${CLASES_TARJETA} ${CLASES_TARJETA_INTERACTIVA}`}
+                >
+                  <ContenidoTarjeta
+                    icon={IconoWhatsapp}
+                    label={t.contact.labels.telefono}
+                    value={personalInfo.phone}
+                    description={t.contact.descripciones.telefono}
+                    badge={{ icon: IconoWhatsapp, texto: t.contact.badgeWhatsapp }}
+                  />
+                </a>
+              </motion.li>
               <motion.li variants={itemVariants}>
                 <button
                   type="button"
@@ -213,24 +232,6 @@ export default function Contact() {
                     badge={{ icon: Copy, texto: t.contact.badgeCopiar }}
                   />
                 </button>
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  // El nombre accesible empieza por la etiqueta visible (WCAG 2.5.3).
-                  aria-label={`${t.contact.labels.telefono}: ${personalInfo.phone}. ${t.a11y.whatsapp} (${t.a11y.nuevaPestana})`}
-                  className={`${CLASES_TARJETA} ${CLASES_TARJETA_INTERACTIVA}`}
-                >
-                  <ContenidoTarjeta
-                    icon={Phone}
-                    label={t.contact.labels.telefono}
-                    value={personalInfo.phone}
-                    description={t.contact.descripciones.telefono}
-                    badge={{ icon: Phone, texto: t.contact.badgeWhatsapp }}
-                  />
-                </a>
               </motion.li>
               <motion.li variants={itemVariants}>
                 <div className={CLASES_TARJETA}>
