@@ -44,37 +44,3 @@ _Enviado desde el formulario de contacto del portfolio_`;
 export const sendContactMessage = async (formData: ContactForm): Promise<ResultadoEnvio> => {
   return sendWhatsApp(formData);
 };
-
-// ===============================
-// BACKUP: Email via API (para futuro si lo necesitas)
-// ===============================
-
-// Función para enviar email via API route (BACKUP - para futuro)
-export const sendEmailViaAPI = async (formData: ContactForm) => {
-  try {
-    const response = await fetch('/api/send-email', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-      }),
-    });
-
-    const result = await response.json();
-
-    if (response.ok && result.success) {
-      return { success: true, message: 'Email enviado correctamente' };
-    }
-
-    console.error('Error en API de email:', result.error);
-    return { success: false, message: result.error || 'Error enviando email' };
-  } catch (error) {
-    console.error('Error conectando con API de email:', error);
-    return { success: false, message: 'Error de conexión con el servidor' };
-  }
-};

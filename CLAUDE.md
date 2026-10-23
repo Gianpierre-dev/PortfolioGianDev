@@ -31,7 +31,7 @@ Es una single page: `src/app/page.tsx` (server component) compone todas las secc
 - `src/data/personal.ts` — datos personales (nombre, título, email, skills, experiencia). Cambios de contenido van aquí, no en los componentes.
 - `src/data/proyectos.ts` — datos técnicos de los proyectos (stack, links, repo, estado). Los textos de cada proyecto viven en el diccionario i18n, keyed por id.
 - `src/lib/github.ts` — integración con la API pública de GitHub (username hardcodeado `Gianpierre-dev`). Usa `next: { revalidate: 3600 }`; solo se llama desde el servidor.
-- `src/lib/email.ts` — el formulario de contacto abre WhatsApp (`wa.me` con mensaje pre-armado) como canal principal; existe también `src/app/api/send-email/route.ts` con nodemailer/EmailJS como alternativa.
+- `src/lib/email.ts` — el formulario de contacto abre WhatsApp (`wa.me` con mensaje pre-armado). No hay API de envío de email (se eliminó: era pública y sin uso).
 - `src/lib/site.ts` — URL canónica (`SITE_URL`) y textos SEO. Fuente única para metadataBase, sitemap, robots y JSON-LD.
 - `src/app/opengraph-image.tsx` y `src/app/twitter-image.tsx` — imagen de previsualización generada con `next/og` (`src/lib/og-imagen.tsx`).
 - `src/types/index.ts` — tipos compartidos (Skill, ContactForm, SocialLink, etc.).
@@ -46,4 +46,5 @@ Es una single page: `src/app/page.tsx` (server component) compone todas las secc
 ## Variables de entorno
 
 - `NEXT_PUBLIC_SITE_URL` — URL pública del sitio. Se inyecta en build; si falta, se usa el dominio de Railway (ver `src/lib/site.ts`). No definir defaults en `next.config.ts` (un default a localhost terminaba en og:image).
-- `EMAILJS_SERVICE_ID`, `EMAILJS_TEMPLATE_ID`, `EMAILJS_PUBLIC_KEY` — opcionales, para el envío de email alternativo.
+- `GITHUB_TOKEN` — opcional (token sin permisos); sube el límite de la API de GitHub de 60 a 5000 req/h.
+- La imagen OG carga Inter desde `src/assets/fonts/` con `fs`; `next.config.ts` la incluye vía `outputFileTracingIncludes` para el output standalone.
