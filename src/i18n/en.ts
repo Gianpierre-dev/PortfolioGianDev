@@ -304,6 +304,12 @@ export const en: Diccionario = {
         'Online store for made-to-order handcrafted handbags and accessories: catalog by category, cart, payment with Yape or Plin (Peruvian mobile wallets) and nationwide shipping, plus a panel where the brand manages its products.',
       technicalNote: 'Monorepo with a Next.js frontend and a NestJS + Prisma API; JWT-protected admin panel, images on S3 and catalog import from Excel.',
     },
+    '12': {
+      title: 'Human Touch Books — publisher website with its own CMS',
+      description:
+        'Website for a Peruvian publisher of school guidance textbooks and a reading program: catalog by grade and line, institutional pages, FAQ and contact form. The publisher edits copy, images, books and pages from its own admin panel, without relying on a developer.',
+      technicalNote: 'Server-rendered Astro with Prisma and PostgreSQL; admin panel with revocable JWT sessions, images optimized with sharp on S3, rate-limited contact form and automated tests.',
+    },
     '10': {
       title: "Tlacuache's Store — outlet catalog",
       description:

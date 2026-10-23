@@ -75,6 +75,20 @@ export const proyectos: ProyectoBase[] = [
     year: '2026',
   },
   {
+    id: 12,
+    category: 'fullstack',
+    featured: false,
+    status: 'live',
+    tech: ['Astro', 'TypeScript', 'Prisma', 'PostgreSQL', 'Tailwind CSS', 'S3'],
+    repoName: 'Human-Touch-Books',
+    private: false,
+    links: {
+      demo: 'https://editorialhtb.com',
+      code: 'https://github.com/Gianpierre-dev/Human-Touch-Books',
+    },
+    year: '2026',
+  },
+  {
     id: 4,
     category: 'automation',
     featured: false,

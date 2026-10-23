@@ -303,6 +303,12 @@ export const es: Diccionario = {
         'Tienda online de carteras y accesorios artesanales hechos a pedido: catálogo por categorías, carrito, pago con Yape o Plin y envíos a todo el Perú, con un panel para que la marca administre sus productos.',
       technicalNote: 'Monorepo con frontend Next.js y API NestJS + Prisma; panel con autenticación JWT, imágenes en S3 e importación del catálogo desde Excel.',
     },
+    '12': {
+      title: 'Human Touch Books — sitio editorial con panel propio',
+      description:
+        'Sitio de una editorial peruana de textos escolares de tutoría y plan lector: catálogo por grado y línea, páginas institucionales, preguntas frecuentes y formulario de contacto. La editorial edita textos, imágenes, libros y páginas desde su propio panel, sin depender de un desarrollador.',
+      technicalNote: 'Astro con renderizado en servidor, Prisma y PostgreSQL; panel con sesiones JWT revocables, imágenes optimizadas con sharp en S3, formulario con límite de intentos y pruebas automatizadas.',
+    },
     '10': {
       title: "Tlacuache's Store — catálogo outlet",
       description:
