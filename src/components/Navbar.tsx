@@ -7,6 +7,8 @@ import { useScrollProgress } from '@/hooks/useScrollProgress';
 import { useTheme } from 'next-themes';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useIdioma } from '@/i18n/LanguageProvider';
+import IconoWhatsapp from '@/components/ui/IconoWhatsapp';
+import { urlWhatsapp } from '@/lib/email';
 
 interface NavigationItem {
   name: string;
@@ -125,8 +127,9 @@ export default function Navbar() {
             </motion.button>
 
             {/* Desktop Navigation */}
+            {/* Sin "Inicio" en desktop: el logo ya lleva arriba y libera espacio para WhatsApp */}
             <ul className="hidden lg:flex items-center space-x-1">
-              {navigation.map((item) => {
+              {navigation.filter((item) => item.href !== 'hero').map((item) => {
                 const activo = activeSection === item.href;
                 const clasesEnlace = sobreHero
                   ? activo
@@ -164,8 +167,20 @@ export default function Navbar() {
               })}
             </ul>
 
-            {/* Acciones: idioma + tema + menú móvil */}
+            {/* Acciones: WhatsApp + idioma + tema + menú móvil */}
             <div className="flex items-center gap-2">
+              {/* Acceso fijo a WhatsApp: integrado a la barra en lugar de una burbuja flotante */}
+              <a
+                href={urlWhatsapp(t.whatsapp.mensajeGeneral)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${t.whatsapp.cta} (${t.a11y.nuevaPestana})`}
+                className="inline-flex items-center gap-2 rounded-xl bg-green-700 px-3 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950"
+              >
+                <IconoWhatsapp className="w-4 h-4" />
+                <span className="hidden sm:inline">WhatsApp</span>
+              </a>
+
               <motion.button
                 type="button"
                 onClick={cambiarIdioma}

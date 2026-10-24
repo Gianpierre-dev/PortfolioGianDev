@@ -27,7 +27,7 @@ npm run lint    # ESLint
 - `src/data/personal.ts` — datos personales, skills y experiencia
 - `src/data/proyectos.ts` — datos técnicos de los proyectos; sus textos viven en `src/i18n/` (ES/EN)
 - `src/lib/github.ts` — métricas de repos públicos vía API de GitHub, en el servidor (caché de 1 hora)
-- `src/lib/email.ts` — el formulario de contacto abre WhatsApp con el mensaje redactado
+- `src/lib/email.ts` y `src/app/api/contacto/route.ts` — enlaces de WhatsApp y envío del formulario de contacto por correo (Resend)
 - `cv/` — fuente HTML de los CV en español e inglés; los PDF se publican en `public/documents/`
 
 ## Variables de entorno
@@ -35,6 +35,8 @@ npm run lint    # ESLint
 ```env
 NEXT_PUBLIC_SITE_URL=https://tu-dominio   # URL pública del sitio (se inyecta en build)
 GITHUB_TOKEN=...                          # Opcional: sube el límite de la API de GitHub
+RESEND_API_KEY=...                        # Envío del formulario de contacto por correo
+CONTACTO_EMAIL_DESTINO=...                # Opcional: por defecto el email de personal.ts
 ```
 
 ## Deploy en Railway

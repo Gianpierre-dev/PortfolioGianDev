@@ -10,42 +10,26 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMERO}`;
 export const urlWhatsapp = (mensaje: string): string =>
   `${WHATSAPP_URL}?text=${encodeURIComponent(mensaje)}`;
 
-interface ResultadoEnvio {
-  success: boolean;
-}
+// Resultado del envío del formulario, alineado con los códigos de /api/contacto.
+export type ResultadoContacto = 'enviado' | 'limite' | 'no-configurado' | 'error';
 
-// Abre WhatsApp con el mensaje del formulario ya redactado (MÉTODO PRINCIPAL).
-export const sendWhatsApp = (formData: ContactForm): ResultadoEnvio => {
-  const message = `*Nuevo mensaje desde el portfolio*
-
-*Nombre:* ${formData.name}
-*Email:* ${formData.email}
-*Asunto:* ${formData.subject}
-
-*Mensaje:*
-${formData.message}
-
----
-_Enviado desde el formulario de contacto del portfolio_`;
-
-  const whatsappURL = urlWhatsapp(message);
-
-  // window.open devuelve null si el navegador bloqueó la ventana emergente.
-  // No se pasa 'noopener' como feature porque con él window.open siempre devuelve
-  // null y no se podría detectar el bloqueo; se corta el opener a mano.
-  const ventana = window.open(whatsappURL, '_blank');
-  if (!ventana) {
-    // Ventana bloqueada (Safari iOS, bloqueadores): se navega en la misma pestaña
-    // para que el mensaje no se pierda.
-    window.location.href = whatsappURL;
-    return { success: true };
+// Envía el formulario por correo a través de /api/contacto. `sitioWeb` es el
+// campo trampa contra bots: una persona lo deja vacío.
+export async function enviarFormularioContacto(
+  datos: ContactForm,
+  sitioWeb: string
+): Promise<ResultadoContacto> {
+  try {
+    const respuesta = await fetch('/api/contacto', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...datos, sitioWeb }),
+    });
+    if (respuesta.ok) return 'enviado';
+    if (respuesta.status === 429) return 'limite';
+    if (respuesta.status === 503) return 'no-configurado';
+    return 'error';
+  } catch {
+    return 'error';
   }
-
-  ventana.opener = null;
-  return { success: true };
-};
-
-// Función principal de contacto: hoy el único canal es WhatsApp.
-export const sendContactMessage = async (formData: ContactForm): Promise<ResultadoEnvio> => {
-  return sendWhatsApp(formData);
-};
+}

@@ -1,8 +1,6 @@
 import Navbar from '@/components/Navbar';
 import SkipLink from '@/components/SkipLink';
-import Footer from '@/components/Footer';
-import BotonWhatsappFlotante from '@/components/BotonWhatsappFlotante';
-import Hero from '@/components/sections/Hero';
+import Footer from '@/components/Footer';import Hero from '@/components/sections/Hero';
 import About from '@/components/sections/About';
 import Services from '@/components/sections/Services';
 import Projects from '@/components/sections/Projects';
@@ -32,7 +30,6 @@ export default async function HomePage() {
         <Contact />
       </main>
       <Footer />
-      <BotonWhatsappFlotante />
     </>
   );
 }

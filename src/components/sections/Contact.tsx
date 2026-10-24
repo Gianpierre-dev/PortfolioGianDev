@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { ComponentType } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
@@ -8,7 +8,7 @@ import type { FieldError } from 'react-hook-form';
 import { Button } from '@/components/ui/Button';
 import { personalInfo } from '@/data/personal';
 import { isValidEmail } from '@/lib/utils';
-import { sendContactMessage, urlWhatsapp } from '@/lib/email';
+import { enviarFormularioContacto, urlWhatsapp } from '@/lib/email';
 import IconoWhatsapp from '@/components/ui/IconoWhatsapp';
 import { ContactForm } from '@/types';
 import { useIdioma } from '@/i18n/LanguageProvider';
@@ -97,6 +97,8 @@ export default function Contact() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [submitMessage, setSubmitMessage] = useState('');
   const [copyNotification, setCopyNotification] = useState('');
+  // Campo trampa contra bots: fuera de react-hook-form para no validarlo.
+  const sitioWebRef = useRef<HTMLInputElement>(null);
 
   const {
     register,
@@ -120,23 +122,18 @@ export default function Contact() {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
-    try {
-      const result = await sendContactMessage(data);
+    const resultado = await enviarFormularioContacto(data, sitioWebRef.current?.value ?? '');
+    setIsSubmitting(false);
 
-      if (result.success) {
-        setSubmitStatus('success');
-        setSubmitMessage(t.contact.mensajes.exito);
-        reset();
-      } else {
-        setSubmitStatus('error');
-        setSubmitMessage(t.contact.mensajes.error);
-      }
-    } catch {
-      setSubmitStatus('error');
-      setSubmitMessage(t.contact.mensajes.error);
-    } finally {
-      setIsSubmitting(false);
+    if (resultado === 'enviado') {
+      setSubmitStatus('success');
+      setSubmitMessage(t.contact.mensajes.exito);
+      reset();
+      return;
     }
+
+    setSubmitStatus('error');
+    setSubmitMessage(resultado === 'limite' ? t.contact.mensajes.limite : t.contact.mensajes.error);
   };
 
   const containerVariants = {
@@ -379,6 +376,12 @@ export default function Contact() {
                 <ErrorCampo id="message-error" error={errors.message} />
               </motion.div>
 
+              {/* Campo trampa: oculto para personas y lectores de pantalla; los bots lo completan */}
+              <div className="absolute -left-[9999px] w-px h-px overflow-hidden" aria-hidden="true">
+                <label htmlFor="sitio-web">{t.contact.form.trampa}</label>
+                <input ref={sitioWebRef} type="text" id="sitio-web" name="sitio-web" tabIndex={-1} autoComplete="off" />
+              </div>
+
               {/* Submit Button */}
               <motion.div variants={itemVariants}>
                 <Button
@@ -418,7 +421,23 @@ export default function Contact() {
                     ) : (
                       <AlertCircle className="w-5 h-5 mr-2 shrink-0" aria-hidden="true" />
                     )}
-                    {submitMessage}
+                    <span>
+                      {submitMessage}
+                      {/* Si el correo falla, el contacto no se pierde: WhatsApp a un clic */}
+                      {submitStatus === 'error' && (
+                        <>
+                          {' '}
+                          <a
+                            href={urlWhatsapp(t.whatsapp.mensajeGeneral)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-semibold underline underline-offset-2"
+                          >
+                            {t.whatsapp.cta}
+                          </a>
+                        </>
+                      )}
+                    </span>
                   </motion.div>
                 )}
               </div>

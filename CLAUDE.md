@@ -31,7 +31,8 @@ Es una single page: `src/app/page.tsx` (server component) compone todas las secc
 - `src/data/personal.ts` — datos personales (nombre, título, email, skills, experiencia). Cambios de contenido van aquí, no en los componentes.
 - `src/data/proyectos.ts` — datos técnicos de los proyectos (stack, links, repo, estado). Los textos de cada proyecto viven en el diccionario i18n, keyed por id.
 - `src/lib/github.ts` — integración con la API pública de GitHub (username hardcodeado `Gianpierre-dev`). Usa `next: { revalidate: 3600 }`; solo se llama desde el servidor.
-- `src/lib/email.ts` — el formulario de contacto abre WhatsApp (`wa.me` con mensaje pre-armado). No hay API de envío de email (se eliminó: era pública y sin uso).
+- `src/lib/email.ts` — `urlWhatsapp(mensaje)` arma los enlaces `wa.me` con mensaje pre-escrito (navbar, hero, servicios, proyectos privados, contacto) y `enviarFormularioContacto` envía el formulario a `/api/contacto`.
+- `src/app/api/contacto/route.ts` — envía el formulario por correo con la API REST de Resend (sin SDK). Valida en servidor, tiene campo trampa (`sitioWeb`) y límite de 3 envíos por IP cada 10 min en memoria. Sin `RESEND_API_KEY` responde 503 y el formulario ofrece WhatsApp.
 - `src/lib/site.ts` — URL canónica (`SITE_URL`) y textos SEO. Fuente única para metadataBase, sitemap, robots y JSON-LD.
 - `src/app/opengraph-image.tsx` y `src/app/twitter-image.tsx` — imagen de previsualización generada con `next/og` (`src/lib/og-imagen.tsx`).
 - `src/types/index.ts` — tipos compartidos (Skill, ContactForm, SocialLink, etc.).
@@ -47,4 +48,7 @@ Es una single page: `src/app/page.tsx` (server component) compone todas las secc
 
 - `NEXT_PUBLIC_SITE_URL` — URL pública del sitio. Se inyecta en build; si falta, se usa el dominio de Railway (ver `src/lib/site.ts`). No definir defaults en `next.config.ts` (un default a localhost terminaba en og:image).
 - `GITHUB_TOKEN` — opcional (token sin permisos); sube el límite de la API de GitHub de 60 a 5000 req/h.
+- `RESEND_API_KEY` — necesaria para que el formulario de contacto envíe correos.
+- `CONTACTO_EMAIL_DESTINO` — opcional; por defecto el email de `personal.ts`. Sin dominio verificado en Resend, solo puede ser el email de la cuenta de Resend.
+- `CONTACTO_EMAIL_REMITENTE` — opcional; requiere dominio verificado (por defecto `onboarding@resend.dev`).
 - La imagen OG carga Inter desde `src/assets/fonts/` con `fs`; `next.config.ts` la incluye vía `outputFileTracingIncludes` para el output standalone.

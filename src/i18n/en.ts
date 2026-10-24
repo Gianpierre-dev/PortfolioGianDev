@@ -30,7 +30,6 @@ export const en: Diccionario = {
   },
   whatsapp: {
     cta: 'Message me on WhatsApp',
-    flotante: 'Message on WhatsApp',
     mensajeGeneral: 'Hi Gianpierre, I saw your portfolio and would like to talk about a project for my company.',
     mensajeProyecto: 'Hi Gianpierre, I saw your portfolio and I am interested in a system like',
   },
@@ -166,7 +165,7 @@ export const en: Diccionario = {
     badgeCopiar: 'Copy',
     badgeWhatsapp: 'WhatsApp',
     formTitulo: 'Send me a message',
-    formAviso: 'When you submit, WhatsApp will open with your message ready to send.',
+    formAviso: 'It goes straight to my inbox and I will reply to the address you provide.',
     form: {
       nombre: 'Name',
       email: 'Email',
@@ -176,8 +175,9 @@ export const en: Diccionario = {
       emailPlaceholder: 'you@email.com',
       asuntoPlaceholder: 'Payroll system / Automation / Website',
       mensajePlaceholder: 'Tell me about your project or inquiry...',
-      enviar: 'Send via WhatsApp',
-      enviando: 'Opening WhatsApp...',
+      enviar: 'Send message',
+      enviando: 'Sending...',
+      trampa: 'Leave this field empty',
     },
     validaciones: {
       nombreRequerido: 'Name is required',
@@ -191,8 +191,9 @@ export const en: Diccionario = {
     },
     mensajes: {
       copiado: 'Email copied to clipboard.',
-      exito: 'WhatsApp opened with your message. Just send it from there. I will get back to you soon.',
-      error: 'WhatsApp could not be opened. You can write to me directly by email or phone.',
+      exito: 'Message sent. I will get back to you soon by email.',
+      error: 'The message could not be sent. In the meantime, you can reach me directly:',
+      limite: 'I already received your recent messages. If you need anything else, reach me directly:',
     },
   },
   footer: {

@@ -30,7 +30,6 @@ export const es: Diccionario = {
   },
   whatsapp: {
     cta: 'Escríbeme por WhatsApp',
-    flotante: 'Escribir por WhatsApp',
     mensajeGeneral: 'Hola Gianpierre, vi tu portfolio y quiero conversar sobre un proyecto para mi empresa.',
     mensajeProyecto: 'Hola Gianpierre, vi tu portfolio y me interesa un sistema como',
   },
@@ -164,7 +163,7 @@ export const es: Diccionario = {
     badgeCopiar: 'Copiar',
     badgeWhatsapp: 'WhatsApp',
     formTitulo: 'Envíame un mensaje',
-    formAviso: 'Al enviar, se abrirá WhatsApp con tu mensaje listo para enviar.',
+    formAviso: 'Llega directo a mi correo y te respondo a la dirección que indiques.',
     form: {
       nombre: 'Nombre',
       email: 'Email',
@@ -174,8 +173,9 @@ export const es: Diccionario = {
       emailPlaceholder: 'tu@email.com',
       asuntoPlaceholder: 'Sistema de planillas / Automatización / Sitio web',
       mensajePlaceholder: 'Cuéntame sobre tu proyecto o consulta...',
-      enviar: 'Enviar por WhatsApp',
-      enviando: 'Abriendo WhatsApp...',
+      enviar: 'Enviar mensaje',
+      enviando: 'Enviando...',
+      trampa: 'No completes este campo',
     },
     validaciones: {
       nombreRequerido: 'El nombre es requerido',
@@ -189,9 +189,9 @@ export const es: Diccionario = {
     },
     mensajes: {
       copiado: 'Email copiado al portapapeles.',
-      exito: 'Se abrió WhatsApp con tu mensaje. Solo falta que lo envíes desde allí. Te responderé pronto.',
-      error:
-        'No se pudo abrir WhatsApp. Puedes escribirme directamente a mi email o a mi número de teléfono.',
+      exito: 'Mensaje enviado. Te responderé pronto a tu correo.',
+      error: 'No se pudo enviar el mensaje. Mientras tanto, puedes escribirme directamente:',
+      limite: 'Ya recibí tus mensajes recientes. Si necesitas algo más, escríbeme directamente:',
     },
   },
   footer: {
