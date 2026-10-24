@@ -71,17 +71,17 @@ export const es: Diccionario = {
       {
         titulo: 'Automatización de procesos SUNAT',
         beneficio:
-          'Descarga y clasifica comprobantes electrónicos de forma masiva, sin horas de trabajo manual en el portal SUNAT.',
+          'Descarga y clasifica de forma masiva facturas, boletas y guías de remisión del portal SUNAT, sin horas de trabajo manual ni descargas una por una.',
       },
       {
         titulo: 'Sistemas de gestión para estudios contables',
         beneficio:
-          'Cronogramas de vencimientos, alertas, parte diario del equipo y consultas de RUC y DNI en un solo lugar.',
+          'Cronogramas de vencimientos con alertas antes de cada fecha límite, parte diario del equipo y consultas de RUC, DNI y tipo de cambio en un solo lugar.',
       },
       {
         titulo: 'Sitios web y tiendas online',
         beneficio:
-          'Una web o tienda online profesional, rápida y adaptada a móviles: catálogo, carrito, pagos con Yape o Plin y pedidos por WhatsApp, optimizada para que tus clientes te encuentren en Google.',
+          'Web o tienda online rápida y adaptada a móviles: catálogo, carrito, pagos con Yape o Plin y pedidos por WhatsApp, lista para que tus clientes te encuentren en Google.',
       },
     ],
     procesoTitulo: 'Cómo trabajo',

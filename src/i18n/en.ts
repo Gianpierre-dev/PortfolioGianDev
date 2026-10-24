@@ -71,17 +71,17 @@ export const en: Diccionario = {
       {
         titulo: 'SUNAT process automation',
         beneficio:
-          'Bulk-downloads and classifies electronic receipts from SUNAT (Peru’s tax authority), with no hours of manual work on its portal.',
+          'Bulk-downloads and classifies invoices, receipts and shipping guides from the SUNAT (Peru’s tax authority) portal, with no hours of manual, one-by-one downloads.',
       },
       {
         titulo: 'Management systems for accounting firms',
         beneficio:
-          'Tax due-date schedules, alerts, the team’s daily work log and RUC/DNI lookups in one place.',
+          'Tax due-date schedules with alerts before every deadline, the team’s daily work log and RUC, DNI and exchange-rate lookups in one place.',
       },
       {
         titulo: 'Websites and online stores',
         beneficio:
-          'A professional, fast, mobile-friendly website or online store: catalog, cart, local payment methods and WhatsApp ordering, optimized so your clients can find you on Google.',
+          'A fast, mobile-friendly website or online store: catalog, cart, local payment methods and WhatsApp ordering, ready for your clients to find you on Google.',
       },
     ],
     procesoTitulo: 'How I work',

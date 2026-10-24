@@ -87,7 +87,7 @@ function ContenidoTarjeta({ icon: Icon, label, value, description, badge }: Tarj
 }
 
 const CLASES_TARJETA =
-  'block w-full bg-gray-50 dark:bg-gray-800 rounded-lg p-5 border border-gray-200 dark:border-gray-700 transition-all duration-200';
+  'flex items-center w-full h-full bg-gray-50 dark:bg-gray-800 rounded-lg p-5 border border-gray-200 dark:border-gray-700 transition-all duration-200';
 const CLASES_TARJETA_INTERACTIVA =
   'hover:shadow-lg hover:border-blue-300 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-700 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500';
 
@@ -186,19 +186,20 @@ export default function Contact() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="space-y-8"
+            className="flex flex-col gap-8"
           >
-            <motion.div variants={itemVariants} className="mb-8">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            <motion.div variants={itemVariants}>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                 {t.contact.infoTitulo}
               </h3>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
+              <p className="text-gray-600 dark:text-gray-300">
                 {t.contact.infoTexto}
               </p>
             </motion.div>
 
-            {/* Contact Methods */}
-            <ul className="space-y-4">
+            {/* Contact Methods: en desktop las tarjetas reparten el alto del formulario
+                para que ambas columnas terminen a la misma altura. */}
+            <ul className="space-y-4 lg:flex-1 lg:grid lg:auto-rows-fr lg:gap-4 lg:space-y-0">
               {/* WhatsApp primero: es el canal por el que escriben los clientes */}
               <motion.li variants={itemVariants}>
                 <a

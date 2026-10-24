@@ -242,7 +242,7 @@ function ProjectRow({ project, idioma, ahora, t }: {
 
   return (
     <motion.li variants={FILA_VARIANTS} className="group">
-      <div className="grid grid-cols-1 gap-x-6 gap-y-4 rounded-2xl px-4 py-7 -mx-4 transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-gray-800/60 md:grid-cols-[3.5rem_minmax(0,1fr)_11.5rem]">
+      <div className="grid grid-cols-1 gap-x-6 gap-y-4 rounded-2xl px-4 py-7 -mx-4 transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-gray-800/60 md:grid-cols-[3.5rem_minmax(0,1fr)_16rem]">
         {/* Año */}
         <span className="font-mono text-sm tabular-nums text-gray-400 dark:text-gray-500 md:pt-1">
           {project.year}
@@ -250,21 +250,6 @@ function ProjectRow({ project, idioma, ahora, t }: {
 
         {/* Contenido */}
         <div className="min-w-0">
-          {project.imagen && (
-            <div className="mb-5 overflow-hidden rounded-xl border border-gray-200 dark:border-gray-800 shadow-sm">
-              <Image
-                src={project.imagen}
-                alt={`${t.projects.capturaAlt} ${textos.title}`}
-                width={1280}
-                height={800}
-                // Ancho real de la columna de contenido: 672 px desde lg; entre md y lg
-                // descuenta las columnas de año y acciones (336 px).
-                sizes="(min-width: 1024px) 672px, (min-width: 768px) calc(100vw - 336px), calc(100vw - 48px)"
-                className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:transform-none motion-reduce:transition-none"
-              />
-            </div>
-          )}
-
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white transition-colors duration-300 group-hover:text-blue-600 dark:group-hover:text-blue-400">
               {textos.title}
@@ -296,8 +281,23 @@ function ProjectRow({ project, idioma, ahora, t }: {
           </p>
         </div>
 
-        {/* Estado, métricas y accesos */}
+        {/* Captura, estado y accesos. La captura vive en esta columna para que la fila
+            mantenga la misma altura que las demás y no deje la columna vacía. */}
         <div className="flex flex-col gap-3 md:items-end md:pt-1">
+          {project.imagen && (
+            <div className="w-full overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 shadow-sm">
+              <Image
+                src={project.imagen}
+                alt={`${t.projects.capturaAlt} ${textos.title}`}
+                width={1280}
+                height={800}
+                // Desde md la columna mide 16rem; en móvil ocupa el ancho de la página.
+                sizes="(min-width: 768px) 256px, calc(100vw - 48px)"
+                className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none motion-reduce:transition-none"
+              />
+            </div>
+          )}
+
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1 md:justify-end">
             <StatusBadge status={project.status} t={t} />
             {project.lastUpdate && ahora !== null && (
