@@ -7,7 +7,7 @@ export const en: Diccionario = {
     about: 'About',
     servicios: 'Services',
     proyectos: 'Projects',
-    habilidades: 'Skills',
+    habilidades: 'Stack',
     contacto: 'Contact',
     rolLogo: 'Full Stack Developer',
     irInicio: 'Go to home',
@@ -40,7 +40,6 @@ export const en: Diccionario = {
     prueba: 'Tech Lead at STI GOLD · Systems in production · End-to-end TypeScript',
     ctaProyectos: 'View projects',
     ctaCV: 'Download CV',
-    scroll: 'Scroll',
   },
   about: {
     titulo: 'About me',
@@ -111,19 +110,16 @@ export const en: Diccionario = {
       'Management systems, online stores and websites in production. Private systems were built for companies and do not expose their code.',
     notaContexto:
       'Context: SUNAT is Peru’s tax authority, and “planilla” is payroll under Peruvian labor regimes.',
-    categorias: {
-      all: 'All',
-      fullstack: 'Systems',
-      frontend: 'Frontend',
-      automation: 'Automation',
-    },
     status: {
       live: 'In production',
       development: 'In development',
       demo: 'Demo',
     },
-    destacado: 'Featured',
     privadoBadge: 'Private',
+    datosClave: 'Key facts',
+    actualizado: 'Code updated',
+    otrosTitulo: 'Personal projects',
+    otrosDescripcion: 'Products and tools I build on my own, with public source code.',
     consultar: 'Inquire',
     verDemo: 'Visit site',
     codigo: 'Code',
@@ -143,12 +139,17 @@ export const en: Diccionario = {
   },
   contact: {
     titulo: 'Contact',
-    subtitulo: 'Have a project in mind? I would love to hear about it.',
-    infoTitulo: 'Contact information',
-    infoTexto: 'Reach out through whichever channel you prefer: we review your case and I propose the next steps.',
+    subtitulo: 'Tell me what your company needs and I will propose the next steps.',
+    infoTitulo: 'The fastest way: WhatsApp',
+    infoTexto: 'Message me and we will talk about your current process and what you want to solve.',
+    garantias: [
+      'I reply the same business day.',
+      'The first conversation to understand your project is free of charge.',
+      'I work under a confidentiality agreement covering your company’s data.',
+    ],
     labels: {
       email: 'Email',
-      telefono: 'Phone',
+      telefono: 'WhatsApp',
       ubicacion: 'Location',
       horario: 'Hours',
     },
@@ -158,13 +159,12 @@ export const en: Diccionario = {
     },
     descripciones: {
       email: 'Click to copy the email',
-      telefono: 'Click to message on WhatsApp',
+      telefono: 'Tap to open the chat',
       ubicacion: 'Available for remote work',
       horario: 'Peru time (UTC-5)',
     },
     badgeCopiar: 'Copy',
-    badgeWhatsapp: 'WhatsApp',
-    formTitulo: 'Send me a message',
+    formTitulo: 'Prefer email?',
     formAviso: 'It goes straight to my inbox and I will reply to the address you provide.',
     form: {
       nombre: 'Name',
@@ -204,7 +204,7 @@ export const en: Diccionario = {
       about: 'About',
       servicios: 'Services',
       proyectos: 'Projects',
-      habilidades: 'Skills',
+      habilidades: 'Stack',
       contacto: 'Contact',
     },
     contactoTitulo: 'Contact',
@@ -255,19 +255,22 @@ export const en: Diccionario = {
       title: 'Multi-Company Payroll System',
       description:
         'Calculates payroll for Peru’s 6 private-sector labor regimes and generates payslips, for several companies at once. Built for teams that manage the payroll of more than one company.',
-      technicalNote: 'Hexagonal architecture, 370+ automated tests and a blocking CI.',
+      technicalNote: 'More than 370 automated tests that run before every change.',
+      datosClave: ['6 labor regimes', 'Several companies in one installation', 'Payslips'],
     },
     '2': {
       title: 'SIGEMYPE',
       description:
         'Organizes an accounting firm’s work: SUNAT tax due-date schedules, alerts before every deadline, the team’s daily work log and automated RUC, DNI and exchange-rate lookups.',
-      technicalNote: 'Turborepo monorepo, Excel import, 120+ tests and security hardening.',
+      technicalNote: 'Imports data from Excel and has more than 120 automated tests.',
+      datosClave: ['SUNAT schedule with alerts', 'Team daily work log', 'RUC, DNI and exchange-rate lookups'],
     },
     '3': {
       title: 'Multi-Company HR System',
       description:
         'Centralizes staff records, contracts and documents for several companies, and generates print-ready ID badges and cards as PDFs.',
-      technicalNote: 'JWT authentication, Zod validation and deployment on Railway.',
+      technicalNote: 'Username and password access, with data validation on every form.',
+      datosClave: ['Several companies', 'Staff records and contracts', 'PDF ID cards'],
     },
     '4': {
       title: 'SUNAT Automation',

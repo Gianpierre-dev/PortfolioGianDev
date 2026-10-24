@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, useInView } from 'framer-motion';
 import { useIdioma } from '@/i18n/LanguageProvider';
@@ -9,27 +9,7 @@ import { urlWhatsapp } from '@/lib/email';
 import { EASE_SITE } from '@/lib/motion';
 import type { Diccionario, Idioma } from '@/i18n/types';
 import { proyectos, type EstadoProyecto, type MetricasRepo, type ProyectoBase } from '@/data/proyectos';
-import {
-  ExternalLink,
-  Github,
-  Star,
-  Code2,
-  Monitor,
-  Lock,
-  Database,
-  Zap,
-  GitBranch,
-  Bot
-} from 'lucide-react';
-
-const categories = [
-  { id: 'all', icon: Code2 },
-  { id: 'fullstack', icon: Database },
-  { id: 'frontend', icon: Monitor },
-  { id: 'automation', icon: Bot }
-] as const;
-
-type IdCategoria = (typeof categories)[number]['id'];
+import { ChevronDown, ExternalLink, Github, Star, Lock, GitBranch, Check } from 'lucide-react';
 
 // Un solo indicador de estado por fila: punto de color + etiqueta.
 const statusStyles: Record<EstadoProyecto, { dot: string; text: string }> = {
@@ -37,6 +17,9 @@ const statusStyles: Record<EstadoProyecto, { dot: string; text: string }> = {
   development: { dot: 'bg-amber-500', text: 'text-amber-700 dark:text-amber-400' },
   demo: { dot: 'bg-purple-500', text: 'text-purple-700 dark:text-purple-400' }
 };
+
+// Enlaces de acción con área táctil de 44 px de alto como mínimo.
+const CLASES_ENLACE = 'inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold transition-colors duration-200';
 
 type ProjectWithMetrics = ProyectoBase & {
   metrics: { stars: number; forks: number };
@@ -76,11 +59,7 @@ function useAhora(): number | null {
 
 export default function Projects({ metricasGithub }: ProjectsProps) {
   const { t, idioma } = useIdioma();
-  const [selectedCategory, setSelectedCategory] = useState<IdCategoria>('all');
   const listaRef = useRef<HTMLUListElement>(null);
-  // El reveal se controla con un flag propio, no con whileInView por fila:
-  // whileInView + once:true no alcanza a las filas que se montan después
-  // (al cambiar de filtro) y las dejaba en opacity 0 de forma permanente.
   const listaEnVista = useInView(listaRef, { once: true, amount: 0.05 });
   const ahora = useAhora();
 
@@ -97,99 +76,36 @@ export default function Projects({ metricasGithub }: ProjectsProps) {
     };
   });
 
-  // Los contadores se derivan de los datos: agregar un proyecto no exige
-  // recordar actualizar un número a mano.
-  const conteos = useMemo(
-    () =>
-      proyectos.reduce<Record<string, number>>(
-        (acc, project) => {
-          acc[project.category] = (acc[project.category] ?? 0) + 1;
-          return acc;
-        },
-        { all: proyectos.length }
-      ),
-    []
-  );
-
-  const filteredProjects =
-    selectedCategory === 'all'
-      ? projects
-      : projects.filter(project => project.category === selectedCategory);
-
-  // El destacado encabeza la lista; comparte la misma gramática visual que el resto.
-  const orderedProjects = [...filteredProjects].sort(
-    (a, b) => Number(b.featured) - Number(a.featured)
-  );
+  // El trabajo para clientes es la prueba principal; los proyectos propios
+  // quedan plegados para no diluirla.
+  const deClientes = projects.filter(project => project.ambito === 'cliente');
+  const propios = projects.filter(project => project.ambito === 'propio');
 
   return (
-    <section id="projects" className="relative py-20 bg-white dark:bg-gray-900 overflow-hidden">
+    <section id="projects" className="relative py-20 bg-white dark:bg-gray-950 overflow-hidden">
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         {/* Header */}
-        <div className="text-center mb-14">
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="flex items-center justify-center gap-3 mb-4"
-          >
-            <div className="p-3 bg-blue-600 rounded-2xl shadow-sm">
-              <Zap className="w-6 h-6 text-white" aria-hidden="true" />
-            </div>
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
-              {t.projects.titulo}
-            </h2>
-          </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-400 leading-relaxed"
-          >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="text-center mb-10"
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            {t.projects.titulo}
+          </h2>
+          <p className="max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
             {t.projects.subtitulo}
-          </motion.p>
-
+          </p>
           {t.projects.notaContexto && (
             <p className="max-w-2xl mx-auto mt-3 text-sm italic text-gray-500 dark:text-gray-400">
               {t.projects.notaContexto}
             </p>
           )}
-        </div>
+        </motion.div>
 
-        {/* Categories */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-4">
-          {categories.map((category, index) => (
-            <motion.button
-              key={category.id}
-              type="button"
-              onClick={() => setSelectedCategory(category.id)}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
-              aria-pressed={selectedCategory === category.id}
-              className={`group flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-300 ${
-                selectedCategory === category.id
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 hover:text-gray-900 dark:hover:text-gray-200'
-              }`}
-            >
-              <category.icon className="w-4 h-4" aria-hidden="true" />
-              <span>{t.projects.categorias[category.id]}</span>
-              <span
-                className={`text-xs font-mono tabular-nums ${
-                  selectedCategory === category.id ? 'text-white/70' : 'text-gray-400 dark:text-gray-500'
-                }`}
-              >
-                {conteos[category.id] ?? 0}
-              </span>
-            </motion.button>
-          ))}
-        </div>
-
-        {/* Lista de proyectos */}
+        {/* Trabajo para clientes */}
         <motion.ul
           ref={listaRef}
           className="divide-y divide-gray-200 dark:divide-gray-800"
@@ -197,17 +113,43 @@ export default function Projects({ metricasGithub }: ProjectsProps) {
           animate={listaEnVista ? 'visible' : 'hidden'}
           variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
         >
-          {orderedProjects.map((project) => (
-            <ProjectRow
-              key={project.id}
-              project={project}
-              idioma={idioma}
-              ahora={ahora}
-              t={t}
-            />
+          {deClientes.map((project) => (
+            <ProjectRow key={project.id} project={project} idioma={idioma} ahora={ahora} t={t} />
           ))}
         </motion.ul>
 
+        {/* Proyectos propios: plegados por defecto */}
+        {propios.length > 0 && (
+          <details className="group/otros mt-10 rounded-2xl border border-gray-200 dark:border-gray-800">
+            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 rounded-2xl px-5 py-4 hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 [&::-webkit-details-marker]:hidden">
+              <span>
+                <span className="block text-lg font-semibold text-gray-900 dark:text-white">
+                  {t.projects.otrosTitulo}
+                  <span className="ml-2 font-mono text-sm font-normal text-gray-500 dark:text-gray-400">
+                    {propios.length}
+                  </span>
+                </span>
+                <span className="block text-sm text-gray-600 dark:text-gray-400">
+                  {t.projects.otrosDescripcion}
+                </span>
+              </span>
+              <ChevronDown
+                className="h-5 w-5 shrink-0 text-gray-500 transition-transform duration-200 group-open/otros:rotate-180 motion-reduce:transition-none"
+                aria-hidden="true"
+              />
+            </summary>
+            {/* Sin animación de entrada: las filas se montan ocultas dentro del details */}
+            <motion.ul
+              className="divide-y divide-gray-200 dark:divide-gray-800 px-5"
+              initial="visible"
+              animate="visible"
+            >
+              {propios.map((project) => (
+                <ProjectRow key={project.id} project={project} idioma={idioma} ahora={ahora} t={t} />
+              ))}
+            </motion.ul>
+          </details>
+        )}
       </div>
     </section>
   );
@@ -242,49 +184,39 @@ function ProjectRow({ project, idioma, ahora, t }: {
 
   return (
     <motion.li variants={FILA_VARIANTS} className="group">
-      <div className="grid grid-cols-1 gap-x-6 gap-y-4 rounded-2xl px-4 py-7 -mx-4 transition-colors duration-300 hover:bg-gray-50 dark:hover:bg-gray-800/60 md:grid-cols-[3.5rem_minmax(0,1fr)_16rem]">
-        {/* Año */}
-        <span className="font-mono text-sm tabular-nums text-gray-400 dark:text-gray-500 md:pt-1">
-          {project.year}
-        </span>
-
+      <div className="grid grid-cols-1 gap-x-8 gap-y-4 py-7 md:grid-cols-[minmax(0,1fr)_16rem]">
         {/* Contenido */}
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white transition-colors duration-300 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white">
               {textos.title}
             </h3>
-            {project.featured && (
-              <span className="inline-flex items-center gap-1 rounded-full bg-blue-600/10 dark:bg-blue-500/15 px-2.5 py-1 text-xs font-semibold text-blue-700 dark:text-blue-400">
-                <Star className="w-3 h-3 fill-current" aria-hidden="true" />
-                {t.projects.destacado}
-              </span>
-            )}
             {project.private && (
-              <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-1 text-xs font-semibold text-gray-500 dark:text-gray-400">
+              <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-1 text-xs font-semibold text-gray-600 dark:text-gray-300">
                 <Lock className="w-3 h-3" aria-hidden="true" />
                 {t.projects.privadoBadge}
               </span>
             )}
+            <StatusBadge status={project.status} t={t} />
           </div>
 
-          <p className="mt-2.5 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+          <p className="mt-2.5 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
             {textos.description}
           </p>
 
-          <p className="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-500">
+          <p className="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
             {textos.technicalNote}
           </p>
 
-          <p className="mt-3 font-mono text-xs leading-relaxed text-gray-500 dark:text-gray-500">
+          <p className="mt-3 font-mono text-xs leading-relaxed text-gray-500 dark:text-gray-400">
             {project.tech.join(' · ')}
           </p>
         </div>
 
-        {/* Captura, estado y accesos. La captura vive en esta columna para que la fila
-            mantenga la misma altura que las demás y no deje la columna vacía. */}
-        <div className="flex flex-col gap-3 md:items-end md:pt-1">
-          {project.imagen && (
+        {/* Columna lateral: captura del sitio o, en los sistemas privados, sus
+            datos clave. Debajo, los accesos. */}
+        <div className="flex flex-col gap-3">
+          {project.imagen ? (
             <div className="w-full overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 shadow-sm">
               <Image
                 src={project.imagen}
@@ -296,40 +228,67 @@ function ProjectRow({ project, idioma, ahora, t }: {
                 className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none motion-reduce:transition-none"
               />
             </div>
-          )}
-
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 md:justify-end">
-            <StatusBadge status={project.status} t={t} />
-            {project.lastUpdate && ahora !== null && (
-              <span className="text-xs text-gray-400 dark:text-gray-500">
-                {formatearAntiguedad(project.lastUpdate, idioma, ahora)}
-              </span>
-            )}
-          </div>
-
-          {mostrarMetricas && (
-            <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
-              <span className="flex items-center gap-1">
-                <Star className="w-3.5 h-3.5 fill-current text-amber-500" aria-hidden="true" />
-                <span className="font-semibold tabular-nums">{project.metrics.stars}</span>
-                <span className="sr-only">{t.projects.estrellas}</span>
-              </span>
-              <span className="flex items-center gap-1">
-                <GitBranch className="w-3.5 h-3.5" aria-hidden="true" />
-                <span className="font-semibold tabular-nums">{project.metrics.forks}</span>
-                <span className="sr-only">{t.projects.forks}</span>
-              </span>
+          ) : textos.datosClave && textos.datosClave.length > 0 ? (
+            <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 p-4">
+              <p className="text-xs font-semibold text-gray-500 dark:text-gray-400">
+                {t.projects.datosClave}
+              </p>
+              <ul className="mt-2 space-y-1.5">
+                {textos.datosClave.map((dato) => (
+                  <li key={dato} className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-200">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue-600 dark:text-blue-400" aria-hidden="true" />
+                    {dato}
+                  </li>
+                ))}
+              </ul>
             </div>
-          )}
+          ) : null}
 
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 md:justify-end">
+          {(project.lastUpdate && ahora !== null) || mostrarMetricas ? (
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-500 dark:text-gray-400">
+              {project.lastUpdate && ahora !== null && (
+                <span>
+                  {t.projects.actualizado} {formatearAntiguedad(project.lastUpdate, idioma, ahora)}
+                </span>
+              )}
+              {mostrarMetricas && (
+                <>
+                  <span className="flex items-center gap-1">
+                    <Star className="w-3.5 h-3.5 fill-current text-amber-500" aria-hidden="true" />
+                    <span className="font-semibold tabular-nums">{project.metrics.stars}</span>
+                    <span className="sr-only">{t.projects.estrellas}</span>
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <GitBranch className="w-3.5 h-3.5" aria-hidden="true" />
+                    <span className="font-semibold tabular-nums">{project.metrics.forks}</span>
+                    <span className="sr-only">{t.projects.forks}</span>
+                  </span>
+                </>
+              )}
+            </div>
+          ) : null}
+
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
+            {project.private && (
+              // El mensaje ya nombra el sistema: Gian sabe de entrada qué le interesa al cliente.
+              <a
+                href={urlWhatsapp(`${t.whatsapp.mensajeProyecto} ${textos.title}.`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${t.projects.consultar}: ${textos.title} (${t.a11y.nuevaPestana})`}
+                className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-green-700 px-4 text-sm font-semibold text-green-700 transition-colors duration-200 hover:bg-green-700 hover:text-white dark:border-green-500 dark:text-green-400 dark:hover:bg-green-700 dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
+              >
+                <IconoWhatsapp className="w-4 h-4" />
+                {t.projects.consultar}
+              </a>
+            )}
             {project.links.demo && (
               <a
                 href={project.links.demo}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${t.projects.verDemo}: ${textos.title} (${t.a11y.nuevaPestana})`}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200"
+                className={`${CLASES_ENLACE} text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300`}
               >
                 <ExternalLink className="w-4 h-4" aria-hidden="true" />
                 {t.projects.verDemo}
@@ -341,23 +300,10 @@ function ProjectRow({ project, idioma, ahora, t }: {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${t.projects.codigo}: ${textos.title} (${t.a11y.nuevaPestana})`}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors duration-200"
+                className={`${CLASES_ENLACE} text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white`}
               >
                 <Github className="w-4 h-4" aria-hidden="true" />
                 {t.projects.codigo}
-              </a>
-            )}
-            {project.private && (
-              // El mensaje ya nombra el sistema: Gian sabe de entrada qué le interesa al cliente.
-              <a
-                href={urlWhatsapp(`${t.whatsapp.mensajeProyecto} ${textos.title}.`)}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${t.projects.consultar}: ${textos.title} (${t.a11y.nuevaPestana})`}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 transition-colors duration-200"
-              >
-                <IconoWhatsapp className="w-4 h-4" />
-                {t.projects.consultar}
               </a>
             )}
           </div>

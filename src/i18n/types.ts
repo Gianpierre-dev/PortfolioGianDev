@@ -49,7 +49,6 @@ export interface DiccionarioHero {
   prueba: string;
   ctaProyectos: string;
   ctaCV: string;
-  scroll: string;
 }
 
 export interface DiccionarioAboutStats {
@@ -94,19 +93,19 @@ export interface DiccionarioProjects {
   // Aclaración de términos locales (SUNAT, planilla) para lectores extranjeros.
   // Solo existe en los idiomas que la necesitan.
   notaContexto?: string;
-  categorias: {
-    all: string;
-    fullstack: string;
-    frontend: string;
-    automation: string;
-  };
   status: {
     live: string;
     development: string;
     demo: string;
   };
-  destacado: string;
   privadoBadge: string;
+  // Encabezado del recuadro de datos clave de los sistemas privados.
+  datosClave: string;
+  // Prefijo de la antigüedad del último push: "Código actualizado hace 2 meses".
+  actualizado: string;
+  // Bloque plegable con los proyectos propios.
+  otrosTitulo: string;
+  otrosDescripcion: string;
   consultar: string;
   verDemo: string;
   codigo: string;
@@ -132,6 +131,8 @@ export interface DiccionarioContact {
   subtitulo: string;
   infoTitulo: string;
   infoTexto: string;
+  // Compromisos confirmados por Gian (PRODUCT.md); no agregar otros sin confirmación.
+  garantias: string[];
   labels: {
     email: string;
     telefono: string;
@@ -149,7 +150,6 @@ export interface DiccionarioContact {
     horario: string;
   };
   badgeCopiar: string;
-  badgeWhatsapp: string;
   formTitulo: string;
   formAviso: string;
   form: {
@@ -212,6 +212,9 @@ export interface ProyectoTraducido {
   description: string;
   // Una línea técnica breve; el stack completo vive en los datos del proyecto.
   technicalNote: string;
+  // Hasta 3 datos concretos y verificables. Los sistemas privados los muestran
+  // en lugar de la captura que no pueden publicar.
+  datosClave?: string[];
 }
 
 export interface Diccionario {

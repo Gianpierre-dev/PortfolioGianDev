@@ -42,26 +42,32 @@ function ErrorCampo({ id, error }: { id: string; error: FieldError | undefined }
   );
 }
 
+// Tono del ícono: verde solo para WhatsApp (regla del DESIGN.md), azul para
+// otras acciones y gris para datos informativos.
+type TonoTarjeta = 'whatsapp' | 'accion' | 'neutro';
+
+const CLASES_ICONO: Record<TonoTarjeta, string> = {
+  whatsapp: 'bg-green-700 text-white',
+  accion: 'bg-blue-100 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400',
+  neutro: 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300',
+};
+
 interface TarjetaContactoProps {
   icon: ComponentType<{ className?: string }>;
   label: string;
   value: string;
   description: string;
+  tono: TonoTarjeta;
   badge?: { icon: ComponentType<{ className?: string }>; texto: string };
 }
 
 // Contenido común de las tarjetas; el contenedor (button, a o div) lo decide quien la usa.
 // Solo usa <span>: dentro de un <button> únicamente se admite contenido de frase.
-function ContenidoTarjeta({ icon: Icon, label, value, description, badge }: TarjetaContactoProps) {
-  const interactiva = Boolean(badge);
+function ContenidoTarjeta({ icon: Icon, label, value, description, tono, badge }: TarjetaContactoProps) {
   return (
     <span className="flex items-center space-x-4 text-left">
       <span
-        className={`w-10 h-10 shrink-0 rounded-lg flex items-center justify-center ${
-          interactiva
-            ? 'bg-blue-100 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400'
-            : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300'
-        }`}
+        className={`w-10 h-10 shrink-0 rounded-lg flex items-center justify-center ${CLASES_ICONO[tono]}`}
       >
         <Icon className="w-5 h-5" aria-hidden="true" />
       </span>
@@ -90,6 +96,9 @@ const CLASES_TARJETA =
   'flex items-center w-full h-full bg-gray-50 dark:bg-gray-800 rounded-lg p-5 border border-gray-200 dark:border-gray-700 transition-all duration-200';
 const CLASES_TARJETA_INTERACTIVA =
   'hover:shadow-lg hover:border-blue-300 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-700 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500';
+// La tarjeta de WhatsApp es el canal principal: fondo y borde verdes.
+const CLASES_TARJETA_WHATSAPP =
+  'flex items-center w-full h-full rounded-lg p-5 border-2 border-green-700 dark:border-green-600 bg-green-50 dark:bg-green-950/40 transition-all duration-200 hover:shadow-lg hover:bg-green-100 dark:hover:bg-green-900/40 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500';
 
 export default function Contact() {
   const { t } = useIdioma();
@@ -159,7 +168,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-white dark:bg-gray-900">
+    <section id="contact" className="py-20 bg-white dark:bg-gray-950">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -192,27 +201,36 @@ export default function Contact() {
               <p className="text-gray-600 dark:text-gray-300">
                 {t.contact.infoTexto}
               </p>
+              {/* Compromisos confirmados: tranquilizan justo antes de escribir */}
+              <ul className="mt-5 space-y-2">
+                {t.contact.garantias.map((garantia) => (
+                  <li key={garantia} className="flex items-start gap-2.5 text-gray-700 dark:text-gray-200">
+                    <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-blue-600 dark:text-blue-400" aria-hidden="true" />
+                    {garantia}
+                  </li>
+                ))}
+              </ul>
             </motion.div>
 
             {/* Contact Methods: en desktop las tarjetas reparten el alto del formulario
                 para que ambas columnas terminen a la misma altura. */}
             <ul className="space-y-4 lg:flex-1 lg:grid lg:auto-rows-fr lg:gap-4 lg:space-y-0">
-              {/* WhatsApp primero: es el canal por el que escriben los clientes */}
+              {/* WhatsApp primero y en verde: es el canal principal */}
               <motion.li variants={itemVariants}>
                 <a
                   href={urlWhatsapp(t.whatsapp.mensajeGeneral)}
                   target="_blank"
                   rel="noopener noreferrer"
                   // El nombre accesible empieza por la etiqueta visible (WCAG 2.5.3).
-                  aria-label={`${t.contact.labels.telefono}: ${personalInfo.phone}. ${t.a11y.whatsapp} (${t.a11y.nuevaPestana})`}
-                  className={`${CLASES_TARJETA} ${CLASES_TARJETA_INTERACTIVA}`}
+                  aria-label={`${t.contact.labels.telefono}: ${personalInfo.phone} (${t.a11y.nuevaPestana})`}
+                  className={CLASES_TARJETA_WHATSAPP}
                 >
                   <ContenidoTarjeta
                     icon={IconoWhatsapp}
+                    tono="whatsapp"
                     label={t.contact.labels.telefono}
                     value={personalInfo.phone}
                     description={t.contact.descripciones.telefono}
-                    badge={{ icon: IconoWhatsapp, texto: t.contact.badgeWhatsapp }}
                   />
                 </a>
               </motion.li>
@@ -224,6 +242,7 @@ export default function Contact() {
                 >
                   <ContenidoTarjeta
                     icon={Mail}
+                    tono="accion"
                     label={t.contact.labels.email}
                     value={personalInfo.email}
                     description={t.contact.descripciones.email}
@@ -234,20 +253,22 @@ export default function Contact() {
               <motion.li variants={itemVariants}>
                 <div className={CLASES_TARJETA}>
                   <ContenidoTarjeta
-                    icon={MapPin}
-                    label={t.contact.labels.ubicacion}
-                    value={t.contact.valores.ubicacion}
-                    description={t.contact.descripciones.ubicacion}
+                    icon={Clock}
+                    tono="neutro"
+                    label={t.contact.labels.horario}
+                    value={t.contact.valores.horario}
+                    description={t.contact.descripciones.horario}
                   />
                 </div>
               </motion.li>
               <motion.li variants={itemVariants}>
                 <div className={CLASES_TARJETA}>
                   <ContenidoTarjeta
-                    icon={Clock}
-                    label={t.contact.labels.horario}
-                    value={t.contact.valores.horario}
-                    description={t.contact.descripciones.horario}
+                    icon={MapPin}
+                    tono="neutro"
+                    label={t.contact.labels.ubicacion}
+                    value={t.contact.valores.ubicacion}
+                    description={t.contact.descripciones.ubicacion}
                   />
                 </div>
               </motion.li>

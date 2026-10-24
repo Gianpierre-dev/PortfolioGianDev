@@ -7,7 +7,7 @@ export const es: Diccionario = {
     about: 'Sobre mí',
     servicios: 'Servicios',
     proyectos: 'Proyectos',
-    habilidades: 'Habilidades',
+    habilidades: 'Stack',
     contacto: 'Contacto',
     rolLogo: 'Full Stack Developer',
     irInicio: 'Ir al inicio',
@@ -40,7 +40,6 @@ export const es: Diccionario = {
     prueba: 'Tech Lead en STI GOLD · Sistemas en producción · TypeScript de punta a punta',
     ctaProyectos: 'Ver proyectos',
     ctaCV: 'Descargar CV',
-    scroll: 'Scroll',
   },
   about: {
     titulo: 'Sobre mí',
@@ -109,19 +108,16 @@ export const es: Diccionario = {
     titulo: 'Proyectos',
     subtitulo:
       'Sistemas de gestión, tiendas online y sitios web en producción. Los sistemas privados se desarrollaron para empresas y no exponen su código.',
-    categorias: {
-      all: 'Todos',
-      fullstack: 'Sistemas',
-      frontend: 'Frontend',
-      automation: 'Automatización',
-    },
     status: {
       live: 'En producción',
       development: 'En desarrollo',
       demo: 'Demo',
     },
-    destacado: 'Destacado',
     privadoBadge: 'Privado',
+    datosClave: 'Datos clave',
+    actualizado: 'Código actualizado',
+    otrosTitulo: 'Proyectos propios',
+    otrosDescripcion: 'Productos y herramientas que desarrollo por mi cuenta, con código público.',
     consultar: 'Consultar',
     verDemo: 'Ver sitio',
     codigo: 'Código',
@@ -141,12 +137,17 @@ export const es: Diccionario = {
   },
   contact: {
     titulo: 'Contacto',
-    subtitulo: '¿Tienes un proyecto en mente? Me encantaría escuchar sobre él.',
-    infoTitulo: 'Información de contacto',
-    infoTexto: 'Escríbeme por el medio que prefieras: revisamos tu caso y te propongo los siguientes pasos.',
+    subtitulo: 'Cuéntame qué necesita tu empresa y te propongo los siguientes pasos.',
+    infoTitulo: 'La forma más rápida: WhatsApp',
+    infoTexto: 'Escríbeme y conversamos sobre tu proceso actual y lo que quieres resolver.',
+    garantias: [
+      'Respondo el mismo día hábil.',
+      'La primera conversación para entender tu proyecto no tiene costo.',
+      'Trabajo con acuerdo de confidencialidad sobre los datos de tu empresa.',
+    ],
     labels: {
       email: 'Email',
-      telefono: 'Teléfono',
+      telefono: 'WhatsApp',
       ubicacion: 'Ubicación',
       horario: 'Horario',
     },
@@ -156,13 +157,12 @@ export const es: Diccionario = {
     },
     descripciones: {
       email: 'Clic para copiar el email',
-      telefono: 'Clic para escribir por WhatsApp',
+      telefono: 'Toca para abrir el chat',
       ubicacion: 'Disponible para trabajo remoto',
       horario: 'Hora de Perú (UTC-5)',
     },
     badgeCopiar: 'Copiar',
-    badgeWhatsapp: 'WhatsApp',
-    formTitulo: 'Envíame un mensaje',
+    formTitulo: '¿Prefieres escribir por correo?',
     formAviso: 'Llega directo a mi correo y te respondo a la dirección que indiques.',
     form: {
       nombre: 'Nombre',
@@ -202,7 +202,7 @@ export const es: Diccionario = {
       about: 'Sobre mí',
       servicios: 'Servicios',
       proyectos: 'Proyectos',
-      habilidades: 'Habilidades',
+      habilidades: 'Stack',
       contacto: 'Contacto',
     },
     contactoTitulo: 'Contacto',
@@ -253,19 +253,22 @@ export const es: Diccionario = {
       title: 'Sistema de Planillas Multiempresa',
       description:
         'Calcula la planilla de los 6 regímenes laborales privados del Perú y genera las boletas de pago, para varias empresas a la vez. Pensado para quienes gestionan la planilla de más de una empresa.',
-      technicalNote: 'Arquitectura hexagonal, más de 370 tests automatizados y CI bloqueante.',
+      technicalNote: 'Más de 370 pruebas automatizadas que se ejecutan antes de cada cambio.',
+      datosClave: ['6 regímenes laborales', 'Varias empresas en una instalación', 'Boletas de pago'],
     },
     '2': {
       title: 'SIGEMYPE',
       description:
         'Organiza el trabajo de un estudio contable: cronogramas de vencimientos SUNAT, alertas antes de cada fecha límite, parte diario del equipo y consultas automáticas de RUC, DNI y tipo de cambio.',
-      technicalNote: 'Monorepo con Turborepo, importación desde Excel, más de 120 tests y hardening de seguridad.',
+      technicalNote: 'Importa datos desde Excel y tiene más de 120 pruebas automatizadas.',
+      datosClave: ['Cronograma SUNAT con alertas', 'Parte diario del equipo', 'Consultas de RUC, DNI y tipo de cambio'],
     },
     '3': {
       title: 'Sistema de RRHH Multiempresa',
       description:
         'Centraliza los legajos, contratos y documentos del personal de varias empresas, y genera photochecks y carnets en PDF listos para imprimir.',
-      technicalNote: 'Autenticación JWT, validación con Zod y despliegue en Railway.',
+      technicalNote: 'Acceso con usuario y contraseña, y validación de datos en cada formulario.',
+      datosClave: ['Varias empresas', 'Legajos y contratos', 'Carnets en PDF'],
     },
     '4': {
       title: 'Automatización SUNAT',

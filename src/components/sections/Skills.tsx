@@ -19,7 +19,7 @@ export default function Skills() {
   const { t } = useIdioma();
 
   return (
-    <section id="skills" className="py-14 bg-gray-50 dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800">
+    <section id="skills" className="py-14 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -40,7 +40,7 @@ export default function Skills() {
           {grupos.map((grupo) => (
             <div
               key={grupo.id}
-              className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-4"
+              className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 p-4"
             >
               <dt className="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-900 dark:text-white">
                 <grupo.icon className="w-4 h-4 text-blue-600 dark:text-blue-400" aria-hidden="true" />

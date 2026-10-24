@@ -20,7 +20,7 @@ export default function Services() {
   const { t } = useIdioma();
 
   return (
-    <section id="services" className="py-20 bg-gray-50 dark:bg-gray-950">
+    <section id="services" className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -52,7 +52,7 @@ export default function Services() {
               <motion.li
                 key={servicio.titulo}
                 variants={ITEM_VARIANTS}
-                className="flex gap-4 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-6"
+                className="flex gap-4 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 p-6"
               >
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400">
                   <Icono className="w-5 h-5" aria-hidden="true" />

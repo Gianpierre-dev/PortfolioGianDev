@@ -2,11 +2,12 @@
 
 import { motion } from 'framer-motion';
 import { experiences } from '@/data/personal';
-import { Calendar, MapPin, Building, Code } from 'lucide-react';
+import { Calendar, MapPin, Building, Code, Download } from 'lucide-react';
 import { useIdioma } from '@/i18n/LanguageProvider';
+import { downloadCV } from '@/lib/utils';
 
 export default function About() {
-  const { t } = useIdioma();
+  const { t, idioma } = useIdioma();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -37,7 +38,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-20 bg-gray-50 dark:bg-gray-950">
+    <section id="about" className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
@@ -76,23 +77,34 @@ export default function About() {
             ))}
           </div>
 
-          <dl className="grid grid-cols-3 lg:grid-cols-1 gap-3">
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="flex flex-col items-center gap-1 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-4 text-center lg:flex-row lg:gap-4 lg:text-left"
-              >
-                <stat.icon className="w-6 h-6 shrink-0 text-blue-600 dark:text-blue-400" aria-hidden="true" />
-                {/* Valor arriba de la etiqueta en móvil; a la derecha en desktop. */}
-                <dt className="order-2 text-sm text-gray-600 dark:text-gray-400 lg:order-1">
-                  {stat.label}
-                </dt>
-                <dd className="order-1 text-2xl font-bold text-gray-900 dark:text-white lg:order-2 lg:ml-auto">
-                  {stat.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <div className="space-y-3">
+            <dl className="grid grid-cols-3 lg:grid-cols-1 gap-3">
+              {stats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="flex flex-col items-center gap-1 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 p-4 text-center lg:flex-row lg:gap-4 lg:text-left"
+                >
+                  <stat.icon className="w-6 h-6 shrink-0 text-blue-600 dark:text-blue-400" aria-hidden="true" />
+                  {/* Valor arriba de la etiqueta en móvil; a la derecha en desktop. */}
+                  <dt className="order-2 text-sm text-gray-600 dark:text-gray-400 lg:order-1">
+                    {stat.label}
+                  </dt>
+                  <dd className="order-1 text-2xl font-bold text-gray-900 dark:text-white lg:order-2 lg:ml-auto">
+                    {stat.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            {/* El CV vive aquí y no en la portada: es para quien evalúa la trayectoria */}
+            <button
+              type="button"
+              onClick={() => downloadCV(idioma)}
+              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 px-4 text-sm font-semibold text-gray-700 dark:text-gray-200 transition-colors duration-200 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            >
+              <Download className="h-4 w-4" aria-hidden="true" />
+              {t.hero.ctaCV}
+            </button>
+          </div>
         </motion.div>
 
         {/* Experiencia: a lo ancho y en dos columnas, sin repetir el stack */}

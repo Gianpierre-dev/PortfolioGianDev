@@ -50,6 +50,16 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Esc cierra el menú móvil, como cualquier panel desplegable.
+  useEffect(() => {
+    if (!isOpen) return;
+    const cerrarConEscape = (evento: KeyboardEvent): void => {
+      if (evento.key === 'Escape') setIsOpen(false);
+    };
+    window.addEventListener('keydown', cerrarConEscape);
+    return () => window.removeEventListener('keydown', cerrarConEscape);
+  }, [isOpen]);
+
   const handleNavClick = (href: string): void => {
     scrollToSection(href);
     setIsOpen(false);
@@ -175,7 +185,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${t.whatsapp.cta} (${t.a11y.nuevaPestana})`}
-                className="inline-flex items-center gap-2 rounded-xl bg-green-700 px-3 py-2 text-sm font-semibold text-white transition-colors duration-200 hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950"
+                className="inline-flex h-11 min-w-11 items-center justify-center gap-2 rounded-xl bg-green-700 px-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950"
               >
                 <IconoWhatsapp className="w-4 h-4" />
                 <span className="hidden sm:inline">WhatsApp</span>
@@ -186,7 +196,7 @@ export default function Navbar() {
                 onClick={cambiarIdioma}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`p-2.5 rounded-xl text-xs font-bold transition-colors duration-200 ${clasesAccion}`}
+                className={`h-11 px-3 rounded-xl text-xs font-bold transition-colors duration-200 ${clasesAccion}`}
                 aria-label={t.nav.cambiarIdioma}
               >
                 <span
@@ -215,7 +225,7 @@ export default function Navbar() {
                 onClick={() => setTheme(esOscuro ? 'light' : 'dark')}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`p-2.5 rounded-xl transition-colors duration-200 ${clasesAccion}`}
+                className={`flex h-11 w-11 items-center justify-center rounded-xl transition-colors duration-200 ${clasesAccion}`}
                 aria-label={etiquetaTema}
               >
                 {/* Antes del montaje se reserva el espacio sin ícono para no mostrar uno incorrecto */}
@@ -237,7 +247,7 @@ export default function Navbar() {
                 aria-label={isOpen ? t.nav.cerrarMenu : t.nav.abrirMenu}
                 aria-expanded={isOpen}
                 aria-controls={ID_MENU_MOVIL}
-                className={`lg:hidden p-2.5 rounded-xl transition-colors duration-200 ${clasesAccion}`}
+                className={`lg:hidden flex h-11 w-11 items-center justify-center rounded-xl transition-colors duration-200 ${clasesAccion}`}
               >
                 <AnimatePresence mode="wait" initial={false}>
                   {isOpen ? (
@@ -300,6 +310,19 @@ export default function Navbar() {
                     </button>
                   </motion.li>
                 ))}
+                {/* WhatsApp también dentro del menú: es la acción principal del sitio */}
+                <li className="pt-2">
+                  <a
+                    href={urlWhatsapp(t.whatsapp.mensajeGeneral)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${t.whatsapp.cta} (${t.a11y.nuevaPestana})`}
+                    className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-green-700 px-4 font-semibold text-white transition-colors duration-200 hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
+                  >
+                    <IconoWhatsapp className="w-5 h-5" />
+                    {t.whatsapp.cta}
+                  </a>
+                </li>
               </ul>
             </motion.div>
           )}

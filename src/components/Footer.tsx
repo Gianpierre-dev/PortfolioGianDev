@@ -1,8 +1,10 @@
 'use client';
 
-import { Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin } from 'lucide-react';
 import { personalInfo, socialLinks } from '@/data/personal';
 import { etiquetaSocial } from '@/lib/a11y';
+import { urlWhatsapp } from '@/lib/email';
+import IconoWhatsapp from '@/components/ui/IconoWhatsapp';
 import { useIdioma } from '@/i18n/LanguageProvider';
 
 const iconMap = {
@@ -45,9 +47,9 @@ export default function Footer() {
                     target={esExterno ? '_blank' : undefined}
                     rel={esExterno ? 'noopener noreferrer' : undefined}
                     aria-label={etiquetaSocial(social, t)}
-                    className="w-8 h-8 bg-gray-700 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors duration-200"
+                    className="w-11 h-11 bg-gray-700 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
                   >
-                    <Icon className="w-4 h-4" aria-hidden="true" />
+                    <Icon className="w-5 h-5" aria-hidden="true" />
                   </a>
                 );
               })}
@@ -79,14 +81,22 @@ export default function Footer() {
                 {t.footer.ubicacion}
               </li>
               <li className="text-gray-300 text-sm flex items-center">
-                <Mail className="w-4 h-4 mr-2 text-green-400" aria-hidden="true" />
+                <Mail className="w-4 h-4 mr-2 text-blue-400" aria-hidden="true" />
                 <a href={`mailto:${personalInfo.email}`} className="hover:text-blue-400 transition-colors">
                   {personalInfo.email}
                 </a>
               </li>
               <li className="text-gray-300 text-sm flex items-center">
-                <Phone className="w-4 h-4 mr-2 text-blue-400" aria-hidden="true" />
-                {personalInfo.phone}
+                <IconoWhatsapp className="w-4 h-4 mr-2 text-green-400" />
+                <a
+                  href={urlWhatsapp(t.whatsapp.mensajeGeneral)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${t.whatsapp.cta}: ${personalInfo.phone} (${t.a11y.nuevaPestana})`}
+                  className="hover:text-green-400 transition-colors"
+                >
+                  {personalInfo.phone}
+                </a>
               </li>
             </ul>
           </div>
@@ -99,7 +109,7 @@ export default function Footer() {
           </p>
           <div className="flex items-center space-x-4">
             <span className="text-gray-400 text-sm">{t.footer.disponible}</span>
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" aria-hidden="true"></div>
+            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" aria-hidden="true"></div>
           </div>
         </div>
       </div>

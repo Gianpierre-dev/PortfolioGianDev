@@ -1,15 +1,17 @@
 // Proyectos curados manualmente. Los sistemas privados (para empresas) no
-// exponen repositorio ni demo: se documentan como case studies.
-// Los textos (título, descripción y nota técnica) viven en el diccionario i18n,
-// keyed por id. Aquí solo permanecen los datos técnicos no traducibles.
+// exponen repositorio ni demo: se documentan con sus datos clave.
+// Los textos (título, descripción, nota técnica y datos clave) viven en el
+// diccionario i18n, keyed por id. Aquí solo permanecen los datos técnicos.
 
-export type CategoriaProyecto = 'fullstack' | 'frontend' | 'automation';
 export type EstadoProyecto = 'live' | 'development' | 'demo';
+
+// 'cliente': trabajo hecho para una empresa o marca; es la prueba principal.
+// 'propio': productos y herramientas propias; se muestran plegados.
+export type AmbitoProyecto = 'cliente' | 'propio';
 
 export interface ProyectoBase {
   id: number;
-  category: CategoriaProyecto;
-  featured: boolean;
+  ambito: AmbitoProyecto;
   status: EstadoProyecto;
   tech: string[];
   // Nombre del repositorio público en GitHub; vacío si el proyecto es privado.
@@ -17,9 +19,8 @@ export interface ProyectoBase {
   private: boolean;
   links: { demo: string; code: string };
   // Captura del sitio en vivo (public/images/proyectos, 1280x800). Solo los
-  // proyectos con demo pública la tienen.
+  // proyectos con sitio público la tienen.
   imagen?: string;
-  year: string;
 }
 
 // Métricas públicas del repositorio, obtenidas en el servidor (src/lib/github.ts).
@@ -29,44 +30,38 @@ export interface MetricasRepo {
   lastUpdate: string;
 }
 
+// El orden del array es el orden en pantalla: primero lo que está en producción.
 export const proyectos: ProyectoBase[] = [
   {
-    id: 1,
-    category: 'fullstack',
-    featured: true,
-    status: 'development',
-    tech: ['NestJS', 'Prisma', 'PostgreSQL', 'Next.js', 'Tailwind CSS', 'Railway', 'Wasabi S3'],
-    repoName: '',
-    private: true,
-    links: { demo: '', code: '' },
-    year: '2026',
-  },
-  {
     id: 2,
-    category: 'fullstack',
-    featured: false,
+    ambito: 'cliente',
     status: 'live',
     tech: ['NestJS', 'Prisma', 'PostgreSQL', 'Next.js', 'Turborepo', 'Redis'],
     repoName: '',
     private: true,
     links: { demo: '', code: '' },
-    year: '2026',
   },
   {
     id: 3,
-    category: 'fullstack',
-    featured: false,
+    ambito: 'cliente',
     status: 'live',
     tech: ['NestJS', 'Prisma', 'PostgreSQL', 'Next.js', 'Tailwind CSS', 'Railway'],
     repoName: '',
     private: true,
     links: { demo: '', code: '' },
-    year: '2026',
+  },
+  {
+    id: 1,
+    ambito: 'cliente',
+    status: 'development',
+    tech: ['NestJS', 'Prisma', 'PostgreSQL', 'Next.js', 'Tailwind CSS', 'Railway', 'Wasabi S3'],
+    repoName: '',
+    private: true,
+    links: { demo: '', code: '' },
   },
   {
     id: 9,
-    category: 'fullstack',
-    featured: false,
+    ambito: 'cliente',
     status: 'live',
     tech: ['Next.js', 'NestJS', 'Prisma', 'PostgreSQL', 'S3', 'JWT'],
     repoName: 'ValentinoBenites',
@@ -76,12 +71,10 @@ export const proyectos: ProyectoBase[] = [
       code: 'https://github.com/Gianpierre-dev/ValentinoBenites',
     },
     imagen: '/images/proyectos/valentino-benites.webp',
-    year: '2026',
   },
   {
     id: 12,
-    category: 'fullstack',
-    featured: false,
+    ambito: 'cliente',
     status: 'live',
     tech: ['Astro', 'TypeScript', 'Prisma', 'PostgreSQL', 'Tailwind CSS', 'S3'],
     repoName: 'Human-Touch-Books',
@@ -91,12 +84,30 @@ export const proyectos: ProyectoBase[] = [
       code: 'https://github.com/Gianpierre-dev/Human-Touch-Books',
     },
     imagen: '/images/proyectos/human-touch-books.webp',
-    year: '2026',
+  },
+  {
+    id: 10,
+    ambito: 'cliente',
+    status: 'live',
+    tech: ['Astro', 'Tailwind CSS'],
+    repoName: '',
+    private: false,
+    links: { demo: 'https://tienda-production-3860.up.railway.app', code: '' },
+    imagen: '/images/proyectos/tlacuache-store.webp',
+  },
+  {
+    id: 11,
+    ambito: 'cliente',
+    status: 'live',
+    tech: ['AlpineJS', 'Tailwind CSS', 'SEO'],
+    repoName: '',
+    private: false,
+    links: { demo: 'https://mrsif.com.pe', code: '' },
+    imagen: '/images/proyectos/mr-sif.webp',
   },
   {
     id: 4,
-    category: 'automation',
-    featured: false,
+    ambito: 'propio',
     status: 'development',
     tech: ['Python', 'Playwright', 'PySide6', 'SQLAlchemy', 'SQLite'],
     repoName: 'Sistema-de-automatizaciones-Sunat-',
@@ -105,12 +116,10 @@ export const proyectos: ProyectoBase[] = [
       demo: '',
       code: 'https://github.com/Gianpierre-dev/Sistema-de-automatizaciones-Sunat-',
     },
-    year: '2026',
   },
   {
     id: 5,
-    category: 'fullstack',
-    featured: false,
+    ambito: 'propio',
     status: 'development',
     tech: ['NestJS', 'Prisma', 'PostgreSQL', 'Astro', 'React', 'Tailwind CSS'],
     repoName: 'TeachGenius_Frontend',
@@ -119,12 +128,10 @@ export const proyectos: ProyectoBase[] = [
       demo: '',
       code: 'https://github.com/Gianpierre-dev/TeachGenius_Frontend',
     },
-    year: '2026',
   },
   {
     id: 6,
-    category: 'fullstack',
-    featured: false,
+    ambito: 'propio',
     status: 'development',
     tech: ['React', 'TypeScript', 'Zustand', 'Spring Boot', 'Wasabi S3'],
     repoName: 'Tonin-Web',
@@ -133,30 +140,5 @@ export const proyectos: ProyectoBase[] = [
       demo: '',
       code: 'https://github.com/Gianpierre-dev/Tonin-Web',
     },
-    year: '2026',
-  },
-  {
-    id: 10,
-    category: 'frontend',
-    featured: false,
-    status: 'live',
-    tech: ['Astro', 'Tailwind CSS'],
-    repoName: '',
-    private: false,
-    links: { demo: 'https://tienda-production-3860.up.railway.app', code: '' },
-    imagen: '/images/proyectos/tlacuache-store.webp',
-    year: '2026',
-  },
-  {
-    id: 11,
-    category: 'frontend',
-    featured: false,
-    status: 'live',
-    tech: ['AlpineJS', 'Tailwind CSS', 'SEO'],
-    repoName: '',
-    private: false,
-    links: { demo: 'https://mrsif.com.pe', code: '' },
-    imagen: '/images/proyectos/mr-sif.webp',
-    year: '2024',
   },
 ];
