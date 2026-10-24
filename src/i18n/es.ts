@@ -171,7 +171,7 @@ export const es: Diccionario = {
       mensaje: 'Mensaje',
       nombrePlaceholder: 'Tu nombre completo',
       emailPlaceholder: 'tu@email.com',
-      asuntoPlaceholder: 'Sistema de planillas / Automatización / Sitio web',
+      asuntoPlaceholder: 'Ej.: sistema de planillas',
       mensajePlaceholder: 'Cuéntame sobre tu proyecto o consulta...',
       enviar: 'Enviar mensaje',
       enviando: 'Enviando...',

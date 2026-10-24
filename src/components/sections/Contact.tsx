@@ -295,7 +295,9 @@ export default function Contact() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700 shadow-lg"
+            // En desktop la tarjeta toma el alto de la columna vecina y el campo
+            // Mensaje crece para ocuparlo, sin dejar espacio vacío al pie.
+            className="flex flex-col bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700 shadow-lg"
           >
             <motion.div variants={itemVariants}>
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -306,7 +308,7 @@ export default function Contact() {
               </p>
             </motion.div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-1 flex-col gap-6" noValidate>
               {/* Name */}
               <motion.div variants={itemVariants}>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -376,7 +378,7 @@ export default function Contact() {
               </motion.div>
 
               {/* Message */}
-              <motion.div variants={itemVariants}>
+              <motion.div variants={itemVariants} className="flex flex-1 flex-col">
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   <MessageSquare className="w-4 h-4 inline mr-2" aria-hidden="true" />
                   {t.contact.form.mensaje} *
@@ -391,7 +393,7 @@ export default function Contact() {
                     required: t.contact.validaciones.mensajeRequerido,
                     minLength: { value: 10, message: t.contact.validaciones.mensajeMin }
                   })}
-                  className={`${clasesCampo(errors.message)} resize-none`}
+                  className={`${clasesCampo(errors.message)} min-h-32 flex-1 resize-none`}
                   placeholder={t.contact.form.mensajePlaceholder}
                 />
                 <ErrorCampo id="message-error" error={errors.message} />

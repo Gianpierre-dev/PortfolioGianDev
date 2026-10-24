@@ -173,7 +173,7 @@ export const en: Diccionario = {
       mensaje: 'Message',
       nombrePlaceholder: 'Your full name',
       emailPlaceholder: 'you@email.com',
-      asuntoPlaceholder: 'Payroll system / Automation / Website',
+      asuntoPlaceholder: 'E.g. payroll system',
       mensajePlaceholder: 'Tell me about your project or inquiry...',
       enviar: 'Send message',
       enviando: 'Sending...',
