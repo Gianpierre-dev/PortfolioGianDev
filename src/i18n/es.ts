@@ -34,9 +34,11 @@ export const es: Diccionario = {
     mensajeProyecto: 'Hola Gianpierre, vi tu portfolio y me interesa un sistema como',
   },
   hero: {
-    statementLinea1: 'Construyo los sistemas que gestionan',
-    statementLinea2Pre: 'planillas, RRHH y procesos SUNAT',
-    statementLinea2Post: ' de empresas peruanas.',
+    titularPre: 'Construyo sistemas web a medida que',
+    titularDestacado: 'ordenan y automatizan',
+    titularPost: ' el trabajo de tu empresa.',
+    areas:
+      'Planillas y RRHH, procesos SUNAT, sistemas para estudios contables, tiendas online y sitios con panel de administración propio.',
     prueba: 'Tech Lead en STI GOLD · Sistemas en producción · TypeScript de punta a punta',
     ctaProyectos: 'Ver proyectos',
     ctaCV: 'Descargar CV',

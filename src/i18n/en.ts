@@ -34,9 +34,11 @@ export const en: Diccionario = {
     mensajeProyecto: 'Hi Gianpierre, I saw your portfolio and I am interested in a system like',
   },
   hero: {
-    statementLinea1: 'I build the systems that run',
-    statementLinea2Pre: 'payroll, HR and SUNAT processes',
-    statementLinea2Post: ' for Peruvian companies.',
+    titularPre: 'I build custom web systems that',
+    titularDestacado: 'organize and automate',
+    titularPost: ' the way your company works.',
+    areas:
+      'Payroll and HR, SUNAT processes, systems for accounting firms, online stores and websites with their own admin panel.',
     prueba: 'Tech Lead at STI GOLD · Systems in production · End-to-end TypeScript',
     ctaProyectos: 'View projects',
     ctaCV: 'Download CV',

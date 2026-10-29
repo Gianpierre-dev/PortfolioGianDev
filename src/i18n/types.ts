@@ -43,9 +43,10 @@ export interface DiccionarioWhatsapp {
 }
 
 export interface DiccionarioHero {
-  statementLinea1: string;
-  statementLinea2Pre: string;
-  statementLinea2Post: string;
+  titularPre: string;
+  titularDestacado: string;
+  titularPost: string;
+  areas: string;
   prueba: string;
   ctaProyectos: string;
   ctaCV: string;
