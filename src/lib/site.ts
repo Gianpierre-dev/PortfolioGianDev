@@ -8,14 +8,14 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || URL_PRODUCCION).rep
 
 export const SITE_NOMBRE = 'Gianpierre Terrazas';
 
-export const SITE_TITULO = 'Gianpierre Terrazas | Sistemas de planillas, RRHH y automatización SUNAT';
+export const SITE_TITULO = 'Gianpierre Terrazas | Sistemas web a medida para empresas';
 
 export const SITE_DESCRIPCION =
-  'Desarrollador Full Stack en Perú. Construyo sistemas de planillas, RRHH y automatización de procesos SUNAT para empresas peruanas, con TypeScript de punta a punta.';
+  'Desarrollador Full Stack en Perú. Construyo sistemas web a medida para empresas: planillas y RRHH, procesos SUNAT, estudios contables, tiendas online y sitios con panel propio.';
 
 // Destino del enlace "saltar al contenido" (vive aquí y no en el componente
 // cliente para poder usarlo también desde page.tsx, que es server component).
 export const ID_CONTENIDO_PRINCIPAL = 'contenido-principal';
 
 export const SITE_POSICIONAMIENTO =
-  'Sistemas de planillas, RRHH y automatización SUNAT para empresas peruanas';
+  'Sistemas web a medida que ordenan y automatizan el trabajo de tu empresa';
