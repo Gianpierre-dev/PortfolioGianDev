@@ -91,7 +91,16 @@ export default function Services() {
                   </p>
                 </div>
 
+                {/* La experiencia en producción, si existe, va antes que los proyectos */}
                 <dl className="text-sm">
+                  {servicio.respaldo && (
+                    <div className="mb-2 grid grid-cols-[6rem_minmax(0,1fr)] gap-2 border-b border-gray-200 pb-3 dark:border-gray-800">
+                      <dt className="text-xs leading-5 text-gray-500 dark:text-gray-400">
+                        {t.servicios.campoExperiencia}
+                      </dt>
+                      <dd className="text-gray-800 dark:text-gray-200">{servicio.respaldo}</dd>
+                    </div>
+                  )}
                   {pruebas.length > 0 && (
                     <div className="grid grid-cols-[6rem_minmax(0,1fr)] gap-2">
                       <dt className="pt-3 text-xs leading-5 text-gray-500 dark:text-gray-400">
@@ -123,14 +132,6 @@ export default function Services() {
                           ))}
                         </ul>
                       </dd>
-                    </div>
-                  )}
-                  {servicio.respaldo && (
-                    <div className="mt-2 grid grid-cols-[6rem_minmax(0,1fr)] gap-2 border-t border-gray-200 pt-3 dark:border-gray-800">
-                      <dt className="text-xs leading-5 text-gray-500 dark:text-gray-400">
-                        {t.servicios.campoExperiencia}
-                      </dt>
-                      <dd className="text-gray-800 dark:text-gray-200">{servicio.respaldo}</dd>
                     </div>
                   )}
                 </dl>

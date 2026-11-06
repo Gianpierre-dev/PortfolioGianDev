@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { experiences } from '@/data/personal';
-import { Calendar, MapPin, Building, Code, Download, ChevronDown } from 'lucide-react';
+import { Building, Download, ChevronDown } from 'lucide-react';
 import { useIdioma } from '@/i18n/LanguageProvider';
 import { downloadCV } from '@/lib/utils';
 
@@ -36,10 +36,11 @@ export default function About() {
     },
   };
 
+  // Datos, no acciones: van como ficha (campo · valor) y no en tarjetas. La
+  // ubicación ya figura en Contacto y en el pie.
   const stats = [
-    { label: t.about.stats.experiencia, value: '3+', icon: Calendar },
-    { label: t.about.stats.proyectos, value: '25+', icon: Code },
-    { label: t.about.stats.ubicacion, value: t.about.ubicacionValor, icon: MapPin },
+    { label: t.about.stats.experiencia, value: '3+' },
+    { label: t.about.stats.proyectos, value: '25+' },
   ];
 
   return (
@@ -83,20 +84,11 @@ export default function About() {
           </div>
 
           <div className="space-y-3">
-            <dl className="grid grid-cols-3 lg:grid-cols-1 gap-3">
+            <dl className="divide-y divide-gray-200 border-y border-gray-200 dark:divide-gray-800 dark:border-gray-800">
               {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="flex flex-col items-center gap-1 rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 p-4 text-center lg:flex-row lg:gap-4 lg:text-left"
-                >
-                  <stat.icon className="w-6 h-6 shrink-0 text-blue-600 dark:text-blue-400" aria-hidden="true" />
-                  {/* Valor arriba de la etiqueta en móvil; a la derecha en desktop. */}
-                  <dt className="order-2 text-sm text-gray-600 dark:text-gray-400 lg:order-1">
-                    {stat.label}
-                  </dt>
-                  <dd className="order-1 text-2xl font-bold text-gray-900 dark:text-white lg:order-2 lg:ml-auto">
-                    {stat.value}
-                  </dd>
+                <div key={stat.label} className="flex items-baseline justify-between gap-4 py-3">
+                  <dt className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</dt>
+                  <dd className="text-2xl font-bold tabular-nums text-gray-900 dark:text-white">{stat.value}</dd>
                 </div>
               ))}
             </dl>
@@ -157,16 +149,22 @@ export default function About() {
               );
             })}
           </ol>
-          {!verTodaExperiencia && experiences.length > EXPERIENCIAS_VISIBLES_MOVIL && (
+          {experiences.length > EXPERIENCIAS_VISIBLES_MOVIL && (
+            // Abre y vuelve a plegar: el visitante no queda atrapado en la lista larga.
             <button
               type="button"
-              onClick={() => setVerTodaExperiencia(true)}
+              onClick={() => setVerTodaExperiencia((actual) => !actual)}
               aria-controls="lista-experiencia"
               aria-expanded={verTodaExperiencia}
               className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 md:hidden"
             >
-              {t.about.verTodaExperiencia} ({experiences.length})
-              <ChevronDown className="h-4 w-4" aria-hidden="true" />
+              {verTodaExperiencia
+                ? t.about.verMenosExperiencia
+                : `${t.about.verTodaExperiencia} (${experiences.length})`}
+              <ChevronDown
+                className={`h-4 w-4 transition-transform duration-200 motion-reduce:transition-none ${verTodaExperiencia ? 'rotate-180' : ''}`}
+                aria-hidden="true"
+              />
             </button>
           )}
         </motion.div>

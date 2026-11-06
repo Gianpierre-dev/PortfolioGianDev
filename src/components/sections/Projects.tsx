@@ -20,6 +20,9 @@ const statusStyles: Record<EstadoProyecto, { dot: string; text: string }> = {
   development: { dot: 'bg-gray-400', text: 'text-gray-600 dark:text-gray-400' }
 };
 
+// Pasado este plazo no se muestra "Código actualizado hace…".
+const DIAS_ACTUALIZACION_RECIENTE = 90;
+
 // Enlaces de acción con área táctil de 44 px de alto como mínimo.
 const CLASES_ENLACE = 'inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold transition-colors duration-200';
 
@@ -61,8 +64,6 @@ function useAhora(): number | null {
 
 export default function Projects({ metricasGithub }: ProjectsProps) {
   const { t, idioma } = useIdioma();
-  const listaRef = useRef<HTMLUListElement>(null);
-  const listaEnVista = useInView(listaRef, { once: true, amount: 0.05 });
   const ahora = useAhora();
 
   // Combinar datos estáticos con las métricas de GitHub
@@ -80,7 +81,11 @@ export default function Projects({ metricasGithub }: ProjectsProps) {
 
   // El trabajo para clientes es la prueba principal; los proyectos propios
   // quedan plegados para no diluirla.
+  // Los de clientes se agrupan por tipo (sin ocultar ninguno): primero los
+  // sistemas de gestión, luego los sitios web y tiendas.
   const deClientes = projects.filter(project => project.ambito === 'cliente');
+  const sistemas = deClientes.filter(project => project.private);
+  const sitios = deClientes.filter(project => !project.private);
   const propios = projects.filter(project => project.ambito === 'propio');
 
   return (
@@ -107,30 +112,22 @@ export default function Projects({ metricasGithub }: ProjectsProps) {
           )}
         </motion.div>
 
-        {/* Trabajo para clientes */}
-        <motion.ul
-          ref={listaRef}
-          className="divide-y divide-gray-200 dark:divide-gray-800"
-          initial="hidden"
-          animate={listaEnVista ? 'visible' : 'hidden'}
-          variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
-        >
-          {deClientes.map((project) => (
-            <ProjectRow key={project.id} project={project} idioma={idioma} ahora={ahora} t={t} />
-          ))}
-        </motion.ul>
+        {/* Trabajo para clientes, agrupado por tipo */}
+        <GrupoProyectos titulo={t.projects.grupoSistemas} proyectos={sistemas} idioma={idioma} ahora={ahora} t={t} />
+        <GrupoProyectos titulo={t.projects.grupoSitios} proyectos={sitios} idioma={idioma} ahora={ahora} t={t} />
 
         {/* Proyectos propios: plegados por defecto */}
         {propios.length > 0 && (
           <details className="group/otros mt-10 rounded-2xl border border-gray-200 dark:border-gray-800">
             <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 rounded-2xl px-5 py-4 hover:bg-gray-50 dark:hover:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 [&::-webkit-details-marker]:hidden">
               <span>
-                <span className="block text-lg font-semibold text-gray-900 dark:text-white">
+                {/* h3, al mismo nivel que los grupos de clientes: las filas de adentro son h4 */}
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                   {t.projects.otrosTitulo}
                   <span className="ml-2 font-mono text-sm font-normal text-gray-500 dark:text-gray-400">
                     {propios.length}
                   </span>
-                </span>
+                </h3>
                 <span className="block text-sm text-gray-600 dark:text-gray-400">
                   {t.projects.otrosDescripcion}
                 </span>
@@ -154,7 +151,7 @@ export default function Projects({ metricasGithub }: ProjectsProps) {
         )}
 
         {/* Acceso a WhatsApp a mitad de página: después de la prueba, sin esperar a Contacto */}
-        <div className="mt-12 flex flex-col items-center gap-3 text-center">
+        <div className="mt-12 flex flex-col items-start gap-3">
           <p className="text-lg font-semibold text-gray-900 dark:text-white">{t.projects.ctaCierre}</p>
           <a
             href={urlWhatsapp(t.whatsapp.mensajeGeneral)}
@@ -169,6 +166,40 @@ export default function Projects({ metricasGithub }: ProjectsProps) {
         </div>
       </div>
     </section>
+  );
+}
+
+// Un grupo de proyectos con su encabezado. Cada grupo anima su entrada al
+// aparecer en pantalla.
+function GrupoProyectos({ titulo, proyectos: lista, idioma, ahora, t }: {
+  titulo: string;
+  proyectos: ProjectWithMetrics[];
+  idioma: Idioma;
+  ahora: number | null;
+  t: Diccionario;
+}) {
+  const listaRef = useRef<HTMLUListElement>(null);
+  const enVista = useInView(listaRef, { once: true, amount: 0.05 });
+  if (lista.length === 0) return null;
+
+  return (
+    <div className="mt-10 first:mt-0">
+      <h3 className="border-b border-gray-300 pb-2 text-lg font-semibold text-gray-900 dark:border-gray-700 dark:text-white">
+        {titulo}
+        <span className="ml-2 font-mono text-sm font-normal text-gray-500 dark:text-gray-400">{lista.length}</span>
+      </h3>
+      <motion.ul
+        ref={listaRef}
+        className="divide-y divide-gray-200 dark:divide-gray-800"
+        initial="hidden"
+        animate={enVista ? 'visible' : 'hidden'}
+        variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
+      >
+        {lista.map((project) => (
+          <ProjectRow key={project.id} project={project} idioma={idioma} ahora={ahora} t={t} />
+        ))}
+      </motion.ul>
+    </div>
   );
 }
 
@@ -198,6 +229,12 @@ function ProjectRow({ project, idioma, ahora, t }: {
   // Un proyecto sin textos en el diccionario no se muestra, en lugar de romper la página.
   if (!textos) return null;
   const mostrarMetricas = project.metrics.stars > 0 || project.metrics.forks > 0;
+  // La antigüedad del código solo se muestra si es reciente: "hace 9 meses" en un
+  // proyecto en desarrollo se lee como abandonado, aunque no lo esté.
+  const mostrarActualizacion =
+    project.lastUpdate !== undefined &&
+    ahora !== null &&
+    ahora - new Date(project.lastUpdate).getTime() <= DIAS_ACTUALIZACION_RECIENTE * 86_400_000;
 
   return (
     // scroll-mt deja la fila visible bajo la barra de navegación fija.
@@ -237,9 +274,9 @@ function ProjectRow({ project, idioma, ahora, t }: {
             {t.projects.volverServicios}
           </a>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+            <h4 className="text-xl font-bold text-gray-900 dark:text-white">
               {textos.title}
-            </h3>
+            </h4>
             {project.private && (
               <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 dark:bg-gray-800 px-2.5 py-1 text-xs font-semibold text-gray-600 dark:text-gray-300">
                 <Lock className="w-3 h-3" aria-hidden="true" />
@@ -297,9 +334,9 @@ function ProjectRow({ project, idioma, ahora, t }: {
             </figure>
           ) : null}
 
-          {(project.lastUpdate && ahora !== null) || mostrarMetricas ? (
+          {mostrarActualizacion || mostrarMetricas ? (
             <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-500 dark:text-gray-400">
-              {project.lastUpdate && ahora !== null && (
+              {mostrarActualizacion && project.lastUpdate && ahora !== null && (
                 <span>
                   {t.projects.actualizado} {formatearAntiguedad(project.lastUpdate, idioma, ahora)}
                 </span>

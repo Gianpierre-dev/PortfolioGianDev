@@ -60,11 +60,10 @@ export const es: Diccionario = {
     stats: {
       experiencia: 'Años como full stack',
       proyectos: 'Proyectos completados',
-      ubicacion: 'Ubicación',
     },
-    ubicacionValor: 'Perú',
     experienciaTitulo: 'Experiencia profesional',
     verTodaExperiencia: 'Ver toda la experiencia',
+    verMenosExperiencia: 'Ver menos',
   },
   servicios: {
     titulo: 'Servicios',
@@ -129,6 +128,8 @@ export const es: Diccionario = {
     fichaTitulo: 'Ficha del sistema',
     ctaCierre: '¿Necesitas un sistema así para tu empresa?',
     volverServicios: 'Volver a Servicios',
+    grupoSistemas: 'Sistemas de gestión',
+    grupoSitios: 'Sitios web y tiendas',
     actualizado: 'Código actualizado',
     otrosTitulo: 'Proyectos propios',
     otrosDescripcion: 'Productos y herramientas que desarrollo por mi cuenta, con código público.',
@@ -194,6 +195,7 @@ export const es: Diccionario = {
       enviando: 'Enviando...',
       trampa: 'No completes este campo',
       opcional: 'opcional',
+      mensajeAyuda: 'Mínimo 10 caracteres. Cuéntame qué necesitas resolver.',
     },
     validaciones: {
       nombreRequerido: 'El nombre es requerido',

@@ -22,7 +22,8 @@ import {
   Clock,
   User,
   MessageSquare,
-  Copy
+  Copy,
+  Tag
 } from 'lucide-react';
 
 const CLASES_INPUT =
@@ -374,7 +375,7 @@ export default function Contact() {
               {/* Subject */}
               <motion.div variants={itemVariants}>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  <MessageSquare className="w-4 h-4 inline mr-2" aria-hidden="true" />
+                  <Tag className="w-4 h-4 inline mr-2" aria-hidden="true" />
                   {t.contact.form.asunto}{' '}
                   <span className="font-normal text-gray-500 dark:text-gray-400">({t.contact.form.opcional})</span>
                 </label>
@@ -408,7 +409,8 @@ export default function Contact() {
                   rows={5}
                   aria-required="true"
                   aria-invalid={errors.message ? 'true' : 'false'}
-                  aria-describedby={errors.message ? 'message-error' : undefined}
+                  // La pista del mínimo se ve antes de escribir, no recién al fallar.
+                  aria-describedby={errors.message ? 'message-ayuda message-error' : 'message-ayuda'}
                   maxLength={MAXIMOS_CONTACTO.mensaje}
                   {...register('message', {
                     required: t.contact.validaciones.mensajeRequerido,
@@ -418,6 +420,9 @@ export default function Contact() {
                   className={`${clasesCampo(errors.message)} min-h-32 flex-1 resize-none`}
                   placeholder={t.contact.form.mensajePlaceholder}
                 />
+                <p id="message-ayuda" className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                  {t.contact.form.mensajeAyuda}
+                </p>
                 <ErrorCampo id="message-error" error={errors.message} />
               </motion.div>
 

@@ -59,7 +59,6 @@ export interface DiccionarioHero {
 export interface DiccionarioAboutStats {
   experiencia: string;
   proyectos: string;
-  ubicacion: string;
 }
 
 export interface DiccionarioAbout {
@@ -67,10 +66,10 @@ export interface DiccionarioAbout {
   subtitulo: string;
   bioParrafos: string[];
   stats: DiccionarioAboutStats;
-  ubicacionValor: string;
   experienciaTitulo: string;
   // Botón (solo en celular) que muestra los cargos plegados.
   verTodaExperiencia: string;
+  verMenosExperiencia: string;
 }
 
 export interface ServicioTraducido {
@@ -116,6 +115,9 @@ export interface DiccionarioProjects {
   ctaCierre: string;
   // Enlace de regreso que aparece en la fila al llegar desde un servicio.
   volverServicios: string;
+  // Encabezados de los grupos de proyectos de clientes.
+  grupoSistemas: string;
+  grupoSitios: string;
   // Prefijo de la antigüedad del último push: "Código actualizado hace 2 meses".
   actualizado: string;
   // Bloque plegable con los proyectos propios.
@@ -185,6 +187,8 @@ export interface DiccionarioContact {
     trampa: string;
     // Marca de los campos que se pueden dejar vacíos.
     opcional: string;
+    // Pista bajo el campo Mensaje con el mínimo requerido.
+    mensajeAyuda: string;
   };
   validaciones: {
     nombreRequerido: string;

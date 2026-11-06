@@ -4,6 +4,7 @@ import { Github, Linkedin, Mail, MapPin } from 'lucide-react';
 import { personalInfo, socialLinks } from '@/data/personal';
 import { etiquetaSocial } from '@/lib/a11y';
 import { urlWhatsapp } from '@/lib/email';
+import { scrollToSection } from '@/lib/utils';
 import IconoWhatsapp from '@/components/ui/IconoWhatsapp';
 import { useIdioma } from '@/i18n/LanguageProvider';
 
@@ -65,7 +66,16 @@ export default function Footer() {
             <ul>
               {enlaces.map((enlace) => (
                 <li key={enlace.href}>
-                  <a href={enlace.href} className="inline-flex min-h-11 min-w-11 items-center text-gray-300 hover:text-blue-400 transition-colors text-sm">
+                  <a
+                    href={enlace.href}
+                    // Mismo desplazamiento que la navbar: suave y registrado en el historial.
+                    onClick={(evento) => {
+                      if (evento.metaKey || evento.ctrlKey || evento.shiftKey || evento.button !== 0) return;
+                      evento.preventDefault();
+                      scrollToSection(enlace.href.slice(1));
+                    }}
+                    className="inline-flex min-h-11 min-w-11 items-center rounded-md text-gray-300 hover:text-blue-400 transition-colors text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+                  >
                     {enlace.texto}
                   </a>
                 </li>
