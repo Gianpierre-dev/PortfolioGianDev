@@ -27,7 +27,8 @@ Construye sistemas de gestión a medida para la realidad peruana —planillas ba
 ## Operating Context
 
 - El primer contacto es por WhatsApp; los enlaces abren el chat con un mensaje pre-escrito. El formulario envía correo con Resend.
-- Compromisos confirmados por el usuario y publicables: responde el mismo día hábil; la primera conversación para entender el proyecto no tiene costo; trabaja con acuerdo de confidencialidad sobre los datos del cliente (planillas, datos tributarios).
+- Compromisos confirmados por el usuario y publicables: responde el mismo día hábil; la primera conversación para entender el proyecto no tiene costo; trabaja con acuerdo de confidencialidad sobre los datos del cliente (planillas, datos tributarios); el código fuente es 100 % propiedad intelectual del cliente.
+- No se publican plazos ni precios: dependen del requerimiento y se definen en la propuesta.
 - Los sistemas para empresas son privados: se presentan como casos sin código ni capturas reales.
 - Términos locales que el sitio usa y explica en inglés: SUNAT, planilla, RUC/DNI, régimen laboral, boletas, Yape/Plin.
 

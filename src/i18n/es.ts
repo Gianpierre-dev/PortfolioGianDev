@@ -102,7 +102,8 @@ export const es: Diccionario = {
       },
       {
         titulo: 'Despliegue y soporte',
-        descripcion: 'Publico el sistema en producción y te acompaño con soporte después de la entrega.',
+        descripcion:
+          'Publico el sistema en producción, te entrego el código fuente, que es 100 % de tu propiedad, y te acompaño con soporte después de la entrega.',
       },
     ],
     cta: 'Cuéntame tu proyecto por WhatsApp',
@@ -147,6 +148,7 @@ export const es: Diccionario = {
       'Respondo el mismo día hábil.',
       'La primera conversación para entender tu proyecto no tiene costo.',
       'Trabajo con acuerdo de confidencialidad sobre los datos de tu empresa.',
+      'El código fuente es 100 % propiedad intelectual tuya.',
     ],
     labels: {
       email: 'Email',

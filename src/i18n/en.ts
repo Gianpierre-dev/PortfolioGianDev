@@ -102,7 +102,8 @@ export const en: Diccionario = {
       },
       {
         titulo: 'Deployment and support',
-        descripcion: 'I put the system into production and keep supporting you after delivery.',
+        descripcion:
+          'I put the system into production, hand over the source code, which is 100% yours, and keep supporting you after delivery.',
       },
     ],
     cta: 'Tell me about your project on WhatsApp',
@@ -149,6 +150,7 @@ export const en: Diccionario = {
       'I reply the same business day.',
       'The first conversation to understand your project is free of charge.',
       'I work under a confidentiality agreement covering your company’s data.',
+      'The source code is 100% your intellectual property.',
     ],
     labels: {
       email: 'Email',
