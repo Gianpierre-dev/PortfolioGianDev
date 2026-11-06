@@ -30,6 +30,11 @@ export interface MetricasRepo {
   lastUpdate: string;
 }
 
+// Ancla de la fila del proyecto: la usan los enlaces de Servicios hacia su prueba.
+export function idAnclaProyecto(id: number): string {
+  return `proyecto-${id}`;
+}
+
 // El orden del array es el orden en pantalla: primero lo que está en producción.
 export const proyectos: ProyectoBase[] = [
   {

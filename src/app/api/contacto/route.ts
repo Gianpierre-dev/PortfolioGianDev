@@ -156,7 +156,7 @@ function validar(cuerpo: Record<string, unknown>): DatosContacto | null {
   const valido =
     datos.nombre.length >= 2 && datos.nombre.length <= LIMITES.nombre &&
     datos.email.length <= LIMITES.email && EMAIL_VALIDO.test(datos.email) &&
-    datos.asunto.length >= 5 && datos.asunto.length <= LIMITES.asunto &&
+    datos.asunto.length >= 3 && datos.asunto.length <= LIMITES.asunto &&
     datos.mensaje.length >= 10 && datos.mensaje.length <= LIMITES.mensaje;
 
   return valido ? datos : null;

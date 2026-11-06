@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { ComponentType } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
@@ -116,8 +116,19 @@ export default function Contact() {
     reset,
   } = useForm<ContactForm>();
 
+  // En pantallas táctiles copiar al portapapeles no sirve de mucho: se abre el
+  // cliente de correo. Se detecta tras el montaje para no desincronizar el HTML.
+  const [esTactil, setEsTactil] = useState(false);
+  useEffect(() => {
+    setEsTactil(window.matchMedia('(pointer: coarse)').matches);
+  }, []);
+
   // Copia el email al portapapeles; si el navegador no lo permite, abre el cliente de correo.
   const handleEmailClick = async () => {
+    if (esTactil) {
+      window.location.href = `mailto:${personalInfo.email}`;
+      return;
+    }
     try {
       await navigator.clipboard.writeText(personalInfo.email);
       setCopyNotification(t.contact.mensajes.copiado);
@@ -212,9 +223,8 @@ export default function Contact() {
               </ul>
             </motion.div>
 
-            {/* Contact Methods: en desktop las tarjetas reparten el alto del formulario
-                para que ambas columnas terminen a la misma altura. */}
-            <ul className="space-y-4 lg:flex-1 lg:grid lg:auto-rows-fr lg:gap-4 lg:space-y-0">
+            {/* Canales de contacto: las dos acciones reales */}
+            <ul className="space-y-4">
               {/* WhatsApp primero y en verde: es el canal principal */}
               <motion.li variants={itemVariants}>
                 <a
@@ -245,34 +255,31 @@ export default function Contact() {
                     tono="accion"
                     label={t.contact.labels.email}
                     value={personalInfo.email}
-                    description={t.contact.descripciones.email}
-                    badge={{ icon: Copy, texto: t.contact.badgeCopiar }}
+                    description={esTactil ? t.contact.descripciones.emailTactil : t.contact.descripciones.email}
+                    badge={esTactil ? undefined : { icon: Copy, texto: t.contact.badgeCopiar }}
                   />
                 </button>
               </motion.li>
-              <motion.li variants={itemVariants}>
-                <div className={CLASES_TARJETA}>
-                  <ContenidoTarjeta
-                    icon={Clock}
-                    tono="neutro"
-                    label={t.contact.labels.horario}
-                    value={t.contact.valores.horario}
-                    description={t.contact.descripciones.horario}
-                  />
-                </div>
-              </motion.li>
-              <motion.li variants={itemVariants}>
-                <div className={CLASES_TARJETA}>
-                  <ContenidoTarjeta
-                    icon={MapPin}
-                    tono="neutro"
-                    label={t.contact.labels.ubicacion}
-                    value={t.contact.valores.ubicacion}
-                    description={t.contact.descripciones.ubicacion}
-                  />
-                </div>
-              </motion.li>
             </ul>
+
+            {/* Datos informativos: no son acciones, así que van como lista simple */}
+            <motion.dl variants={itemVariants} className="space-y-3 text-sm">
+              {[
+                { Icono: Clock, label: t.contact.labels.horario, valor: t.contact.valores.horario, detalle: t.contact.descripciones.horario },
+                { Icono: MapPin, label: t.contact.labels.ubicacion, valor: t.contact.valores.ubicacion, detalle: t.contact.descripciones.ubicacion },
+              ].map(({ Icono, label, valor, detalle }) => (
+                <div key={label} className="flex items-start gap-3">
+                  <dt className="flex w-28 shrink-0 items-center gap-2 text-gray-500 dark:text-gray-400">
+                    <Icono className="h-4 w-4 shrink-0" aria-hidden="true" />
+                    {label}
+                  </dt>
+                  <dd className="text-gray-800 dark:text-gray-200">
+                    <span className="font-medium">{valor}</span>
+                    <span className="text-gray-500 dark:text-gray-400"> · {detalle}</span>
+                  </dd>
+                </div>
+              ))}
+            </motion.dl>
 
             {/* Copy Notification */}
             <div aria-live="polite">
@@ -280,7 +287,7 @@ export default function Contact() {
                 <motion.div
                   initial={{ opacity: 0, y: 20, scale: 0.9 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
-                  className="bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300 p-4 rounded-lg flex items-center shadow-lg border border-green-200 dark:border-green-700"
+                  className="bg-blue-50 dark:bg-blue-500/15 text-blue-800 dark:text-blue-200 p-4 rounded-lg flex items-center border border-blue-200 dark:border-blue-500/30"
                 >
                   <CheckCircle className="w-5 h-5 mr-2" aria-hidden="true" />
                   {copyNotification}
@@ -369,7 +376,7 @@ export default function Contact() {
                   aria-describedby={errors.subject ? 'subject-error' : undefined}
                   {...register('subject', {
                     required: t.contact.validaciones.asuntoRequerido,
-                    minLength: { value: 5, message: t.contact.validaciones.asuntoMin }
+                    minLength: { value: 3, message: t.contact.validaciones.asuntoMin }
                   })}
                   className={clasesCampo(errors.subject)}
                   placeholder={t.contact.form.asuntoPlaceholder}
@@ -435,7 +442,7 @@ export default function Contact() {
                     animate={{ opacity: 1, y: 0 }}
                     className={`p-4 rounded-lg flex items-center ${
                       submitStatus === 'success'
-                        ? 'bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300'
+                        ? 'bg-blue-50 dark:bg-blue-500/15 text-blue-800 dark:text-blue-200'
                         : 'bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300'
                     }`}
                   >

@@ -32,6 +32,7 @@ export const en: Diccionario = {
     cta: 'Message me on WhatsApp',
     mensajeGeneral: 'Hi Gianpierre, I saw your portfolio and would like to talk about a project for my company.',
     mensajeProyecto: 'Hi Gianpierre, I saw your portfolio and I am interested in a system like',
+    garantia: 'I reply the same business day · The first conversation is free',
   },
   hero: {
     titularPre: 'I build custom web systems that',
@@ -118,7 +119,7 @@ export const en: Diccionario = {
       demo: 'Demo',
     },
     privadoBadge: 'Private',
-    datosClave: 'Key facts',
+    fichaTitulo: 'System record',
     actualizado: 'Code updated',
     otrosTitulo: 'Personal projects',
     otrosDescripcion: 'Products and tools I build on my own, with public source code.',
@@ -161,6 +162,7 @@ export const en: Diccionario = {
     },
     descripciones: {
       email: 'Click to copy the email',
+      emailTactil: 'Tap to send me an email',
       telefono: 'Tap to open the chat',
       ubicacion: 'Available for remote work',
       horario: 'Peru time (UTC-5)',
@@ -187,7 +189,7 @@ export const en: Diccionario = {
       emailRequerido: 'Email is required',
       emailInvalido: 'Invalid email',
       asuntoRequerido: 'Subject is required',
-      asuntoMin: 'Subject must be at least 5 characters',
+      asuntoMin: 'Subject must be at least 3 characters',
       mensajeRequerido: 'Message is required',
       mensajeMin: 'Message must be at least 10 characters',
     },
@@ -258,21 +260,36 @@ export const en: Diccionario = {
       description:
         'Calculates payroll for Peru’s 6 private-sector labor regimes and generates payslips, for several companies at once. Built for teams that manage the payroll of more than one company.',
       technicalNote: 'More than 370 automated tests that run before every change.',
-      datosClave: ['6 labor regimes', 'Several companies in one installation', 'Payslips'],
+      ficha: [
+        { campo: 'Regimes', valor: '6 private labor regimes' },
+        { campo: 'Companies', valor: 'Several in one installation' },
+        { campo: 'Issues', valor: 'Payslips' },
+        { campo: 'Tests', valor: 'More than 370 automated' },
+      ],
     },
     '2': {
       title: 'SIGEMYPE',
       description:
         'Organizes an accounting firm’s work: SUNAT tax due-date schedules, alerts before every deadline, the team’s daily work log and automated RUC, DNI and exchange-rate lookups.',
       technicalNote: 'Imports data from Excel and has more than 120 automated tests.',
-      datosClave: ['SUNAT schedule with alerts', 'Team daily work log', 'RUC, DNI and exchange-rate lookups'],
+      ficha: [
+        { campo: 'Used by', valor: 'Accounting firms' },
+        { campo: 'Alerts', valor: 'SUNAT deadlines' },
+        { campo: 'Imports', valor: 'Data from Excel' },
+        { campo: 'Tests', valor: 'More than 120 automated' },
+      ],
     },
     '3': {
       title: 'Multi-Company HR System',
       description:
         'Centralizes staff records, contracts and documents for several companies, and generates print-ready ID badges and cards as PDFs.',
       technicalNote: 'Username and password access, with data validation on every form.',
-      datosClave: ['Several companies', 'Staff records and contracts', 'PDF ID cards'],
+      ficha: [
+        { campo: 'Companies', valor: 'Several in one installation' },
+        { campo: 'Manages', valor: 'Staff records, contracts and documents' },
+        { campo: 'Issues', valor: 'Badges and ID cards in PDF' },
+        { campo: 'Access', valor: 'Username and password' },
+      ],
     },
     '4': {
       title: 'SUNAT Automation',

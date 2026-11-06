@@ -8,14 +8,16 @@ import IconoWhatsapp from '@/components/ui/IconoWhatsapp';
 import { urlWhatsapp } from '@/lib/email';
 import { EASE_SITE } from '@/lib/motion';
 import type { Diccionario, Idioma } from '@/i18n/types';
-import { proyectos, type EstadoProyecto, type MetricasRepo, type ProyectoBase } from '@/data/proyectos';
-import { ChevronDown, ExternalLink, Github, Star, Lock, GitBranch, Check } from 'lucide-react';
+import { idAnclaProyecto, proyectos, type EstadoProyecto, type MetricasRepo, type ProyectoBase } from '@/data/proyectos';
+import { ChevronDown, ExternalLink, Github, Star, Lock, GitBranch } from 'lucide-react';
 
-// Un solo indicador de estado por fila: punto de color + etiqueta.
+// Un solo indicador de estado por fila: punto + etiqueta. Azul (el acento del
+// sitio) para lo que está en producción; gris para el resto. El verde queda
+// reservado para WhatsApp.
 const statusStyles: Record<EstadoProyecto, { dot: string; text: string }> = {
-  live: { dot: 'bg-emerald-500', text: 'text-emerald-700 dark:text-emerald-400' },
-  development: { dot: 'bg-amber-500', text: 'text-amber-700 dark:text-amber-400' },
-  demo: { dot: 'bg-purple-500', text: 'text-purple-700 dark:text-purple-400' }
+  live: { dot: 'bg-blue-600 dark:bg-blue-400', text: 'text-blue-700 dark:text-blue-400' },
+  development: { dot: 'bg-gray-400', text: 'text-gray-600 dark:text-gray-400' },
+  demo: { dot: 'bg-gray-400', text: 'text-gray-600 dark:text-gray-400' }
 };
 
 // Enlaces de acción con área táctil de 44 px de alto como mínimo.
@@ -183,7 +185,8 @@ function ProjectRow({ project, idioma, ahora, t }: {
   const mostrarMetricas = project.metrics.stars > 0 || project.metrics.forks > 0;
 
   return (
-    <motion.li variants={FILA_VARIANTS} className="group">
+    // scroll-mt deja la fila visible bajo la barra de navegación fija.
+    <motion.li id={idAnclaProyecto(project.id)} variants={FILA_VARIANTS} className="group scroll-mt-24">
       <div className="grid grid-cols-1 gap-x-8 gap-y-4 py-7 md:grid-cols-[minmax(0,1fr)_16rem]">
         {/* Contenido */}
         <div className="min-w-0">
@@ -204,17 +207,20 @@ function ProjectRow({ project, idioma, ahora, t }: {
             {textos.description}
           </p>
 
-          <p className="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
-            {textos.technicalNote}
-          </p>
+          {/* En los sistemas privados el dato técnico ya figura en la ficha */}
+          {!textos.ficha && (
+            <p className="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+              {textos.technicalNote}
+            </p>
+          )}
 
           <p className="mt-3 font-mono text-xs leading-relaxed text-gray-500 dark:text-gray-400">
             {project.tech.join(' · ')}
           </p>
         </div>
 
-        {/* Columna lateral: captura del sitio o, en los sistemas privados, sus
-            datos clave. Debajo, los accesos. */}
+        {/* Columna lateral: captura del sitio o, en los sistemas privados, su
+            ficha. Debajo, los accesos. */}
         <div className="flex flex-col gap-3">
           {project.imagen ? (
             <div className="w-full overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 shadow-sm">
@@ -228,20 +234,22 @@ function ProjectRow({ project, idioma, ahora, t }: {
                 className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none motion-reduce:transition-none"
               />
             </div>
-          ) : textos.datosClave && textos.datosClave.length > 0 ? (
-            <div className="rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 p-4">
-              <p className="text-xs font-semibold text-gray-500 dark:text-gray-400">
-                {t.projects.datosClave}
-              </p>
-              <ul className="mt-2 space-y-1.5">
-                {textos.datosClave.map((dato) => (
-                  <li key={dato} className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-200">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-blue-600 dark:text-blue-400" aria-hidden="true" />
-                    {dato}
-                  </li>
+          ) : textos.ficha && textos.ficha.length > 0 ? (
+            // Ficha de expediente: campo y valor en filas separadas por filetes,
+            // en el mismo espacio que ocupa la captura en los sitios públicos.
+            <figure className="rounded-lg border border-gray-300 dark:border-gray-700">
+              <figcaption className="border-b border-gray-300 dark:border-gray-700 px-4 py-2 text-xs font-semibold text-gray-600 dark:text-gray-300">
+                {t.projects.fichaTitulo}
+              </figcaption>
+              <dl className="divide-y divide-gray-200 dark:divide-gray-800 px-4">
+                {textos.ficha.map(({ campo, valor }) => (
+                  <div key={campo} className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-3 py-2 text-sm">
+                    <dt className="text-gray-500 dark:text-gray-400">{campo}</dt>
+                    <dd className="font-medium text-gray-900 dark:text-gray-100">{valor}</dd>
+                  </div>
                 ))}
-              </ul>
-            </div>
+              </dl>
+            </figure>
           ) : null}
 
           {(project.lastUpdate && ahora !== null) || mostrarMetricas ? (

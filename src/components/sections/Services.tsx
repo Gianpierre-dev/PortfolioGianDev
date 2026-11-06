@@ -1,15 +1,21 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Building2, FileSearch, Globe, Users } from 'lucide-react';
+import { ArrowRight, Building2, FileSearch, Globe, Users } from 'lucide-react';
 import IconoWhatsapp from '@/components/ui/IconoWhatsapp';
 import { useIdioma } from '@/i18n/LanguageProvider';
 import { urlWhatsapp } from '@/lib/email';
 import { EASE_SITE } from '@/lib/motion';
+import { scrollToSection } from '@/lib/utils';
+import { idAnclaProyecto, proyectos } from '@/data/proyectos';
 
 // Íconos en el mismo orden que t.servicios.items:
 // planillas/RRHH, SUNAT, estudios contables, web corporativa.
 const ICONOS_SERVICIO = [Users, FileSearch, Building2, Globe] as const;
+
+// Proyecto que prueba cada servicio, en el mismo orden: RRHH Multiempresa,
+// Automatización SUNAT, SIGEMYPE y Valentino Benites.
+const PRUEBA_SERVICIO = [3, 4, 2, 9] as const;
 
 const ITEM_VARIANTS = {
   hidden: { opacity: 0, y: 16 },
@@ -48,6 +54,8 @@ export default function Services() {
         >
           {t.servicios.items.map((servicio, index) => {
             const Icono = ICONOS_SERVICIO[index] ?? Users;
+            const prueba = proyectos.find((proyecto) => proyecto.id === PRUEBA_SERVICIO[index]);
+            const tituloPrueba = prueba ? t.proyectos[String(prueba.id)]?.title : undefined;
             return (
               <motion.li
                 key={servicio.titulo}
@@ -64,6 +72,25 @@ export default function Services() {
                   <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
                     {servicio.beneficio}
                   </p>
+                  {/* La prueba del servicio: lleva a la fila del proyecto */}
+                  {prueba && tituloPrueba && (
+                    <a
+                      href={`#${idAnclaProyecto(prueba.id)}`}
+                      onClick={(evento) => {
+                        evento.preventDefault();
+                        scrollToSection(idAnclaProyecto(prueba.id));
+                      }}
+                      className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-200 focus:outline-none focus-visible:underline"
+                    >
+                      <span>
+                        <span className="font-normal text-gray-500 dark:text-gray-400">
+                          {t.projects.status[prueba.status]}:
+                        </span>{' '}
+                        {tituloPrueba}
+                      </span>
+                      <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+                    </a>
+                  )}
                 </div>
               </motion.li>
             );
@@ -107,7 +134,7 @@ export default function Services() {
             ))}
           </motion.ol>
 
-          <div className="mt-12 flex justify-center">
+          <div className="mt-12 flex flex-col items-center gap-3">
             <a
               href={urlWhatsapp(t.whatsapp.mensajeGeneral)}
               target="_blank"
@@ -118,6 +145,7 @@ export default function Services() {
               <IconoWhatsapp className="w-5 h-5" />
               {t.servicios.cta}
             </a>
+            <p className="text-sm text-gray-500 dark:text-gray-400">{t.whatsapp.garantia}</p>
           </div>
         </div>
       </div>

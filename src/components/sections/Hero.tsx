@@ -25,20 +25,6 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center bg-gray-950 overflow-hidden">
-      {/* Subtle Grid Pattern */}
-      <div className="absolute inset-0" aria-hidden="true">
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px'
-          }}
-        ></div>
-      </div>
-
       {/* Dos columnas en escritorio: la propuesta a la izquierda y la foto a la derecha.
           En celular la foto va arriba del texto. */}
       <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-24 sm:px-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-16 lg:px-8">
@@ -64,7 +50,7 @@ export default function Hero() {
 
         <div className="text-center lg:order-1 lg:text-left">
           {/* La propuesta de valor es el título: un cliente sabe en segundos si el sitio es para él */}
-          <h1 className="text-3xl leading-tight sm:text-5xl lg:text-[3.4rem] font-bold text-white tracking-tight text-balance">
+          <h1 className="text-3xl leading-tight sm:text-5xl xl:text-6xl font-bold text-white tracking-tight text-balance">
             {t.hero.titularPre}{' '}
             <span className="text-blue-400">{t.hero.titularDestacado}</span>
             {t.hero.titularPost}
@@ -106,6 +92,8 @@ export default function Hero() {
               <ChevronDown className="w-5 h-5" aria-hidden="true" />
             </RippleButton>
           </motion.div>
+          {/* Compromisos confirmados, justo debajo de la acción principal */}
+          <p className="mt-4 text-sm text-gray-400">{t.whatsapp.garantia}</p>
         </div>
       </div>
     </section>

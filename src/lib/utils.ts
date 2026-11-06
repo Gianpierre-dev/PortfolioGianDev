@@ -25,6 +25,10 @@ export const scrollToSection: ScrollToSectionFunction = (sectionId: string): voi
   const element = document.getElementById(sectionId);
   if (!element) return;
 
+  // Si el destino vive dentro de un bloque plegado (proyectos propios), se abre primero.
+  const plegable = element.closest('details');
+  if (plegable) plegable.open = true;
+
   // Con "reducir movimiento" activo el salto es inmediato.
   const reducirMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   element.scrollIntoView({ behavior: reducirMovimiento ? 'auto' : 'smooth' });

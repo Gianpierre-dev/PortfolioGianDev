@@ -32,6 +32,7 @@ export const es: Diccionario = {
     cta: 'Escríbeme por WhatsApp',
     mensajeGeneral: 'Hola Gianpierre, vi tu portfolio y quiero conversar sobre un proyecto para mi empresa.',
     mensajeProyecto: 'Hola Gianpierre, vi tu portfolio y me interesa un sistema como',
+    garantia: 'Respondo el mismo día hábil · La primera conversación no tiene costo',
   },
   hero: {
     titularPre: 'Construyo sistemas web a medida que',
@@ -116,7 +117,7 @@ export const es: Diccionario = {
       demo: 'Demo',
     },
     privadoBadge: 'Privado',
-    datosClave: 'Datos clave',
+    fichaTitulo: 'Ficha del sistema',
     actualizado: 'Código actualizado',
     otrosTitulo: 'Proyectos propios',
     otrosDescripcion: 'Productos y herramientas que desarrollo por mi cuenta, con código público.',
@@ -158,7 +159,8 @@ export const es: Diccionario = {
       horario: '9:00 AM - 6:00 PM',
     },
     descripciones: {
-      email: 'Clic para copiar el email',
+      email: 'Haz clic para copiar el email',
+      emailTactil: 'Toca para escribirme un correo',
       telefono: 'Toca para abrir el chat',
       ubicacion: 'Disponible para trabajo remoto',
       horario: 'Hora de Perú (UTC-5)',
@@ -185,7 +187,7 @@ export const es: Diccionario = {
       emailRequerido: 'El email es requerido',
       emailInvalido: 'Email inválido',
       asuntoRequerido: 'El asunto es requerido',
-      asuntoMin: 'El asunto debe tener al menos 5 caracteres',
+      asuntoMin: 'El asunto debe tener al menos 3 caracteres',
       mensajeRequerido: 'El mensaje es requerido',
       mensajeMin: 'El mensaje debe tener al menos 10 caracteres',
     },
@@ -256,21 +258,36 @@ export const es: Diccionario = {
       description:
         'Calcula la planilla de los 6 regímenes laborales privados del Perú y genera las boletas de pago, para varias empresas a la vez. Pensado para quienes gestionan la planilla de más de una empresa.',
       technicalNote: 'Más de 370 pruebas automatizadas que se ejecutan antes de cada cambio.',
-      datosClave: ['6 regímenes laborales', 'Varias empresas en una instalación', 'Boletas de pago'],
+      ficha: [
+        { campo: 'Regímenes', valor: '6 regímenes laborales privados' },
+        { campo: 'Empresas', valor: 'Varias en una instalación' },
+        { campo: 'Emite', valor: 'Boletas de pago' },
+        { campo: 'Pruebas', valor: 'Más de 370 automatizadas' },
+      ],
     },
     '2': {
       title: 'SIGEMYPE',
       description:
         'Organiza el trabajo de un estudio contable: cronogramas de vencimientos SUNAT, alertas antes de cada fecha límite, parte diario del equipo y consultas automáticas de RUC, DNI y tipo de cambio.',
       technicalNote: 'Importa datos desde Excel y tiene más de 120 pruebas automatizadas.',
-      datosClave: ['Cronograma SUNAT con alertas', 'Parte diario del equipo', 'Consultas de RUC, DNI y tipo de cambio'],
+      ficha: [
+        { campo: 'Usuario', valor: 'Estudios contables' },
+        { campo: 'Alertas', valor: 'Vencimientos SUNAT' },
+        { campo: 'Importa', valor: 'Datos desde Excel' },
+        { campo: 'Pruebas', valor: 'Más de 120 automatizadas' },
+      ],
     },
     '3': {
       title: 'Sistema de RRHH Multiempresa',
       description:
         'Centraliza los legajos, contratos y documentos del personal de varias empresas, y genera photochecks y carnets en PDF listos para imprimir.',
       technicalNote: 'Acceso con usuario y contraseña, y validación de datos en cada formulario.',
-      datosClave: ['Varias empresas', 'Legajos y contratos', 'Carnets en PDF'],
+      ficha: [
+        { campo: 'Empresas', valor: 'Varias en una instalación' },
+        { campo: 'Gestiona', valor: 'Legajos, contratos y documentos' },
+        { campo: 'Emite', valor: 'Photochecks y carnets en PDF' },
+        { campo: 'Acceso', valor: 'Usuario y contraseña' },
+      ],
     },
     '4': {
       title: 'Automatización SUNAT',

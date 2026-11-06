@@ -40,6 +40,9 @@ export interface DiccionarioWhatsapp {
   mensajeGeneral: string;
   // Se completa con el título del proyecto: "...un sistema como {título}."
   mensajeProyecto: string;
+  // Línea tenue bajo los botones de WhatsApp (portada y servicios). Solo
+  // compromisos confirmados por Gian (los mismos de contact.garantias).
+  garantia: string;
 }
 
 export interface DiccionarioHero {
@@ -100,8 +103,8 @@ export interface DiccionarioProjects {
     demo: string;
   };
   privadoBadge: string;
-  // Encabezado del recuadro de datos clave de los sistemas privados.
-  datosClave: string;
+  // Encabezado de la ficha de los sistemas privados.
+  fichaTitulo: string;
   // Prefijo de la antigüedad del último push: "Código actualizado hace 2 meses".
   actualizado: string;
   // Bloque plegable con los proyectos propios.
@@ -146,6 +149,8 @@ export interface DiccionarioContact {
   };
   descripciones: {
     email: string;
+    // En pantallas táctiles el email abre el cliente de correo en vez de copiarse.
+    emailTactil: string;
     telefono: string;
     ubicacion: string;
     horario: string;
@@ -213,9 +218,14 @@ export interface ProyectoTraducido {
   description: string;
   // Una línea técnica breve; el stack completo vive en los datos del proyecto.
   technicalNote: string;
-  // Hasta 3 datos concretos y verificables. Los sistemas privados los muestran
-  // en lugar de la captura que no pueden publicar.
-  datosClave?: string[];
+  // Ficha del sistema: campos concretos y verificables. Los sistemas privados
+  // la muestran en lugar de la captura que no pueden publicar.
+  ficha?: CampoFicha[];
+}
+
+export interface CampoFicha {
+  campo: string;
+  valor: string;
 }
 
 export interface Diccionario {
