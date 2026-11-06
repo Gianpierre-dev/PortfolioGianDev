@@ -154,10 +154,9 @@ export default function Navbar() {
                     <motion.button
                       type="button"
                       onClick={() => handleNavClick(item.href)}
-                      whileHover={{ y: -2 }}
                       whileTap={{ scale: 0.95 }}
                       aria-current={activo ? 'location' : undefined}
-                      className={`relative px-4 py-2 rounded-lg transition-colors duration-200 ${clasesEnlace}`}
+                      className={`relative min-h-11 px-4 py-2 rounded-lg transition-colors duration-200 ${clasesEnlace}`}
                     >
                       {item.name}
                       {activo && (

@@ -159,10 +159,13 @@ Paleta fría y sobria: neutros azul pizarra de Tailwind, un azul eléctrico de m
 Página única con secciones apiladas. Contenedores centrados con margen lateral de 16 px en móvil, 24 px en tablet y 32 px en desktop; anchos máximos de 1024 px (Proyectos, Sobre mí) a 1280 px (navbar). Margen vertical de sección de 80 px (56 px en Stack).
 
 - **Hero:** 2 columnas desde lg (`1.35fr · 1fr`): a la izquierda propuesta de valor, línea de áreas, nombre con prueba, botones y la línea de garantías; a la derecha la foto circular (288–320 px). En móvil la foto va arriba y el texto se centra. Fondo liso, sin grilla decorativa.
-- **Servicios:** grilla de 2 columnas desde md; cada tarjeta termina con sus pruebas: una línea opcional de experiencia que respalda el servicio y uno o más enlaces ("En producción: SIGEMYPE →") que llevan a la fila del proyecto y la resaltan en azul unos segundos. Los cuatro servicios tienen el mismo peso. Proceso en 4 columnas desde lg y, bajo el botón final, la línea de garantías.
+- **Encabezados de sección:** alineados a la izquierda, sobre la misma retícula que el contenido (no centrados).
+- **Servicios:** registro de filas separadas por filetes, con el mismo lenguaje que la ficha: a la izquierda título y beneficio; a la derecha (22rem desde md) los campos "Prueba" (enlaces a la fila del proyecto, con su estado debajo; resaltan la fila en azul unos segundos) y, si existe, "Experiencia". Sin íconos ni tarjetas. Los cuatro servicios tienen el mismo peso. Proceso en 4 columnas desde lg y el botón de WhatsApp al final.
 - **Proyectos:** filas de registro con grilla `ficha (flexible) · captura o ficha del sistema y accesos (16rem)` desde md; en móvil, una columna con la captura antes de los accesos. Primero los sistemas en producción. En los sistemas privados "Consultar" va en la columna izquierda, bajo el stack, para que no quede hueco frente a la ficha. La sección cierra con una pregunta y el botón de WhatsApp con la línea de garantías.
-- **Sobre mí:** bio con datos clave al costado (17rem) y experiencia a lo ancho en 2 columnas.
-- **Contacto:** 2 columnas desde lg. A la izquierda, garantías, las dos acciones (WhatsApp y email) como tarjetas y Horario/Ubicación como lista simple; a la derecha, el formulario.
+- **Sobre mí:** bio con datos clave al costado (17rem) y experiencia a lo ancho en 2 columnas. En celular se ven los 3 cargos más recientes y un botón "Ver toda la experiencia".
+- **Stack:** 2 columnas ya en celular y 4 desde lg, con tarjetas compactas.
+- **Contacto:** 2 columnas desde lg y los dos medios con el mismo peso: a la izquierda garantías, WhatsApp y email como tarjetas, y Horario/Ubicación como lista simple; a la derecha el formulario, con borde fino y sin sombra. El asunto es opcional.
+- **Fila de proyecto en celular:** cabecera, luego la captura o la ficha, y al final el stack y "Consultar": la evidencia va antes de la tecnología.
 - **Navbar:** fija, transparente sobre el hero y con fondo translúcido al hacer scroll.
 
 ### Named Rules
@@ -204,7 +207,7 @@ Radios suaves y consistentes: 6 px en el botón del formulario, 8 px en campos, 
 Reemplaza a la captura en los sistemas privados, en el mismo hueco de 16rem. Es un `figure` con borde de 1 px: encabezado "Ficha del sistema" separado por un filete y, debajo, filas `campo (4.25rem, 12 px) · valor` divididas por filetes, con el campo en gris y el valor en tinta semibold. Solo datos verificables (regímenes, empresas, qué emite, cantidad de pruebas); la nota técnica no se repite en la fila.
 
 ### Línea de garantías
-Texto de 14 px en gris bajo los botones de WhatsApp del hero y de Servicios: "Respondo el mismo día hábil · La primera conversación no tiene costo". Solo compromisos confirmados por Gian.
+Texto de 14 px en gris, solo bajo los botones de la portada (en Contacto los mismos compromisos van como lista): "Respondo el mismo día hábil · La primera conversación no tiene costo". Solo compromisos confirmados por Gian.
 
 ### Inputs / Fields
 - **Style:** fondo blanco, borde de 1 px, radio de 8 px, padding de 12×16 px; etiqueta encima con ícono de 16 px.
@@ -234,6 +237,8 @@ Registro de dos columnas: ficha (título, insignias, estado, descripción de neg
 - **Don't** volver a la grilla decorativa de fondo en el hero.
 - **Don't** usar animaciones decorativas en bucle (como el punto pulsante que tenía el footer).
 - **Don't** dejar enlaces con menos de 44 px de alto, incluidos los del footer.
+- **Don't** enlazar el repositorio de un proyecto de cliente: solo el sitio en vivo. El código público queda para los proyectos propios.
+- **Don't** repetir la línea de garantías fuera de la portada y de Contacto.
 - **Don't** volver a la burbuja flotante de WhatsApp: el acceso fijo vive en el navbar.
 - **Don't** usar la monoespaciada para títulos o párrafos.
 - **Don't** agregar sombras a tarjetas nuevas.

@@ -68,6 +68,8 @@ export interface DiccionarioAbout {
   stats: DiccionarioAboutStats;
   ubicacionValor: string;
   experienciaTitulo: string;
+  // Botón (solo en celular) que muestra los cargos plegados.
+  verTodaExperiencia: string;
 }
 
 export interface ServicioTraducido {
@@ -87,6 +89,9 @@ export interface DiccionarioServicios {
   subtitulo: string;
   // Orden fijo: planillas/RRHH, SUNAT, estudios contables, web corporativa.
   items: ServicioTraducido[];
+  // Etiquetas de los campos de respaldo de cada servicio.
+  campoPrueba: string;
+  campoExperiencia: string;
   procesoTitulo: string;
   procesoSubtitulo: string;
   pasos: PasoProceso[];
@@ -175,13 +180,14 @@ export interface DiccionarioContact {
     enviando: string;
     // Etiqueta del campo trampa contra bots (no visible).
     trampa: string;
+    // Marca de los campos que se pueden dejar vacíos.
+    opcional: string;
   };
   validaciones: {
     nombreRequerido: string;
     nombreMin: string;
     emailRequerido: string;
     emailInvalido: string;
-    asuntoRequerido: string;
     asuntoMin: string;
     mensajeRequerido: string;
     mensajeMin: string;

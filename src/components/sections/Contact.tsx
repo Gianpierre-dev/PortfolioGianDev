@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button';
 import { personalInfo } from '@/data/personal';
 import { isValidEmail } from '@/lib/utils';
 import { enviarFormularioContacto, urlWhatsapp } from '@/lib/email';
+import { MAXIMOS_CONTACTO, MINIMOS_CONTACTO } from '@/lib/contacto-limites';
 import IconoWhatsapp from '@/components/ui/IconoWhatsapp';
 import { ContactForm } from '@/types';
 import { useIdioma } from '@/i18n/LanguageProvider';
@@ -31,11 +32,13 @@ function clasesCampo(error: FieldError | undefined): string {
   return `${CLASES_INPUT} ${error ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'}`;
 }
 
-// Mensaje de error vinculado a su campo mediante aria-describedby.
+// Mensaje de error vinculado a su campo mediante aria-describedby. Sin role="alert":
+// al enviar, react-hook-form lleva el foco al primer campo con error y el lector
+// de pantalla lee ese mensaje, en vez de anunciar todos los errores a la vez.
 function ErrorCampo({ id, error }: { id: string; error: FieldError | undefined }) {
   if (!error) return null;
   return (
-    <p id={id} role="alert" className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center">
+    <p id={id} className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center">
       <AlertCircle className="w-4 h-4 mr-1 shrink-0" aria-hidden="true" />
       {error.message}
     </p>
@@ -186,12 +189,12 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="mb-12"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             {t.contact.titulo}
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl">
             {t.contact.subtitulo}
           </p>
         </motion.div>
@@ -304,7 +307,8 @@ export default function Contact() {
             viewport={{ once: true }}
             // En desktop la tarjeta toma el alto de la columna vecina y el campo
             // Mensaje crece para ocuparlo, sin dejar espacio vacío al pie.
-            className="flex flex-col bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700 shadow-lg"
+            // Mismo peso que los canales de la izquierda: borde fino, sin sombra.
+            className="flex flex-col bg-white dark:bg-gray-800 rounded-lg p-6 sm:p-8 border border-gray-200 dark:border-gray-700"
           >
             <motion.div variants={itemVariants}>
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -329,9 +333,12 @@ export default function Contact() {
                   aria-required="true"
                   aria-invalid={errors.name ? 'true' : 'false'}
                   aria-describedby={errors.name ? 'name-error' : undefined}
+                  maxLength={MAXIMOS_CONTACTO.nombre}
                   {...register('name', {
                     required: t.contact.validaciones.nombreRequerido,
-                    minLength: { value: 2, message: t.contact.validaciones.nombreMin }
+                    // Se mide sin espacios al borde, igual que en el servidor.
+                    validate: (valor) =>
+                      valor.trim().length >= MINIMOS_CONTACTO.nombre || t.contact.validaciones.nombreMin
                   })}
                   className={clasesCampo(errors.name)}
                   placeholder={t.contact.form.nombrePlaceholder}
@@ -352,9 +359,10 @@ export default function Contact() {
                   aria-required="true"
                   aria-invalid={errors.email ? 'true' : 'false'}
                   aria-describedby={errors.email ? 'email-error' : undefined}
+                  maxLength={MAXIMOS_CONTACTO.email}
                   {...register('email', {
                     required: t.contact.validaciones.emailRequerido,
-                    validate: (value) => isValidEmail(value) || t.contact.validaciones.emailInvalido
+                    validate: (value) => isValidEmail(value.trim()) || t.contact.validaciones.emailInvalido
                   })}
                   className={clasesCampo(errors.email)}
                   placeholder={t.contact.form.emailPlaceholder}
@@ -366,17 +374,21 @@ export default function Contact() {
               <motion.div variants={itemVariants}>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   <MessageSquare className="w-4 h-4 inline mr-2" aria-hidden="true" />
-                  {t.contact.form.asunto} *
+                  {t.contact.form.asunto}{' '}
+                  <span className="font-normal text-gray-500 dark:text-gray-400">({t.contact.form.opcional})</span>
                 </label>
                 <input
                   type="text"
                   id="subject"
-                  aria-required="true"
+                  maxLength={MAXIMOS_CONTACTO.asunto}
                   aria-invalid={errors.subject ? 'true' : 'false'}
                   aria-describedby={errors.subject ? 'subject-error' : undefined}
                   {...register('subject', {
-                    required: t.contact.validaciones.asuntoRequerido,
-                    minLength: { value: 3, message: t.contact.validaciones.asuntoMin }
+                    // Opcional: vacío se acepta; si se escribe, respeta el mínimo.
+                    validate: (valor) => {
+                      const limpio = valor.trim();
+                      return limpio.length === 0 || limpio.length >= MINIMOS_CONTACTO.asunto || t.contact.validaciones.asuntoMin;
+                    }
                   })}
                   className={clasesCampo(errors.subject)}
                   placeholder={t.contact.form.asuntoPlaceholder}
@@ -396,9 +408,11 @@ export default function Contact() {
                   aria-required="true"
                   aria-invalid={errors.message ? 'true' : 'false'}
                   aria-describedby={errors.message ? 'message-error' : undefined}
+                  maxLength={MAXIMOS_CONTACTO.mensaje}
                   {...register('message', {
                     required: t.contact.validaciones.mensajeRequerido,
-                    minLength: { value: 10, message: t.contact.validaciones.mensajeMin }
+                    validate: (valor) =>
+                      valor.trim().length >= MINIMOS_CONTACTO.mensaje || t.contact.validaciones.mensajeMin
                   })}
                   className={`${clasesCampo(errors.message)} min-h-32 flex-1 resize-none`}
                   placeholder={t.contact.form.mensajePlaceholder}

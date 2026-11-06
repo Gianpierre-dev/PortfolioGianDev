@@ -59,6 +59,7 @@ export const en: Diccionario = {
     },
     ubicacionValor: 'Peru',
     experienciaTitulo: 'Professional experience',
+    verTodaExperiencia: 'Show all experience',
   },
   servicios: {
     titulo: 'Services',
@@ -73,7 +74,7 @@ export const en: Diccionario = {
         titulo: 'SUNAT process automation',
         beneficio:
           'Bulk-downloads and classifies invoices, receipts and shipping guides from the SUNAT (Peru’s tax authority) portal, with no hours of manual, one-by-one downloads.',
-        respaldo: 'Experience: automated SUNAT lookups as Tech Lead at STI GOLD.',
+        respaldo: 'Automated SUNAT lookups as Tech Lead at STI GOLD',
       },
       {
         titulo: 'Management systems for accounting firms',
@@ -86,6 +87,8 @@ export const en: Diccionario = {
           'A fast, mobile-friendly website or online store: catalog, cart, local payment methods and WhatsApp ordering, ready for your clients to find you on Google.',
       },
     ],
+    campoPrueba: 'Proof',
+    campoExperiencia: 'Experience',
     procesoTitulo: 'How I work',
     procesoSubtitulo: 'A clear process, from the first conversation to the system in production.',
     pasos: [
@@ -112,7 +115,7 @@ export const en: Diccionario = {
   projects: {
     titulo: 'Projects',
     subtitulo:
-      'Management systems, online stores and websites in production. Private systems were built for companies: I do not publish their code or their data.',
+      'Management systems, online stores and websites; each one shows whether it is in production or in development. Private systems were built for companies: I do not publish their code or their data.',
     notaContexto:
       'Context: SUNAT is Peru’s tax authority, and “planilla” is payroll under Peruvian labor regimes.',
     status: {
@@ -145,8 +148,8 @@ export const en: Diccionario = {
   contact: {
     titulo: 'Contact',
     subtitulo: 'Tell me what your company needs and I will propose the next steps.',
-    infoTitulo: 'The fastest way: WhatsApp',
-    infoTexto: 'Message me and we will talk about your current process and what you want to solve.',
+    infoTitulo: 'Write to me however you prefer',
+    infoTexto: 'By WhatsApp or by email, we will talk about your current process and what you want to solve.',
     garantias: [
       'I reply the same business day.',
       'The first conversation to understand your project is free of charge.',
@@ -172,7 +175,7 @@ export const en: Diccionario = {
       horario: 'Peru time (UTC-5)',
     },
     badgeCopiar: 'Copy',
-    formTitulo: 'Prefer email?',
+    formTitulo: 'Send me an email',
     formAviso: 'It goes straight to my inbox and I will reply to the address you provide.',
     form: {
       nombre: 'Name',
@@ -186,13 +189,13 @@ export const en: Diccionario = {
       enviar: 'Send message',
       enviando: 'Sending...',
       trampa: 'Leave this field empty',
+      opcional: 'optional',
     },
     validaciones: {
       nombreRequerido: 'Name is required',
       nombreMin: 'Name must be at least 2 characters',
       emailRequerido: 'Email is required',
       emailInvalido: 'Invalid email',
-      asuntoRequerido: 'Subject is required',
       asuntoMin: 'Subject must be at least 3 characters',
       mensajeRequerido: 'Message is required',
       mensajeMin: 'Message must be at least 10 characters',

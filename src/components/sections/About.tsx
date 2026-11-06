@@ -1,13 +1,18 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { experiences } from '@/data/personal';
-import { Calendar, MapPin, Building, Code, Download } from 'lucide-react';
+import { Calendar, MapPin, Building, Code, Download, ChevronDown } from 'lucide-react';
 import { useIdioma } from '@/i18n/LanguageProvider';
 import { downloadCV } from '@/lib/utils';
 
+// Cargos visibles en celular antes de "Ver toda la experiencia".
+const EXPERIENCIAS_VISIBLES_MOVIL = 3;
+
 export default function About() {
   const { t, idioma } = useIdioma();
+  const [verTodaExperiencia, setVerTodaExperiencia] = useState(false);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -45,7 +50,7 @@ export default function About() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-12 max-w-5xl mx-auto"
         >
           <motion.h2
             variants={itemVariants}
@@ -55,7 +60,7 @@ export default function About() {
           </motion.h2>
           <motion.p
             variants={itemVariants}
-            className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto"
+            className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl"
           >
             {t.about.subtitulo}
           </motion.p>
@@ -119,11 +124,16 @@ export default function About() {
             {t.about.experienciaTitulo}
           </h3>
 
-          <ol className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-            {experiences.map((exp) => {
+          <ol id="lista-experiencia" className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+            {experiences.map((exp, index) => {
               const expT = t.experiencias[exp.company];
+              // En celular se muestran los cargos más recientes; el resto, a pedido.
+              const plegado = !verTodaExperiencia && index >= EXPERIENCIAS_VISIBLES_MOVIL;
               return (
-                <li key={exp.company} className="relative border-l-2 border-gray-200 dark:border-gray-800 pl-5">
+                <li
+                  key={exp.company}
+                  className={`relative border-l-2 border-gray-200 dark:border-gray-800 pl-5 ${plegado ? 'hidden md:block' : ''}`}
+                >
                   <span
                     className="absolute -left-[5px] top-2 w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400"
                     aria-hidden="true"
@@ -147,6 +157,18 @@ export default function About() {
               );
             })}
           </ol>
+          {!verTodaExperiencia && experiences.length > EXPERIENCIAS_VISIBLES_MOVIL && (
+            <button
+              type="button"
+              onClick={() => setVerTodaExperiencia(true)}
+              aria-controls="lista-experiencia"
+              aria-expanded={verTodaExperiencia}
+              className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 focus:outline-none focus-visible:underline md:hidden"
+            >
+              {t.about.verTodaExperiencia} ({experiences.length})
+              <ChevronDown className="h-4 w-4" aria-hidden="true" />
+            </button>
+          )}
         </motion.div>
       </div>
     </section>

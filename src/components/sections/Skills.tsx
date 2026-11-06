@@ -26,7 +26,7 @@ export default function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="text-center mb-8"
+          className="mb-6"
         >
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
             {t.skills.titulo}
@@ -36,11 +36,12 @@ export default function Skills() {
           </p>
         </motion.div>
 
-        <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Dos columnas ya en celular: el stack se lee de un vistazo sin ocupar varias pantallas */}
+        <dl className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {grupos.map((grupo) => (
             <div
               key={grupo.id}
-              className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 p-4"
+              className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 p-3 sm:p-4"
             >
               <dt className="flex items-center gap-2 mb-3 text-sm font-semibold text-gray-900 dark:text-white">
                 <grupo.icon className="w-4 h-4 text-blue-600 dark:text-blue-400" aria-hidden="true" />

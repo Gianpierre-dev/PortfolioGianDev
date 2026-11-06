@@ -59,6 +59,7 @@ export const es: Diccionario = {
     },
     ubicacionValor: 'Perú',
     experienciaTitulo: 'Experiencia profesional',
+    verTodaExperiencia: 'Ver toda la experiencia',
   },
   servicios: {
     titulo: 'Servicios',
@@ -73,7 +74,7 @@ export const es: Diccionario = {
         titulo: 'Automatización de procesos SUNAT',
         beneficio:
           'Descarga y clasifica de forma masiva facturas, boletas y guías de remisión del portal SUNAT, sin horas de trabajo manual ni descargas una por una.',
-        respaldo: 'Experiencia: automatización de consultas SUNAT como Tech Lead en STI GOLD.',
+        respaldo: 'Automatización de consultas SUNAT como Tech Lead en STI GOLD',
       },
       {
         titulo: 'Sistemas de gestión para estudios contables',
@@ -86,6 +87,8 @@ export const es: Diccionario = {
           'Web o tienda online rápida y adaptada a móviles: catálogo, carrito, pagos con Yape o Plin y pedidos por WhatsApp, lista para que tus clientes te encuentren en Google.',
       },
     ],
+    campoPrueba: 'Prueba',
+    campoExperiencia: 'Experiencia',
     procesoTitulo: 'Cómo trabajo',
     procesoSubtitulo: 'Un proceso claro, desde la primera conversación hasta el sistema en producción.',
     pasos: [
@@ -104,7 +107,7 @@ export const es: Diccionario = {
       {
         titulo: 'Despliegue y soporte',
         descripcion:
-          'Publico el sistema en producción, te entrego el código fuente, que es 100 % de tu propiedad, y te acompaño con soporte después de la entrega.',
+          'Publico el sistema en producción, te entrego el código fuente, que es 100 % de tu propiedad, y te acompaño con soporte después de la entrega.',
       },
     ],
     cta: 'Cuéntame tu proyecto por WhatsApp',
@@ -112,7 +115,7 @@ export const es: Diccionario = {
   projects: {
     titulo: 'Proyectos',
     subtitulo:
-      'Sistemas de gestión, tiendas online y sitios web en producción. Los sistemas privados se desarrollaron para empresas: no publico su código ni sus datos.',
+      'Sistemas de gestión, tiendas online y sitios web; cada uno indica si está en producción o en desarrollo. Los sistemas privados se desarrollaron para empresas: no publico su código ni sus datos.',
     status: {
       live: 'En producción',
       development: 'En desarrollo',
@@ -143,13 +146,13 @@ export const es: Diccionario = {
   contact: {
     titulo: 'Contacto',
     subtitulo: 'Cuéntame qué necesita tu empresa y te propongo los siguientes pasos.',
-    infoTitulo: 'La forma más rápida: WhatsApp',
-    infoTexto: 'Escríbeme y conversamos sobre tu proceso actual y lo que quieres resolver.',
+    infoTitulo: 'Escríbeme como prefieras',
+    infoTexto: 'Por WhatsApp o por correo, conversamos sobre tu proceso actual y lo que quieres resolver.',
     garantias: [
       'Respondo el mismo día hábil.',
       'La primera conversación para entender tu proyecto no tiene costo.',
       'Trabajo con acuerdo de confidencialidad sobre los datos de tu empresa.',
-      'El código fuente es 100 % propiedad intelectual tuya.',
+      'El código fuente es 100 % propiedad intelectual tuya.',
     ],
     labels: {
       email: 'Email',
@@ -170,7 +173,7 @@ export const es: Diccionario = {
       horario: 'Hora de Perú (UTC-5)',
     },
     badgeCopiar: 'Copiar',
-    formTitulo: '¿Prefieres escribir por correo?',
+    formTitulo: 'Escríbeme por correo',
     formAviso: 'Llega directo a mi correo y te respondo a la dirección que indiques.',
     form: {
       nombre: 'Nombre',
@@ -184,13 +187,13 @@ export const es: Diccionario = {
       enviar: 'Enviar mensaje',
       enviando: 'Enviando...',
       trampa: 'No completes este campo',
+      opcional: 'opcional',
     },
     validaciones: {
       nombreRequerido: 'El nombre es requerido',
       nombreMin: 'El nombre debe tener al menos 2 caracteres',
       emailRequerido: 'El email es requerido',
       emailInvalido: 'Email inválido',
-      asuntoRequerido: 'El asunto es requerido',
       asuntoMin: 'El asunto debe tener al menos 3 caracteres',
       mensajeRequerido: 'El mensaje es requerido',
       mensajeMin: 'El mensaje debe tener al menos 10 caracteres',

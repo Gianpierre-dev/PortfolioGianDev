@@ -6,6 +6,8 @@
 export type EstadoProyecto = 'live' | 'development';
 
 // 'cliente': trabajo hecho para una empresa o marca; es la prueba principal.
+//   Nunca enlaza su repositorio: el código es del cliente y el sitio promete
+//   confidencialidad. Solo se muestra el sitio en vivo.
 // 'propio': productos y herramientas propias; se muestran plegados.
 export type AmbitoProyecto = 'cliente' | 'propio';
 
@@ -69,12 +71,9 @@ export const proyectos: ProyectoBase[] = [
     ambito: 'cliente',
     status: 'live',
     tech: ['Next.js', 'NestJS', 'Prisma', 'PostgreSQL', 'S3', 'JWT'],
-    repoName: 'ValentinoBenites',
+    repoName: '',
     private: false,
-    links: {
-      demo: 'https://valentinobenites.com',
-      code: 'https://github.com/Gianpierre-dev/ValentinoBenites',
-    },
+    links: { demo: 'https://valentinobenites.com', code: '' },
     imagen: '/images/proyectos/valentino-benites.webp',
   },
   {
@@ -82,12 +81,9 @@ export const proyectos: ProyectoBase[] = [
     ambito: 'cliente',
     status: 'live',
     tech: ['Astro', 'TypeScript', 'Prisma', 'PostgreSQL', 'Tailwind CSS', 'S3'],
-    repoName: 'Human-Touch-Books',
+    repoName: '',
     private: false,
-    links: {
-      demo: 'https://editorialhtb.com',
-      code: 'https://github.com/Gianpierre-dev/Human-Touch-Books',
-    },
+    links: { demo: 'https://editorialhtb.com', code: '' },
     imagen: '/images/proyectos/human-touch-books.webp',
   },
   {

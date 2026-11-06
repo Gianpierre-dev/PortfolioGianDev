@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { personalInfo } from '@/data/personal';
 import { SITE_URL } from '@/lib/site';
+import { ASUNTO_POR_DEFECTO, MAXIMOS_CONTACTO, MINIMOS_CONTACTO } from '@/lib/contacto-limites';
 
 // Envío del formulario de contacto por correo con la API REST de Resend
 // (sin SDK: una sola llamada fetch). Variables de entorno:
@@ -19,7 +20,7 @@ const TIMEOUT_RESEND_MS = 10_000;
 
 // Un mensaje legítimo pesa ~20 KB en el peor caso de UTF-8.
 const CUERPO_MAXIMO_BYTES = 32 * 1024;
-const LIMITES = { nombre: 120, email: 160, asunto: 150, mensaje: 5000 } as const;
+const LIMITES = MAXIMOS_CONTACTO;
 const EMAIL_VALIDO = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 // C0, DEL, NEL y los separadores de línea y párrafo Unicode (U+2028, U+2029).
 // Se arma con códigos de carácter: escritos literalmente, U+2028/2029 cortan
@@ -153,13 +154,19 @@ function validar(cuerpo: Record<string, unknown>): DatosContacto | null {
     mensaje: texto(cuerpo.message),
   };
 
-  const valido =
-    datos.nombre.length >= 2 && datos.nombre.length <= LIMITES.nombre &&
-    datos.email.length <= LIMITES.email && EMAIL_VALIDO.test(datos.email) &&
-    datos.asunto.length >= 3 && datos.asunto.length <= LIMITES.asunto &&
-    datos.mensaje.length >= 10 && datos.mensaje.length <= LIMITES.mensaje;
+  // El asunto es opcional; si viene, respeta el mínimo.
+  const asuntoValido =
+    datos.asunto.length === 0 ||
+    (datos.asunto.length >= MINIMOS_CONTACTO.asunto && datos.asunto.length <= LIMITES.asunto);
 
-  return valido ? datos : null;
+  const valido =
+    datos.nombre.length >= MINIMOS_CONTACTO.nombre && datos.nombre.length <= LIMITES.nombre &&
+    datos.email.length <= LIMITES.email && EMAIL_VALIDO.test(datos.email) &&
+    asuntoValido &&
+    datos.mensaje.length >= MINIMOS_CONTACTO.mensaje && datos.mensaje.length <= LIMITES.mensaje;
+
+  if (!valido) return null;
+  return { ...datos, asunto: datos.asunto || ASUNTO_POR_DEFECTO };
 }
 
 function respuesta(estado: number, codigo: string) {

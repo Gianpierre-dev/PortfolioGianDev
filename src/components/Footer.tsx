@@ -65,7 +65,7 @@ export default function Footer() {
             <ul>
               {enlaces.map((enlace) => (
                 <li key={enlace.href}>
-                  <a href={enlace.href} className="inline-flex min-h-11 items-center text-gray-300 hover:text-blue-400 transition-colors text-sm">
+                  <a href={enlace.href} className="inline-flex min-h-11 min-w-11 items-center text-gray-300 hover:text-blue-400 transition-colors text-sm">
                     {enlace.texto}
                   </a>
                 </li>

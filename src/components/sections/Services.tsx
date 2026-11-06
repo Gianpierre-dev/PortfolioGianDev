@@ -1,17 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Building2, FileSearch, Globe, Users } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import IconoWhatsapp from '@/components/ui/IconoWhatsapp';
 import { useIdioma } from '@/i18n/LanguageProvider';
 import { urlWhatsapp } from '@/lib/email';
 import { EASE_SITE } from '@/lib/motion';
 import { scrollToSection } from '@/lib/utils';
 import { idAnclaProyecto, proyectos } from '@/data/proyectos';
-
-// Íconos en el mismo orden que t.servicios.items:
-// planillas/RRHH, SUNAT, estudios contables, web corporativa.
-const ICONOS_SERVICIO = [Users, FileSearch, Building2, Globe] as const;
 
 // Proyectos que prueban cada servicio, en el mismo orden. Planillas/RRHH cita
 // los dos sistemas (RRHH en producción, Planillas en desarrollo) para no
@@ -47,26 +43,27 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="text-center mb-12"
+          className="mb-10"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             {t.servicios.titulo}
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl">
             {t.servicios.subtitulo}
           </p>
         </motion.div>
 
-        {/* Servicios */}
+        {/* Servicios como registro: qué se construye a la izquierda y, a la derecha,
+            su respaldo en campos (el mismo lenguaje que la ficha de Proyectos).
+            Los cuatro tienen el mismo peso. */}
         <motion.ul
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.1 }}
           variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-5"
+          className="divide-y divide-gray-200 dark:divide-gray-800 border-y border-gray-200 dark:border-gray-800"
         >
           {t.servicios.items.map((servicio, index) => {
-            const Icono = ICONOS_SERVICIO[index] ?? Users;
             const pruebas = (PRUEBAS_SERVICIO[index] ?? []).flatMap((id) => {
               const proyecto = proyectos.find((p) => p.id === id);
               const titulo = t.proyectos[String(id)]?.title;
@@ -76,47 +73,59 @@ export default function Services() {
               <motion.li
                 key={servicio.titulo}
                 variants={ITEM_VARIANTS}
-                className="flex gap-4 rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-950 p-6"
+                className="grid grid-cols-1 gap-x-10 gap-y-4 py-7 md:grid-cols-[minmax(0,1fr)_22rem]"
               >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400">
-                  <Icono className="w-5 h-5" aria-hidden="true" />
-                </span>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1.5">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
                     {servicio.titulo}
                   </h3>
-                  <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                  <p className="mt-2 max-w-prose text-sm leading-relaxed text-gray-600 dark:text-gray-400 sm:text-base">
                     {servicio.beneficio}
                   </p>
-                  {servicio.respaldo && (
-                    <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">{servicio.respaldo}</p>
-                  )}
-                  {/* Las pruebas del servicio: cada enlace lleva a la fila del proyecto */}
-                  {pruebas.length > 0 && (
-                    <ul className="mt-1">
-                      {pruebas.map(({ proyecto, titulo }) => (
-                        <li key={proyecto.id}>
-                          <a
-                            href={`#${idAnclaProyecto(proyecto.id)}`}
-                            onClick={(evento) => {
-                              evento.preventDefault();
-                              irAProyecto(proyecto.id);
-                            }}
-                            className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-200 focus:outline-none focus-visible:underline"
-                          >
-                            <span>
-                              <span className="font-normal text-gray-500 dark:text-gray-400">
-                                {t.projects.status[proyecto.status]}:
-                              </span>{' '}
-                              {titulo}
-                            </span>
-                            <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
                 </div>
+
+                <dl className="text-sm">
+                  {pruebas.length > 0 && (
+                    <div className="grid grid-cols-[6rem_minmax(0,1fr)] gap-2">
+                      <dt className="pt-3 text-xs leading-5 text-gray-500 dark:text-gray-400">
+                        {t.servicios.campoPrueba}
+                      </dt>
+                      <dd>
+                        {/* Cada enlace lleva a la fila del proyecto y la resalta */}
+                        <ul>
+                          {pruebas.map(({ proyecto, titulo }) => (
+                            <li key={proyecto.id}>
+                              <a
+                                href={`#${idAnclaProyecto(proyecto.id)}`}
+                                onClick={(evento) => {
+                                  evento.preventDefault();
+                                  irAProyecto(proyecto.id);
+                                }}
+                                className="inline-flex min-h-11 items-center gap-1.5 font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-200 focus:outline-none focus-visible:underline"
+                              >
+                                <span>
+                                  {titulo}
+                                  <span className="block text-xs font-normal text-gray-500 dark:text-gray-400">
+                                    {t.projects.status[proyecto.status]}
+                                  </span>
+                                </span>
+                                <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </dd>
+                    </div>
+                  )}
+                  {servicio.respaldo && (
+                    <div className="mt-2 grid grid-cols-[6rem_minmax(0,1fr)] gap-2 border-t border-gray-200 pt-3 dark:border-gray-800">
+                      <dt className="text-xs leading-5 text-gray-500 dark:text-gray-400">
+                        {t.servicios.campoExperiencia}
+                      </dt>
+                      <dd className="text-gray-800 dark:text-gray-200">{servicio.respaldo}</dd>
+                    </div>
+                  )}
+                </dl>
               </motion.li>
             );
           })}
@@ -124,7 +133,7 @@ export default function Services() {
 
         {/* Cómo trabajo */}
         <div className="mt-16">
-          <div className="text-center mb-10">
+          <div className="mb-10">
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
               {t.servicios.procesoTitulo}
             </h3>
@@ -159,7 +168,7 @@ export default function Services() {
             ))}
           </motion.ol>
 
-          <div className="mt-12 flex flex-col items-center gap-3">
+          <div className="mt-12">
             <a
               href={urlWhatsapp(t.whatsapp.mensajeGeneral)}
               target="_blank"
@@ -170,7 +179,6 @@ export default function Services() {
               <IconoWhatsapp className="w-5 h-5" />
               {t.servicios.cta}
             </a>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{t.whatsapp.garantia}</p>
           </div>
         </div>
       </div>

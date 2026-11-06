@@ -91,16 +91,16 @@ export default function Projects({ metricasGithub }: ProjectsProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="text-center mb-10"
+          className="mb-10"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             {t.projects.titulo}
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+          <p className="max-w-2xl text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
             {t.projects.subtitulo}
           </p>
           {t.projects.notaContexto && (
-            <p className="max-w-2xl mx-auto mt-3 text-sm italic text-gray-500 dark:text-gray-400">
+            <p className="max-w-2xl mt-3 text-sm italic text-gray-500 dark:text-gray-400">
               {t.projects.notaContexto}
             </p>
           )}
@@ -165,7 +165,6 @@ export default function Projects({ metricasGithub }: ProjectsProps) {
             <IconoWhatsapp className="w-5 h-5" />
             {t.whatsapp.cta}
           </a>
-          <p className="text-sm text-gray-500 dark:text-gray-400">{t.whatsapp.garantia}</p>
         </div>
       </div>
     </section>
@@ -207,9 +206,12 @@ function ProjectRow({ project, idioma, ahora, t }: {
       variants={FILA_VARIANTS}
       className="group scroll-mt-24 -mx-4 rounded-xl px-4 transition-colors duration-700 data-[destacado=true]:bg-blue-50 dark:data-[destacado=true]:bg-blue-500/10"
     >
-      <div className="grid grid-cols-1 gap-x-8 gap-y-4 py-7 md:grid-cols-[minmax(0,1fr)_16rem]">
-        {/* Contenido */}
-        <div className="min-w-0">
+      {/* Tres bloques: cabecera, columna lateral y detalle. En móvil se apilan en
+          ese orden (la ficha, que es la evidencia, va antes del stack); desde md
+          la columna lateral ocupa la derecha a lo alto de la fila. */}
+      <div className="grid grid-cols-1 gap-x-8 gap-y-4 py-7 md:grid-cols-[minmax(0,1fr)_16rem] md:grid-rows-[auto_1fr]">
+        {/* Cabecera */}
+        <div className="min-w-0 md:col-start-1 md:row-start-1">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white">
               {textos.title}
@@ -233,30 +235,11 @@ function ProjectRow({ project, idioma, ahora, t }: {
               {textos.technicalNote}
             </p>
           )}
-
-          <p className="mt-3 font-mono text-xs leading-relaxed text-gray-500 dark:text-gray-400">
-            {project.tech.join(' · ')}
-          </p>
-
-          {/* En los sistemas privados la acción va bajo la lectura: así la columna
-              izquierda no termina mucho antes que la ficha. */}
-          {project.private && (
-            <a
-              href={urlWhatsapp(`${t.whatsapp.mensajeProyecto} ${textos.title}.`)}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${t.projects.consultar}: ${textos.title} (${t.a11y.nuevaPestana})`}
-              className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg border border-green-700 px-4 text-sm font-semibold text-green-700 transition-colors duration-200 hover:bg-green-700 hover:text-white dark:border-green-500 dark:text-green-400 dark:hover:bg-green-700 dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
-            >
-              <IconoWhatsapp className="w-4 h-4" />
-              {t.projects.consultar}
-            </a>
-          )}
         </div>
 
         {/* Columna lateral: captura del sitio o, en los sistemas privados, su
             ficha. Debajo, los accesos. */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 md:col-start-2 md:row-span-2 md:row-start-1">
           {project.imagen ? (
             <div className="w-full overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 shadow-sm">
               <Image
@@ -297,7 +280,7 @@ function ProjectRow({ project, idioma, ahora, t }: {
               {mostrarMetricas && (
                 <>
                   <span className="flex items-center gap-1">
-                    <Star className="w-3.5 h-3.5 fill-current text-amber-500" aria-hidden="true" />
+                    <Star className="w-3.5 h-3.5 fill-current text-gray-400" aria-hidden="true" />
                     <span className="font-semibold tabular-nums">{project.metrics.stars}</span>
                     <span className="sr-only">{t.projects.estrellas}</span>
                   </span>
@@ -311,6 +294,7 @@ function ProjectRow({ project, idioma, ahora, t }: {
             </div>
           ) : null}
 
+          {(project.links.demo || project.links.code) && (
           <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
             {project.links.demo && (
               <a
@@ -337,6 +321,27 @@ function ProjectRow({ project, idioma, ahora, t }: {
               </a>
             )}
           </div>
+          )}
+        </div>
+
+        {/* Detalle: stack y, en los sistemas privados, la consulta. La acción va
+            bajo la lectura para que la columna izquierda no termine antes que la ficha. */}
+        <div className="min-w-0 md:col-start-1 md:row-start-2">
+          <p className="font-mono text-xs leading-relaxed text-gray-500 dark:text-gray-400">
+            {project.tech.join(' · ')}
+          </p>
+          {project.private && (
+            <a
+              href={urlWhatsapp(`${t.whatsapp.mensajeProyecto} ${textos.title}.`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${t.projects.consultar}: ${textos.title} (${t.a11y.nuevaPestana})`}
+              className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg border border-green-700 px-4 text-sm font-semibold text-green-700 transition-colors duration-200 hover:bg-green-700 hover:text-white dark:border-green-500 dark:text-green-400 dark:hover:bg-green-700 dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
+            >
+              <IconoWhatsapp className="w-4 h-4" />
+              {t.projects.consultar}
+            </a>
+          )}
         </div>
       </div>
     </motion.li>
