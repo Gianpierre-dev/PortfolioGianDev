@@ -159,8 +159,8 @@ Paleta fría y sobria: neutros azul pizarra de Tailwind, un azul eléctrico de m
 Página única con secciones apiladas. Contenedores centrados con margen lateral de 16 px en móvil, 24 px en tablet y 32 px en desktop; anchos máximos de 1024 px (Proyectos, Sobre mí) a 1280 px (navbar). Margen vertical de sección de 80 px (56 px en Stack).
 
 - **Hero:** 2 columnas desde lg (`1.35fr · 1fr`): a la izquierda propuesta de valor, línea de áreas, nombre con prueba, botones y la línea de garantías; a la derecha la foto circular (288–320 px). En móvil la foto va arriba y el texto se centra. Fondo liso, sin grilla decorativa.
-- **Servicios:** grilla de 2 columnas desde md; cada tarjeta termina con un enlace a su prueba ("En producción: SIGEMYPE →") que lleva a la fila del proyecto. Proceso en 4 columnas desde lg y, bajo el botón final, la línea de garantías.
-- **Proyectos:** filas de registro con grilla `ficha (flexible) · captura o ficha del sistema y accesos (16rem)` desde md; en móvil, una columna con la captura antes de los accesos. Primero los sistemas en producción.
+- **Servicios:** grilla de 2 columnas desde md; cada tarjeta termina con sus pruebas: una línea opcional de experiencia que respalda el servicio y uno o más enlaces ("En producción: SIGEMYPE →") que llevan a la fila del proyecto y la resaltan en azul unos segundos. Los cuatro servicios tienen el mismo peso. Proceso en 4 columnas desde lg y, bajo el botón final, la línea de garantías.
+- **Proyectos:** filas de registro con grilla `ficha (flexible) · captura o ficha del sistema y accesos (16rem)` desde md; en móvil, una columna con la captura antes de los accesos. Primero los sistemas en producción. En los sistemas privados "Consultar" va en la columna izquierda, bajo el stack, para que no quede hueco frente a la ficha. La sección cierra con una pregunta y el botón de WhatsApp con la línea de garantías.
 - **Sobre mí:** bio con datos clave al costado (17rem) y experiencia a lo ancho en 2 columnas.
 - **Contacto:** 2 columnas desde lg. A la izquierda, garantías, las dos acciones (WhatsApp y email) como tarjetas y Horario/Ubicación como lista simple; a la derecha, el formulario.
 - **Navbar:** fija, transparente sobre el hero y con fondo translúcido al hacer scroll.
@@ -232,6 +232,8 @@ Registro de dos columnas: ficha (título, insignias, estado, descripción de neg
 - **Don't** volver a los gradientes violeta y rosa, el efecto vidrio ni los resplandores: se eliminaron de `globals.css` porque no forman parte del sistema.
 - **Don't** usar verde, esmeralda o violeta para estados o avisos: el verde es solo de WhatsApp, y los avisos de éxito van en azul.
 - **Don't** volver a la grilla decorativa de fondo en el hero.
+- **Don't** usar animaciones decorativas en bucle (como el punto pulsante que tenía el footer).
+- **Don't** dejar enlaces con menos de 44 px de alto, incluidos los del footer.
 - **Don't** volver a la burbuja flotante de WhatsApp: el acceso fijo vive en el navbar.
 - **Don't** usar la monoespaciada para títulos o párrafos.
 - **Don't** agregar sombras a tarjetas nuevas.

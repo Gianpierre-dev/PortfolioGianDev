@@ -40,7 +40,7 @@ export const es: Diccionario = {
     titularPost: ' el trabajo de tu empresa.',
     areas:
       'Planillas y RRHH, procesos SUNAT, sistemas para estudios contables, tiendas online y sitios con panel de administración propio.',
-    prueba: 'Tech Lead en STI GOLD · Sistemas en producción · TypeScript de punta a punta',
+    prueba: '25+ proyectos completados · Sistemas en producción para empresas · Trabajas directo conmigo',
     ctaProyectos: 'Ver proyectos',
     ctaCV: 'Descargar CV',
   },
@@ -53,7 +53,7 @@ export const es: Diccionario = {
       'Construyo con tecnologías actuales (TypeScript, NestJS, Next.js y PostgreSQL) y con pruebas automatizadas, para que el sistema sea confiable y fácil de mantener a medida que tu empresa crece.',
     ],
     stats: {
-      experiencia: 'Años de experiencia',
+      experiencia: 'Años como full stack',
       proyectos: 'Proyectos completados',
       ubicacion: 'Ubicación',
     },
@@ -62,7 +62,7 @@ export const es: Diccionario = {
   },
   servicios: {
     titulo: 'Servicios',
-    subtitulo: 'Lo que puedo construir para tu empresa, respaldado por sistemas que ya están en uso.',
+    subtitulo: 'Lo que puedo construir para tu empresa. Cada servicio enlaza al proyecto que lo respalda.',
     items: [
       {
         titulo: 'Sistemas de planillas y RRHH a medida',
@@ -73,6 +73,7 @@ export const es: Diccionario = {
         titulo: 'Automatización de procesos SUNAT',
         beneficio:
           'Descarga y clasifica de forma masiva facturas, boletas y guías de remisión del portal SUNAT, sin horas de trabajo manual ni descargas una por una.',
+        respaldo: 'Experiencia: automatización de consultas SUNAT como Tech Lead en STI GOLD.',
       },
       {
         titulo: 'Sistemas de gestión para estudios contables',
@@ -111,14 +112,14 @@ export const es: Diccionario = {
   projects: {
     titulo: 'Proyectos',
     subtitulo:
-      'Sistemas de gestión, tiendas online y sitios web en producción. Los sistemas privados se desarrollaron para empresas y no exponen su código.',
+      'Sistemas de gestión, tiendas online y sitios web en producción. Los sistemas privados se desarrollaron para empresas: no publico su código ni sus datos.',
     status: {
       live: 'En producción',
       development: 'En desarrollo',
-      demo: 'Demo',
     },
     privadoBadge: 'Privado',
     fichaTitulo: 'Ficha del sistema',
+    ctaCierre: '¿Necesitas un sistema así para tu empresa?',
     actualizado: 'Código actualizado',
     otrosTitulo: 'Proyectos propios',
     otrosDescripcion: 'Productos y herramientas que desarrollo por mi cuenta, con código público.',
@@ -163,7 +164,8 @@ export const es: Diccionario = {
     descripciones: {
       email: 'Haz clic para copiar el email',
       emailTactil: 'Toca para escribirme un correo',
-      telefono: 'Toca para abrir el chat',
+      telefono: 'Haz clic para abrir el chat',
+      telefonoTactil: 'Toca para abrir el chat',
       ubicacion: 'Disponible para trabajo remoto',
       horario: 'Hora de Perú (UTC-5)',
     },

@@ -240,7 +240,7 @@ export default function Contact() {
                     tono="whatsapp"
                     label={t.contact.labels.telefono}
                     value={personalInfo.phone}
-                    description={t.contact.descripciones.telefono}
+                    description={esTactil ? t.contact.descripciones.telefonoTactil : t.contact.descripciones.telefono}
                   />
                 </a>
               </motion.li>
@@ -418,7 +418,8 @@ export default function Contact() {
                   type="submit"
                   size="lg"
                   disabled={isSubmitting}
-                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed dark:focus:ring-offset-gray-800"
+                  // WhatsApp es el canal principal: el envío por correo no ocupa todo el ancho en pantallas medianas.
+                  className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed dark:focus:ring-offset-gray-800"
                 >
                   {isSubmitting ? (
                     <>

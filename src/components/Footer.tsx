@@ -61,10 +61,11 @@ export default function Footer() {
             <h2 id="footer-navegacion" className="text-lg font-semibold mb-4 text-white">
               {t.footer.navegacionTitulo}
             </h2>
-            <ul className="space-y-2">
+            {/* Enlaces con 44 px de alto: área táctil cómoda en celular */}
+            <ul>
               {enlaces.map((enlace) => (
                 <li key={enlace.href}>
-                  <a href={enlace.href} className="text-gray-300 hover:text-blue-400 transition-colors text-sm">
+                  <a href={enlace.href} className="inline-flex min-h-11 items-center text-gray-300 hover:text-blue-400 transition-colors text-sm">
                     {enlace.texto}
                   </a>
                 </li>
@@ -76,13 +77,13 @@ export default function Footer() {
           <div className="md:col-span-1">
             <h2 className="text-lg font-semibold mb-4 text-white">{t.footer.contactoTitulo}</h2>
             <ul className="space-y-2">
-              <li className="text-gray-300 text-sm flex items-center">
+              <li className="text-gray-300 text-sm flex min-h-11 items-center">
                 <MapPin className="w-4 h-4 mr-2 text-blue-400" aria-hidden="true" />
                 {t.footer.ubicacion}
               </li>
               <li className="text-gray-300 text-sm flex items-center">
                 <Mail className="w-4 h-4 mr-2 text-blue-400" aria-hidden="true" />
-                <a href={`mailto:${personalInfo.email}`} className="hover:text-blue-400 transition-colors">
+                <a href={`mailto:${personalInfo.email}`} className="inline-flex min-h-11 items-center break-all hover:text-blue-400 transition-colors">
                   {personalInfo.email}
                 </a>
               </li>
@@ -93,7 +94,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${t.whatsapp.cta}: ${personalInfo.phone} (${t.a11y.nuevaPestana})`}
-                  className="hover:text-green-400 transition-colors"
+                  className="inline-flex min-h-11 items-center hover:text-green-400 transition-colors"
                 >
                   {personalInfo.phone}
                 </a>
@@ -107,10 +108,7 @@ export default function Footer() {
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
             © {new Date().getFullYear()} {personalInfo.name}. {t.footer.copyright}
           </p>
-          <div className="flex items-center space-x-4">
-            <span className="text-gray-400 text-sm">{t.footer.disponible}</span>
-            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" aria-hidden="true"></div>
-          </div>
+          <p className="text-gray-400 text-sm">{t.footer.disponible}</p>
         </div>
       </div>
     </footer>

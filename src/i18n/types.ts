@@ -73,6 +73,8 @@ export interface DiccionarioAbout {
 export interface ServicioTraducido {
   titulo: string;
   beneficio: string;
+  // Experiencia laboral que respalda el servicio, además de sus proyectos.
+  respaldo?: string;
 }
 
 export interface PasoProceso {
@@ -100,11 +102,12 @@ export interface DiccionarioProjects {
   status: {
     live: string;
     development: string;
-    demo: string;
   };
   privadoBadge: string;
   // Encabezado de la ficha de los sistemas privados.
   fichaTitulo: string;
+  // Pregunta sobre el botón de WhatsApp que cierra la sección.
+  ctaCierre: string;
   // Prefijo de la antigüedad del último push: "Código actualizado hace 2 meses".
   actualizado: string;
   // Bloque plegable con los proyectos propios.
@@ -152,6 +155,7 @@ export interface DiccionarioContact {
     // En pantallas táctiles el email abre el cliente de correo en vez de copiarse.
     emailTactil: string;
     telefono: string;
+    telefonoTactil: string;
     ubicacion: string;
     horario: string;
   };

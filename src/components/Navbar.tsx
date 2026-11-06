@@ -107,7 +107,7 @@ export default function Navbar() {
             <motion.button
               type="button"
               onClick={() => handleNavClick('hero')}
-              className="flex items-center gap-2.5"
+              className="flex min-h-11 min-w-11 items-center gap-2.5"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               aria-label={t.nav.irInicio}

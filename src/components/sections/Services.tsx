@@ -13,9 +13,22 @@ import { idAnclaProyecto, proyectos } from '@/data/proyectos';
 // planillas/RRHH, SUNAT, estudios contables, web corporativa.
 const ICONOS_SERVICIO = [Users, FileSearch, Building2, Globe] as const;
 
-// Proyecto que prueba cada servicio, en el mismo orden: RRHH Multiempresa,
-// Automatización SUNAT, SIGEMYPE y Valentino Benites.
-const PRUEBA_SERVICIO = [3, 4, 2, 9] as const;
+// Proyectos que prueban cada servicio, en el mismo orden. Planillas/RRHH cita
+// los dos sistemas (RRHH en producción, Planillas en desarrollo) para no
+// atribuirle a uno lo que hace el otro.
+const PRUEBAS_SERVICIO: readonly (readonly number[])[] = [[3, 1], [4], [2], [9]];
+
+// Lleva a la fila del proyecto y la resalta un momento.
+function irAProyecto(id: number) {
+  const ancla = idAnclaProyecto(id);
+  scrollToSection(ancla);
+  const fila = document.getElementById(ancla);
+  if (!fila) return;
+  fila.dataset.destacado = 'true';
+  window.setTimeout(() => {
+    delete fila.dataset.destacado;
+  }, 2400);
+}
 
 const ITEM_VARIANTS = {
   hidden: { opacity: 0, y: 16 },
@@ -54,8 +67,11 @@ export default function Services() {
         >
           {t.servicios.items.map((servicio, index) => {
             const Icono = ICONOS_SERVICIO[index] ?? Users;
-            const prueba = proyectos.find((proyecto) => proyecto.id === PRUEBA_SERVICIO[index]);
-            const tituloPrueba = prueba ? t.proyectos[String(prueba.id)]?.title : undefined;
+            const pruebas = (PRUEBAS_SERVICIO[index] ?? []).flatMap((id) => {
+              const proyecto = proyectos.find((p) => p.id === id);
+              const titulo = t.proyectos[String(id)]?.title;
+              return proyecto && titulo ? [{ proyecto, titulo }] : [];
+            });
             return (
               <motion.li
                 key={servicio.titulo}
@@ -72,24 +88,33 @@ export default function Services() {
                   <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
                     {servicio.beneficio}
                   </p>
-                  {/* La prueba del servicio: lleva a la fila del proyecto */}
-                  {prueba && tituloPrueba && (
-                    <a
-                      href={`#${idAnclaProyecto(prueba.id)}`}
-                      onClick={(evento) => {
-                        evento.preventDefault();
-                        scrollToSection(idAnclaProyecto(prueba.id));
-                      }}
-                      className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-200 focus:outline-none focus-visible:underline"
-                    >
-                      <span>
-                        <span className="font-normal text-gray-500 dark:text-gray-400">
-                          {t.projects.status[prueba.status]}:
-                        </span>{' '}
-                        {tituloPrueba}
-                      </span>
-                      <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-                    </a>
+                  {servicio.respaldo && (
+                    <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">{servicio.respaldo}</p>
+                  )}
+                  {/* Las pruebas del servicio: cada enlace lleva a la fila del proyecto */}
+                  {pruebas.length > 0 && (
+                    <ul className="mt-1">
+                      {pruebas.map(({ proyecto, titulo }) => (
+                        <li key={proyecto.id}>
+                          <a
+                            href={`#${idAnclaProyecto(proyecto.id)}`}
+                            onClick={(evento) => {
+                              evento.preventDefault();
+                              irAProyecto(proyecto.id);
+                            }}
+                            className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-200 focus:outline-none focus-visible:underline"
+                          >
+                            <span>
+                              <span className="font-normal text-gray-500 dark:text-gray-400">
+                                {t.projects.status[proyecto.status]}:
+                              </span>{' '}
+                              {titulo}
+                            </span>
+                            <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
                   )}
                 </div>
               </motion.li>

@@ -1,9 +1,9 @@
 // Proyectos curados manualmente. Los sistemas privados (para empresas) no
-// exponen repositorio ni demo: se documentan con sus datos clave.
+// exponen repositorio ni demo: se documentan con su ficha.
 // Los textos (título, descripción, nota técnica y datos clave) viven en el
 // diccionario i18n, keyed por id. Aquí solo permanecen los datos técnicos.
 
-export type EstadoProyecto = 'live' | 'development' | 'demo';
+export type EstadoProyecto = 'live' | 'development';
 
 // 'cliente': trabajo hecho para una empresa o marca; es la prueba principal.
 // 'propio': productos y herramientas propias; se muestran plegados.

@@ -40,7 +40,7 @@ export const en: Diccionario = {
     titularPost: ' the way your company works.',
     areas:
       'Payroll and HR, SUNAT processes, systems for accounting firms, online stores and websites with their own admin panel.',
-    prueba: 'Tech Lead at STI GOLD · Systems in production · End-to-end TypeScript',
+    prueba: '25+ completed projects · Systems in production for companies · You work directly with me',
     ctaProyectos: 'View projects',
     ctaCV: 'Download CV',
   },
@@ -53,7 +53,7 @@ export const en: Diccionario = {
       'I build with modern technology (TypeScript, NestJS, Next.js and PostgreSQL) and automated tests, so the system stays reliable and easy to maintain as your company grows.',
     ],
     stats: {
-      experiencia: 'Years of experience',
+      experiencia: 'Years as full stack',
       proyectos: 'Completed projects',
       ubicacion: 'Location',
     },
@@ -62,7 +62,7 @@ export const en: Diccionario = {
   },
   servicios: {
     titulo: 'Services',
-    subtitulo: 'What I can build for your company, backed by systems already in use.',
+    subtitulo: 'What I can build for your company. Each service links to the project that backs it.',
     items: [
       {
         titulo: 'Custom payroll and HR systems',
@@ -73,6 +73,7 @@ export const en: Diccionario = {
         titulo: 'SUNAT process automation',
         beneficio:
           'Bulk-downloads and classifies invoices, receipts and shipping guides from the SUNAT (Peru’s tax authority) portal, with no hours of manual, one-by-one downloads.',
+        respaldo: 'Experience: automated SUNAT lookups as Tech Lead at STI GOLD.',
       },
       {
         titulo: 'Management systems for accounting firms',
@@ -111,16 +112,16 @@ export const en: Diccionario = {
   projects: {
     titulo: 'Projects',
     subtitulo:
-      'Management systems, online stores and websites in production. Private systems were built for companies and do not expose their code.',
+      'Management systems, online stores and websites in production. Private systems were built for companies: I do not publish their code or their data.',
     notaContexto:
       'Context: SUNAT is Peru’s tax authority, and “planilla” is payroll under Peruvian labor regimes.',
     status: {
       live: 'In production',
       development: 'In development',
-      demo: 'Demo',
     },
     privadoBadge: 'Private',
     fichaTitulo: 'System record',
+    ctaCierre: 'Need a system like this for your company?',
     actualizado: 'Code updated',
     otrosTitulo: 'Personal projects',
     otrosDescripcion: 'Products and tools I build on my own, with public source code.',
@@ -165,7 +166,8 @@ export const en: Diccionario = {
     descripciones: {
       email: 'Click to copy the email',
       emailTactil: 'Tap to send me an email',
-      telefono: 'Tap to open the chat',
+      telefono: 'Click to open the chat',
+      telefonoTactil: 'Tap to open the chat',
       ubicacion: 'Available for remote work',
       horario: 'Peru time (UTC-5)',
     },

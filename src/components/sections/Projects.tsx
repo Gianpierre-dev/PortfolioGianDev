@@ -16,8 +16,7 @@ import { ChevronDown, ExternalLink, Github, Star, Lock, GitBranch } from 'lucide
 // reservado para WhatsApp.
 const statusStyles: Record<EstadoProyecto, { dot: string; text: string }> = {
   live: { dot: 'bg-blue-600 dark:bg-blue-400', text: 'text-blue-700 dark:text-blue-400' },
-  development: { dot: 'bg-gray-400', text: 'text-gray-600 dark:text-gray-400' },
-  demo: { dot: 'bg-gray-400', text: 'text-gray-600 dark:text-gray-400' }
+  development: { dot: 'bg-gray-400', text: 'text-gray-600 dark:text-gray-400' }
 };
 
 // Enlaces de acción con área táctil de 44 px de alto como mínimo.
@@ -152,6 +151,22 @@ export default function Projects({ metricasGithub }: ProjectsProps) {
             </motion.ul>
           </details>
         )}
+
+        {/* Acceso a WhatsApp a mitad de página: después de la prueba, sin esperar a Contacto */}
+        <div className="mt-12 flex flex-col items-center gap-3 text-center">
+          <p className="text-lg font-semibold text-gray-900 dark:text-white">{t.projects.ctaCierre}</p>
+          <a
+            href={urlWhatsapp(t.whatsapp.mensajeGeneral)}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${t.whatsapp.cta} (${t.a11y.nuevaPestana})`}
+            className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-green-700 px-6 py-3 font-semibold text-white transition-colors duration-200 hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950"
+          >
+            <IconoWhatsapp className="w-5 h-5" />
+            {t.whatsapp.cta}
+          </a>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{t.whatsapp.garantia}</p>
+        </div>
       </div>
     </section>
   );
@@ -186,7 +201,12 @@ function ProjectRow({ project, idioma, ahora, t }: {
 
   return (
     // scroll-mt deja la fila visible bajo la barra de navegación fija.
-    <motion.li id={idAnclaProyecto(project.id)} variants={FILA_VARIANTS} className="group scroll-mt-24">
+    // data-destacado lo activa el enlace de Servicios: marca la fila a la que se llegó.
+    <motion.li
+      id={idAnclaProyecto(project.id)}
+      variants={FILA_VARIANTS}
+      className="group scroll-mt-24 -mx-4 rounded-xl px-4 transition-colors duration-700 data-[destacado=true]:bg-blue-50 dark:data-[destacado=true]:bg-blue-500/10"
+    >
       <div className="grid grid-cols-1 gap-x-8 gap-y-4 py-7 md:grid-cols-[minmax(0,1fr)_16rem]">
         {/* Contenido */}
         <div className="min-w-0">
@@ -217,6 +237,21 @@ function ProjectRow({ project, idioma, ahora, t }: {
           <p className="mt-3 font-mono text-xs leading-relaxed text-gray-500 dark:text-gray-400">
             {project.tech.join(' · ')}
           </p>
+
+          {/* En los sistemas privados la acción va bajo la lectura: así la columna
+              izquierda no termina mucho antes que la ficha. */}
+          {project.private && (
+            <a
+              href={urlWhatsapp(`${t.whatsapp.mensajeProyecto} ${textos.title}.`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${t.projects.consultar}: ${textos.title} (${t.a11y.nuevaPestana})`}
+              className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg border border-green-700 px-4 text-sm font-semibold text-green-700 transition-colors duration-200 hover:bg-green-700 hover:text-white dark:border-green-500 dark:text-green-400 dark:hover:bg-green-700 dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
+            >
+              <IconoWhatsapp className="w-4 h-4" />
+              {t.projects.consultar}
+            </a>
+          )}
         </div>
 
         {/* Columna lateral: captura del sitio o, en los sistemas privados, su
@@ -277,19 +312,6 @@ function ProjectRow({ project, idioma, ahora, t }: {
           ) : null}
 
           <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
-            {project.private && (
-              // El mensaje ya nombra el sistema: Gian sabe de entrada qué le interesa al cliente.
-              <a
-                href={urlWhatsapp(`${t.whatsapp.mensajeProyecto} ${textos.title}.`)}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${t.projects.consultar}: ${textos.title} (${t.a11y.nuevaPestana})`}
-                className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-green-700 px-4 text-sm font-semibold text-green-700 transition-colors duration-200 hover:bg-green-700 hover:text-white dark:border-green-500 dark:text-green-400 dark:hover:bg-green-700 dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
-              >
-                <IconoWhatsapp className="w-4 h-4" />
-                {t.projects.consultar}
-              </a>
-            )}
             {project.links.demo && (
               <a
                 href={project.links.demo}
