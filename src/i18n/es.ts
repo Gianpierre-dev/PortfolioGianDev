@@ -40,7 +40,11 @@ export const es: Diccionario = {
     titularPost: ' el trabajo de tu empresa.',
     areas:
       'Planillas y RRHH, procesos SUNAT, sistemas para estudios contables, tiendas online y sitios con panel de administración propio.',
-    prueba: '25+ proyectos completados · Sistemas en producción para empresas · Trabajas directo conmigo',
+    prueba: [
+      { campo: 'En producción', valor: 'SIGEMYPE y RRHH Multiempresa' },
+      { campo: 'Proyectos', valor: '25+ completados' },
+      { campo: 'Trato', valor: 'Directo conmigo' },
+    ],
     ctaProyectos: 'Ver proyectos',
     ctaCV: 'Descargar CV',
   },
@@ -123,6 +127,7 @@ export const es: Diccionario = {
     privadoBadge: 'Privado',
     fichaTitulo: 'Ficha del sistema',
     ctaCierre: '¿Necesitas un sistema así para tu empresa?',
+    volverServicios: 'Volver a Servicios',
     actualizado: 'Código actualizado',
     otrosTitulo: 'Proyectos propios',
     otrosDescripcion: 'Productos y herramientas que desarrollo por mi cuenta, con código público.',
@@ -200,14 +205,14 @@ export const es: Diccionario = {
     },
     mensajes: {
       copiado: 'Email copiado al portapapeles.',
-      exito: 'Mensaje enviado. Te responderé pronto a tu correo.',
+      exito: 'Mensaje enviado. Te respondo el mismo día hábil en tu correo.',
       error: 'No se pudo enviar el mensaje. Mientras tanto, puedes escribirme directamente:',
       limite: 'Ya recibí tus mensajes recientes. Si necesitas algo más, escríbeme directamente:',
     },
   },
   footer: {
     descripcion:
-      'Desarrollo sistemas de planillas, RRHH y automatización de procesos SUNAT para empresas peruanas, con TypeScript de punta a punta.',
+      'Sistemas web a medida para empresas peruanas: planillas y RRHH, procesos SUNAT, estudios contables, tiendas online y sitios con panel propio.',
     navegacionTitulo: 'Navegación',
     navegacion: {
       about: 'Sobre mí',

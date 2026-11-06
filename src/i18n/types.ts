@@ -50,7 +50,8 @@ export interface DiccionarioHero {
   titularDestacado: string;
   titularPost: string;
   areas: string;
-  prueba: string;
+  // Prueba en formato ficha (campo · valor), en la misma forma que los sistemas privados.
+  prueba: CampoFicha[];
   ctaProyectos: string;
   ctaCV: string;
 }
@@ -113,6 +114,8 @@ export interface DiccionarioProjects {
   fichaTitulo: string;
   // Pregunta sobre el botón de WhatsApp que cierra la sección.
   ctaCierre: string;
+  // Enlace de regreso que aparece en la fila al llegar desde un servicio.
+  volverServicios: string;
   // Prefijo de la antigüedad del último push: "Código actualizado hace 2 meses".
   actualizado: string;
   // Bloque plegable con los proyectos propios.

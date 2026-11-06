@@ -59,10 +59,18 @@ export default function Hero() {
             {t.hero.areas}
           </p>
 
-          {/* Quién está detrás */}
+          {/* Quién está detrás y su prueba, en el formato de la ficha del sistema:
+              la portada es la primera hoja del expediente. */}
           <div className="mt-6">
             <p className="font-semibold text-white">{personalInfo.name}</p>
-            <p className="text-sm text-gray-400">{t.hero.prueba}</p>
+            <dl className="mx-auto mt-3 grid max-w-xl grid-cols-3 divide-x divide-gray-800 border-y border-gray-800 text-left lg:mx-0">
+              {t.hero.prueba.map(({ campo, valor }) => (
+                <div key={campo} className="px-3 py-2 first:pl-0">
+                  <dt className="text-xs text-gray-400">{campo}</dt>
+                  <dd className="text-sm font-medium text-white">{valor}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
 
           {/* Dos acciones: escribir por WhatsApp o ver la prueba */}

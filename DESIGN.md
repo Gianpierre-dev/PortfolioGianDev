@@ -158,10 +158,10 @@ Paleta fría y sobria: neutros azul pizarra de Tailwind, un azul eléctrico de m
 
 Página única con secciones apiladas. Contenedores centrados con margen lateral de 16 px en móvil, 24 px en tablet y 32 px en desktop; anchos máximos de 1024 px (Proyectos, Sobre mí) a 1280 px (navbar). Margen vertical de sección de 80 px (56 px en Stack).
 
-- **Hero:** 2 columnas desde lg (`1.35fr · 1fr`): a la izquierda propuesta de valor, línea de áreas, nombre con prueba, botones y la línea de garantías; a la derecha la foto circular (288–320 px). En móvil la foto va arriba y el texto se centra. Fondo liso, sin grilla decorativa.
+- **Hero:** 2 columnas desde lg (`1.35fr · 1fr`): a la izquierda propuesta de valor, línea de áreas, nombre con su prueba en formato ficha (tres campos «En producción · Proyectos · Trato» separados por filetes), botones y la línea de garantías; a la derecha la foto circular (288–320 px). En móvil la foto va arriba y el texto se centra. Fondo liso, sin grilla decorativa.
 - **Encabezados de sección:** alineados a la izquierda, sobre la misma retícula que el contenido (no centrados).
 - **Servicios:** registro de filas separadas por filetes, con el mismo lenguaje que la ficha: a la izquierda título y beneficio; a la derecha (22rem desde md) los campos "Prueba" (enlaces a la fila del proyecto, con su estado debajo; resaltan la fila en azul unos segundos) y, si existe, "Experiencia". Sin íconos ni tarjetas. Los cuatro servicios tienen el mismo peso. Proceso en 4 columnas desde lg y el botón de WhatsApp al final.
-- **Proyectos:** filas de registro con grilla `ficha (flexible) · captura o ficha del sistema y accesos (16rem)` desde md; en móvil, una columna con la captura antes de los accesos. Primero los sistemas en producción. En los sistemas privados "Consultar" va en la columna izquierda, bajo el stack, para que no quede hueco frente a la ficha. La sección cierra con una pregunta y el botón de WhatsApp con la línea de garantías.
+- **Proyectos:** filas de registro con grilla `ficha (flexible) · captura o ficha del sistema y accesos (16rem)` desde md; en móvil, una columna con la captura antes de los accesos. Primero los sistemas en producción. En los sistemas privados "Consultar" es un enlace verde con ícono (no un botón con borde) y va en la columna izquierda, bajo el stack, para que no quede hueco frente a la ficha. La sección cierra con una pregunta y el botón de WhatsApp con la línea de garantías.
 - **Sobre mí:** bio con datos clave al costado (17rem) y experiencia a lo ancho en 2 columnas. En celular se ven los 3 cargos más recientes y un botón "Ver toda la experiencia".
 - **Stack:** 2 columnas ya en celular y 4 desde lg, con tarjetas compactas.
 - **Contacto:** 2 columnas desde lg y los dos medios con el mismo peso: a la izquierda garantías, WhatsApp y email como tarjetas, y Horario/Ubicación como lista simple; a la derecha el formulario, con borde fino y sin sombra. El asunto es opcional.
@@ -173,10 +173,10 @@ Página única con secciones apiladas. Contenedores centrados con margen lateral
 
 ## Elevation & Depth
 
-Sistema plano con bordes. La profundidad se comunica con bordes de 1 px y cambios de fondo entre secciones; las sombras se reservan para tres casos: el formulario de contacto (sombra amplia y suave), la barra de navegación al hacer scroll y los botones del hero.
+Sistema plano con bordes. La profundidad se comunica con bordes de 1 px y cambios de fondo entre secciones; las sombras se reservan para dos casos: la barra de navegación al hacer scroll y los botones del hero. El formulario de contacto no lleva sombra: tiene el mismo peso que la tarjeta de WhatsApp.
 
 ### Named Rules
-**The Border-Before-Shadow Rule.** Una tarjeta nueva lleva borde fino, no sombra. La sombra señala algo flotante (navbar) o la acción final (formulario).
+**The Border-Before-Shadow Rule.** Una tarjeta nueva lleva borde fino, no sombra. La sombra señala algo flotante (navbar) o la acción principal de la portada.
 
 ## Shapes
 
@@ -239,6 +239,7 @@ Registro de dos columnas: ficha (título, insignias, estado, descripción de neg
 - **Don't** dejar enlaces con menos de 44 px de alto, incluidos los del footer.
 - **Don't** enlazar el repositorio de un proyecto de cliente: solo el sitio en vivo. El código público queda para los proyectos propios.
 - **Don't** repetir la línea de garantías fuera de la portada y de Contacto.
+- **Don't** navegar dentro de la página sin dejar rastro: todo salto interno usa `scrollToSection`, que registra la sección en el historial (el gesto "volver" regresa al punto anterior) y la navegación usa enlaces `#seccion`.
 - **Don't** volver a la burbuja flotante de WhatsApp: el acceso fijo vive en el navbar.
 - **Don't** usar la monoespaciada para títulos o párrafos.
 - **Don't** agregar sombras a tarjetas nuevas.

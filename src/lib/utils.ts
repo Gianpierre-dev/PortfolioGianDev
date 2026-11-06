@@ -29,6 +29,15 @@ export const scrollToSection: ScrollToSectionFunction = (sectionId: string): voi
   const plegable = element.closest('details');
   if (plegable) plegable.open = true;
 
+  // El salto queda en el historial: el botón o gesto "volver" regresa al punto
+  // anterior de la página en vez de sacar al visitante del sitio, y la sección
+  // queda con una URL que se puede compartir. La portada usa la URL limpia.
+  const { pathname, search, hash } = window.location;
+  const destino = `${pathname}${search}${sectionId === 'hero' ? '' : `#${sectionId}`}`;
+  if (`${pathname}${search}${hash}` !== destino) {
+    window.history.pushState(null, '', destino);
+  }
+
   // Con "reducir movimiento" activo el salto es inmediato.
   const reducirMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   element.scrollIntoView({ behavior: reducirMovimiento ? 'auto' : 'smooth' });

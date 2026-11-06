@@ -40,7 +40,11 @@ export const en: Diccionario = {
     titularPost: ' the way your company works.',
     areas:
       'Payroll and HR, SUNAT processes, systems for accounting firms, online stores and websites with their own admin panel.',
-    prueba: '25+ completed projects · Systems in production for companies · You work directly with me',
+    prueba: [
+      { campo: 'In production', valor: 'SIGEMYPE and the HR system' },
+      { campo: 'Projects', valor: '25+ completed' },
+      { campo: 'Working with', valor: 'Me, directly' },
+    ],
     ctaProyectos: 'View projects',
     ctaCV: 'Download CV',
   },
@@ -125,6 +129,7 @@ export const en: Diccionario = {
     privadoBadge: 'Private',
     fichaTitulo: 'System record',
     ctaCierre: 'Need a system like this for your company?',
+    volverServicios: 'Back to Services',
     actualizado: 'Code updated',
     otrosTitulo: 'Personal projects',
     otrosDescripcion: 'Products and tools I build on my own, with public source code.',
@@ -202,14 +207,14 @@ export const en: Diccionario = {
     },
     mensajes: {
       copiado: 'Email copied to clipboard.',
-      exito: 'Message sent. I will get back to you soon by email.',
+      exito: 'Message sent. I will reply by email the same business day.',
       error: 'The message could not be sent. In the meantime, you can reach me directly:',
       limite: 'I already received your recent messages. If you need anything else, reach me directly:',
     },
   },
   footer: {
     descripcion:
-      'I build payroll, HR and SUNAT automation systems for Peruvian companies, with end-to-end TypeScript.',
+      'Custom web systems for Peruvian companies: payroll and HR, SUNAT processes, accounting firms, online stores and websites with their own admin panel.',
     navegacionTitulo: 'Navigation',
     navegacion: {
       about: 'About',

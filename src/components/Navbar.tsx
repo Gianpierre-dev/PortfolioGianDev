@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { scrollToSection } from '@/lib/utils';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
@@ -60,7 +60,12 @@ export default function Navbar() {
     return () => window.removeEventListener('keydown', cerrarConEscape);
   }, [isOpen]);
 
-  const handleNavClick = (href: string): void => {
+  // Los accesos son enlaces reales (#seccion): se pueden abrir en otra pestaña
+  // y copiar. El clic normal se intercepta para el desplazamiento suave, que
+  // además registra la sección en el historial (el botón "volver" funciona).
+  const handleNavClick = (href: string, evento?: MouseEvent<HTMLAnchorElement>): void => {
+    if (evento && (evento.metaKey || evento.ctrlKey || evento.shiftKey || evento.button !== 0)) return;
+    evento?.preventDefault();
     scrollToSection(href);
     setIsOpen(false);
   };
@@ -104,10 +109,10 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <motion.button
-              type="button"
-              onClick={() => handleNavClick('hero')}
-              className="flex min-h-11 min-w-11 items-center gap-2.5"
+            <motion.a
+              href="#hero"
+              onClick={(evento) => handleNavClick('hero', evento)}
+              className="flex min-h-11 min-w-11 items-center gap-2.5 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               aria-label={t.nav.irInicio}
@@ -134,7 +139,7 @@ export default function Navbar() {
                   {t.nav.rolLogo}
                 </span>
               </span>
-            </motion.button>
+            </motion.a>
 
             {/* Desktop Navigation */}
             {/* Sin "Inicio" en desktop: el logo ya lleva arriba y libera espacio para WhatsApp */}
@@ -151,12 +156,12 @@ export default function Navbar() {
 
                 return (
                   <li key={item.href}>
-                    <motion.button
-                      type="button"
-                      onClick={() => handleNavClick(item.href)}
+                    <motion.a
+                      href={`#${item.href}`}
+                      onClick={(evento) => handleNavClick(item.href, evento)}
                       whileTap={{ scale: 0.95 }}
                       aria-current={activo ? 'location' : undefined}
-                      className={`relative min-h-11 px-4 py-2 rounded-lg transition-colors duration-200 ${clasesEnlace}`}
+                      className={`relative inline-flex min-h-11 items-center px-4 py-2 rounded-lg transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${clasesEnlace}`}
                     >
                       {item.name}
                       {activo && (
@@ -170,7 +175,7 @@ export default function Navbar() {
                           transition={{ type: "spring", stiffness: 400, damping: 30 }}
                         />
                       )}
-                    </motion.button>
+                    </motion.a>
                   </li>
                 );
               })}
@@ -295,9 +300,9 @@ export default function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
                   >
-                    <button
-                      type="button"
-                      onClick={() => handleNavClick(item.href)}
+                    <a
+                      href={`#${item.href}`}
+                      onClick={(evento) => handleNavClick(item.href, evento)}
                       aria-current={activeSection === item.href ? 'location' : undefined}
                       className={`block w-full text-left px-4 py-3 rounded-xl transition-colors duration-200 ${
                         activeSection === item.href
@@ -306,7 +311,7 @@ export default function Navbar() {
                       }`}
                     >
                       {item.name}
-                    </button>
+                    </a>
                   </motion.li>
                 ))}
                 {/* WhatsApp también dentro del menú: es la acción principal del sitio */}

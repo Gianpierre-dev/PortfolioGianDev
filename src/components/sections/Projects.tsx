@@ -9,7 +9,7 @@ import { urlWhatsapp } from '@/lib/email';
 import { EASE_SITE } from '@/lib/motion';
 import type { Diccionario, Idioma } from '@/i18n/types';
 import { idAnclaProyecto, proyectos, type EstadoProyecto, type MetricasRepo, type ProyectoBase } from '@/data/proyectos';
-import { ChevronDown, ExternalLink, Github, Star, Lock, GitBranch } from 'lucide-react';
+import { ArrowLeft, ChevronDown, ExternalLink, Github, Star, Lock, GitBranch } from 'lucide-react';
 
 // Un solo indicador de estado por fila: punto + etiqueta. Azul (el acento del
 // sitio) para lo que está en producción; gris para el resto. El verde queda
@@ -204,14 +204,31 @@ function ProjectRow({ project, idioma, ahora, t }: {
     <motion.li
       id={idAnclaProyecto(project.id)}
       variants={FILA_VARIANTS}
-      className="group scroll-mt-24 -mx-4 rounded-xl px-4 transition-colors duration-700 data-[destacado=true]:bg-blue-50 dark:data-[destacado=true]:bg-blue-500/10"
+      className="group scroll-mt-24"
     >
       {/* Tres bloques: cabecera, columna lateral y detalle. En móvil se apilan en
           ese orden (la ficha, que es la evidencia, va antes del stack); desde md
           la columna lateral ocupa la derecha a lo alto de la fila. */}
-      <div className="grid grid-cols-1 gap-x-8 gap-y-4 py-7 md:grid-cols-[minmax(0,1fr)_16rem] md:grid-rows-[auto_1fr]">
+      {/* El resaltado vive en este bloque y no en el <li>: así los filetes entre
+          filas quedan rectos. Menos aire vertical en celular. */}
+      <div className="-mx-4 grid grid-cols-1 gap-x-8 gap-y-3 rounded-xl px-4 py-5 transition-colors duration-700 group-data-[destacado=true]:bg-blue-50 dark:group-data-[destacado=true]:bg-blue-500/10 md:grid-cols-[minmax(0,1fr)_16rem] md:grid-rows-[auto_1fr] md:gap-y-4 md:py-7">
         {/* Cabecera */}
         <div className="min-w-0 md:col-start-1 md:row-start-1">
+          {/* Solo visible si se llegó desde un servicio: vuelve al punto de partida */}
+          <a
+            href="#services"
+            onClick={(evento) => {
+              evento.preventDefault();
+              const fila = evento.currentTarget.closest<HTMLElement>('[data-desde-servicios]');
+              if (fila) delete fila.dataset.desdeServicios;
+              // El salto desde Servicios quedó en el historial: volver restaura esa posición.
+              window.history.back();
+            }}
+            className="mb-2 hidden min-h-11 items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800 focus:outline-none focus-visible:underline dark:text-blue-400 dark:hover:text-blue-300 group-data-[desde-servicios=true]:inline-flex"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            {t.projects.volverServicios}
+          </a>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white">
               {textos.title}
@@ -229,9 +246,10 @@ function ProjectRow({ project, idioma, ahora, t }: {
             {textos.description}
           </p>
 
-          {/* En los sistemas privados el dato técnico ya figura en la ficha */}
+          {/* En los sistemas privados el dato técnico ya figura en la ficha. En
+              celular se omite: la captura y el sitio en vivo ya prueban el trabajo. */}
           {!textos.ficha && (
-            <p className="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+            <p className="mt-2 hidden text-sm leading-relaxed text-gray-500 dark:text-gray-400 md:block">
               {textos.technicalNote}
             </p>
           )}
@@ -336,7 +354,8 @@ function ProjectRow({ project, idioma, ahora, t }: {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${t.projects.consultar}: ${textos.title} (${t.a11y.nuevaPestana})`}
-              className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg border border-green-700 px-4 text-sm font-semibold text-green-700 transition-colors duration-200 hover:bg-green-700 hover:text-white dark:border-green-500 dark:text-green-400 dark:hover:bg-green-700 dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
+              // Enlace con ícono, no botón: el acceso sigue ahí sin sumar otro bloque verde a la página.
+              className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-green-700 transition-colors duration-200 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300 focus:outline-none focus-visible:underline"
             >
               <IconoWhatsapp className="w-4 h-4" />
               {t.projects.consultar}

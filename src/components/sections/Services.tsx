@@ -14,12 +14,17 @@ import { idAnclaProyecto, proyectos } from '@/data/proyectos';
 // atribuirle a uno lo que hace el otro.
 const PRUEBAS_SERVICIO: readonly (readonly number[])[] = [[3, 1], [4], [2], [9]];
 
-// Lleva a la fila del proyecto y la resalta un momento.
+// Lleva a la fila del proyecto, la resalta un momento y muestra en ella el
+// enlace "Volver a Servicios" (data-desde-servicios).
 function irAProyecto(id: number) {
   const ancla = idAnclaProyecto(id);
   scrollToSection(ancla);
   const fila = document.getElementById(ancla);
   if (!fila) return;
+  document.querySelectorAll<HTMLElement>('[data-desde-servicios]').forEach((otra) => {
+    delete otra.dataset.desdeServicios;
+  });
+  fila.dataset.desdeServicios = 'true';
   fila.dataset.destacado = 'true';
   window.setTimeout(() => {
     delete fila.dataset.destacado;
@@ -101,15 +106,16 @@ export default function Services() {
                                   evento.preventDefault();
                                   irAProyecto(proyecto.id);
                                 }}
-                                className="inline-flex min-h-11 items-center gap-1.5 font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-200 focus:outline-none focus-visible:underline"
+                                className="inline-flex min-h-11 flex-col justify-center py-1 font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-200 focus:outline-none focus-visible:underline"
                               >
+                                {/* La flecha va pegada al final del título, aunque este ocupe dos líneas */}
                                 <span>
                                   {titulo}
-                                  <span className="block text-xs font-normal text-gray-500 dark:text-gray-400">
-                                    {t.projects.status[proyecto.status]}
-                                  </span>
+                                  <ArrowRight className="ml-1 inline h-4 w-4 align-[-3px]" aria-hidden="true" />
                                 </span>
-                                <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+                                <span className="text-xs font-normal text-gray-500 dark:text-gray-400">
+                                  {t.projects.status[proyecto.status]}
+                                </span>
                               </a>
                             </li>
                           ))}
