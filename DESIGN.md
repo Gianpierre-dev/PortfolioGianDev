@@ -17,7 +17,7 @@ colors:
 typography:
   display:
     fontFamily: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
-    fontSize: "3.75rem"
+    fontSize: "3rem"
     fontWeight: 700
     lineHeight: 1.25
   headline:
@@ -144,7 +144,7 @@ Paleta fría y sobria: neutros azul pizarra de Tailwind, un azul eléctrico de m
 **Character:** Una sola familia neutra y muy legible que no compite con el contenido; la monoespaciada aporta el tono de "registro técnico" solo donde hay datos.
 
 ### Hierarchy
-- **Display** (700, 3.75rem desde xl, 3rem desde sm, 1.875rem en móvil, interlineado 1.25): solo la propuesta de valor del hero, con la frase central en azul claro.
+- **Display** (700, 3rem desde sm, 1.875rem en móvil, interlineado 1.25): solo la propuesta de valor del hero, con la frase central en azul claro.
 - **Headline** (700, 2.25rem, 1.1): títulos de sección (Servicios, Proyectos, Sobre mí, Contacto).
 - **Title** (600, 1.125–1.25rem, 1.55): títulos de servicios, proyectos, cargos y pasos.
 - **Body** (400, 1rem–1.125rem, 1.6): bio y subtítulos de sección; máximo ~70 caracteres por línea.
@@ -201,7 +201,7 @@ Radios suaves y consistentes: 6 px en el botón del formulario, 8 px en campos, 
 - **Internal Padding:** 24 px (servicios), 20 px (contacto), 16 px horizontal (ficha del sistema).
 
 ### Ficha del sistema
-Reemplaza a la captura en los sistemas privados, en el mismo hueco de 16rem. Es un `figure` con borde de 1 px: encabezado "Ficha del sistema" separado por un filete y, debajo, filas `campo (5.5rem) · valor` divididas por filetes, con el campo en gris y el valor en tinta semibold. Solo datos verificables (regímenes, empresas, qué emite, cantidad de pruebas); la nota técnica no se repite en la fila.
+Reemplaza a la captura en los sistemas privados, en el mismo hueco de 16rem. Es un `figure` con borde de 1 px: encabezado "Ficha del sistema" separado por un filete y, debajo, filas `campo (4.25rem, 12 px) · valor` divididas por filetes, con el campo en gris y el valor en tinta semibold. Solo datos verificables (regímenes, empresas, qué emite, cantidad de pruebas); la nota técnica no se repite en la fila.
 
 ### Línea de garantías
 Texto de 14 px en gris bajo los botones de WhatsApp del hero y de Servicios: "Respondo el mismo día hábil · La primera conversación no tiene costo". Solo compromisos confirmados por Gian.

@@ -50,7 +50,7 @@ export default function Hero() {
 
         <div className="text-center lg:order-1 lg:text-left">
           {/* La propuesta de valor es el título: un cliente sabe en segundos si el sitio es para él */}
-          <h1 className="text-3xl leading-tight sm:text-5xl xl:text-6xl font-bold text-white tracking-tight text-balance">
+          <h1 className="text-3xl leading-tight sm:text-5xl font-bold text-white tracking-tight text-balance">
             {t.hero.titularPre}{' '}
             <span className="text-blue-400">{t.hero.titularDestacado}</span>
             {t.hero.titularPost}

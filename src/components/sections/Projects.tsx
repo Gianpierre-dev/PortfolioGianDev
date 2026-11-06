@@ -243,8 +243,8 @@ function ProjectRow({ project, idioma, ahora, t }: {
               </figcaption>
               <dl className="divide-y divide-gray-200 dark:divide-gray-800 px-4">
                 {textos.ficha.map(({ campo, valor }) => (
-                  <div key={campo} className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-3 py-2 text-sm">
-                    <dt className="text-gray-500 dark:text-gray-400">{campo}</dt>
+                  <div key={campo} className="grid grid-cols-[4.25rem_minmax(0,1fr)] gap-2 py-2 text-sm">
+                    <dt className="text-xs leading-5 text-gray-500 dark:text-gray-400">{campo}</dt>
                     <dd className="font-medium text-gray-900 dark:text-gray-100">{valor}</dd>
                   </div>
                 ))}
