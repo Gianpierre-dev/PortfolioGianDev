@@ -19,7 +19,7 @@ typography:
     fontFamily: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
     fontSize: "3.75rem"
     fontWeight: 700
-    lineHeight: 1
+    lineHeight: 1.25
   headline:
     fontFamily: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
     fontSize: "2.25rem"
@@ -100,7 +100,7 @@ components:
 
 El sitio se comporta como un expediente bien ordenado que un contador o el dueño de una pyme puede revisar en minutos: qué se ofrece, qué ya está en producción y cómo contactar. La claridad pesa más que la expresión. Superficies blancas y gris niebla, tinta azul pizarra para el texto, un solo azul de marca para la acción y la identidad, y un hero nocturno que funciona como portada.
 
-La densidad es media: secciones con aire generoso (80 px de margen vertical), contenido en columnas acotadas (máx. 1024–1152 px) y listas que privilegian la lectura antes que la decoración. Los proyectos se presentan como filas de un registro (año, ficha, estado), no como una galería de tarjetas. El verde de WhatsApp es el único segundo color con permiso, porque es el canal de contacto.
+La densidad es media: secciones con aire generoso (80 px de margen vertical), contenido en columnas acotadas (máx. 1024–1152 px) y listas que privilegian la lectura antes que la decoración. Los proyectos se presentan como filas de un registro (ficha, estado, captura o ficha del sistema), no como una galería de tarjetas. El verde de WhatsApp es el único segundo color con permiso, porque es el canal de contacto.
 
 **Key Characteristics:**
 - Inter en todo el sitio, jerarquía por peso y tamaño, nunca por color decorativo.
@@ -144,12 +144,12 @@ Paleta fría y sobria: neutros azul pizarra de Tailwind, un azul eléctrico de m
 **Character:** Una sola familia neutra y muy legible que no compite con el contenido; la monoespaciada aporta el tono de "registro técnico" solo donde hay datos.
 
 ### Hierarchy
-- **Display** (700, 3.75rem en desktop, 2.25rem en móvil, interlineado 1): solo el nombre en el hero.
+- **Display** (700, 3.75rem desde xl, 3rem desde sm, 1.875rem en móvil, interlineado 1.25): solo la propuesta de valor del hero, con la frase central en azul claro.
 - **Headline** (700, 2.25rem, 1.1): títulos de sección (Servicios, Proyectos, Sobre mí, Contacto).
 - **Title** (600, 1.125–1.25rem, 1.55): títulos de servicios, proyectos, cargos y pasos.
 - **Body** (400, 1rem–1.125rem, 1.6): bio y subtítulos de sección; máximo ~70 caracteres por línea.
 - **Body Small** (400, 0.875rem, 1.625): descripciones de servicios, proyectos y experiencia.
-- **Label Mono** (400, 0.75rem): años, numeración de pasos (01–04) y stacks separados por " · ".
+- **Label Mono** (400, 0.75rem): numeración de pasos (01–04), conteos y stacks separados por " · ".
 
 ### Named Rules
 **The Data-Only Mono Rule.** La monoespaciada marca datos (fechas, numeración, tecnologías). Nunca títulos ni párrafos.
@@ -158,10 +158,11 @@ Paleta fría y sobria: neutros azul pizarra de Tailwind, un azul eléctrico de m
 
 Página única con secciones apiladas. Contenedores centrados con margen lateral de 16 px en móvil, 24 px en tablet y 32 px en desktop; anchos máximos de 1024 px (Proyectos, Sobre mí) a 1280 px (navbar). Margen vertical de sección de 80 px (56 px en Stack).
 
-- **Servicios:** grilla de 2 columnas desde md; proceso en 4 columnas desde lg.
-- **Proyectos:** filas de registro con grilla `año (3.5rem) · ficha (flexible) · captura y accesos (16rem)` desde md; en móvil, una columna con la captura antes de los accesos.
+- **Hero:** 2 columnas desde lg (`1.35fr · 1fr`): a la izquierda propuesta de valor, línea de áreas, nombre con prueba, botones y la línea de garantías; a la derecha la foto circular (288–320 px). En móvil la foto va arriba y el texto se centra. Fondo liso, sin grilla decorativa.
+- **Servicios:** grilla de 2 columnas desde md; cada tarjeta termina con un enlace a su prueba ("En producción: SIGEMYPE →") que lleva a la fila del proyecto. Proceso en 4 columnas desde lg y, bajo el botón final, la línea de garantías.
+- **Proyectos:** filas de registro con grilla `ficha (flexible) · captura o ficha del sistema y accesos (16rem)` desde md; en móvil, una columna con la captura antes de los accesos. Primero los sistemas en producción.
 - **Sobre mí:** bio con datos clave al costado (17rem) y experiencia a lo ancho en 2 columnas.
-- **Contacto:** 2 columnas desde lg; las tarjetas reparten el alto del formulario para terminar alineadas.
+- **Contacto:** 2 columnas desde lg. A la izquierda, garantías, las dos acciones (WhatsApp y email) como tarjetas y Horario/Ubicación como lista simple; a la derecha, el formulario.
 - **Navbar:** fija, transparente sobre el hero y con fondo translúcido al hacer scroll.
 
 ### Named Rules
@@ -176,7 +177,7 @@ Sistema plano con bordes. La profundidad se comunica con bordes de 1 px y cambio
 
 ## Shapes
 
-Radios suaves y consistentes: 6 px en el botón del formulario, 8 px en campos, 12 px en botones del hero y del navbar, 16 px en tarjetas de servicios y filas de proyectos, y píldora completa en filtros y etiquetas de estado. La foto del hero es circular con un anillo azul tenue. Las capturas de proyectos tienen esquinas de 8 px y borde fino.
+Radios suaves y consistentes: 6 px en el botón del formulario, 8 px en campos, 12 px en botones del hero y del navbar, 16 px en tarjetas de servicios y filas de proyectos, y píldora completa en filtros e insignias. El estado de un proyecto es un punto de 6 px con su etiqueta: azul para "En producción", gris para el resto. La foto del hero es circular con un anillo azul tenue. Las capturas de proyectos tienen esquinas de 8 px y borde fino.
 
 ## Components
 
@@ -193,11 +194,17 @@ Radios suaves y consistentes: 6 px en el botón del formulario, 8 px en campos, 
 - **Tecnologías (Stack):** rectángulo de 6 px, fondo Niebla y borde fino, texto de 12 px.
 
 ### Cards / Containers
-- **Corner Style:** 16 px (servicios), 8 px (contacto y datos clave).
-- **Background:** Papel en modo claro, Tinta en modo oscuro; tarjetas de contacto en Niebla.
+- **Corner Style:** 16 px (servicios), 8 px (contacto y ficha del sistema).
+- **Background:** Papel en modo claro, Tinta en modo oscuro; tarjetas de contacto en Niebla. Solo las acciones van en tarjeta; los datos informativos (horario, ubicación) van como lista.
 - **Shadow Strategy:** sin sombra (ver Elevation & Depth).
 - **Border:** 1 px en Línea.
-- **Internal Padding:** 24 px (servicios), 20 px (contacto), 16 px (datos clave).
+- **Internal Padding:** 24 px (servicios), 20 px (contacto), 16 px horizontal (ficha del sistema).
+
+### Ficha del sistema
+Reemplaza a la captura en los sistemas privados, en el mismo hueco de 16rem. Es un `figure` con borde de 1 px: encabezado "Ficha del sistema" separado por un filete y, debajo, filas `campo (5.5rem) · valor` divididas por filetes, con el campo en gris y el valor en tinta semibold. Solo datos verificables (regímenes, empresas, qué emite, cantidad de pruebas); la nota técnica no se repite en la fila.
+
+### Línea de garantías
+Texto de 14 px en gris bajo los botones de WhatsApp del hero y de Servicios: "Respondo el mismo día hábil · La primera conversación no tiene costo". Solo compromisos confirmados por Gian.
 
 ### Inputs / Fields
 - **Style:** fondo blanco, borde de 1 px, radio de 8 px, padding de 12×16 px; etiqueta encima con ícono de 16 px.
@@ -210,7 +217,7 @@ Radios suaves y consistentes: 6 px en el botón del formulario, 8 px en campos, 
 - Una barra de progreso azul de 4 px recorre el borde superior.
 
 ### Fila de proyecto (signature)
-Registro de tres columnas: año en monoespaciada, ficha (título, insignias, descripción de negocio, nota técnica y stack) y, si hay sitio público, una captura de 1280×800 con estado y enlaces debajo. Al pasar el cursor, la fila toma fondo Niebla y el título se vuelve azul.
+Registro de dos columnas: ficha (título, insignias, estado, descripción de negocio, nota técnica y stack) y, a la derecha, una captura de 1280×800 si hay sitio público o la ficha del sistema si es privado, con métricas y enlaces debajo. Cada fila tiene el ancla `proyecto-{id}` para los enlaces de Servicios. Al pasar el cursor, la fila toma fondo Niebla y el título se vuelve azul.
 
 ## Do's and Don'ts
 
@@ -222,7 +229,9 @@ Registro de tres columnas: año en monoespaciada, ficha (título, insignias, des
 - **Do** verificar cada cambio de layout en 1440 px y en 390 px.
 
 ### Don't:
-- **Don't** usar los gradientes violeta y rosa, `.glass-effect`, `.shadow-glow` ni `.text-gradient` de `globals.css`: son restos de una versión anterior y no forman parte del sistema.
+- **Don't** volver a los gradientes violeta y rosa, el efecto vidrio ni los resplandores: se eliminaron de `globals.css` porque no forman parte del sistema.
+- **Don't** usar verde, esmeralda o violeta para estados o avisos: el verde es solo de WhatsApp, y los avisos de éxito van en azul.
+- **Don't** volver a la grilla decorativa de fondo en el hero.
 - **Don't** volver a la burbuja flotante de WhatsApp: el acceso fijo vive en el navbar.
 - **Don't** usar la monoespaciada para títulos o párrafos.
 - **Don't** agregar sombras a tarjetas nuevas.
