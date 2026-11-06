@@ -74,20 +74,11 @@ components:
     textColor: "{colors.brand-blue-light}"
     rounded: "{rounded.lg}"
     padding: "16px 32px"
-  card-service:
-    backgroundColor: "{colors.paper}"
-    rounded: "{rounded.xl}"
-    padding: "{spacing.card}"
   input:
     backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
     rounded: "{rounded.md}"
     padding: "12px 16px"
-  chip-filter-active:
-    backgroundColor: "{colors.brand-blue}"
-    textColor: "{colors.paper}"
-    rounded: "{rounded.full}"
-    padding: "8px 16px"
 ---
 
 # Design System: Portfolio Gianpierre Terrazas
@@ -156,14 +147,15 @@ Paleta fría y sobria: neutros azul pizarra de Tailwind, un azul eléctrico de m
 
 ## Layout
 
-Página única con secciones apiladas. Contenedores centrados con margen lateral de 16 px en móvil, 24 px en tablet y 32 px en desktop; anchos máximos de 1024 px (Proyectos, Sobre mí) a 1280 px (navbar). Margen vertical de sección de 80 px (56 px en Stack).
+Página única con secciones apiladas. Contenedores centrados con margen lateral de 16 px en móvil, 24 px en tablet y 32 px en desktop; un solo ancho máximo de 1152 px (`max-w-6xl`) para la navbar, todas las secciones y el footer, de modo que todos los encabezados comparten el mismo borde izquierdo. Las columnas más angostas se limitan dentro de ese contenedor (por ejemplo, `max-w-prose` en textos), nunca con un contenedor centrado distinto. Margen vertical de sección de 80 px (56 px en Stack).
 
 - **Hero:** 2 columnas desde lg (`1.35fr · 1fr`): a la izquierda propuesta de valor, línea de áreas, nombre con su prueba en formato ficha (tres campos «En producción · Proyectos · Trato» separados por filetes), botones y la línea de garantías; a la derecha la foto circular (288–320 px). En móvil la foto va arriba y el texto se centra. Fondo liso, sin grilla decorativa.
 - **Encabezados de sección:** alineados a la izquierda, sobre la misma retícula que el contenido (no centrados).
 - **Servicios:** registro de filas separadas por filetes, con el mismo lenguaje que la ficha: a la izquierda título y beneficio; a la derecha (22rem desde md) los campos "Prueba" (enlaces a la fila del proyecto, con su estado debajo; resaltan la fila en azul unos segundos) y, si existe, "Experiencia". Sin íconos ni tarjetas. Los cuatro servicios tienen el mismo peso. Proceso en 4 columnas desde lg y el botón de WhatsApp al final.
 - **Proyectos:** filas de registro con grilla `ficha (flexible) · captura o ficha del sistema y accesos (16rem)` desde md; en móvil, una columna con la captura antes de los accesos. Primero los sistemas en producción. En los sistemas privados "Consultar" es un enlace verde con ícono (no un botón con borde) y va en la columna izquierda, bajo el stack, para que no quede hueco frente a la ficha. La sección cierra con una pregunta y el botón de WhatsApp con la línea de garantías.
 - **Sobre mí:** bio con datos clave al costado (17rem) y experiencia a lo ancho en 2 columnas. En celular se ven los 3 cargos más recientes y un botón "Ver toda la experiencia".
-- **Stack:** 2 columnas ya en celular y 4 desde lg, con tarjetas compactas.
+- **Stack:** registro de filas «categoría · tecnologías» separadas por filetes (categoría de 10rem a la izquierda desde sm, tecnologías en monoespaciada unidas por " · "). Sin tarjetas ni íconos.
+- **Capturas de proyectos en celular:** recortadas a 2:1 desde la parte superior; desde md se muestran completas.
 - **Contacto:** 2 columnas desde lg y los dos medios con el mismo peso: a la izquierda garantías, WhatsApp y email como tarjetas, y Horario/Ubicación como lista simple; a la derecha el formulario, con borde fino y sin sombra. El asunto es opcional.
 - **Fila de proyecto en celular:** cabecera, luego la captura o la ficha, y al final el stack y "Consultar": la evidencia va antes de la tecnología.
 - **Navbar:** fija, transparente sobre el hero y con fondo translúcido al hacer scroll.
@@ -180,7 +172,7 @@ Sistema plano con bordes. La profundidad se comunica con bordes de 1 px y cambio
 
 ## Shapes
 
-Radios suaves y consistentes: 6 px en el botón del formulario, 8 px en campos, 12 px en botones del hero y del navbar, 16 px en tarjetas de servicios y filas de proyectos, y píldora completa en filtros e insignias. El estado de un proyecto es un punto de 6 px con su etiqueta: azul para "En producción", gris para el resto. La foto del hero es circular con un anillo azul tenue. Las capturas de proyectos tienen esquinas de 8 px y borde fino.
+Radios suaves y consistentes: 6 px en el botón del formulario, 8 px en campos, 12 px en botones del hero y del navbar, 16 px en tarjetas de servicios y filas de proyectos, y píldora completa en insignias. El estado de un proyecto es un punto de 6 px con su etiqueta: azul para "En producción", gris para el resto. La foto del hero es circular con un anillo azul tenue. Las capturas de proyectos tienen esquinas de 8 px y borde fino.
 
 ## Components
 
@@ -189,15 +181,13 @@ Radios suaves y consistentes: 6 px en el botón del formulario, 8 px en campos, 
 - **WhatsApp (acción principal):** Verde Canal con texto blanco y logo oficial de WhatsApp; en el hero, 16×32 px de padding y texto 18 px semibold.
 - **Primario:** Azul Expediente con texto blanco; hover en el azul profundo.
 - **Contorno sobre oscuro:** borde de 2 px en azul claro y texto azul claro, sin fondo; solo en el hero.
-- **Focus:** anillo de 2 px del color del botón con separación de 2 px.
+- **Focus:** anillo de 2 px del color del botón con separación de 2 px. Los enlaces de texto (Prueba, Consultar, Volver) también llevan anillo, no solo subrayado.
 
 ### Chips
-- **Filtros de proyectos:** píldora; el activo usa Azul Expediente y el inactivo es blanco con borde fino. Incluyen el conteo en monoespaciada.
-- **Insignias:** "Destacado" en azul translúcido y "Privado" en gris, ambas en píldora con ícono de 12 px.
-- **Tecnologías (Stack):** rectángulo de 6 px, fondo Niebla y borde fino, texto de 12 px.
+- **Insignias:** "Privado" en gris, en píldora con ícono de 12 px. No hay filtros de proyectos.
 
 ### Cards / Containers
-- **Corner Style:** 16 px (servicios), 8 px (contacto y ficha del sistema).
+- **Corner Style:** 8 px (contacto, ficha del sistema y capturas). Servicios y Stack no usan tarjetas.
 - **Background:** Papel en modo claro, Tinta en modo oscuro; tarjetas de contacto en Niebla. Solo las acciones van en tarjeta; los datos informativos (horario, ubicación) van como lista.
 - **Shadow Strategy:** sin sombra (ver Elevation & Depth).
 - **Border:** 1 px en Línea.

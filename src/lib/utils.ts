@@ -57,14 +57,9 @@ export function downloadFile(fileUrl: string, fileName?: string) {
     
     // Remover del DOM
     document.body.removeChild(link);
-    
-    // Log para debugging
-    console.log(`✅ Descargando archivo: ${fileName || fileUrl}`);
-    
+
     return true;
-  } catch (error) {
-    console.error('❌ Error descargando archivo:', error);
-    
+  } catch {
     // Fallback: abrir en nueva pestaña
     window.open(fileUrl, '_blank');
     return false;

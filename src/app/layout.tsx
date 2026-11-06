@@ -109,6 +109,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="es" suppressHydrationWarning>
       <body className={inter.className}>
+        {/* Las secciones con animación de entrada salen del servidor con opacity:0
+            (framer-motion). Sin JavaScript nunca se animarían: se muestran tal cual. */}
+        <noscript>
+          <style>{'[style*="opacity:0"]{opacity:1!important;transform:none!important}'}</style>
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}

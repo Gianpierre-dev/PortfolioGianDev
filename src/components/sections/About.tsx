@@ -44,13 +44,13 @@ export default function About() {
 
   return (
     <section id="about" className="py-20 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mb-12 max-w-5xl mx-auto"
+          className="mb-12"
         >
           <motion.h2
             variants={itemVariants}
@@ -72,7 +72,7 @@ export default function About() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_17rem] gap-10 lg:gap-16 items-center max-w-5xl mx-auto"
+          className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_17rem] gap-10 lg:gap-16 items-center"
         >
           <div className="space-y-4">
             {t.about.bioParrafos.map((parrafo, index) => (
@@ -118,7 +118,7 @@ export default function About() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mt-20 max-w-5xl mx-auto"
+          className="mt-20"
         >
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-8">
             {t.about.experienciaTitulo}
@@ -163,7 +163,7 @@ export default function About() {
               onClick={() => setVerTodaExperiencia(true)}
               aria-controls="lista-experiencia"
               aria-expanded={verTodaExperiencia}
-              className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 focus:outline-none focus-visible:underline md:hidden"
+              className="mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 md:hidden"
             >
               {t.about.verTodaExperiencia} ({experiences.length})
               <ChevronDown className="h-4 w-4" aria-hidden="true" />

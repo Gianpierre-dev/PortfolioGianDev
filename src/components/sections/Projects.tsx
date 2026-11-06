@@ -7,6 +7,7 @@ import { useIdioma } from '@/i18n/LanguageProvider';
 import IconoWhatsapp from '@/components/ui/IconoWhatsapp';
 import { urlWhatsapp } from '@/lib/email';
 import { EASE_SITE } from '@/lib/motion';
+import { scrollToSection } from '@/lib/utils';
 import type { Diccionario, Idioma } from '@/i18n/types';
 import { idAnclaProyecto, proyectos, type EstadoProyecto, type MetricasRepo, type ProyectoBase } from '@/data/proyectos';
 import { ArrowLeft, ChevronDown, ExternalLink, Github, Star, Lock, GitBranch } from 'lucide-react';
@@ -84,7 +85,7 @@ export default function Projects({ metricasGithub }: ProjectsProps) {
 
   return (
     <section id="projects" className="relative py-20 bg-white dark:bg-gray-950 overflow-hidden">
-      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -221,10 +222,16 @@ function ProjectRow({ project, idioma, ahora, t }: {
               evento.preventDefault();
               const fila = evento.currentTarget.closest<HTMLElement>('[data-desde-servicios]');
               if (fila) delete fila.dataset.desdeServicios;
-              // El salto desde Servicios quedó en el historial: volver restaura esa posición.
-              window.history.back();
+              // Si la entrada actual es el salto desde Servicios, volver restaura la
+              // posición exacta; si el visitante navegó entre medio, se va a Servicios.
+              const estado = window.history.state as { desdeServicios?: boolean } | null;
+              if (estado?.desdeServicios) {
+                window.history.back();
+              } else {
+                scrollToSection('services');
+              }
             }}
-            className="mb-2 hidden min-h-11 items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800 focus:outline-none focus-visible:underline dark:text-blue-400 dark:hover:text-blue-300 group-data-[desde-servicios=true]:inline-flex"
+            className="mb-2 hidden min-h-11 items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-blue-400 dark:hover:text-blue-300 group-data-[desde-servicios=true]:inline-flex"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             {t.projects.volverServicios}
@@ -242,7 +249,7 @@ function ProjectRow({ project, idioma, ahora, t }: {
             <StatusBadge status={project.status} t={t} />
           </div>
 
-          <p className="mt-2.5 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+          <p className="mt-2.5 max-w-prose text-sm leading-relaxed text-gray-600 dark:text-gray-300">
             {textos.description}
           </p>
 
@@ -259,7 +266,9 @@ function ProjectRow({ project, idioma, ahora, t }: {
             ficha. Debajo, los accesos. */}
         <div className="flex flex-col gap-3 md:col-start-2 md:row-span-2 md:row-start-1">
           {project.imagen ? (
-            <div className="w-full overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 shadow-sm">
+            // En celular la captura se recorta a 2:1 (parte superior del sitio, donde está
+            // la portada): la fila ocupa menos alto. Desde md se muestra completa.
+            <div className="aspect-[2/1] w-full overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 md:aspect-auto">
               <Image
                 src={project.imagen}
                 alt={`${t.projects.capturaAlt} ${textos.title}`}
@@ -267,7 +276,7 @@ function ProjectRow({ project, idioma, ahora, t }: {
                 height={800}
                 // Desde md la columna mide 16rem; en móvil ocupa el ancho de la página.
                 sizes="(min-width: 768px) 256px, calc(100vw - 48px)"
-                className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none motion-reduce:transition-none"
+                className="h-full w-full object-cover object-top md:h-auto transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transform-none motion-reduce:transition-none"
               />
             </div>
           ) : textos.ficha && textos.ficha.length > 0 ? (
@@ -355,7 +364,7 @@ function ProjectRow({ project, idioma, ahora, t }: {
               rel="noopener noreferrer"
               aria-label={`${t.projects.consultar}: ${textos.title} (${t.a11y.nuevaPestana})`}
               // Enlace con ícono, no botón: el acceso sigue ahí sin sumar otro bloque verde a la página.
-              className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-green-700 transition-colors duration-200 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300 focus:outline-none focus-visible:underline"
+              className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-green-700 transition-colors duration-200 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
             >
               <IconoWhatsapp className="w-4 h-4" />
               {t.projects.consultar}

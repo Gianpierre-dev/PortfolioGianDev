@@ -98,10 +98,10 @@ function ContenidoTarjeta({ icon: Icon, label, value, description, tono, badge }
 const CLASES_TARJETA =
   'flex items-center w-full h-full bg-gray-50 dark:bg-gray-800 rounded-lg p-5 border border-gray-200 dark:border-gray-700 transition-all duration-200';
 const CLASES_TARJETA_INTERACTIVA =
-  'hover:shadow-lg hover:border-blue-300 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-700 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500';
+  'hover:border-blue-300 dark:hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-700 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500';
 // La tarjeta de WhatsApp es el canal principal: fondo y borde verdes.
 const CLASES_TARJETA_WHATSAPP =
-  'flex items-center w-full h-full rounded-lg p-5 border-2 border-green-700 dark:border-green-600 bg-green-50 dark:bg-green-950/40 transition-all duration-200 hover:shadow-lg hover:bg-green-100 dark:hover:bg-green-900/40 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500';
+  'flex items-center w-full h-full rounded-lg p-5 border-2 border-green-700 dark:border-green-600 bg-green-50 dark:bg-green-950/40 transition-all duration-200 hover:bg-green-100 dark:hover:bg-green-900/40 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500';
 
 export default function Contact() {
   const { t } = useIdioma();
@@ -206,7 +206,8 @@ export default function Contact() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="flex flex-col gap-8"
+            // En desktop el título arranca a la altura del título del formulario (mismo padding superior).
+            className="flex flex-col gap-8 lg:pt-8"
           >
             <motion.div variants={itemVariants}>
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">

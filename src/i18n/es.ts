@@ -15,7 +15,8 @@ export const es: Diccionario = {
     cambiarTema: 'Cambiar tema',
     cambiarTemaClaro: 'Cambiar a modo claro',
     cambiarTemaOscuro: 'Cambiar a modo oscuro',
-    cambiarIdioma: 'Cambiar idioma a inglés',
+    // Empieza por el texto visible del botón (WCAG 2.5.3): funciona con control por voz.
+    cambiarIdioma: 'ES | EN: cambiar idioma a inglés',
     abrirMenu: 'Abrir menú',
     cerrarMenu: 'Cerrar menú',
   },
@@ -198,7 +199,7 @@ export const es: Diccionario = {
       nombreRequerido: 'El nombre es requerido',
       nombreMin: 'El nombre debe tener al menos 2 caracteres',
       emailRequerido: 'El email es requerido',
-      emailInvalido: 'Email inválido',
+      emailInvalido: 'Revisa el email: debe tener el formato nombre@empresa.com',
       asuntoMin: 'El asunto debe tener al menos 3 caracteres',
       mensajeRequerido: 'El mensaje es requerido',
       mensajeMin: 'El mensaje debe tener al menos 10 caracteres',

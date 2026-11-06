@@ -106,7 +106,8 @@ export default function Navbar() {
         aria-label={t.nav.navegacionPrincipal}
         className={`fixed top-0 left-0 right-0 z-40 border-b transition-colors duration-300 ${clasesBarra}`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Mismo contenedor que todas las secciones (max-w-6xl): un solo borde izquierdo */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <motion.a
@@ -200,7 +201,7 @@ export default function Navbar() {
                 onClick={cambiarIdioma}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`h-11 px-3 rounded-xl text-xs font-bold transition-colors duration-200 ${clasesAccion}`}
+                className={`h-11 px-3 rounded-xl text-xs font-bold transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${clasesAccion}`}
                 aria-label={t.nav.cambiarIdioma}
               >
                 <span
@@ -229,7 +230,7 @@ export default function Navbar() {
                 onClick={() => setTheme(esOscuro ? 'light' : 'dark')}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`flex h-11 w-11 items-center justify-center rounded-xl transition-colors duration-200 ${clasesAccion}`}
+                className={`flex h-11 w-11 items-center justify-center rounded-xl transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${clasesAccion}`}
                 aria-label={etiquetaTema}
               >
                 {/* Antes del montaje se reserva el espacio sin ícono para no mostrar uno incorrecto */}
@@ -251,7 +252,7 @@ export default function Navbar() {
                 aria-label={isOpen ? t.nav.cerrarMenu : t.nav.abrirMenu}
                 aria-expanded={isOpen}
                 aria-controls={ID_MENU_MOVIL}
-                className={`lg:hidden flex h-11 w-11 items-center justify-center rounded-xl transition-colors duration-200 ${clasesAccion}`}
+                className={`lg:hidden flex h-11 w-11 items-center justify-center rounded-xl transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${clasesAccion}`}
               >
                 <AnimatePresence mode="wait" initial={false}>
                   {isOpen ? (
@@ -304,7 +305,7 @@ export default function Navbar() {
                       href={`#${item.href}`}
                       onClick={(evento) => handleNavClick(item.href, evento)}
                       aria-current={activeSection === item.href ? 'location' : undefined}
-                      className={`block w-full text-left px-4 py-3 rounded-xl transition-colors duration-200 ${
+                      className={`block w-full text-left px-4 py-3 rounded-xl transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 ${
                         activeSection === item.href
                           ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10'
                           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800/60 hover:text-blue-600 dark:hover:text-blue-400'

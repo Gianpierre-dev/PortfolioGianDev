@@ -27,7 +27,7 @@ export default function Hero() {
     <section id="hero" className="relative min-h-screen flex items-center justify-center bg-gray-950 overflow-hidden">
       {/* Dos columnas en escritorio: la propuesta a la izquierda y la foto a la derecha.
           En celular la foto va arriba del texto. */}
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-24 sm:px-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-16 lg:px-8">
+      <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-10 px-4 py-24 sm:px-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-16 lg:px-8">
         <div className="flex justify-center lg:order-2">
           <div className="relative h-44 w-44 overflow-hidden rounded-full bg-gray-800 ring-2 ring-blue-500/40 ring-offset-8 ring-offset-gray-950 sm:h-52 sm:w-52 lg:h-72 lg:w-72 xl:h-80 xl:w-80">
             {fotoFallida ? (

@@ -19,6 +19,8 @@ const PRUEBAS_SERVICIO: readonly (readonly number[])[] = [[3, 1], [4], [2], [9]]
 function irAProyecto(id: number) {
   const ancla = idAnclaProyecto(id);
   scrollToSection(ancla);
+  // Marca la entrada del historial: "Volver a Servicios" solo retrocede si sigue en ella.
+  window.history.replaceState({ desdeServicios: true }, '');
   const fila = document.getElementById(ancla);
   if (!fila) return;
   document.querySelectorAll<HTMLElement>('[data-desde-servicios]').forEach((otra) => {
@@ -106,7 +108,7 @@ export default function Services() {
                                   evento.preventDefault();
                                   irAProyecto(proyecto.id);
                                 }}
-                                className="inline-flex min-h-11 flex-col justify-center py-1 font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-200 focus:outline-none focus-visible:underline"
+                                className="inline-flex min-h-11 flex-col justify-center rounded-md py-1 font-semibold text-blue-700 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-4 dark:focus-visible:ring-offset-gray-900"
                               >
                                 {/* La flecha va pegada al final del título, aunque este ocupe dos líneas */}
                                 <span>
